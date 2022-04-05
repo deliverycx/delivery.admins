@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+    
+    admin_frontend:
+        image: docker/admin_frontend
+        container_name: admin_frontend
+        build:
+            context: ./frontend
+        ports:
+          - "6000:6000"
+        networks:
+          - mynetwork
+    admin_backend:
+        image: docker/admin_backend
+        container_name: admin_backend
+        env_file:
+            - ./backend/.production.env
+        
+        build:
+            context: ./backend
+        networks:
+          - mynetwork
+networks:
+  mynetwork:
+    external:
+      name: delivglobalnetwork           
+            
