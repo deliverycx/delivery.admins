@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
+  /*
   const router = useRouter()
   const check = async () => {
     try {
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     check()
   }, [])
+  */
   
   return <Component {...pageProps} />
 }
