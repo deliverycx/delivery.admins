@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
 
+  /*
   const router = useRouter()
   const check = async () => {
     try {
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     check()
   }, [])
-  
+  */
   
   return (
     <div className="wrapper">

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { RequestUsers } from "servises/repository/Axios/Request";
 
 const Upload: NextPage = () => {
+  /*
   const router = useRouter()
   const check = async () => {
     try {
@@ -21,6 +22,7 @@ const Upload: NextPage = () => {
   useEffect(() => {
     check()
   }, [])
+  */
   return (
     <div className="wrapper">
       <Header />

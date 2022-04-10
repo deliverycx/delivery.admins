@@ -5,7 +5,7 @@ import { IikoRequesterServises } from '../servises/iiko.servises'
 import { UnloadServises } from '../servises/unload.servises'
 import { Response } from "express";
 
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('unload')
 export class UnloadControllers{
   constructor(
