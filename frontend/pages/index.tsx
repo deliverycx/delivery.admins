@@ -6,6 +6,7 @@ import Header from 'application/components/common/Header/Header'
 import Menu from 'application/components/common/Menu/Menu'
 import { RequestUsers } from 'servises/repository/Axios/Request'
 import { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
 
