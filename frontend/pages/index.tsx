@@ -9,7 +9,18 @@ import { useEffect } from 'react';
 
 const Home: NextPage = () => {
 
-  
+  const router = useRouter()
+  const check = async () => {
+    try {
+      const user = await RequestUsers.check()
+      return user.data
+    } catch (error) {
+      router.push('/auth')
+    }
+  }
+  useEffect(() => {
+    check()
+  }, [])
   
   
   return (
