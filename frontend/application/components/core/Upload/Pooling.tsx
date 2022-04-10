@@ -4,7 +4,9 @@ import { useCasePooling } from "domains/useCase/upload/useCase.Pooling"
 const Pooling = () => {
   const useCasePoints = adapterComponentUseCase(useCasePooling)
   const { startPolling } = useCasePoints.handlers
-  const {statupool,poolError} = useCasePoints.status
+  const { statupool, poolError } = useCasePoints.status
+
+  
 
   return (
     <div className="card">

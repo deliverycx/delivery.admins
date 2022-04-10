@@ -8,12 +8,13 @@ import { OrganizationClass } from "src/database/mongodbModel/delivery/organizati
 import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
 import { UnloadControllers } from "../controllers/unload.controller";
 import { IikoRequesterServises } from "../servises/iiko.servises";
+import { UnloadServises } from "../servises/unload.servises";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass,CategoryClass,ProductClass], DELIVERY_DB)
   ],
   controllers: [UnloadControllers], 
-  providers:[IikoRequesterServises]
+  providers:[IikoRequesterServises,UnloadServises]
 })
 export class UnloadModule {}
