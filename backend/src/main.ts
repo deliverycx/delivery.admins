@@ -18,8 +18,8 @@ async function bootstrap() {
   });
 
   app.set("trust proxy", true);
-  app.useStaticAssets(join(__dirname, '..', 'public/static/shop'), {
-    prefix: '/static/shop',
+  app.useStaticAssets(join(__dirname, '..', 'public'), {
+    prefix: '/static', ///static/shop
   });
 
   doc(app); 
