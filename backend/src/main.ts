@@ -18,9 +18,13 @@ async function bootstrap() {
   });
 
   app.set("trust proxy", true);
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+
+  /*
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     prefix: '/static', ///static/shop
   });
+  */
 
   doc(app); 
   await app.listen(process.env.PORT);
