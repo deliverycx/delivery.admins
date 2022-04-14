@@ -10,7 +10,7 @@ import { CityClass } from "./city.model";
 
 @ModelOptions({
     options: { customName: "Organization", allowMixed: Severity.ALLOW },
-    schemaOptions: { collection: 'organization', versionKey: false, timestamps: true }
+    schemaOptions: { collection: 'organizations', versionKey: false, timestamps: true }
 })
 export class OrganizationClass {
     @prop()

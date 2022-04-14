@@ -10,7 +10,7 @@ import { Types } from "mongoose";
 
 @ModelOptions({
     options: { customName: "City" },
-    schemaOptions: { versionKey: false, timestamps: true }
+    schemaOptions: { collection: 'cities',versionKey: false, timestamps: true }
 })
 export class CityClass {
     @prop({ type: mongoose.Types.ObjectId })

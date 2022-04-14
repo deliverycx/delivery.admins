@@ -16,7 +16,7 @@ enum MeasureUnit {
 
 @ModelOptions({
     options: { customName: "Product" },
-    schemaOptions: {collection: 'product', versionKey: false, timestamps: true }
+    schemaOptions: {collection: 'products', versionKey: false, timestamps: true }
 })
 export class ProductClass {
     @prop({ ref: () => OrganizationClass })

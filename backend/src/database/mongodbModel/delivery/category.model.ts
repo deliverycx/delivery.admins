@@ -8,7 +8,7 @@ import { OrganizationClass } from "./organization.model";
 
 @ModelOptions({
     options: { customName: "Category" },
-    schemaOptions: {  collection: 'category', versionKey: false, timestamps: true }
+    schemaOptions: {  collection: 'categories', versionKey: false, timestamps: true }
 })
 export class CategoryClass {
     @prop({ required: false })

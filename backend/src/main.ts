@@ -25,6 +25,7 @@ async function bootstrap() {
     prefix: '/static', ///static/shop
   });
   */
+  
 
   doc(app); 
   await app.listen(process.env.PORT);
