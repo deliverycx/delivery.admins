@@ -95,7 +95,7 @@ export class IikoRequesterServises {
           const objectId = await this.organizationModel.findOneAndUpdate(
             { id: guid },
             {
-                $set: {
+                $setOnInsert: {
                     id: guid,
                     city: cityId,
                     address: {
@@ -103,6 +103,8 @@ export class IikoRequesterServises {
                         longitude,
                         latitude
                     },
+                },
+                $set: {
                     phone,
                     workTime
                 }
@@ -132,6 +134,8 @@ export class IikoRequesterServises {
           },
           { upsert: true }
         );
+
+        
         
       }
       
