@@ -84,6 +84,9 @@ export class IikoRequesterServises {
         
         
       }
+
+    }
+
       for (let city in this.cities) {
         const cityId = new Types.ObjectId();
         const organizations = [];
@@ -120,6 +123,8 @@ export class IikoRequesterServises {
           
           
         }
+
+        console.log('id city',cityId)
         
         await this.cityModel.updateOne(
           { name: city },
@@ -139,7 +144,6 @@ export class IikoRequesterServises {
         
       }
       
-    }
     
   }
 
