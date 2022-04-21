@@ -7,6 +7,7 @@ import { AuthModule } from 'src/components/common/auth/module/auth.module';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UnloadModule } from 'src/components/core/unload/module/unload.module';
 import { ADMIN_DB, DELIVERY_DB } from 'src/database/mongodbModel/config.mongodb';
+import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 
 
 
@@ -27,7 +28,8 @@ import { ADMIN_DB, DELIVERY_DB } from 'src/database/mongodbModel/config.mongodb'
         connectionName: DELIVERY_DB
       }),
     AuthModule,
-    UnloadModule
+    UnloadModule,
+    OrganizationModule
   ],
   
 })

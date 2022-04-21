@@ -10,7 +10,6 @@ const UploadOrganization = () => {
     {
       organizations && 
         organizations.map((org: any, index: number) => {
-          console.log(org);
           if (org) {
             return (
               <>

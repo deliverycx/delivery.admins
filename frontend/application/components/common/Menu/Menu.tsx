@@ -40,6 +40,14 @@ const Menu = () =>{
                 <i className="right fas fa-angle-left"></i>
               </p>
             </a>
+            <a href="/organization" className="nav-link active">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Организации
+                <i className="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            
 						
             
           </li>
