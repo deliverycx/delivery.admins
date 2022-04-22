@@ -8,21 +8,22 @@ import RequestOrganization from "servises/repository/Axios/Request/Request.Organ
 
 
 
-const Organization: NextPage = ({data}:any) => {
+const Organization: NextPage = () => {
   
-  console.log(data);
+
 
   return (
     <div className="wrapper">
       <Header />
       <Menu />
       <Container>
-        <OrganizationList orgs={data} />
+        <OrganizationList />
       </Container>
     </div>
   );
 };
 
+/*
 export async function getServerSideProps() {
   try {
     const {data} = await RequestOrganization.getAll()
@@ -32,6 +33,7 @@ export async function getServerSideProps() {
   }
   
 }
+*/
 
 
 export default Organization

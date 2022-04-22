@@ -9,8 +9,8 @@ type IProps = {
   orgs:ListOrganization[]
 }
 
-const OrganizationList: FC<IProps> = ({ orgs }) => {
-  const useCasePoints = adapterComponentUseCase(useOrganization,orgs)
+const OrganizationList = () => {
+  const useCasePoints = adapterComponentUseCase(useOrganization)
   const {organizations} = useCasePoints.data
   const {handlePuckUp} = useCasePoints.handlers
 
