@@ -7,7 +7,7 @@ import { CityClass } from "src/database/mongodbModel/delivery/city.model";
 import { OrganizationClass } from "src/database/mongodbModel/delivery/organization.model";
 import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
 import { OrganizationRepository } from "src/domain/repository/organization.repository";
-import { OrganizationControllers } from "../controllers/Organization.controller";
+import { OrganizationControllers } from "../controllers/organization.controller";
 import { OrganizationServises } from "../servises/organization.servises";
 
 @Module({
