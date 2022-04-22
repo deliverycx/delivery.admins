@@ -17,7 +17,7 @@ const Organization: NextPage = ({data}:any) => {
       <Header />
       <Menu />
       <Container>
-        <OrganizationList organizations={data} />
+        <OrganizationList orgs={data} />
       </Container>
     </div>
   );

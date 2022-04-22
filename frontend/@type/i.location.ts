@@ -11,7 +11,8 @@ export interface IPoint {
   }
   city:	string
   phone:	string
-  workTime:	string
+  workTime: string
+  delivMetod:string | null
 }
 
 export interface ListOrganization {

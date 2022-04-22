@@ -2,14 +2,18 @@ import { IPoint, ListOrganization } from "@type"
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { useOrganization } from "domains/useCase/organization/useCase.Organization"
 import { FC } from "react"
+import cn from "classnames";
+import { CART_CHOICE } from "application/contstans/cart.const";
 
 type IProps = {
-  organizations:ListOrganization[]
+  orgs:ListOrganization[]
 }
 
-const OrganizationList: FC<IProps> = ({ organizations }) => {
-  const useCasePoints = adapterComponentUseCase(useOrganization)
+const OrganizationList: FC<IProps> = ({ orgs }) => {
+  const useCasePoints = adapterComponentUseCase(useOrganization,orgs)
+  const {organizations} = useCasePoints.data
   const {handlePuckUp} = useCasePoints.handlers
+
 
   return (
     <>
@@ -26,18 +30,27 @@ const OrganizationList: FC<IProps> = ({ organizations }) => {
                   </div>
                   {
                     org.organizations.map((point: IPoint, i: number) => {
+                      console.log(point.address.street,point.delivMetod);
+                      const CN = cn("col btn btn-block", {
+                        'btn-success':
+                          (point.delivMetod === CART_CHOICE.PICKUP)
+                          
+                      })
                       return (
                         <div key={point.id} className="card-body">
                           
                           <div className="card-footer">
                            <h3 className="card-title">{point.address.street}</h3>
-                          <br/> 
+                            <br /> 
+                            <hr />
                             <table>
                               <tr>
-                                <td><div className="col btn btn-block bg-gradient-secondary"
-                                  onClick={() => handlePuckUp(point.id,"qq")}
+                                <td><div className={CN}
+                                  onClick={() => handlePuckUp(
+                                    point.id,
+                                    point.delivMetod)}
                                 >Только Самовывоз</div></td>
-                                <td><div className="col btn btn-block bg-gradient-primary">Обновить организацию</div></td>
+                                
                               </tr>
                               
                             </table>
