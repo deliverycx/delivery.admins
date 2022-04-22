@@ -24,11 +24,13 @@ const Organization: NextPage = ({data}:any) => {
 };
 
 export async function getServerSideProps() {
-  // Fetch data from external API
+  try {
+    const {data} = await RequestOrganization.getAll()
+    return { props: { data } }
+  } catch (error) {
+    console.log(error);
+  }
   
-  const {data} = await RequestOrganization.getAll()
-  // Pass data to the page via props
-  return { props: { data } }
 }
 
 
