@@ -5,7 +5,7 @@ import { OrganizationServises } from '../servises/organization.servises'
 import { Response } from "express";
 import OrganizationDTO from "../dto/organization.dto";
 
-//@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('organization')
 export class OrganizationControllers{
   constructor(

@@ -11,7 +11,8 @@ export class LoginServises{
     private readonly jwtService: JwtService
   ){}
 
-  async validateUsers(name:string,password:string) {
+  async validateUsers(name: string, password: string) {
+    console.log(name,password)
     const user = await this.UsersRepository.getOne(name)
     this.logger.log(user);
     if (!user) {
