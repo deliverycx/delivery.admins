@@ -22,6 +22,7 @@ export class DownloadImage {
                 const imageName = `${uuid.v4()}_${Date.now()}.${ext}`;
 
                 image.resize(w, Jimp.AUTO);
+                console.log('patch',process.cwd())
                 await image.writeAsync(`${process.cwd()}/public/static/shop/${imageName}`);
 
                 resolve(`/static/shop/${imageName}`);
