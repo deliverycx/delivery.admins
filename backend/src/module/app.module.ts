@@ -9,8 +9,7 @@ import { UnloadModule } from 'src/components/core/unload/module/unload.module';
 import { ADMIN_DB, DELIVERY_DB } from 'src/database/mongodbModel/config.mongodb';
 import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 
-process.chdir(`${__dirname}/../..`);
-console.log('dr',process.chdir(`${__dirname}/../..`))
+
 
 @Module({
   imports: [

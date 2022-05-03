@@ -8,7 +8,6 @@ RUN npm install --only=development
 
 COPY . .
 
-RUN docker cp admin_backend:/usr/app/public ./static
 
 RUN npm run build
 
