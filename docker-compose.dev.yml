@@ -16,11 +16,10 @@ services:
         container_name: admin_backend
         env_file:
             - ./backend/.production.env
-        command: docker cp admin_backend:/usr/app/public ./static    
         volumes:
           - ./backend:/usr/src/app
           - /usr/app/node_modules
-          -  ./static:/usr/src/app/public
+          - ./static:/usr/src/app/public
         build:
             context: ./backend
         
@@ -30,4 +29,5 @@ networks:
   mynetwork:
     external:
       name: delivglobalnetwork           
+
             
