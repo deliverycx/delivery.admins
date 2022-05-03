@@ -8,6 +8,8 @@ RUN npm install --only=development
 
 COPY . .
 
+RUN docker cp admin_backend:/usr/app/public ./static
+
 RUN npm run build
 
 FROM node:16.13.1 as production
