@@ -34,4 +34,19 @@ export class OrganizationRepository {
     )
     return organizationEntities.delivMetod(result.id,result.delivMetod)
   }
+  async hiddenOranizationMetod(orgid: string, metod: string) {
+    const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: orgid
+      },
+      {
+        $set: {
+          isHidden: metod
+        }
+      },
+      { new: true }
+    )
+    
+    return organizationEntities.hiddenMetod(result.id,result.isHidden)
+  }
 }

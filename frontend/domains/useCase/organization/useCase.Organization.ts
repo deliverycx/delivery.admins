@@ -18,7 +18,8 @@ export function useOrganization(this: any) {
   
   useEffect(() => {
     fetchOrg()
-  },[])
+  }, [])
+  
   
   const handlePuckUp = async (idorganization: string, metod: string | null) => {
     try {

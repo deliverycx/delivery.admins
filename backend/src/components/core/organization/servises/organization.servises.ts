@@ -12,4 +12,7 @@ export class OrganizationServises{
   switchDelivMetod({idorganization,delivmetod}) {
     return this.OrganizationRepository.swtchDelivMetod(idorganization,delivmetod)
   }
+  hiddenOranizationMetod({idorganization,isHidden}) {
+    return this.OrganizationRepository.hiddenOranizationMetod(idorganization,isHidden)
+  }
 }

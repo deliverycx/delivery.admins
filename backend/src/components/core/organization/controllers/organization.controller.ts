@@ -5,7 +5,7 @@ import { OrganizationServises } from '../servises/organization.servises'
 import { Response } from "express";
 import OrganizationDTO from "../dto/organization.dto";
 
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('organization')
 export class OrganizationControllers{
   constructor(
@@ -21,6 +21,12 @@ export class OrganizationControllers{
   @Post('puckup')
   swichPuckup(@Body() body:OrganizationDTO) {
     const result = this.OrganizationServises.switchDelivMetod(body)
+    return result
+  }
+  @Post('hidden')
+  async hidenOrg(@Body() body: OrganizationDTO) {
+    
+    const result = await this.OrganizationServises.hiddenOranizationMetod(body)
     console.log(result)
     return result
   }

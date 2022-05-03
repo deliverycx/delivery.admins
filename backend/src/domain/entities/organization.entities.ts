@@ -2,7 +2,8 @@ import { AbstractEntities } from "src/application/abstracts/entities.abstract";
 
 interface IOrganizationEntities{
   orgid: string,
-  delivmetod:string | null
+  delivmetod: string | null,
+  isHidden:boolean
 }
 
 export class OrganizationEntities extends AbstractEntities < IOrganizationEntities> {
@@ -10,6 +11,12 @@ export class OrganizationEntities extends AbstractEntities < IOrganizationEntiti
     return this.entities = {
       orgid: id,
       delivmetod:metod
+    }
+  }
+  hiddenMetod(id:string,metod:boolean) {
+    return this.entities = {
+      orgid: id,
+      isHidden:metod
     }
   }
 }

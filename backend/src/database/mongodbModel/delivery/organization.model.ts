@@ -38,6 +38,9 @@ export class OrganizationClass {
     @prop({ default: null })
     public delivMetod!: string | null;
     
+    @prop({ type: () => Boolean,default:false })
+    isHidden:boolean
+    
 }
 
 //export const OrganizationModel = getModelForClass(OrganizationClass);

@@ -30,8 +30,7 @@ const OrganizationList = () => {
                   </div>
                   {
                     org.organizations.map((point: IPoint, i: number) => {
-                      console.log(point.address.street,point.delivMetod);
-                      const CN = cn("col btn btn-block", {
+                      const CNdelivMetod = cn("col btn btn-block", {
                         'btn-success':
                           (point.delivMetod === CART_CHOICE.PICKUP)
                           
@@ -45,11 +44,17 @@ const OrganizationList = () => {
                             <hr />
                             <table>
                               <tr>
-                                <td><div className={CN}
+                                <td><div className={CNdelivMetod}
                                   onClick={() => handlePuckUp(
                                     point.id,
                                     point.delivMetod)}
                                 >Только Самовывоз</div></td>
+                                <td><div className={CNdelivMetod}
+                                  onClick={() => handlePuckUp(
+                                    point.id,
+                                    point.delivMetod)}
+                                >Скрыть точку</div>
+                                </td>
                                 
                               </tr>
                               
