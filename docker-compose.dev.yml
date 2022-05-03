@@ -20,6 +20,7 @@ services:
         volumes:
           - ./backend:/usr/src/app
           - /usr/app/node_modules
+          -  ./static:/usr/src/app/public
         build:
             context: ./backend
         
