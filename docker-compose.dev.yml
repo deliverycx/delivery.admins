@@ -17,7 +17,9 @@ services:
         env_file:
             - ./backend/.production.env
         volumes:
-          - ./backend:/usr/node/app/
+          - ./backend:/usr/src/app
+          - /usr/app/node_modules
+          - ./static:/usr/src/app/public
         build:
             context: ./backend
         
