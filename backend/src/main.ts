@@ -4,6 +4,8 @@ import { join } from 'path';
 import { doc } from './docs/api.docs';
 import { AppModule } from './module/app.module';
 
+
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
