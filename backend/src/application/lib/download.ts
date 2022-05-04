@@ -23,8 +23,7 @@ export class DownloadImage {
 
                 image.resize(w, Jimp.AUTO);
                 
-                //await image.writeAsync(`${process.cwd()}/public/static/shop/${imageName}`);
-                await image.writeAsync(`/data/iiko/${imageName}`);
+                await image.writeAsync(`${process.cwd()}/public/static/shop/${imageName}`);
 
                 resolve(`/static/shop/${imageName}`);
             } catch (e) {
