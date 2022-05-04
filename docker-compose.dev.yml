@@ -16,10 +16,7 @@ services:
         container_name: admin_backend
         env_file:
             - ./backend/.production.env
-        volumes:
-          - ./backend:/usr/node/app/
-          - /usr/node/app/node_modules
-          - ./static:/usr/node/app/public
+        
         build:
             context: ./backend
         
