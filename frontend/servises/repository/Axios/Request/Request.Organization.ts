@@ -9,12 +9,20 @@ namespace Req{
     orgid: string,
     delivmetod:string
   }
+  export type hiddenMetod = {
+    idorganization: string,
+    isHidden:boolean
+  }
   
 }
 namespace Res{
   export type DelivMetod = {
     idorganization: string,
     delivmetod:string | null
+  }
+  export type hiddenMetod = {
+    idorganization: string,
+    isHidden:boolean
   }
 }
 
@@ -30,6 +38,11 @@ class RequestOrganization extends ApiSuper {
   @methods('post')
   switchDelivMetod(metods:Res.DelivMetod) {
     return this.request<Req.org>(`/organization/puckup`)
+  }
+
+  @methods('post')
+  hiddenOrganization(metods:Res.hiddenMetod) {
+    return this.request<Req.hiddenMetod>(`/organization/hidden`)
   }
   
   

@@ -232,7 +232,6 @@ export class IikoRequesterServises {
                 : "";
 
             console.log(objectId);
-
             const product = {
                 category: category._id,
                 organization: objectId,
@@ -240,7 +239,7 @@ export class IikoRequesterServises {
                 description,
                 order,
                 id,
-                image: await this.downloader.download(image, 300),
+                image: await this.downloader.download(image, 300,id),
                 additionalInfo,
                 tags,
                 measureUnit: measureUnit,

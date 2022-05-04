@@ -12,7 +12,7 @@ type IProps = {
 const OrganizationList = () => {
   const useCasePoints = adapterComponentUseCase(useOrganization)
   const {organizations} = useCasePoints.data
-  const {handlePuckUp} = useCasePoints.handlers
+  const {handlePuckUp,handleHiddenOrg} = useCasePoints.handlers
 
 
   return (
@@ -35,6 +35,7 @@ const OrganizationList = () => {
                           (point.delivMetod === CART_CHOICE.PICKUP)
                           
                       })
+                      const CNhiddenMetod = cn("col btn btn-block", {'btn-success':point.isHidden})
                       return (
                         <div key={point.id} className="card-body">
                           
@@ -49,10 +50,10 @@ const OrganizationList = () => {
                                     point.id,
                                     point.delivMetod)}
                                 >Только Самовывоз</div></td>
-                                <td><div className={CNdelivMetod}
-                                  onClick={() => handlePuckUp(
+                                <td><div className={CNhiddenMetod}
+                                  onClick={() => handleHiddenOrg(
                                     point.id,
-                                    point.delivMetod)}
+                                    !point.isHidden)}
                                 >Скрыть точку</div>
                                 </td>
                                 
