@@ -3,8 +3,11 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 help:
 	make -pRrq  -f $(THIS_FILE) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 up: docker-up
+down: docker-down
 
 docker-up:
 	docker-compose docker-compose.dev.yml up -d
+docker-down:
+	docker-compose docker-compose.dev.yml down --remove-orphans	
 build:
 	docker-compose -f docker-compose.dev.yml up -d --build 	
