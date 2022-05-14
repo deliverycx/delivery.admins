@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'sleep 1'
+                sh 'make up'
             }
         }
     }
