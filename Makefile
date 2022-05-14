@@ -6,6 +6,6 @@ up: docker-up
 
 
 docker-up:
-	docker-compose docker-compose.dev.yml up -d
+	git pull
 build:
 	docker-compose -f docker-compose.dev.yml up -d --build 	
