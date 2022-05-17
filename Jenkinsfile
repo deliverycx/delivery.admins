@@ -6,7 +6,10 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "git -v"
+                sh "ls"
+            }
+						steps {
+                sh "make"
             }
         }
     }
