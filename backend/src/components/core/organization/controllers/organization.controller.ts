@@ -14,7 +14,12 @@ export class OrganizationControllers{
   
   
   @Get('getAll')
-  getOrganization(@Body() body:OrganizationDTO) {
+  getOrganization() {
+    const result = this.OrganizationServises.getAllOrganization()
+    return result
+  }
+	@Get('defaultsetting')
+  defaultSetting() {
     const result = this.OrganizationServises.getAllOrganization()
     return result
   }
