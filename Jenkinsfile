@@ -1,9 +1,12 @@
 pipeline {
     agent any
+    options {
+        timestamps()
+    }
     stages {
-        stage('Test') {
+        stage("Init") {
             steps {
-                sh 'make up'
+                sh "make build"
             }
         }
     }
