@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "make build"
+                sh "git -v"
             }
         }
     }
