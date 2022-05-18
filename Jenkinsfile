@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "./devApp.sh"
+                sh "make up"
             }
         }
     }
