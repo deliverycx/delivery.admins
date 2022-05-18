@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "docker -v"
+                sh "make up"
             }
         }
     }
