@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Init") {
             steps {
-                sh "docker-compose -v"
+                sh "docker ps -a"
             }
         }
     }
