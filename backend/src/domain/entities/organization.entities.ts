@@ -13,11 +13,12 @@ export class OrganizationEntities extends AbstractEntities < IOrganizationEntiti
       delivmetod:metod
     }
   }
-  hiddenMetod(id:string,metod:boolean) {
+  hiddenMetod(id:any,metod:boolean) {
     return this.entities = {
       orgid: id,
       isHidden:metod
     }
   }
+	
 }
 export const organizationEntities = new OrganizationEntities()

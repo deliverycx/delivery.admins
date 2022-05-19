@@ -34,7 +34,7 @@ export class OrganizationRepository {
     )
     return organizationEntities.delivMetod(result.id,result.delivMetod)
   }
-  async hiddenOranizationMetod(orgid: string, metod: string) {
+  async hiddenOranizationMetod(orgid: string, metod: boolean) {
     const result = await this.organizationModel.findOneAndUpdate(
       {
         id: orgid
@@ -48,5 +48,22 @@ export class OrganizationRepository {
     )
     
     return organizationEntities.hiddenMetod(result.id,result.isHidden)
+  }
+	async hiddenCityMetod(orgid: string, metod: boolean) {
+		console.log(orgid,metod);
+    const result = await this.cityModel.findOneAndUpdate(
+      {
+        _id: orgid
+      },
+      {
+        $set: {
+          isHidden: metod
+        }
+      },
+      { new: true }
+    )
+		console.log('res',result);
+    
+    return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
 }

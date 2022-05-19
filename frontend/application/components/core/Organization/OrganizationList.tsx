@@ -12,7 +12,7 @@ type IProps = {
 const OrganizationList = () => {
   const useCasePoints = adapterComponentUseCase(useOrganization)
   const {organizations} = useCasePoints.data
-  const {handlePuckUp,handleHiddenOrg} = useCasePoints.handlers
+  const {handlePuckUp,handleHiddenOrg,handleHiddenCity} = useCasePoints.handlers
 
 
   return (
@@ -21,13 +21,20 @@ const OrganizationList = () => {
       organizations && 
         organizations.map((org: ListOrganization, index: number) => {
           if (org) {
+						const CNCity = cn("col btn btn-block", {'btn-success':org.isHidden})
             return (
               
               <div key={index} className="card">
                 <div className="card-header">
-                  <h3 className="card-title">{org.name}</h3>
-
+									<div className="row">
+                  <h3 className="card-title">{org.name}</h3><br />
+									<div className={CNCity}
+                                  onClick={() => handleHiddenCity(
+                                    org._id,
+                                    !org.isHidden)}
+                                >Скрыть город</div>
                   </div>
+									</div>
                   {
                     org.organizations.map((point: IPoint, i: number) => {
                       const CNdelivMetod = cn("col btn btn-block", {

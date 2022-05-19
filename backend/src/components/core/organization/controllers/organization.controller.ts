@@ -32,7 +32,12 @@ export class OrganizationControllers{
   async hidenOrg(@Body() body: OrganizationDTO) {
     
     const result = await this.OrganizationServises.hiddenOranizationMetod(body)
-    console.log(result)
+    return result
+  }
+	@Post('cityhidden')
+  async CityHidden(@Body() body: OrganizationDTO) {
+    const result = await this.OrganizationServises.hiddenCityMetod(body)
+		
     return result
   }
 

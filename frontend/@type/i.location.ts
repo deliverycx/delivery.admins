@@ -18,6 +18,8 @@ export interface IPoint {
 }
 
 export interface ListOrganization {
+	_id:string
   name: string
   organizations:IPoint[]
+	isHidden:boolean
 }

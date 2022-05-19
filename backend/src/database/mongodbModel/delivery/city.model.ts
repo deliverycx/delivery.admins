@@ -21,6 +21,9 @@ export class CityClass {
 
     @prop({ ref: "Organization" })
     public organizations!: Ref<OrganizationClass>[];
+
+		@prop({ type: () => Boolean,default:false })
+    isHidden:boolean
 }
 
 //export const CityModel = getModelForClass(CityClass);

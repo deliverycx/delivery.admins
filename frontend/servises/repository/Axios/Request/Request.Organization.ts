@@ -44,6 +44,10 @@ class RequestOrganization extends ApiSuper {
   hiddenOrganization(metods:Res.hiddenMetod) {
     return this.request<Req.hiddenMetod>(`/organization/hidden`)
   }
+	@methods('post')
+  hiddenCity(metods:Res.hiddenMetod) {
+    return this.request<Req.hiddenMetod>(`/organization/cityhidden`)
+  }
   
   
   

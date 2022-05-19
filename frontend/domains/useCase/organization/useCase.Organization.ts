@@ -40,12 +40,18 @@ export function useOrganization(this: any) {
     await handleAllOrg()
   }
 
+	const handleHiddenCity = async (idorganization: string,isHidden:boolean) => {
+    await RequestOrganization.hiddenCity({ idorganization, isHidden })
+    await handleAllOrg()
+  }
+
   this.data({
     organizations
   })
   this.handlers({
     handlePuckUp,
-    handleHiddenOrg
+    handleHiddenOrg,
+		handleHiddenCity
   })
   this.status({
     
