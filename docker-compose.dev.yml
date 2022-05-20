@@ -11,6 +11,7 @@ services:
           - "6000:6000"
         networks:
           - mynetwork
+          - jenkins
     admin_backend:
         image: docker/admin_backend
         container_name: admin_backend
@@ -22,6 +23,7 @@ services:
             context: ./backend
         networks:
           - mynetwork
+          - jenkins
 networks:
   mynetwork:
     external:
