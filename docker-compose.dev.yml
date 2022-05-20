@@ -11,7 +11,7 @@ services:
           - "6000:6000"
         networks:
           - mynetwork
-          - jenkins
+          - jenkinstwork
     admin_backend:
         image: docker/admin_backend
         container_name: admin_backend
@@ -30,5 +30,5 @@ networks:
       name: delivglobalnetwork           
   jenkinstwork:
       external:
-        name: jenkins
+        name: jenkins 
             
