@@ -23,10 +23,12 @@ services:
             context: ./backend
         networks:
           - mynetwork
-          - jenkins
+          - jenkinstwork
 networks:
   mynetwork:
     external:
       name: delivglobalnetwork           
-
+  jenkinstwork:
+      external:
+        name: jenkins
             
