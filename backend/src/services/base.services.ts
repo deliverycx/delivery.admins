@@ -6,16 +6,27 @@ export class BaseServises{
 		private readonly repozitory
 	){}
 	
-	async getAll(){
-		
+	async getOne(query?:any){
+		return this.repozitory.getOne(query)
 	}
-	async create<T>(body:T){
-		this.repozitory.create(body)
+	async getOneBuId(id:string){
+		return this.repozitory.getOneBuId(id)
 	}
-	async edit(){
-
+	async create<T>(body:T,files?:any[]){
+		const imagesMass = files.reduce((acc,images) => {
+			acc.push(images.originalname)
+			return acc
+		},[]);
+		this.repozitory.create({...body,images:imagesMass})
 	}
-	async delete(){
-
+	async edit(body:any,id:string,files?:any[]){
+		const imagesMass = files.reduce((acc,images) => {
+			acc.push(images.originalname)
+			return acc
+		},[]);
+		this.repozitory.edit(id,{...body,images:imagesMass})
+	}
+	async delete(id:string){
+		this.repozitory.delete(id)
 	}
 }

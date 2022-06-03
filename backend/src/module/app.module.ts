@@ -9,6 +9,7 @@ import { UnloadModule } from 'src/components/core/unload/module/unload.module';
 import { ADMIN_DB, DELIVERY_DB } from 'src/database/mongodbModel/config.mongodb';
 import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 import { BannersModule } from 'src/components/core/banners/module/banners.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 
 
@@ -28,6 +29,9 @@ import { BannersModule } from 'src/components/core/banners/module/banners.module
       {
         connectionName: DELIVERY_DB
       }),
+			MulterModule.register({
+				dest: './public/static',
+			}),
     AuthModule,
     UnloadModule,
     OrganizationModule,

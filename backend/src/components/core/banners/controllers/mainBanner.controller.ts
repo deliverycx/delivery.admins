@@ -1,4 +1,9 @@
-import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Req, Res, UploadedFile, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
+import { diskStorage } from "multer";
+import path from "path";
+import { DownloadImage } from "src/application/lib/download";
+import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
 import { MainBannerDTO } from "../dto/mainBanner.dto";
 import { mainBannerServises } from "../servises/mainBanner.servises";
 
@@ -9,16 +14,62 @@ export class MainBannerControllers{
   ) { }
 
 
-	@Get('all')
-	getList(){
-		return this.BannerServises.getAll()
+	@Get('buorg')
+	geBuOrg(@Query() query: MainBannerDTO){
+		return this.BannerServises.getOne(query)
+	}
+	@Get('bu')
+	geBu(@Query() query: MainBannerDTO){
+		return this.BannerServises.getOneBuId(query.id)
 	}
 
 	@Post('add')
-	addBanner(
-		@Body() body:MainBannerDTO
+	@UseInterceptors(
+		FilesInterceptor('files', 20, {
+			storage: diskStorage({
+				destination: './public/static',
+				filename: editFileName,
+			}),
+			fileFilter: imageFileFilter
+		}),
+	)
+	async addBanner(
+		@UploadedFiles() files: Array<Express.Multer.File>,
+		@Body() body:MainBannerDTO,
+		@Res() response,
 		){
-		return this.BannerServises.create<MainBannerDTO>(body)
+			this.BannerServises.create(body,files)
+			response.status(200).json({error:false})
+		
+	}
+	@Post('edit')
+	@UseInterceptors(
+		FilesInterceptor('files', 20, {
+			storage: diskStorage({
+				destination: './public/static',
+				filename: editFileName,
+			}),
+			fileFilter: imageFileFilter
+		}),
+	)
+	async editBanner(
+		@UploadedFiles() files: Array<Express.Multer.File>,
+		@Body() body:MainBannerDTO,
+		@Res() response,
+		@Query() query: MainBannerDTO
+		){
+			this.BannerServises.edit(body,query.id,files)
+			response.status(200).json({error:false})
+		
+	}
+
+	@Post('delet')
+	async bannerDelete(
+		@Query() query: MainBannerDTO,
+		@Res() response
+	){
+		this.BannerServises.delete(query.id)
+		response.status(200).json({error:false})
 	}
 
 }
