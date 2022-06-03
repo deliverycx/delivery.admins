@@ -10,6 +10,7 @@ import { ADMIN_DB, DELIVERY_DB } from 'src/database/mongodbModel/config.mongodb'
 import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 import { BannersModule } from 'src/components/core/banners/module/banners.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { NewsModule } from 'src/components/core/news/module/news.module';
 
 
 
@@ -35,7 +36,8 @@ import { MulterModule } from '@nestjs/platform-express';
     AuthModule,
     UnloadModule,
     OrganizationModule,
-		BannersModule
+		BannersModule,
+		NewsModule
   ],
   
 })

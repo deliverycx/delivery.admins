@@ -4,26 +4,26 @@ import { diskStorage } from "multer";
 import path from "path";
 import { DownloadImage } from "src/application/lib/download";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
-import { MainBannerDTO } from "../dto/mainBanner.dto";
-import { mainBannerServises } from "../servises/mainBanner.servises";
+import { NewsBannerDTO } from "../dto/stocks.dto";
+import { NewsServises } from "../servises/stocks.servises";
 
-@Controller('mainbanner')
-export class MainBannerControllers{
+@Controller('stocks')
+export class NewsControllers{
   constructor(
-    private readonly BannerServises: mainBannerServises
+    private readonly BannerServises: NewsServises
   ) { }
 
 
 	@Get('all')
-	getAll(@Query() query: MainBannerDTO){
+	getAll(@Query() query: NewsBannerDTO){
 		return this.BannerServises.getAll(query)
 	}
 	@Get('buorg')
-	geBuOrg(@Query() query: MainBannerDTO){
+	geBuOrg(@Query() query: NewsBannerDTO){
 		return this.BannerServises.getOne(query)
 	}
 	@Get('bu')
-	geBu(@Query() query: MainBannerDTO){
+	geBu(@Query() query: NewsBannerDTO){
 		return this.BannerServises.getOneBuId(query.id)
 	}
 
@@ -37,9 +37,9 @@ export class MainBannerControllers{
 			fileFilter: imageFileFilter
 		}),
 	)
-	async addBanner(
+	async addnews(
 		@UploadedFiles() files: Array<Express.Multer.File>,
-		@Body() body:MainBannerDTO,
+		@Body() body:NewsBannerDTO,
 		@Res() response,
 		){
 			this.BannerServises.create(body,files)
@@ -56,11 +56,11 @@ export class MainBannerControllers{
 			fileFilter: imageFileFilter
 		}),
 	)
-	async editBanner(
+	async editnews(
 		@UploadedFiles() files: Array<Express.Multer.File>,
-		@Body() body:MainBannerDTO,
+		@Body() body:NewsBannerDTO,
 		@Res() response,
-		@Query() query: MainBannerDTO
+		@Query() query: NewsBannerDTO
 		){
 			this.BannerServises.edit(body,query.id,files)
 			response.status(200).json({error:false})
@@ -69,7 +69,7 @@ export class MainBannerControllers{
 
 	@Post('delet')
 	async bannerDelete(
-		@Query() query: MainBannerDTO,
+		@Query() query: NewsBannerDTO,
 		@Res() response
 	){
 		this.BannerServises.delete(query.id)

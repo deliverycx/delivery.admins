@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
+import { SocialModel } from "src/database/mongodbModel/admin/social.model";
 import { AdminUsersModel } from "src/database/mongodbModel/admin/users.model";
 import { ADMIN_DB, DELIVERY_DB } from "src/database/mongodbModel/config.mongodb";
 import { CategoryClass } from "src/database/mongodbModel/delivery/category.model";
@@ -12,7 +13,8 @@ import { OrganizationServises } from "../servises/organization.servises";
 
 @Module({
   imports: [
-    TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB)
+    TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB),
+		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
   controllers: [OrganizationControllers], 
   providers:[OrganizationServises,OrganizationRepository]

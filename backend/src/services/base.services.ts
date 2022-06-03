@@ -6,6 +6,9 @@ export class BaseServises{
 		private readonly repozitory
 	){}
 	
+	async getAll(query:any = {}){
+		return this.repozitory.getAll(query)
+	}
 	async getOne(query?:any){
 		return this.repozitory.getOne(query)
 	}

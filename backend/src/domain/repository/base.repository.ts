@@ -5,6 +5,10 @@ export class BaseRepository<ModelClass> {
 			private readonly model: Model<any>,
 	) {}
 
+	async getAll(bu:any){
+		const result = await this.model.find(bu).select('-__v')
+		return result
+	}
 	async getOne(bu:any){
 		const result = await this.model.findOne(bu).select('-__v')
 		return result
