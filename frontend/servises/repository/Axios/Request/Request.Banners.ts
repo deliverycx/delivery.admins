@@ -37,6 +37,13 @@ class RequestBanners  extends ApiSuper{
 			data: data
 		})
   }
+	setImages(slide:any,data:any) {
+    return this.api({
+			method: 'post',
+			url: `/mainbanner/setImages?id=${slide}`,
+			data: data
+		})
+  }
 	delet(slide:string) {
     return this.api({
 			method: 'post',

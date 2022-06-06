@@ -40,6 +40,20 @@ export function useMainBanner(this: any) {
       console.log(error)
     }
   }
+	const setBuImages = async (id:string,data:[]) =>{
+		try {
+			const result = await RequestBanners.setImages(id,{images:data})
+
+			if(result.status === 200){
+				setBanners(result.data)
+			}else{
+				setBanners(null)
+			}
+		} catch (error) {
+			setBanners(null)
+		}
+		
+	}
 
 	
 	
@@ -49,7 +63,8 @@ export function useMainBanner(this: any) {
 		organizations
   })
   this.handlers({
-		setSelectOrg
+		setSelectOrg,
+		setBuImages
   })
   this.status({
     

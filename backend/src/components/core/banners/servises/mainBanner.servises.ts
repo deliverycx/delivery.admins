@@ -10,9 +10,13 @@ import { BannerRepository } from "../repository/banner.repository";
 export class mainBannerServises extends BaseServises{
 	constructor(
 		@Inject(BannerRepository)
-		private readonly Repository: typeof BannerRepository
+		private readonly Repository
 	) {
 		super(Repository);
+	}
+
+	setImages(id:string,{images}){
+		return this.Repository.reverseImages(id,images)
 	}
 	
 }

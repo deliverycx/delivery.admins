@@ -12,4 +12,16 @@ export class BannerRepository extends BaseRepository<MainBannerModel>{
   ) {
 		super(BannerModel)
 	 }
+
+	async reverseImages(id:string,arr:[]){
+		const res = await this.BannerModel.findByIdAndUpdate({
+			_id:id
+			},{
+				$set: {
+					images:arr
+			}
+		},{ upsert: true, new: true })
+		console.log('res',res);
+		return res
+	}
 }

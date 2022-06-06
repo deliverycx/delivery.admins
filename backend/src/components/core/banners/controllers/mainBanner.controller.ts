@@ -66,6 +66,15 @@ export class MainBannerControllers{
 			response.status(200).json({error:false})
 		
 	}
+	@Post('setImages')
+	async setImages(
+		@Query() query: MainBannerDTO,
+		@Body() body:MainBannerDTO,
+		@Res() response
+	){
+		const result = await this.BannerServises.setImages(query.id,body)
+		response.status(200).json(result)
+	}
 
 	@Post('delet')
 	async bannerDelete(

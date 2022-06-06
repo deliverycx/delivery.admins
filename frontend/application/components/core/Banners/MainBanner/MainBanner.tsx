@@ -1,12 +1,15 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { imgRout } from "application/helpers/imgInit"
 import { useMainBanner } from "domains/useCase/banners/useCase.MainBanner"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import DragDropHorizontal from "application/components/common/DragDrop/DragDropHorizontal";
 
 const MainBanner = () =>{
 	const useCasePoints = adapterComponentUseCase(useMainBanner)
 	const {banners,organizations} = useCasePoints.data
-	const {setSelectOrg} = useCasePoints.handlers
-
+	const {setSelectOrg,setBuImages} = useCasePoints.handlers
 
 	return(
 		<div className="col-12 ma0-l">
@@ -47,17 +50,24 @@ const MainBanner = () =>{
                 <div className="row">
 									{
 										banners &&
-										banners.images.map((val:any,index:number)=>{
-											return <div key={index} className="col-sm-2">
-	                    <a href={`/banners/${banners._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-	                      <img src={imgRout(val)} className="img-fluid mb-2" alt="white sample"/>
-	                    </a>
-	                  </div>
-										})
+										<DragDropHorizontal list={banners.images} render={(val:any) =>(
+											<a href={`/banners/${banners._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+											<img src={imgRout(val.content)} className="img-fluid mb-2" alt="white sample"/>
+										</a>
+										)}
+										handle={(items:any)=>{
+											setBuImages(banners._id,items)
+										}}
+										
+										/>
 									}
+									
+									
+							
                   
                   
                 </div>
+								
               </div>
             </div>
           </div>
