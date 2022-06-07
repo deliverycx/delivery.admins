@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       const user = await RequestUsers.check()
       return user.data
     } catch (error) {
-      //router.push('/auth')
+      router.push('/auth')
     }
   }
   
