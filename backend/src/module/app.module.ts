@@ -31,7 +31,7 @@ import { NewsModule } from 'src/components/core/news/module/news.module';
         connectionName: DELIVERY_DB
       }),
 			MulterModule.register({
-				dest: './public/static',
+				dest: './public/static/shop',
 			}),
     AuthModule,
     UnloadModule,

@@ -31,7 +31,7 @@ export class MainBannerControllers{
 	@UseInterceptors(
 		FilesInterceptor('files', 20, {
 			storage: diskStorage({
-				destination: './public/static',
+				destination: './public/static/shop',
 				filename: editFileName,
 			}),
 			fileFilter: imageFileFilter
@@ -50,7 +50,7 @@ export class MainBannerControllers{
 	@UseInterceptors(
 		FilesInterceptor('files', 20, {
 			storage: diskStorage({
-				destination: './public/static',
+				destination: './public/static/shop',
 				filename: editFileName,
 			}),
 			fileFilter: imageFileFilter
