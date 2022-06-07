@@ -3,7 +3,7 @@ import { useOrganizationSetting } from 'domains/useCase/organization/useCase.Org
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
-	const {social} = useCasePoints.data
+	const {social,slideId} = useCasePoints.data
 	const {setInput,onSubmit} = useCasePoints.handlers
 	
 
@@ -23,6 +23,18 @@ const OrganizationSetting = () =>{
 			        </div>
 						</div>
 						<input type="submit" value="Сохранить" onClick={onSubmit} className="btn btn-success"/>
+              
+            </div>
+
+          </div>
+
+
+					<div className="card card-primary">
+            <div className="card-header">
+              <h3 className="card-title">Таргет ссылка</h3>
+            </div>
+            <div className="card-body">
+							<span>https://тест.хинкалыч.рф/?organization={slideId}</span>
               
             </div>
 

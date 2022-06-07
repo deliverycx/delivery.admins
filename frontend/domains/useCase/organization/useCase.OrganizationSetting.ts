@@ -12,13 +12,13 @@ export function  useOrganizationSetting(this: any){
 
 	useEffect(()=>{
 		
-		slideId &&	getSocial()
-	},[])
+		slideId &&	getSocial(slideId)
+	},[slideId])
 
-
-	const getSocial = async () =>{
+	const getSocial = async (id:string) =>{
 		try {
-			const {data} = await RequestOrganization.socialBu(slideId)
+			const {data} = await RequestOrganization.socialBu(id)
+			console.log('data',data);
 			setSocial(data)
 		} catch (error) {
 			console.log(error);
@@ -43,7 +43,8 @@ export function  useOrganizationSetting(this: any){
 	}
 
 	this.data({
-		social
+		social,
+		slideId
   })
   this.handlers({
 		setInput,
