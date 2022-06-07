@@ -65,6 +65,7 @@ export function useNewsForm(this: any) {
 			
 			if(result.status === 200){
 				setNewslist(result.data)
+				setInput(result.data.link)
 			}else{
 				setNewslist(null)
 			}
@@ -73,9 +74,9 @@ export function useNewsForm(this: any) {
 		}
 		
 	}
-	
 
 	const fomrdata = (formData:any,data:any) => {
+		
 		if (filee) {
       for (let i = 0; i < filee.length; i++) {
 				console.log(filee[i]);
