@@ -14,7 +14,8 @@ async function bootstrap() {
 
 
 	const allowedRequestedFromHosts = process.env.CLIENT_PATH.split(" ");
-	console.log(allowedRequestedFromHosts);
+	
+	app.setGlobalPrefix('admin');
   app.enableCors({
     origin: allowedRequestedFromHosts,
 
