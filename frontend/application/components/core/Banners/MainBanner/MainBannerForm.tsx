@@ -46,8 +46,10 @@ console.log(selectOrg);
 																	key={org.id} 
 																	onClick={()=> handlSelectOrg(org.id)} 
 																	value={org.id}
-																	selected={banners && banners.organization === org.id}
-																	>- {org.address.street}</option>
+																	selected={
+																		(banners && banners.organization === org.id) || (banners && banners.organization === 'all')
+																	}
+																	>- {(banners && banners.organization === 'all') ? 'Все' : org.address.street}</option>
 															})
 														}
 														
