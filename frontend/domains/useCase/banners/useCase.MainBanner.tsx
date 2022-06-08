@@ -15,7 +15,7 @@ export function useMainBanner(this: any) {
 	useEffect(()=>{
 		getBuOrg()
 		fetchOrg()
-	},[selectOrg,banners])
+	},[])
 
 
 	const getBuOrg = async () =>{
@@ -79,7 +79,8 @@ export function useMainBannerForm(this: any) {
 	const [filee, setfile] = useState<any>(false)
 	const [banners,setBanners] = useState<any[] | null>()
 	const [organizations, setOrganizations] = useState<any>()
-	const [selectOrg, setSelectOrg] = useState<string>('all')
+	const [selectOrg, setSelectOrg] = useState<string | null>()
+	const [error, setError] = useState<boolean | null>(null)
 
 	useEffect(()=>{
 		slideId && getBu(slideId)
@@ -131,7 +132,7 @@ export function useMainBannerForm(this: any) {
 			!slideId 
 						? await RequestBanners.create(formData)
 						: await RequestBanners.edit(formData,slideId)
-			router.back()
+			router.push('/banners')
     } catch (error) {
       console.log(error);
     }
@@ -140,11 +141,22 @@ export function useMainBannerForm(this: any) {
 	const onDelet = async (id:string) => {
     try {
       await RequestBanners.delet(id)
-			router.back()
+			router.push('/banners')
     } catch (error) {
       console.log(error);
     }
   }
+
+	const handlSelectOrg = async (org:string) =>{
+		const {data} = await RequestBanners.getBuOrg(org)
+		if(!slideId && (data && data.organization === org)){
+			setError(true)
+		}else{
+			setSelectOrg(org)
+			setError(false)
+		}
+		
+	}
 
 	
 
@@ -161,17 +173,18 @@ export function useMainBannerForm(this: any) {
 		banners,
 		organizations,
 		slideId,
-		imagesArr
+		imagesArr,
+		selectOrg
   })
   this.handlers({
 		handleSubmit,
     onSubmit,
 		setfile,
-		setSelectOrg,
+		handlSelectOrg,
 		router,
 		onDelet
   })
   this.status({
-    
+    error
   })
 }

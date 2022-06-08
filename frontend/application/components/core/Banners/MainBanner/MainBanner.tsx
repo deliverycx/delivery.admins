@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import DragDropHorizontal from "application/components/common/DragDrop/DragDropHorizontal";
 
 const MainBanner = () =>{
+	
 	const useCasePoints = adapterComponentUseCase(useMainBanner)
 	const {banners,organizations} = useCasePoints.data
 	const {setSelectOrg,setBuImages} = useCasePoints.handlers

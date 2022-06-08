@@ -8,10 +8,11 @@ import { RequestBanners } from 'servises/repository/Axios/Request';
 
 const MainBannerForm = () =>{
 	const useCasePoints = adapterComponentUseCase(useMainBannerForm)
-	const {register,banners,organizations,slideId,imagesArr} = useCasePoints.data
-	const {handleSubmit,onSubmit,setfile,setSelectOrg,router,onDelet} = useCasePoints.handlers
+	const {selectOrg,banners,organizations,slideId,imagesArr} = useCasePoints.data
+	const {handleSubmit,onSubmit,setfile,handlSelectOrg,router,onDelet} = useCasePoints.handlers
+	const {error} = useCasePoints.status
 	
-
+console.log(selectOrg);
 	return(
 		<form onSubmit={handleSubmit(onSubmit)}>
 		<section className="content">
@@ -36,13 +37,14 @@ const MainBannerForm = () =>{
 											organizations.map((val:any,index:number)=>{
 												return (
 													<>
-														<option onClick={()=> setSelectOrg('all')}>Все</option>
+														<option onClick={()=> handlSelectOrg(null)}>---</option>
+														<option onClick={()=> handlSelectOrg('all')}>Все</option>
 														<option disabled>{val.name}</option>
 														{
 															val.organizations.map((org:any)=>{
 																return <option 
 																	key={org.id} 
-																	onClick={()=> setSelectOrg(org.id)} 
+																	onClick={()=> handlSelectOrg(org.id)} 
 																	value={org.id}
 																	selected={banners && banners.organization === org.id}
 																	>- {org.address.street}</option>
@@ -56,6 +58,10 @@ const MainBannerForm = () =>{
 										}
                     
                   </select>
+									{
+										typeof error === 'boolean' && 
+										error && <span>в такой точке есть слайдер</span>
+									}
                </div>
               <div className="form-group">
 							{
@@ -79,8 +85,12 @@ const MainBannerForm = () =>{
         <div className="col-12">
           <a onClick={router.back} className="btn btn-secondary">Cancel</a>
 					
-          <input type="submit" value="Сохранить" className="btn btn-success float-right"/>
-					<a className="btn btn-secondary float-right" onClick={() => onDelet(slideId)}>Удалить</a>
+					<input type="submit" disabled={(typeof error === 'boolean' && error) || !selectOrg} value="Сохранить" className="btn btn-success float-right"/>
+					{
+						slideId &&
+						<a className="btn btn-secondary float-right" onClick={() => onDelet(slideId)}>Удалить</a>
+					}
+					
         </div>
       </div>
     </section>
