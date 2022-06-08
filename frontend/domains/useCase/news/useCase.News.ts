@@ -12,7 +12,7 @@ export function useNews(this: any) {
 
 	useEffect(()=>{
 		getList()
-	},[])
+	},[news])
 
 
 	const getList = async () =>{

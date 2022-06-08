@@ -13,7 +13,7 @@ export function useStocks(this: any) {
 
 	useEffect(()=>{
 		getList()
-	},[])
+	},[news])
 
 
 	const getList = async () =>{

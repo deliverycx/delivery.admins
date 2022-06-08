@@ -15,7 +15,7 @@ export function useMainBanner(this: any) {
 	useEffect(()=>{
 		getBuOrg()
 		fetchOrg()
-	},[selectOrg])
+	},[selectOrg,banners])
 
 
 	const getBuOrg = async () =>{
