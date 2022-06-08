@@ -2,21 +2,22 @@ import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { imgRout } from "application/helpers/imgInit"
 import { useMainBanner } from "domains/useCase/banners/useCase.MainBanner"
 import { useNews } from "domains/useCase/news/useCase.News"
+import { useStocks } from "domains/useCase/stocks/useCase.Stocks"
 
-const NewsList = () =>{
-	const useCasePoints = adapterComponentUseCase(useNews)
+const StocksList = () =>{
+	const useCasePoints = adapterComponentUseCase(useStocks)
 	const {news} = useCasePoints.data
 
 
 	return(
 		<div className="col-12 ma0-l">
 			<div className="col-2 card-header">
-				<a href="/news/add" className="btn btn-block bg-gradient-secondary">Добавить Новость</a>
+				<a href="/stocks/add" className="btn btn-block bg-gradient-secondary">Добавить акцию</a>
 			</div>
 			
             <div className="card card-primary">
               <div className="card-header">
-                <h4 className="card-title">Новости</h4>
+                <h4 className="card-title">Акции</h4>
               </div>
 							
               <div className="card-body">
@@ -41,4 +42,4 @@ const NewsList = () =>{
           </div>
 	)
 }
-export default NewsList
+export default StocksList

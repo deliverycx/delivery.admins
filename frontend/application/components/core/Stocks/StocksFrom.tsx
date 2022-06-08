@@ -8,7 +8,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import { useForm } from 'react-hook-form';
 import { RequestBanners } from 'servises/repository/Axios/Request';
 
-const NewsForm = () =>{
+const StocksForm = () =>{
 	const useCasePoints = adapterComponentUseCase(useStocksForm)
 	const {register,newslist,slideId,imagesArr} = useCasePoints.data
 	const {handleSubmit,onSubmit,setfile,router,onDelet,setInput} = useCasePoints.handlers
@@ -66,4 +66,4 @@ const NewsForm = () =>{
 		</form>
 	)
 }
-export default NewsForm
+export default StocksForm

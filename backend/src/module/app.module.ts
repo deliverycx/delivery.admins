@@ -11,6 +11,7 @@ import { OrganizationModule } from 'src/components/core/organization/module/orga
 import { BannersModule } from 'src/components/core/banners/module/banners.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { NewsModule } from 'src/components/core/news/module/news.module';
+import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
 
 
 
@@ -37,7 +38,8 @@ import { NewsModule } from 'src/components/core/news/module/news.module';
     UnloadModule,
     OrganizationModule,
 		BannersModule,
-		NewsModule
+		NewsModule,
+		StocksModule
   ],
   
 })

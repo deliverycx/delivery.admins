@@ -1,21 +1,21 @@
 import Container from "application/components/common/Container/Container"
 import Header from "application/components/common/Header/Header"
 import Menu from "application/components/common/Menu/Menu"
-import NewsList from "application/components/core/News/NewsList"
-import StocksList from "application/components/core/Stocks/StocksList"
+import MainBannerForm from "application/components/core/Banners/MainBanner/MainBannerForm"
+import NewsForm from "application/components/core/News/NewsForm"
+import StocksForm from "application/components/core/Stocks/StocksFrom"
 import { NextPage } from "next"
 
 
-
-const News: NextPage = () => {
+const StocksAdd: NextPage = () => {
 	return(
 		<div className="wrapper">
       <Header />
       <Menu />
       <Container>
-				<StocksList />
+				<StocksForm />
       </Container>
     </div>
 	)
 }
-export default News
+export default StocksAdd

@@ -7,11 +7,12 @@ import { NewsRepository } from "../repository/stocks.repository";
 import { NewsServises } from "../servises/stocks.servises";
 import { NewsControllers } from "../controllers/stocks.controller";
 import { NewsModel } from "src/database/mongodbModel/admin/news.model";
+import { StocksModel } from "src/database/mongodbModel/admin/stocks.model";
 
 
 @Module({
   imports: [
-    TypegooseModule.forFeature([NewsModel], ADMIN_DB)
+    TypegooseModule.forFeature([StocksModel], ADMIN_DB)
   ],
   controllers: [NewsControllers], 
   providers:[NewsServises,NewsRepository]

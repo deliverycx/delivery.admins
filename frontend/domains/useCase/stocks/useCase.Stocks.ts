@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { imgRout } from 'application/helpers/imgInit';
 import RequestStocks from 'servises/repository/Axios/Request/Request.Stocks';
 
-export function useNews(this: any) {
+export function useStocks(this: any) {
 	const [news,setNews] = useState<any[] | null>()
 
 	useEffect(()=>{
@@ -18,7 +18,7 @@ export function useNews(this: any) {
 
 	const getList = async () =>{
 		try {
-			const result = await RequestNews.getAll()
+			const result = await RequestStocks.getAll()
 			
 			if(result.status === 200){
 				setNews(result.data)
