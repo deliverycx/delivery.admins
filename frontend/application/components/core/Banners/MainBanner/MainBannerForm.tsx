@@ -8,11 +8,11 @@ import { RequestBanners } from 'servises/repository/Axios/Request';
 
 const MainBannerForm = () =>{
 	const useCasePoints = adapterComponentUseCase(useMainBannerForm)
-	const {selectOrg,banners,organizations,slideId,imagesArr} = useCasePoints.data
-	const {handleSubmit,onSubmit,setfile,handlSelectOrg,router,onDelet} = useCasePoints.handlers
-	const {error} = useCasePoints.status
+	const {stateBanners,slideId,imagesArr} = useCasePoints.data
+	const {handleSubmit,onSubmit,handlerFile,handlSelectOrg,router,onDelet,handlerInput} = useCasePoints.handlers
 	
-console.log(selectOrg);
+
+	console.log('state',stateBanners);
 	return(
 		<form onSubmit={handleSubmit(onSubmit)}>
 		<section className="content">
@@ -32,13 +32,14 @@ console.log(selectOrg);
 							<div className="form-group">
                   <label htmlFor="exampleSelectBorder">Выбор точки</label>
                   <select className="custom-select form-control-border" name="org" id="exampleSelectBorder">
+											<option onClick={()=> handlSelectOrg(null)}>---</option>
+											<option selected={(stateBanners.banners && stateBanners.banners.organization === 'all')} onClick={()=> handlSelectOrg('all')}>Все</option>
 										{
-											organizations &&
-											organizations.map((val:any,index:number)=>{
+											stateBanners.organizations &&
+											stateBanners.organizations.map((val:any,index:number)=>{
 												return (
 													<>
-														<option onClick={()=> handlSelectOrg(null)}>---</option>
-														<option onClick={()=> handlSelectOrg('all')}>Все</option>
+						
 														<option disabled>{val.name}</option>
 														{
 															val.organizations.map((org:any)=>{
@@ -47,9 +48,10 @@ console.log(selectOrg);
 																	onClick={()=> handlSelectOrg(org.id)} 
 																	value={org.id}
 																	selected={
-																		(banners && banners.organization === org.id) || (banners && banners.organization === 'all')
+																		(stateBanners.banners && stateBanners.banners.organization === org.id)
+																		 
 																	}
-																	>- {(banners && banners.organization === 'all') ? 'Все' : org.address.street}</option>
+																	>- {org.address.street}</option>
 															})
 														}
 														
@@ -61,20 +63,43 @@ console.log(selectOrg);
                     
                   </select>
 									{
-										typeof error === 'boolean' && 
-										error && <span>в такой точке есть слайдер</span>
+										typeof stateBanners.error === 'boolean' && 
+										stateBanners.error && <span>в такой точке есть слайдер</span>
 									}
                </div>
-              <div className="form-group">
-							{
-								!slideId && <DropzoneArea onChange={e => setfile(e)} filesLimit={20} />
-							}	
-							
-							{
-			          slideId && banners && <DropzoneArea onChange={e => setfile(e)} filesLimit={20} initialFiles={imagesArr(banners.images)} />
-			        }
-                
-              </div>
+							 <div className="popBox_item"> 
+			            <label className="form-label">Заголовок</label>
+			            <input type="text" name="url" onChange={e => handlerInput(e.target.value)} defaultValue={stateBanners.banners ? String(stateBanners.banners.url) : ''} className="form-control" />
+			        </div>
+							<br />
+							<div className="popBox_item"> 
+									<label htmlFor="exampleSelectBorder">Изображения в топе</label>
+		              <div className="form-group">
+									{
+										!slideId && <DropzoneArea onChange={e => handlerFile('file',e)} filesLimit={20} />
+									}	
+									
+									{
+					          slideId && stateBanners.banners && <DropzoneArea onChange={e => handlerFile('file',e)} filesLimit={20} initialFiles={imagesArr(stateBanners.banners.images)} />
+					        }
+		                
+		              </div>
+							</div>
+							<br />
+							<div className="popBox_item"> 
+									<label htmlFor="exampleSelectBorder">Изображения новости</label>
+									<div className="form-group">
+									{
+										!slideId && <DropzoneArea onChange={e => handlerFile('smallfile',e)} filesLimit={20} />
+									}	
+									
+									{
+					          slideId && stateBanners.banners && <DropzoneArea onChange={e => handlerFile('smallfile',e)} filesLimit={20} initialFiles={imagesArr(stateBanners.banners.smallimages)} />
+					        }
+		                
+		              </div>
+							</div>
+
               
             </div>
 
@@ -87,7 +112,7 @@ console.log(selectOrg);
         <div className="col-12">
           <a onClick={router.back} className="btn btn-secondary">Cancel</a>
 					
-					<input type="submit" disabled={(typeof error === 'boolean' && error) || !selectOrg} value="Сохранить" className="btn btn-success float-right"/>
+					<input type="submit" disabled={(typeof stateBanners.error === 'boolean' && stateBanners.error) || !stateBanners.selectOrg} value="Сохранить" className="btn btn-success float-right"/>
 					{
 						slideId &&
 						<a className="btn btn-secondary float-right" onClick={() => onDelet(slideId)}>Удалить</a>

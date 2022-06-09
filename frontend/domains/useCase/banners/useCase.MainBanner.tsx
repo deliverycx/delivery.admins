@@ -1,11 +1,12 @@
 import { Tfile } from '@type';
 import { useFroms } from 'application/hooks/useForms';
-import { useCallback, useState } from 'react';
+import { useCallback, useReducer, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { RequestBanners, RequestOrganization } from 'servises/repository/Axios/Request';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { imgRout } from 'application/helpers/imgInit';
+import { BannerReducer,initialStateBanner,ReducerActionTypePoints } from 'application/reducers/BannerReducer';
 
 export function useMainBanner(this: any) {
 	const [banners,setBanners] = useState<any[] | null>()
@@ -76,11 +77,12 @@ export function useMainBannerForm(this: any) {
 	const slideId = router.query.id as string
 
 	const { register, handleSubmit, watch } = useForm<{img:Tfile}>();
-	const [filee, setfile] = useState<any>(false)
-	const [banners,setBanners] = useState<any[] | null>()
-	const [organizations, setOrganizations] = useState<any>()
-	const [selectOrg, setSelectOrg] = useState<string | null>()
-	const [error, setError] = useState<boolean | null>(null)
+
+	const [stateBanners, dispatchBanners] = useReducer(
+    BannerReducer,
+    initialStateBanner
+  );
+
 
 	useEffect(()=>{
 		slideId && getBu(slideId)
@@ -90,37 +92,66 @@ export function useMainBannerForm(this: any) {
 
 	const getBu = async (id:string) =>{
 		try {
-			const result = await RequestBanners.getBu(id)
 			
+			const result = await RequestBanners.getBu(id)
+			console.log('data',result);
 			if(result.status === 200){
-				setBanners(result.data)
-				slideId && setSelectOrg(result.data.organization)
+				dispatchBanners({
+					type: ReducerActionTypePoints.setBanners,
+					payload: result.data
+				});
+				if(id){
+					dispatchBanners({
+						type: ReducerActionTypePoints.setSelectOrg,
+						payload: result.data.organization
+					});
+					dispatchBanners({
+						type: ReducerActionTypePoints.setUrl,
+						payload: result.data.url
+					});
+				}
+				
+
 			}else{
-				setBanners(null)
+				dispatchBanners({
+					type: ReducerActionTypePoints.setBanners,
+					payload: null
+				});
 			}
 		} catch (error) {
-			setBanners(null)
+			dispatchBanners({
+				type: ReducerActionTypePoints.setBanners,
+				payload: null
+			});
 		}
 		
 	}
 	const fetchOrg = async () => {
     try {
       const { data } = await RequestOrganization.getAll()
-      setOrganizations(data)
+
+			dispatchBanners({
+				type: ReducerActionTypePoints.setOrganizations,
+				payload: data
+			});
     } catch (error) {
       console.log(error)
     }
   }
 
 	const fomrdata = (formData:any,data:any) => {
-		if (filee) {
-      for (let i = 0; i < filee.length; i++) {
-				console.log(filee[i]);
-        formData.append('files', filee[i])
+		if (stateBanners.filee) {
+      for (let i = 0; i < stateBanners.filee.length; i++) {
+        formData.append('files', stateBanners.filee[i])
       }
-        
     }
-		formData.append('organization', selectOrg)
+		if (stateBanners.smallFilee) {
+      for (let i = 0; i < stateBanners.smallFilee.length; i++) {
+        formData.append('smallfilee', stateBanners.smallFilee[i])
+      }
+    }
+		formData.append('organization', stateBanners.selectOrg)
+		formData.append('url', stateBanners.url)
 
 	}
 
@@ -150,41 +181,71 @@ export function useMainBannerForm(this: any) {
 	const handlSelectOrg = async (org:string) =>{
 		const {data} = await RequestBanners.getBuOrg(org)
 		if(!slideId && (data && data.organization === org)){
-			setError(true)
+			dispatchBanners({
+				type: ReducerActionTypePoints.setError,
+				payload: true
+			});
 		}else{
-			setSelectOrg(org)
-			setError(false)
+			dispatchBanners({
+				type: ReducerActionTypePoints.setSuccsSelectOrg,
+				payload: org
+			});
 		}
 		
 	}
 
-	
+	const handlerFile = (cases:string,file:[]) =>{
+		switch(cases){
+			case 'file':
+				dispatchBanners({
+					type: ReducerActionTypePoints.setFile,
+					payload: file
+				});
+			break;
+
+			case 'smallfile':
+				dispatchBanners({
+					type: ReducerActionTypePoints.setSmallFile,
+					payload: file
+				});
+			break;
+		}
+		
+	}
+
+	const handlerInput = (url:string) =>{
+		dispatchBanners({
+			type: ReducerActionTypePoints.setUrl,
+			payload: url
+		})
+	}
 
 	const imagesArr = useCallback((mass:string[]) => {
-    return mass.map((val:string) => {
-      return imgRout(val)
-    })
+		console.log('massss',mass);
+		return mass.map((val:string) => {
+			return imgRout(val)
+		})
+    
   },[slideId])
 
+
+
 	
-	console.log(banners);
 	this.data({
-		register,
-		banners,
-		organizations,
+		stateBanners,
 		slideId,
 		imagesArr,
-		selectOrg
   })
   this.handlers({
 		handleSubmit,
     onSubmit,
-		setfile,
+		handlerFile,
 		handlSelectOrg,
 		router,
-		onDelet
+		onDelet,
+		handlerInput
   })
   this.status({
-    error
+
   })
 }

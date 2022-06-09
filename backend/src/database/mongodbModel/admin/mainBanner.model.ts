@@ -7,4 +7,10 @@ export class MainBannerModel{
   
 	@prop({ type: () => String })
   public organization:string
+
+	@prop({ type: () => String })
+  public url:string
+
+	@prop({ type: () => Array })
+  public smallimages: string[]
 }

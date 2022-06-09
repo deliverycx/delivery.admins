@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, Req, Res, UploadedFile, UploadedFiles, UseInterceptors } from "@nestjs/common";
-import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
+import { FileInterceptor, FilesInterceptor,AnyFilesInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import path from "path";
 import { DownloadImage } from "src/application/lib/download";
@@ -29,32 +29,33 @@ export class MainBannerControllers{
 
 	@Post('add')
 	@UseInterceptors(
-		FilesInterceptor('files', 20, {
+		AnyFilesInterceptor({
 			storage: diskStorage({
 				destination: './public/static/shop',
 				filename: editFileName,
 			}),
 			fileFilter: imageFileFilter
-		}),
+		})
 	)
 	async addBanner(
 		@UploadedFiles() files: Array<Express.Multer.File>,
 		@Body() body:MainBannerDTO,
 		@Res() response,
 		){
+			console.log(files);
 			this.BannerServises.create(body,files)
 			response.status(200).json({error:false})
 		
 	}
 	@Post('edit')
 	@UseInterceptors(
-		FilesInterceptor('files', 20, {
+		AnyFilesInterceptor({
 			storage: diskStorage({
 				destination: './public/static/shop',
 				filename: editFileName,
 			}),
 			fileFilter: imageFileFilter
-		}),
+		})
 	)
 	async editBanner(
 		@UploadedFiles() files: Array<Express.Multer.File>,
