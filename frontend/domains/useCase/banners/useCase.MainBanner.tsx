@@ -21,8 +21,8 @@ export function useMainBanner(this: any) {
 
 	const getBuOrg = async () =>{
 		try {
-			const result = await RequestBanners.getBuOrg(selectOrg)
-			
+			const result = await RequestBanners.getAll(selectOrg)
+			console.log(result.data);
 			if(result.status === 200){
 				setBanners(result.data)
 			}else{
@@ -152,12 +152,14 @@ export function useMainBannerForm(this: any) {
     }
 		formData.append('organization', stateBanners.selectOrg)
 		formData.append('url', stateBanners.url)
+		formData.append('order', data.order)
 
 	}
 
 
 	const onSubmit = async (data:any) => {
     try {
+			console.log(data);
       const formData = new FormData()
       fomrdata(formData,data)
 			!slideId 
@@ -179,18 +181,10 @@ export function useMainBannerForm(this: any) {
   }
 
 	const handlSelectOrg = async (org:string) =>{
-		const {data} = await RequestBanners.getBuOrg(org)
-		if(!slideId && (data && data.organization === org)){
-			dispatchBanners({
-				type: ReducerActionTypePoints.setError,
-				payload: true
-			});
-		}else{
-			dispatchBanners({
-				type: ReducerActionTypePoints.setSuccsSelectOrg,
-				payload: org
-			});
-		}
+		dispatchBanners({
+			type: ReducerActionTypePoints.setSuccsSelectOrg,
+			payload: org
+		});
 		
 	}
 
@@ -237,6 +231,7 @@ export function useMainBannerForm(this: any) {
 		imagesArr,
   })
   this.handlers({
+		register,
 		handleSubmit,
     onSubmit,
 		handlerFile,

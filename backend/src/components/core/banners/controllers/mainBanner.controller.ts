@@ -22,6 +22,10 @@ export class MainBannerControllers{
 	geBuOrg(@Query() query: MainBannerDTO){
 		return this.BannerServises.getOne(query)
 	}
+	@Get('buallorg')
+	geBuAllOrg(@Query() query: MainBannerDTO){
+		return this.BannerServises.getOne(query)
+	}
 	@Get('bu')
 	geBu(@Query() query: MainBannerDTO){
 		return this.BannerServises.getOneBuId(query.id)

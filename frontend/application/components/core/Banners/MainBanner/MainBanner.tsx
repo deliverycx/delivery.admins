@@ -12,6 +12,11 @@ const MainBanner = () =>{
 	const {banners,organizations} = useCasePoints.data
 	const {setSelectOrg,setBuImages} = useCasePoints.handlers
 
+	const q = banners && banners.sort((a:any,b:any) =>{
+		return (a.order - b.order)
+	})
+	console.log(q);
+
 	return(
 		<div className="col-12 ma0-l">
 			<div className="col-2 card-header">
@@ -51,16 +56,13 @@ const MainBanner = () =>{
                 <div className="row">
 									{
 										banners &&
-										<DragDropHorizontal list={banners.images} render={(val:any) =>(
-											<a href={`/banners/${banners._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-											<img src={imgRout(val.content)} className="img-fluid mb-2" alt="white sample"/>
-										</a>
-										)}
-										handle={(items:any)=>{
-											setBuImages(banners._id,items)
-										}}
-										
-										/>
+										banners.sort((a:any,b:any) => (a.order - b.order)).map((val:any) =>{
+											return (
+												<a key={val._id} href={`/banners/${val._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+												<img src={imgRout(val.images[0])} className="img-fluid mb-2" alt="white sample"/>
+											</a>
+											)
+										})
 									}
 									
 									

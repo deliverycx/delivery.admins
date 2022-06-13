@@ -5,16 +5,22 @@ import Api from "../AxiosCreate";
 class RequestBanners  extends ApiSuper{
 	protected readonly api: AxiosInstance = Api.getInstance.api;
 	
-	getAll(){
+	getAll(org?:string){
 		return this.api({
 			method: 'get',
-			url: `/mainbanner/all`,
+			url: `/mainbanner/all?organization=${org}`,
 		})
 	}
 	getBuOrg(org:string){
 		return this.api({
 			method: 'get',
 			url: `/mainbanner/buorg?organization=${org}`,
+		})
+	}
+	getBuAllOrg(org:string){
+		return this.api({
+			method: 'get',
+			url: `/mainbanner/buallorg?organization=${org}`,
 		})
 	}
 	getBu(slide:string){

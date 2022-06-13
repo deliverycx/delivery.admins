@@ -17,13 +17,18 @@ const DragDropHorizontal:FC<IProps> = ({list,render,handle}) =>{
 
 	const getItems = (count:any) =>
 	  count.map((k:any) => ({
-	    id: `item-${k}`,
+	    id: k._id,
 	    content: k,
-  }));
+  })
+	);
 
 	const reorder = (listArr:any, startIndex:any, endIndex:any) => {
+		/*
 		const [removed] = listArr.splice(startIndex, 1);
 		listArr.splice(endIndex, 0, removed);
+		console.log(listArr,startIndex,endIndex);
+		*/
+		console.log(listArr[startIndex]._id,startIndex,endIndex);
 		return listArr;
 	};
 
@@ -33,9 +38,9 @@ const DragDropHorizontal:FC<IProps> = ({list,render,handle}) =>{
       result.source.index,
       result.destination.index
     );
-
+		
 		setComplite(getItems(items))
-		handle(items)
+		//handle(items)
 	}
 
 	// style

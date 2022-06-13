@@ -13,6 +13,10 @@ export class BaseRepository<ModelClass> {
 		const result = await this.model.findOne(bu).select('-__v')
 		return result
 	}
+	async getBuAll(bu:any){
+		const result = await this.model.findOne(bu).select('-__v')
+		return result
+	}
 	async getOneBuId(id:string){
 		const result = await this.model.findById(id).select('-__v')
 		return result

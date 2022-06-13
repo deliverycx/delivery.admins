@@ -9,10 +9,9 @@ import { RequestBanners } from 'servises/repository/Axios/Request';
 const MainBannerForm = () =>{
 	const useCasePoints = adapterComponentUseCase(useMainBannerForm)
 	const {stateBanners,slideId,imagesArr} = useCasePoints.data
-	const {handleSubmit,onSubmit,handlerFile,handlSelectOrg,router,onDelet,handlerInput} = useCasePoints.handlers
+	const {register,handleSubmit,onSubmit,handlerFile,handlSelectOrg,router,onDelet,handlerInput} = useCasePoints.handlers
 	
 
-	console.log('state',stateBanners);
 	return(
 		<form onSubmit={handleSubmit(onSubmit)}>
 		<section className="content">
@@ -68,8 +67,12 @@ const MainBannerForm = () =>{
 									}
                </div>
 							 <div className="popBox_item"> 
-			            <label className="form-label">Заголовок</label>
-			            <input type="text" name="url" onChange={e => handlerInput(e.target.value)} defaultValue={stateBanners.banners ? String(stateBanners.banners.url) : ''} className="form-control" />
+			            <label className="form-label">Ссылка</label>
+			            <input type="text" {...register('url')} name="url" onChange={e => handlerInput(e.target.value)} defaultValue={stateBanners.banners ? String(stateBanners.banners.url) : ''} className="form-control" />
+			        </div>
+							<div className="popBox_item"> 
+			            <label className="form-label">Позиция в списке</label>
+			            <input type="text" {...register('order')} name="order" defaultValue={stateBanners.banners ? String(stateBanners.banners.order) : ''} className="form-control" />
 			        </div>
 							<br />
 							<div className="popBox_item"> 
@@ -90,11 +93,11 @@ const MainBannerForm = () =>{
 									<label htmlFor="exampleSelectBorder">Изображения новости</label>
 									<div className="form-group">
 									{
-										!slideId && <DropzoneArea onChange={e => handlerFile('smallfile',e)} filesLimit={20} />
+										!slideId && <DropzoneArea onChange={e => handlerFile('smallfile',e)} filesLimit={1} />
 									}	
 									
 									{
-					          slideId && stateBanners.banners && <DropzoneArea onChange={e => handlerFile('smallfile',e)} filesLimit={20} initialFiles={imagesArr(stateBanners.banners.smallimages)} />
+					          slideId && stateBanners.banners && <DropzoneArea onChange={e => handlerFile('smallfile',e)} filesLimit={1} initialFiles={imagesArr(stateBanners.banners.smallimages)} />
 					        }
 		                
 		              </div>
