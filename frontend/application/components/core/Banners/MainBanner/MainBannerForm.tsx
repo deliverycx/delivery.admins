@@ -79,7 +79,7 @@ const MainBannerForm = () =>{
 									<label htmlFor="exampleSelectBorder">Изображения в топе</label>
 		              <div className="form-group">
 									{
-										!slideId && <DropzoneArea onChange={e => handlerFile('file',e)} filesLimit={20} />
+										!slideId && <DropzoneArea onChange={e => handlerFile('file',e)} filesLimit={1} />
 									}	
 									
 									{
