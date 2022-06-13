@@ -152,7 +152,7 @@ export function useMainBannerForm(this: any) {
     }
 		formData.append('organization', stateBanners.selectOrg)
 		formData.append('url', stateBanners.url)
-		formData.append('order', data.order)
+		formData.append('order', data.order || stateBanners.banners.order)
 
 	}
 
