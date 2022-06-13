@@ -12,10 +12,12 @@ const MainBanner = () =>{
 	const {banners,organizations} = useCasePoints.data
 	const {setSelectOrg,setBuImages} = useCasePoints.handlers
 
-	const q = banners && banners.sort((a:any,b:any) =>{
-		return (a.order - b.order)
-	})
-	console.log(q);
+	const grid = 4;
+	const getItemStyle = () => ({
+	  padding: grid * 2,
+	  margin: `0 ${grid}px 0 0`,
+	  background: '#f0f0f0',
+	});
 
 	return(
 		<div className="col-12 ma0-l">
@@ -58,11 +60,34 @@ const MainBanner = () =>{
 										banners &&
 										banners.sort((a:any,b:any) => (a.order - b.order)).map((val:any) =>{
 											return (
-												<a key={val._id} href={`/banners/${val._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+												<div
+												key={val._id}
+												style={getItemStyle()}
+												className="col-sm-2"
+												>
+												<a href={`/banners/${val._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
 												<img src={imgRout(val.images[0])} className="img-fluid mb-2" alt="white sample"/>
 											</a>
+											</div>
 											)
 										})
+									}
+
+
+									{
+										/*
+
+										<DragDropHorizontal list={banners.images} render={(val:any) =>(
+											<a href={`/banners/${banners._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+											<img src={imgRout(val.content)} className="img-fluid mb-2" alt="white sample"/>
+										</a>
+										)}
+										handle={(items:any)=>{
+											setBuImages(banners._id,items)
+										}}
+										
+										/>
+										*/
 									}
 									
 									

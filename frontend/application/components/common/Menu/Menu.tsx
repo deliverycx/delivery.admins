@@ -54,20 +54,7 @@ const Menu = () =>{
                 <i className="right fas fa-angle-left"></i>
               </p>
             </a>
-						<a href="/news" className="nav-link active">
-              <i className="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Новости
-                <i className="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <a href="/stocks" className="nav-link active">
-              <i className="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                акции
-                <i className="right fas fa-angle-left"></i>
-              </p>
-            </a>
+						
 						
             
           </li>
