@@ -22,7 +22,7 @@ const MainBanner = () =>{
 	return(
 		<div className="col-12 ma0-l">
 			<div className="col-2 card-header">
-				<a href="/banners/add" className="btn btn-block bg-gradient-secondary">Добавить слайдер</a>
+				<a href="/banners/add" className="btn btn-block bg-gradient-secondary">Добавить банер</a>
 			</div>
 			
             <div className="card card-primary">
