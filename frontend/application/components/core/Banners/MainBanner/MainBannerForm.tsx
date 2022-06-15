@@ -31,8 +31,7 @@ const MainBannerForm = () =>{
 							<div className="form-group">
                   <label htmlFor="exampleSelectBorder">Выбор точки</label>
                   <select className="custom-select form-control-border" {...register("org")} name="org">
-											<option value="" onChange={()=> handlSelectOrg(null)}>---</option>
-											<option value="all" selected={(stateBanners.banners && stateBanners.banners.organization === 'all')} onChange={()=> handlSelectOrg('all')}>Все точки</option>
+											<option value="all" selected={(stateBanners.banners && stateBanners.banners.organization === 'all')}>Все точки</option>
 										{
 											stateBanners.organizations &&
 											stateBanners.organizations.map((val:any,index:number)=>{

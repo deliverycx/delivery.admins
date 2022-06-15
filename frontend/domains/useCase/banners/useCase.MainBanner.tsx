@@ -155,10 +155,20 @@ export function useMainBannerForm(this: any) {
         formData.append('mobfile', stateBanners.mobfile[i])
       }
     }
-		formData.append('organization', data.org || (stateBanners.banners && stateBanners.banners.organization))
+		formData.append('organization',helpOrg(data.org)) // data.org || (stateBanners.banners && stateBanners.banners.organization)
 		formData.append('url', stateBanners.url)
 		formData.append('order', data.order || (stateBanners.banners && stateBanners.banners.order) || 0)
+
 	}
+
+	const helpOrg = (data:any) =>{
+		if(stateBanners.banners){
+			return stateBanners.banners.organization
+		}else{
+			return data
+		}
+	}
+
 
 
 	const onSubmit = async (data:any) => {
@@ -169,7 +179,7 @@ export function useMainBannerForm(this: any) {
 			!slideId 
 						? await RequestBanners.create(formData)
 						: await RequestBanners.edit(formData,slideId)
-			router.push('/banners')
+			//router.push('/banners')
     } catch (error) {
       console.log(error);
     }
