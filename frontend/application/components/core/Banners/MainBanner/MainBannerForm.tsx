@@ -29,8 +29,8 @@ const MainBannerForm = () =>{
             </div>
             <div className="card-body">
 							<div className="form-group">
-                  <label htmlFor="exampleSelectBorder">Выбор точки</label>
-                  <select className="custom-select form-control-border" {...register("org")} name="org">
+                  <label htmlFor="exampleSelectBorder">Выбор точки</label><br />
+                  <select {...register("org")} name="org">
 											<option value="all" selected={(stateBanners.banners && stateBanners.banners.organization === 'all')}>Все точки</option>
 										{
 											stateBanners.organizations &&
