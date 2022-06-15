@@ -1,5 +1,6 @@
 import { Tfile } from '@type';
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
+import FormSelect from 'application/components/core/Banners/MainBanner/BannerFormSelect';
 import axios from 'axios';
 import { useMainBanner, useMainBannerForm } from 'domains/useCase/banners/useCase.MainBanner';
 import { DropzoneArea } from 'material-ui-dropzone';
@@ -28,43 +29,14 @@ const MainBannerForm = () =>{
               </div>
             </div>
             <div className="card-body">
-							<div className="form-group">
-                  <label htmlFor="exampleSelectBorder">Выбор точки</label><br />
-                  <select {...register("org")} name="org">
-											<option value="all" selected={(stateBanners.banners && stateBanners.banners.organization === 'all')}>Все точки</option>
-										{
-											stateBanners.organizations &&
-											stateBanners.organizations.map((val:any,index:number)=>{
-												return (
-													<>
-						
-														<option disabled>{val.name}</option>
-														{
-															val.organizations.map((org:any)=>{
-																return <option 
-																	key={org.id} 
-																	onClick={()=> handlSelectOrg(org.id)} 
-																	value={org.id}
-																	selected={
-																		(stateBanners.banners && stateBanners.banners.organization === org.id)
-																		 
-																	}
-																	>- {org.address.street}</option>
-															})
-														}
-														
-													</>
-												)
-												
-											})
-										}
-                    
-                  </select>
-									{
-										typeof stateBanners.error === 'boolean' && 
-										stateBanners.error && <span>выберите точку</span>
-									}
-               </div>
+							
+
+
+							 {
+									stateBanners.organizations &&
+									<FormSelect options={stateBanners.organizations} selected={stateBanners.selectOrg}  setter={handlSelectOrg} />
+							 }
+							
 							 <div className="popBox_item"> 
 			            <label className="form-label">Ссылка</label>
 			            <input type="text" {...register('url')} name="url" onChange={e => handlerInput(e.target.value)} defaultValue={stateBanners.banners ? String(stateBanners.banners.url) : ''} className="form-control" />

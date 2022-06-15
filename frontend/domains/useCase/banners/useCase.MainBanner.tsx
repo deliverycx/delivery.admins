@@ -22,7 +22,6 @@ export function useMainBanner(this: any) {
 	const getBuOrg = async () =>{
 		try {
 			const result = await RequestBanners.getAll(selectOrg)
-			console.log(result.data);
 			if(result.status === 200){
 				setBanners(result.data)
 			}else{
@@ -94,7 +93,6 @@ export function useMainBannerForm(this: any) {
 		try {
 			
 			const result = await RequestBanners.getBu(id)
-			console.log('data',result);
 			if(result.status === 200){
 				dispatchBanners({
 					type: ReducerActionTypePoints.setBanners,
@@ -155,11 +153,10 @@ export function useMainBannerForm(this: any) {
         formData.append('mobfile', stateBanners.mobfile[i])
       }
     }
-		formData.append('organization',helpOrg(data.org)) // data.org || (stateBanners.banners && stateBanners.banners.organization)
+		formData.append('organization',stateBanners.selectOrg) // data.org || (stateBanners.banners && stateBanners.banners.organization)
 		formData.append('url', stateBanners.url)
 		formData.append('order', data.order || (stateBanners.banners && stateBanners.banners.order) || 0)
-		console.log('data',data);
-		console.log('org',stateBanners.banners);
+
 	}
 
 	const helpOrg = (data:any) =>{
@@ -196,7 +193,6 @@ export function useMainBannerForm(this: any) {
   }
 
 	const handlSelectOrg = async (org:string) =>{
-		console.log(org);
 		dispatchBanners({
 			type: ReducerActionTypePoints.setSuccsSelectOrg,
 			payload: org
@@ -238,13 +234,11 @@ export function useMainBannerForm(this: any) {
 	}
 
 	const imagesArr = useCallback((mass:string[]) => {
-		console.log('massss',mass);
 		return mass.map((val:string) => {
 			return imgRout(val)
 		})
     
   },[slideId])
-
 
 
 	

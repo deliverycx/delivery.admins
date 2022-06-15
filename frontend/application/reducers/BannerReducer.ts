@@ -6,7 +6,7 @@ export const initialStateBanner = {
 		mobfile:"",
     banners: null,
 		organizations:null,
-		selectOrg:"",
+		selectOrg:"all",
 		error:false,
 		url:""
 };
