@@ -179,7 +179,7 @@ export function useMainBannerForm(this: any) {
 			!slideId 
 						? await RequestBanners.create(formData)
 						: await RequestBanners.edit(formData,slideId)
-			//router.push('/banners')
+			router.push('/banners')
     } catch (error) {
       console.log(error);
     }
