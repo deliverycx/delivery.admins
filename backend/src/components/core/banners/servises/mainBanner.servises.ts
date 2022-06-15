@@ -24,15 +24,23 @@ export class mainBannerServises extends BaseServises{
 				acc.images.push(images.originalname)
 			}else if(images.fieldname === 'smallfilee'){
 				acc.smallimages.push(images.originalname)
+			}else if(images.fieldname === 'mobfile'){
+				acc.mobimages.push(images.originalname)
 			}
+
 
 			return acc
 		},{
 			images:[],
-			smallimages:[]
+			smallimages:[],
+			mobimages:[]
 		});
 
-		this.Repository.create({...body,images:imagesMass.images,smallimages:imagesMass.smallimages})
+		this.Repository.create({...body,
+			images:imagesMass.images,
+			smallimages:imagesMass.smallimages,
+			mobimages:imagesMass.mobimages
+		})
 	}
 	async edit<T>(body:any,id:string,files?:any[]){
 		const imagesMass = files.reduce((acc,images) => {
@@ -40,15 +48,22 @@ export class mainBannerServises extends BaseServises{
 				acc.images.push(images.originalname)
 			}else if(images.fieldname === 'smallfilee'){
 				acc.smallimages.push(images.originalname)
+			}else if(images.fieldname === 'mobfile'){
+				acc.mobimages.push(images.originalname)
 			}
 
 			return acc
 		},{
 			images:[],
-			smallimages:[]
+			smallimages:[],
+			mobimages:[]
 		});
 
-		this.Repository.edit(id,{...body,images:imagesMass.images,smallimages:imagesMass.smallimages})
+		this.Repository.edit(id,{...body,
+			images:imagesMass.images,
+			smallimages:imagesMass.smallimages,
+			mobimages:imagesMass.mobimages
+		})
 	}
 	
 }

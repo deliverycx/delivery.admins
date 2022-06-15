@@ -3,6 +3,7 @@ import { ReducerAction } from ".";
 export const initialStateBanner = {
 		filee: "",
     smallFilee: "",
+		mobfile:"",
     banners: null,
 		organizations:null,
 		selectOrg:"",
@@ -14,6 +15,7 @@ type typeinitialState = typeof initialStateBanner
 export enum ReducerActionTypePoints {
 	setFile,
   setSmallFile,
+	setMobfile,
 	setBanners,
 	setOrganizations,
 	setSelectOrg,
@@ -34,6 +36,11 @@ export function BannerReducer(state: typeinitialState, action: ReducerAction<Red
       return {
         ...state,
         smallFilee: action.payload,
+    };
+		case ReducerActionTypePoints.setMobfile:
+      return {
+        ...state,
+        mobfile: action.payload,
     };
     case ReducerActionTypePoints.setBanners:
       return {

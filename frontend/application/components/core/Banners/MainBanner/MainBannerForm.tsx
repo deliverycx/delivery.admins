@@ -30,9 +30,9 @@ const MainBannerForm = () =>{
             <div className="card-body">
 							<div className="form-group">
                   <label htmlFor="exampleSelectBorder">Выбор точки</label>
-                  <select className="custom-select form-control-border" name="org" id="exampleSelectBorder">
-											<option onClick={()=> handlSelectOrg(null)}>---</option>
-											<option selected={(stateBanners.banners && stateBanners.banners.organization === 'all')} onClick={()=> handlSelectOrg('all')}>Все</option>
+                  <select className="custom-select form-control-border" {...register("org")} name="org">
+											<option value="" onChange={()=> handlSelectOrg(null)}>---</option>
+											<option value="all" selected={(stateBanners.banners && stateBanners.banners.organization === 'all')} onChange={()=> handlSelectOrg('all')}>Все точки</option>
 										{
 											stateBanners.organizations &&
 											stateBanners.organizations.map((val:any,index:number)=>{
@@ -63,7 +63,7 @@ const MainBannerForm = () =>{
                   </select>
 									{
 										typeof stateBanners.error === 'boolean' && 
-										stateBanners.error && <span>в такой точке есть слайдер</span>
+										stateBanners.error && <span>выберите точку</span>
 									}
                </div>
 							 <div className="popBox_item"> 
@@ -103,6 +103,21 @@ const MainBannerForm = () =>{
 		              </div>
 							</div>
 
+							<br />
+							<div className="popBox_item"> 
+									<label htmlFor="exampleSelectBorder">Изображения мобильная</label>
+									<div className="form-group">
+									{
+										!slideId && <DropzoneArea onChange={e => handlerFile('mobfile',e)} filesLimit={1} />
+									}	
+									
+									{
+					          slideId && stateBanners.banners && <DropzoneArea onChange={e => handlerFile('mobfile',e)} filesLimit={1} initialFiles={imagesArr(stateBanners.banners.mobimages)} />
+					        }
+		                
+		              </div>
+							</div>
+
               
             </div>
 
@@ -115,13 +130,14 @@ const MainBannerForm = () =>{
         <div className="col-12">
           <a onClick={router.back} className="btn btn-secondary">Cancel</a>
 					
-					<input type="submit" disabled={(typeof stateBanners.error === 'boolean' && stateBanners.error) || !stateBanners.selectOrg} value="Сохранить" className="btn btn-success float-right"/>
+					<input type="submit"  value="Сохранить" className="btn btn-success float-right"/>
 					{
 						slideId &&
 						<a className="btn btn-secondary float-right" onClick={() => onDelet(slideId)}>Удалить</a>
 					}
 					
         </div>
+				
       </div>
     </section>
 		</form>

@@ -1,10 +1,6 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { imgRout } from "application/helpers/imgInit"
 import { useMainBanner } from "domains/useCase/banners/useCase.MainBanner"
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import DragDropHorizontal from "application/components/common/DragDrop/DragDropHorizontal";
 
 const MainBanner = () =>{
 	
@@ -18,6 +14,8 @@ const MainBanner = () =>{
 	  margin: `0 ${grid}px 0 0`,
 	  background: '#f0f0f0',
 	});
+
+	const handleSelect = (e:any) => setSelectOrg(e.target.value)					
 
 	return(
 		<div className="col-12 ma0-l">
@@ -33,17 +31,17 @@ const MainBanner = () =>{
               <div className="card-body">
 							<div className="form-group">
                   <label htmlFor="exampleSelectBorder">Выбор точки</label>
-                  <select className="custom-select form-control-border" name="org" id="exampleSelectBorder">
+                  <select className="custom-select form-control-border" onChange={handleSelect} name="org">
 										{
 											organizations &&
 											organizations.map((val:any,index:number)=>{
 												return (
 													<>
-														<option onClick={()=> setSelectOrg('all')}>Все</option>
+														<option value="all">Все точки</option>
 														<option disabled>{val.name}</option>
 														{
 															val.organizations.map((org:any)=>{
-																return <option key={org.id} onClick={()=> setSelectOrg(org.id)} value={org.id}>- {org.address.street}</option>
+																return <option key={org.id} value={org.id}>- {org.address.street}</option>
 															})
 														}
 														
@@ -54,6 +52,9 @@ const MainBanner = () =>{
 										}
                     
                   </select>
+
+
+									
                </div>
                 <div className="row">
 									{

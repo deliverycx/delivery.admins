@@ -150,22 +150,27 @@ export function useMainBannerForm(this: any) {
         formData.append('smallfilee', stateBanners.smallFilee[i])
       }
     }
-		formData.append('organization', stateBanners.selectOrg)
+		if (stateBanners.mobfile) {
+      for (let i = 0; i < stateBanners.mobfile.length; i++) {
+        formData.append('mobfile', stateBanners.mobfile[i])
+      }
+    }
+		formData.append('organization', data.org || (stateBanners.banners && stateBanners.banners.organization))
 		formData.append('url', stateBanners.url)
-		formData.append('order', data.order || stateBanners.banners.order)
-
+		formData.append('order', data.order || (stateBanners.banners && stateBanners.banners.order) || 0)
+		console.log(data.order,stateBanners.banners);
 	}
 
 
 	const onSubmit = async (data:any) => {
     try {
-			console.log(data);
+			
       const formData = new FormData()
       fomrdata(formData,data)
 			!slideId 
 						? await RequestBanners.create(formData)
 						: await RequestBanners.edit(formData,slideId)
-			router.push('/banners')
+			//router.push('/banners')
     } catch (error) {
       console.log(error);
     }
@@ -181,6 +186,7 @@ export function useMainBannerForm(this: any) {
   }
 
 	const handlSelectOrg = async (org:string) =>{
+		console.log(org);
 		dispatchBanners({
 			type: ReducerActionTypePoints.setSuccsSelectOrg,
 			payload: org
@@ -200,6 +206,13 @@ export function useMainBannerForm(this: any) {
 			case 'smallfile':
 				dispatchBanners({
 					type: ReducerActionTypePoints.setSmallFile,
+					payload: file
+				});
+			break;
+
+			case 'mobfile':
+				dispatchBanners({
+					type: ReducerActionTypePoints.setMobfile,
 					payload: file
 				});
 			break;
