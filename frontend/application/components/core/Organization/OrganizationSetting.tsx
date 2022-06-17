@@ -6,6 +6,17 @@ const OrganizationSetting = () =>{
 	const {social,slideId} = useCasePoints.data
 	const {setInput,onSubmit} = useCasePoints.handlers
 	
+	console.log(document.location);
+
+	const url = (slideId:string) =>{
+		if(document.location.host === "xn--80aimpg.xn--e1aybc.xn--80apgfh0ct5a.xn--p1ai"){
+			return `${document.location.protocol}//тест.хинкалыч.рф/?organuzation=${slideId}`
+		}else if(document.location.host === "xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1a"){
+			return `${document.location.protocol}//доставка.хинкалыч.рф/?organuzation=${slideId}`
+		}else{
+			return `${document.location.protocol}//${document.location.host}/?organuzation=${slideId}`
+		}
+	}
 
 	return(
 		<section className="content">
@@ -34,7 +45,13 @@ const OrganizationSetting = () =>{
               <h3 className="card-title">Таргет ссылка</h3>
             </div>
             <div className="card-body">
-							<span>https://тест.хинкалыч.рф/?organization={slideId}</span>
+							<span>
+								{
+									url(slideId)
+									
+								}
+							
+								</span>
               
             </div>
 
