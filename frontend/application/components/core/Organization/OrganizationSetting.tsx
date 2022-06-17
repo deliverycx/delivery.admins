@@ -11,7 +11,7 @@ const OrganizationSetting = () =>{
 	const url = (slideId:string) =>{
 		if(document.location.host === "xn--80aimpg.xn--e1aybc.xn--80apgfh0ct5a.xn--p1ai"){
 			return `${document.location.protocol}//тест.хинкалыч.рф/?organuzation=${slideId}`
-		}else if(document.location.host === "xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1a"){
+		}else if(document.location.host === "xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1ai"){
 			return `${document.location.protocol}//доставка.хинкалыч.рф/?organuzation=${slideId}`
 		}else{
 			return `${document.location.protocol}//${document.location.host}/?organuzation=${slideId}`
@@ -47,8 +47,12 @@ const OrganizationSetting = () =>{
             <div className="card-body">
 							<span>
 								{
-									url(slideId)
-									
+									document.location.host === "xn--80aimpg.xn--e1aybc.xn--80apgfh0ct5a.xn--p1ai" &&
+									`${document.location.protocol}//тест.хинкалыч.рф/?organuzation=${slideId}`
+								}
+								{
+									document.location.host === "xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1ai" &&
+									`${document.location.protocol}//доставка.хинкалыч.рф/?organuzation=${slideId}`
 								}
 							
 								</span>
