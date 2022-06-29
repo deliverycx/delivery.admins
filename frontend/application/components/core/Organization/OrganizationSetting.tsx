@@ -34,7 +34,7 @@ const OrganizationSetting = () =>{
               <h3 className="card-title">Таргет ссылка</h3>
             </div>
             <div className="card-body">
-							<span>https://тест.хинкалыч.рф/?organuzation={slideId}</span>
+							<span>https://хинкалыч.рф/?organuzation={slideId}</span>
               
             </div>
 
