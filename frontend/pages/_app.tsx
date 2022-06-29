@@ -1,4 +1,5 @@
 import '../styles/adminlte.min.css'
+import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { RequestUsers } from 'servises/repository/Axios/Request'
 import { useAuthCheck } from 'application/hooks/useAuthCheck'

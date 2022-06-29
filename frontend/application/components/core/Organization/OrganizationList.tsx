@@ -47,7 +47,10 @@ const OrganizationList = () => {
                         <div key={point.id} className="card-body">
                           
                           <div className="card-footer">
-                           <h3 className="card-title">{point.address.street}</h3>
+                           
+														 <a className="card-title" href={`/organization/${point.id}`}>{point.address.street}	</a>
+														 
+													
                             <br /> 
                             <hr />
                             <table>

@@ -102,12 +102,12 @@ export class IikoRequesterServises {
                     id: guid,
                     city: cityId,
                     address: {
-                        street,
                         longitude,
                         latitude
                     },
                 },
                 $set: {
+										street,
                     phone,
                     workTime
                 }

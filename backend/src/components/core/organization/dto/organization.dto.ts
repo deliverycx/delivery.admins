@@ -12,4 +12,7 @@ export default class OrganizationDTO {
   @IsOptional()
   public isHidden:boolean
 
+	@IsOptional()
+	social:[]
+
 }

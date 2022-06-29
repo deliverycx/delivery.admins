@@ -1,4 +1,4 @@
-import { ListOrganization } from "@type";
+import { ISocial, ListOrganization } from "@type";
 import { ApiSuper, methods, token } from "../AxiosApi";
 
 namespace Req{
@@ -23,6 +23,10 @@ namespace Res{
   export type hiddenMetod = {
     idorganization: string,
     isHidden:boolean
+  }
+	export type socialData = {
+    idorganization: string
+		social:any
   }
 }
 
@@ -49,6 +53,15 @@ class RequestOrganization extends ApiSuper {
     return this.request<Req.hiddenMetod>(`/organization/cityhidden`)
   }
   
+	@methods('post')
+  social(data:Res.socialData) {
+    return this.request(`/organization/social`)
+  }
+
+	@methods('get')
+  socialBu(query:string) {
+    return this.request(`/organization/socialbu?idorganization=${query}`)
+  }
   
   
 }

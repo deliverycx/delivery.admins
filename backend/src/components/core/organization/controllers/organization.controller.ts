@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Render, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Render, Res, UseGuards } from "@nestjs/common";
 import { connection } from "src/database/mongodbModel/config.mongodb";
 import { JwtAuthGuard } from "src/guard/jwt.guard";
 import { OrganizationServises } from '../servises/organization.servises'
@@ -41,5 +41,22 @@ export class OrganizationControllers{
 		
     return result
   }
+
+	@Post('social')
+  async Social(@Body() body: OrganizationDTO) {
+    const result = await this.OrganizationServises.socialMetod(body)
+		
+    return result
+  }
+	@Get('socialbu')
+  async SocialBu(
+		@Body() body: OrganizationDTO,
+		@Query() query: OrganizationDTO
+		) {
+    const result = await this.OrganizationServises.socialMetodBu(query)
+		
+    return result
+  }
+
 
 }

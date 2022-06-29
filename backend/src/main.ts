@@ -11,8 +11,13 @@ async function bootstrap() {
       logger: ['log', 'error', 'warn', 'debug', 'verbose'],
     }
   );
+
+
+	const allowedRequestedFromHosts = process.env.CLIENT_PATH.split(" ");
+	
+	//app.setGlobalPrefix('admin');
   app.enableCors({
-    origin: [process.env.CLIENT_PATH],
+    origin: allowedRequestedFromHosts,
 
     credentials: true
   });

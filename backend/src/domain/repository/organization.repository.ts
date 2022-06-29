@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ReturnModelType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
+import { SocialModel } from "src/database/mongodbModel/admin/social.model";
 import { CityClass } from "src/database/mongodbModel/delivery/city.model";
 import { OrganizationClass } from "src/database/mongodbModel/delivery/organization.model";
 import { organizationEntities } from "../entities/organization.entities";
@@ -9,7 +10,8 @@ import { organizationEntities } from "../entities/organization.entities";
 export class OrganizationRepository {
   constructor(
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>
+    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
+		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>
   ) { }
 
   async getAllOrganization() {
@@ -66,4 +68,35 @@ export class OrganizationRepository {
     
     return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
+	async socialMetod(idorganization:string,social:[]){
+		
+		const result = await this.socialModel.findOneAndUpdate(
+      {
+        idorganization: idorganization
+      },
+      {
+        $set: {
+          social: social
+        }
+      },
+      { new: true }
+    )
+		if(!result){
+			await this.socialModel.create({
+				idorganization,
+				social
+			})
+		}
+		
+	}
+	async socialMetodBu(idorganization:string){
+		
+		const result = await this.socialModel.findOne(
+      {
+        idorganization: idorganization
+      }
+    )
+		return result
+		
+	}
 }
