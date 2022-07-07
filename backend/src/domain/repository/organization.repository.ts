@@ -48,6 +48,26 @@ export class OrganizationRepository {
       },
       { new: true }
     )
+		const city = await  this.cityModel.find({
+			organizations:{
+				$all:[result._id]
+			}
+		})
+
+		if(JSON.stringify(result.city)  !== JSON.stringify(city[0]._id)){
+			await this.organizationModel.findOneAndUpdate(
+				{
+					id: orgid
+				},
+				{
+					$set: {
+						city: city[0]._id
+					}
+				},
+				{ new: true }
+			)
+			
+		}
     
     return organizationEntities.hiddenMetod(result.id,result.isHidden)
   }

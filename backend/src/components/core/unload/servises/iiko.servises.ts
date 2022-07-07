@@ -64,6 +64,8 @@ export class IikoRequesterServises {
           organization.address
         );
 
+				
+
         const organizationInArray = {
           street,
           guid: organization.id,
@@ -101,13 +103,13 @@ export class IikoRequesterServises {
                 $setOnInsert: {
                     id: guid,
                     city: cityId,
-                    address: {
-                        longitude,
-                        latitude
-                    },
                 },
                 $set: {
-										street,
+										address: {
+											street,
+											longitude,
+											latitude
+										},
                     phone,
                     workTime
                 }
@@ -222,6 +224,7 @@ export class IikoRequesterServises {
                 id,
                 price,
                 tags,
+								code,
                 images,
                 measureUnit,
                 weight
@@ -242,6 +245,7 @@ export class IikoRequesterServises {
                 image: await this.downloader.download(image, 300,id),
                 additionalInfo,
                 tags,
+								code,
                 measureUnit: measureUnit,
                 price,
                 weight
