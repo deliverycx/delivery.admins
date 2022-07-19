@@ -36,6 +36,15 @@ export class OrganizationRepository {
     )
     return organizationEntities.delivMetod(result.id,result.delivMetod)
   }
+	async getBuOrganization(idorg:string){
+		const result = await this.organizationModel
+            .findOne({id:idorg})
+            .lean();
+
+
+      return result
+	}
+
   async hiddenOranizationMetod(orgid: string, metod: boolean) {
     const result = await this.organizationModel.findOneAndUpdate(
       {
@@ -119,4 +128,22 @@ export class OrganizationRepository {
 		return result
 		
 	}
+
+	async reservetableMetod(idorganization:string,metod:boolean){
+		
+		const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: idorganization
+      },
+      {
+        $set: {
+          reservetable: metod
+        }
+      },
+      { new: true }
+    )
+
+		return result
+	}
+
 }

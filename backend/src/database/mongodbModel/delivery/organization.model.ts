@@ -40,6 +40,9 @@ export class OrganizationClass {
     
     @prop({ type: () => Boolean,default:false })
     isHidden:boolean
+
+		@prop({ type: () => Boolean,default:false })
+		reservetable:boolean
     
 }
 

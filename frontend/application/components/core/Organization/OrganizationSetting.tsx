@@ -3,8 +3,8 @@ import { useOrganizationSetting } from 'domains/useCase/organization/useCase.Org
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
-	const {social,slideId} = useCasePoints.data
-	const {setInput,onSubmit} = useCasePoints.handlers
+	const {organization,social,slideId} = useCasePoints.data
+	const {setInput,onSubmit,handleReserveTable} = useCasePoints.handlers
 	
 
 	return(
@@ -36,6 +36,37 @@ const OrganizationSetting = () =>{
             <div className="card-body">
 							<span>https://тест.хинкалыч.рф/?organuzation={slideId}</span>
               
+            </div>
+
+          </div>
+
+
+					<div className="card card-primary">
+            <div className="card-header">
+              <h3 className="card-title">Заказать столик</h3>
+            </div>
+            <div className="card-body">
+							
+							
+							<input
+								id="tablefalse"
+	              type="radio"
+	              value="false"
+	              checked={organization && organization.reservetable == false}
+	              onChange={handleReserveTable}
+	            />
+							<label htmlFor="tablefalse">Скрыть</label>
+							<br />
+							
+							<input
+								id="tabletrue"
+	              type="radio"
+	              value="true"
+	              checked={organization && organization.reservetable == true}
+	              onChange={handleReserveTable}
+	            />
+              <label htmlFor="tabletrue">Показать</label>
+
             </div>
 
           </div>

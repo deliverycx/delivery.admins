@@ -15,4 +15,7 @@ export default class OrganizationDTO {
 	@IsOptional()
 	social:[]
 
+	@IsOptional()
+	reservetable:boolean
+
 }
