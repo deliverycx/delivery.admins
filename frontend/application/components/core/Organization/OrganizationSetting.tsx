@@ -19,7 +19,7 @@ const OrganizationSetting = () =>{
 						<div className="form-group">
 							<div className="popBox_item col-3"> 
 			            <label className="form-label">VK</label>
-			            <input type="text" name="link" onChange={e => setInput(e.target.value)} defaultValue={social ? String(social.social.vk) : ''} className="form-control" />
+			            <input type="text" name="link" onChange={e => setInput(e.target.value)} defaultValue={social.social ? String(social.social.vk) : ' '} className="form-control" />
 			        </div>
 						</div>
 						<input type="submit" value="Сохранить" onClick={onSubmit} className="btn btn-success"/>
