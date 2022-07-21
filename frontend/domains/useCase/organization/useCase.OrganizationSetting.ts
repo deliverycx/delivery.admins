@@ -9,17 +9,30 @@ export function  useOrganizationSetting(this: any){
 
 	const [input,setInput] = useState<string>()
 	const [social,setSocial] = useState<any>()
+	const [organization,setOrganization] = useState<any>()
 
 	useEffect(()=>{
-		
-		slideId &&	getSocial(slideId)
+		if(slideId){
+			getSocial(slideId)
+			getOrgBu(slideId)
+		}
+
 	},[slideId])
 
 	const getSocial = async (id:string) =>{
 		try {
 			const {data} = await RequestOrganization.socialBu(id)
-			console.log('data',data);
 			setSocial(data)
+		} catch (error) {
+			console.log(error);
+		}
+		
+	}
+
+	const getOrgBu = async (id:string) =>{
+		try {
+			const {data} = await RequestOrganization.getBu({idorganization: id})
+			setOrganization(data)
 		} catch (error) {
 			console.log(error);
 		}
@@ -42,13 +55,29 @@ export function  useOrganizationSetting(this: any){
 		
 	}
 
+
+
+
+	const handleReserveTable = async (event:any) =>{
+		const value = event.target.value
+		const tobol = value === 'true' ? true : false
+		await RequestOrganization.reserveTable({
+			idorganization: slideId,
+			reservetable:tobol
+		})
+		getOrgBu(slideId)
+	}
+	
+
 	this.data({
 		social,
-		slideId
+		slideId,
+		organization
   })
   this.handlers({
 		setInput,
-		onSubmit
+		onSubmit,
+		handleReserveTable
   })
   this.status({
     

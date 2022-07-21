@@ -20,6 +20,10 @@ namespace Res{
     idorganization: string,
     delivmetod:string | null
   }
+	export type OrgBu = {
+    idorganization: string,
+   
+  }
   export type hiddenMetod = {
     idorganization: string,
     isHidden:boolean
@@ -27,6 +31,10 @@ namespace Res{
 	export type socialData = {
     idorganization: string
 		social:any
+  }
+	export type reserve = {
+    idorganization: string
+		reservetable:boolean
   }
 }
 
@@ -37,6 +45,10 @@ class RequestOrganization extends ApiSuper {
   @methods('get')
   getAll() {
     return this.request<Req.org>(`/organization/getAll`)
+  }
+	@methods('post')
+  getBu(idorg:Res.OrgBu) {
+    return this.request<Req.org>(`/organization/getorgbu`)
   }
 
   @methods('post')
@@ -61,6 +73,11 @@ class RequestOrganization extends ApiSuper {
 	@methods('get')
   socialBu(query:string) {
     return this.request(`/organization/socialbu?idorganization=${query}`)
+  }
+
+	@methods('post')
+  reserveTable(data:Res.reserve) {
+    return this.request(`/organization/reservetable`)
   }
   
   

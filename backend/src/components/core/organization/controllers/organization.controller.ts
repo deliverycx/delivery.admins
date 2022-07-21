@@ -18,6 +18,11 @@ export class OrganizationControllers{
     const result = this.OrganizationServises.getAllOrganization()
     return result
   }
+	@Post('getorgbu')
+  getOrganizationBu(@Body() body:OrganizationDTO) {
+    const result = this.OrganizationServises.getBuOrganization(body)
+    return result
+  }
 	@Get('defaultsetting')
   defaultSetting() {
     const result = this.OrganizationServises.getAllOrganization()
@@ -50,6 +55,22 @@ export class OrganizationControllers{
   }
 	@Get('socialbu')
   async SocialBu(
+		@Body() body: OrganizationDTO,
+		@Query() query: OrganizationDTO
+		) {
+    const result = await this.OrganizationServises.socialMetodBu(query)
+		
+    return result
+  }
+
+	@Post('reservetable')
+  async Reservetable(@Body() body: OrganizationDTO) {
+    const result = await this.OrganizationServises.reservetable(body)
+		
+    return result
+  }
+	@Get('reservetablebu')
+  async ReservetableBu(
 		@Body() body: OrganizationDTO,
 		@Query() query: OrganizationDTO
 		) {
