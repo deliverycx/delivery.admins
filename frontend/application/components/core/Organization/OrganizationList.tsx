@@ -42,6 +42,11 @@ const OrganizationList = () => {
                           (point.delivMetod === CART_CHOICE.PICKUP)
                           
                       })
+											const CNdelivMetodNODELIV = cn("col btn btn-block", {
+                        'btn-success':
+                          (point.delivMetod === CART_CHOICE.NODELIVERY)
+                          
+                      })
                       const CNhiddenMetod = cn("col btn btn-block", {'btn-success':point.isHidden})
                       return (
                         <div key={point.id} className="card-body">
@@ -58,8 +63,13 @@ const OrganizationList = () => {
                                 <td><div className={CNdelivMetod}
                                   onClick={() => handlePuckUp(
                                     point.id,
-                                    point.delivMetod)}
+                                    point.delivMetod === CART_CHOICE.PICKUP ? null : CART_CHOICE.PICKUP)}
                                 >Только Самовывоз</div></td>
+																<td><div className={CNdelivMetodNODELIV}
+                                  onClick={() => handlePuckUp(
+                                    point.id,
+                                    point.delivMetod === CART_CHOICE.NODELIVERY ? null : CART_CHOICE.NODELIVERY)}
+                                >Отключить доставку</div></td>
                                 <td><div className={CNhiddenMetod}
                                   onClick={() => handleHiddenOrg(
                                     point.id,
