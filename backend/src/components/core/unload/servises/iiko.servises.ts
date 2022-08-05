@@ -12,7 +12,11 @@ import { CategoryClass } from "src/database/mongodbModel/delivery/category.model
 import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
 
 
-
+const header = (token:string) =>{
+	return {
+		headers: { Authorization: `Bearer ${token}` }
+	}
+}
 
 @Injectable()
 export class IikoRequesterServises {
@@ -33,46 +37,89 @@ export class IikoRequesterServises {
 
   async getToken() {
     
-    const { data } = await axios.get(
-        `https://iiko.biz:9900/api/0/auth/access_token?user_id=${process.env.SERVICE_LOGIN}&user_secret=${process.env.SERVICE_PASSWORD}`
+    const { data } = await axios.post(
+        'https://api-ru.iiko.services/api/1/access_token',
+				{
+					apiLogin: "8991a0c8-0af"
+				}
     );
-
-    this.token = data
+				
+    this.token = data.token
   }
   async getAddresses() {
     const token = this.token;
 
     const { data } = await axios.get(
-      `https://iiko.biz:9900/api/0/organization/list?access_token=${token}`
+      'https://api-ru.iiko.services/api/1/organizations',
+			{
+				headers: { Authorization: `Bearer ${token}` }
+			}
     );
+		
+		
     this.cities = {};
-    for (let i = 0; i < data.length; i++) {
-      const organization = data[i];
-      if (
-        process.env.IIKO_UNLOAD === "prod" &&
-        organization.description.match("HIDDEN")
-      ) {
-        continue;
-      }
-      const matchesAddress = organization.address.match(
-        /(?<city>.*?),\s?(?<street>.*)/i
+    for (let i = 0; i < data.organizations.length; i++) {
+      const organizations = data.organizations[i];
+			
+
+      const {data:resorg} = await axios.post(
+        'https://api-ru.iiko.services/api/1/organizations',
+				{
+					organizationIds: [
+						organizations.id
+					],
+					returnAdditionalInfo: true,
+					includeDisabled: true
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+    	);
+			const organization = resorg.organizations[0]
+
+			
+
+			const {data:rescity} = await axios.post(
+        'https://api-ru.iiko.services/api/1/cities',
+				{
+					organizationIds: [
+						organizations.id
+					]
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+    	);
+			const cityRes = rescity.cities[0].items.filter((val:any)=>{
+				 return val.id === organization.defaultDeliveryCityId
+			})[0]
+
+
+
+			
+
+      const matchesAddress = organization.restaurantAddress.match(
+        /(?<oblast>.*?),(?<city>.*?),\s?(?<street>.*)/i
       );
+
+			
       if (matchesAddress) {
         const { city, street } = matchesAddress.groups;
         
+				
         const { position } = await this.geoCoder.resolve(
-          organization.address
+          city + street
         );
 
-				
 
         const organizationInArray = {
           street,
           guid: organization.id,
           longitude: position[0],
           latitude: position[1],
-          workTime: organization.workTime.split(";")[0],
-          phone: organization.phone
+          workTime: '10:00-22:00',
+          phone: organization.phone,
+					cityguid:cityRes.id
         };
 
         if (city in this.cities) {
@@ -89,13 +136,17 @@ export class IikoRequesterServises {
 
     }
 
+		
+		
+		
       for (let city in this.cities) {
         const cityId = new Types.ObjectId();
+				
         const organizations = [];
 
         
         for (let i = 0; i < this.cities[city].length; i++) {
-          const { guid, longitude, latitude, street, workTime, phone } = this.cities[city][i];
+          const { guid, longitude, latitude, street, workTime, phone,cityguid } = this.cities[city][i];
           
           const objectId = await this.organizationModel.findOneAndUpdate(
             { id: guid },
@@ -103,6 +154,7 @@ export class IikoRequesterServises {
                 $setOnInsert: {
                     id: guid,
                     city: cityId,
+										cyid:cityguid
                 },
                 $set: {
 										address: {
@@ -126,14 +178,15 @@ export class IikoRequesterServises {
           
         }
 
-        console.log('id city',cityId)
+        
         
         await this.cityModel.updateOne(
           { name: city },
           {
               $setOnInsert: {
                   _id: cityId,
-                  name: city
+                  name: city,
+									cyid:this.cities[city][0].cityguid
               },
               $set: {
                   organizations
@@ -158,9 +211,16 @@ export class IikoRequesterServises {
         await this.getToken();
 
         const { guid, objectId } = this.cities[city][i];
-        const { data } = await axios.get(
-          `https://iiko.biz:9900/api/0/nomenclature/${guid}?access_token=${this.token}`
+        const { data } = await axios.post(
+          'https://api-ru.iiko.services/api/1/nomenclature',
+					{
+						organizationId: "c3fa20d3-3d8e-4049-9a65-37b5820add65"
+					},
+					{
+						headers: { Authorization: `Bearer ${this.token}` }
+					}
         );
+				
 
         const revisionFromDatabase = await this.organizationModel.findOne(
             { id: guid },
@@ -169,21 +229,22 @@ export class IikoRequesterServises {
 
         const { groups, products, revision } = data;
 
-        console.log(revisionFromDatabase, revision);
+        //console.log(revisionFromDatabase, revision);
 
         if (revision === revisionFromDatabase.revision) {
             continue;
         }
 
         for (let i = 0; i < groups.length; i++) {
-            const { name, order, images, id, description } = groups[i];
+            const { name, order, images,imageLinks, id, description } = groups[i];
 
+						console.log('images',imageLinks);
             if (description === "HIDDEN") {
                 continue;
             }
 
-            const image = images
-                ? images[images.length - 1]?.imageUrl
+            const image = imageLinks
+                ? imageLinks[imageLinks.length - 1]
                 : "";
 
             const category = {
@@ -216,25 +277,29 @@ export class IikoRequesterServises {
                 continue;
             }
 
+
+
             const {
                 name,
                 description,
                 additionalInfo,
                 order,
                 id,
-                price,
                 tags,
 								code,
                 images,
+								imageLinks,
                 measureUnit,
                 weight
             } = products[i];
 
-            const image = images
-                ? images[images.length - 1]?.imageUrl
-                : "";
+						const price = products[i].sizePrices[0].price.currentPrice
+						
 
-            console.log(objectId);
+            const image = imageLinks
+                ? imageLinks[imageLinks.length - 1]
+                : "";
+						
             const product = {
                 category: category._id,
                 organization: objectId,

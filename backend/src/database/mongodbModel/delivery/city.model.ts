@@ -19,6 +19,9 @@ export class CityClass {
     @prop()
     public name!: string;
 
+		@prop()
+    public cyid!: string;
+
     @prop({ ref: "Organization" })
     public organizations!: Ref<OrganizationClass>[];
 
