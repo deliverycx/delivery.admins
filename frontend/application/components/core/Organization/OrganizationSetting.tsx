@@ -6,6 +6,7 @@ const OrganizationSetting = () =>{
 	const {organization,social,slideId} = useCasePoints.data
 	const {setInput,onSubmit,handleReserveTable} = useCasePoints.handlers
 	
+	console.log('org',organization);
 
 	return(
 		<section className="content">
