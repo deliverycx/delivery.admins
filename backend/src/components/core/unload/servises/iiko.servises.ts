@@ -40,7 +40,7 @@ export class IikoRequesterServises {
     const { data } = await axios.post(
         'https://api-ru.iiko.services/api/1/access_token',
 				{
-					apiLogin: "8991a0c8-0af"
+					apiLogin: "539ecfae"
 				}
     );
 				
@@ -90,7 +90,9 @@ export class IikoRequesterServises {
 					headers: { Authorization: `Bearer ${token}` }
 				}
     	);
-			const cityRes = rescity.cities[0].items.filter((val:any)=>{
+				
+
+			const cityRes = rescity.cities[0] && rescity.cities[0].items.filter((val:any)=>{
 				 return val.id === organization.defaultDeliveryCityId
 			})[0]
 
@@ -101,7 +103,7 @@ export class IikoRequesterServises {
       const matchesAddress = organization.restaurantAddress.match(
         /(?<oblast>.*?),(?<city>.*?),\s?(?<street>.*)/i
       );
-
+				
 			
       if (matchesAddress) {
         const { city, street } = matchesAddress.groups;
@@ -111,6 +113,7 @@ export class IikoRequesterServises {
           city + street
         );
 
+				
 
         const organizationInArray = {
           street,
@@ -119,25 +122,31 @@ export class IikoRequesterServises {
           latitude: position[1],
           workTime: '10:00-22:00',
           phone: organization.phone,
-					cityguid:cityRes.id
+					
         };
 
+				
+				console.log(city in this.cities);
         if (city in this.cities) {
+					
           this.cities[city.trim()].push(organizationInArray);
         } else {
+						
             this.cities = {
                 ...this.cities,
                 [city.trim()]: [organizationInArray]
             };
         }
+
+				
         
         
       }
 
     }
-
 		
 		
+			
 		
       for (let city in this.cities) {
         const cityId = new Types.ObjectId();
@@ -154,7 +163,8 @@ export class IikoRequesterServises {
                 $setOnInsert: {
                     id: guid,
                     city: cityId,
-										cyid:cityguid
+										cyid:cityguid,
+										isHidden:false
                 },
                 $set: {
 										address: {
@@ -211,10 +221,11 @@ export class IikoRequesterServises {
         await this.getToken();
 
         const { guid, objectId } = this.cities[city][i];
+
         const { data } = await axios.post(
           'https://api-ru.iiko.services/api/1/nomenclature',
 					{
-						organizationId: "c3fa20d3-3d8e-4049-9a65-37b5820add65"
+						organizationId: guid
 					},
 					{
 						headers: { Authorization: `Bearer ${this.token}` }

@@ -10,6 +10,7 @@ const UploadOrganization = () => {
     {
       organizations && 
         organizations.map((org: any, index: number) => {
+					console.log(org);
           if (org) {
             return (
               <>
@@ -32,23 +33,16 @@ const UploadOrganization = () => {
                     <h3 className="card-title">Описание</h3>
                     <br/>
                     <ul>
-                      <li>description - {org.info.description }</li>
-                      <li>address - {org.info.address}</li>
-                      <li>timezone - {org.info.timezone}</li>
-                      <li>workTime - {org.info.workTime}</li>
+                      <li>description - {org.info.name }</li>
+                      <li>address - {org.info.restaurantAddress}</li>
+                      <li>id city - {org.info.defaultDeliveryCityId}</li>
+                      <li>version - {org.info.version}</li>
                       
                            
                   </ul>
                 </div>
 
                   <div className="card-footer">
-                    <table>
-                      <tr>
-                        <td><div className="col btn btn-block bg-gradient-secondary">Скрыть организацию</div></td>
-                        <td><div className="col btn btn-block bg-gradient-primary">Обновить организацию</div></td>
-                      </tr>
-                      
-                    </table>
                     
                     
                 </div>

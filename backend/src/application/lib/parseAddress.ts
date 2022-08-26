@@ -1,21 +1,28 @@
+import axios from "axios";
 
 
 function parseOrganization(organization:any,geo:any) {
-  const matchesAddress = organization.address.match(
-    /(?<city>.*?),\s?(?<street>.*)/i
+	
+	console.log(organization);
+	
+
+  const matchesAddress = organization.restaurantAddress.match(
+		/(?<oblast>.*?),(?<city>.*?),\s?(?<street>.*)/i
   );
 
     if(matchesAddress) {
       const { city, street } = matchesAddress.groups;
       
-      console.log(city)
+      
       const organizationInArray = {
         street,
         guid: organization.id,
         
-        workTime: organization.workTime.split(";")[0],
-        phone: organization.phone
+        workTime:organization.workTime ? organization.workTime.split(";")[0] : '',
+        phone: organization.phone ? organization.phone : ''
       };
+
+			
 
       return {
         city: city.trim(),
