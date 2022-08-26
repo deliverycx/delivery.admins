@@ -23,7 +23,7 @@ const Pooling = () => {
             </button>
           </div>
 
-          <div className="card-body">
+          <div className="card-body">  
             {
               poolError === true &&
               <div className="alert alert-danger alert-dismissible">
