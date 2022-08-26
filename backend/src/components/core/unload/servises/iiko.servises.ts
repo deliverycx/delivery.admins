@@ -110,7 +110,7 @@ export class IikoRequesterServises {
         
 				
         const { position } = await this.geoCoder.resolve(
-          city + street
+          city.trim() + street
         );
 
 				
@@ -126,8 +126,7 @@ export class IikoRequesterServises {
         };
 
 				
-				console.log(city in this.cities);
-        if (city in this.cities) {
+        if (city.trim() in this.cities) {
 					
           this.cities[city.trim()].push(organizationInArray);
         } else {
@@ -137,6 +136,8 @@ export class IikoRequesterServises {
                 [city.trim()]: [organizationInArray]
             };
         }
+				
+				
 
 				
         
@@ -164,7 +165,7 @@ export class IikoRequesterServises {
                     id: guid,
                     city: cityId,
 										cyid:cityguid,
-										isHidden:false
+										isHidden:true
                 },
                 $set: {
 										address: {
