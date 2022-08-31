@@ -1,7 +1,8 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { RequestOrganization } from "servises/repository/Axios/Request"
-import { ISocial, ListOrganization } from "@type";
+import { IOrganization, ISocial, ListOrganization } from "@type";
+import { useFormik, FormikProvider } from "formik";
 
 export function  useOrganizationSetting(this: any){
 	const router = useRouter()
@@ -9,7 +10,7 @@ export function  useOrganizationSetting(this: any){
 
 	const [input,setInput] = useState<string>()
 	const [social,setSocial] = useState<any>()
-	const [organization,setOrganization] = useState<any>()
+	const [organization,setOrganization] = useState<any>(null)
 
 	useEffect(()=>{
 		if(slideId){
@@ -77,7 +78,45 @@ export function  useOrganizationSetting(this: any){
   this.handlers({
 		setInput,
 		onSubmit,
-		handleReserveTable
+		handleReserveTable,
+		getOrgBu
+  })
+  this.status({
+    
+  })
+}
+
+
+export function  useOrganizationSettingFrom(this: any,organization:IOrganization){
+
+	const initialValues = {
+		phone:organization.phone
+	}
+
+	const handlerOrgSetting = async (values:typeof initialValues) =>{
+		await RequestOrganization.setSetting({
+			idorganization:organization.id,
+			...values
+		})
+	}
+
+
+	const formik = useFormik({
+    initialValues,
+    onSubmit: async (values, meta) => {
+      await handlerOrgSetting(values)
+
+    },
+  });
+
+
+
+
+	this.data({
+		formik
+  })
+  this.handlers({
+		
   })
   this.status({
     

@@ -146,4 +146,20 @@ export class OrganizationRepository {
 		return result
 	}
 
+	async settingOrgMetod(idorganization:string,setting){
+		const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: idorganization
+      },
+      {
+        $set: {
+          phone: setting.phone
+        }
+      },
+      { new: true }
+    )
+
+		return result
+	}
+
 }

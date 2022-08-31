@@ -9,14 +9,16 @@ import { OrganizationClass } from "src/database/mongodbModel/delivery/organizati
 import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
 import { OrganizationRepository } from "src/domain/repository/organization.repository";
 import { OrganizationControllers } from "../controllers/organization.controller";
+import { OrganizationSettingControllers } from "../controllers/organizationSetting.controller";
 import { OrganizationServises } from "../servises/organization.servises";
+import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB),
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
-  controllers: [OrganizationControllers], 
-  providers:[OrganizationServises,OrganizationRepository]
+  controllers: [OrganizationControllers,OrganizationSettingControllers], 
+  providers:[OrganizationServises,OrganizationRepository,OrganizationSettingServises]
 })
 export class OrganizationModule {}

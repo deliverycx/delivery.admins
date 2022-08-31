@@ -25,7 +25,7 @@ const UploadOrganization = () => {
                     <br/>
                     <ul>
                       <li>id - {org.organization.guid }</li>
-                      <li>телефон - {org.organization.phone }</li>
+                      
                       <li>улица - {org.organization.street }</li>
                       <li>время работы - {org.organization.workTime}</li>
                            

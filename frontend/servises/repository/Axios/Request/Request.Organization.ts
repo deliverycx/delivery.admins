@@ -36,6 +36,12 @@ namespace Res{
     idorganization: string
 		reservetable:boolean
   }
+
+	export type setting = {
+    idorganization: string
+		phone:string
+  }
+
 }
 
 
@@ -78,6 +84,11 @@ class RequestOrganization extends ApiSuper {
 	@methods('post')
   reserveTable(data:Res.reserve) {
     return this.request(`/organization/reservetable`)
+  }
+
+	@methods('post')
+	setSetting(data:Res.setting) {
+    return this.request(`/organization_setting/setting`)
   }
   
   
