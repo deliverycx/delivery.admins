@@ -46,6 +46,7 @@ export class IikoRequesterServises {
       `https://iiko.biz:9900/api/0/organization/list?access_token=${token}`
     );
     this.cities = {};
+		 
     for (let i = 0; i < data.length; i++) {
       const organization = data[i];
       if (
@@ -54,6 +55,7 @@ export class IikoRequesterServises {
       ) {
         continue;
       }
+			
       const matchesAddress = organization.address.match(
         /(?<city>.*?),\s?(?<street>.*)/i
       );

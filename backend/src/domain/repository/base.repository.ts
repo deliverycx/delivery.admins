@@ -5,21 +5,33 @@ export class BaseRepository<ModelClass> {
 			private readonly model: Model<any>,
 	) {}
 
-	async getAll(bu:any){
-		const result = await this.model.find(bu).select('-__v')
-		return result
+	async getAll(bu:Record<string,any>,populate?:string){
+		if(populate){
+			return await this.model.find(bu).populate(populate).select('-__v')
+		}else{
+			return await this.model.find(bu).select('-__v')
+		}
 	}
-	async getOne(bu:any){
-		const result = await this.model.findOne(bu).select('-__v')
-		return result
+	async getOne(bu:Record<string,any>,populate?:string){
+		if(populate){
+			return await this.model.findOne(bu).populate(populate).select('-__v')
+		}else{
+			return await this.model.findOne(bu).select('-__v')
+		}
 	}
-	async getBuAll(bu:any){
-		const result = await this.model.findOne(bu).select('-__v')
-		return result
+	async getBuAll(bu:Record<string,any>,populate?:string){
+		if(populate){
+			return await this.model.findOne(bu).populate(populate).select('-__v')
+		}else{
+			return await this.model.findOne(bu).select('-__v')
+		}
 	}
-	async getOneBuId(id:string){
-		const result = await this.model.findById(id).select('-__v')
-		return result
+	async getOneBuId(id:string,populate?:string){
+		if(populate){
+			return await this.model.findById(id).populate(populate).select('-__v')
+		}else{
+			return await this.model.findById(id).select('-__v')
+		}
 	}
 
 	async create<T>(body:T){
