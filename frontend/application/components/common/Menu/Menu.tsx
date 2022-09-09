@@ -47,17 +47,41 @@ const Menu = () =>{
                 <i className="right fas fa-angle-left"></i>
               </p>
             </a>
-						<a href="/banners" className="nav-link active">
+						
+						
+						
+            
+          </li>
+					<li className="nav-item">
+
+					<a href="/banners" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Баннеры
                 <i className="right fas fa-angle-left"></i>
               </p>
+							<ul className="nav nav-treeview">
+              <li className="nav-item">
+                <a href="/banners/groops" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>Группы</p>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="../index2.html" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>Баннеры</p>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="../index3.html" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>Отоброжение</p>
+                </a>
+              </li>
+            </ul>
             </a>
-						
-						
-            
-          </li>
+					</li>
           
         </ul>
       </nav>

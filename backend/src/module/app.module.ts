@@ -12,6 +12,7 @@ import { BannersModule } from 'src/components/core/banners/module/banners.module
 import { MulterModule } from '@nestjs/platform-express';
 import { NewsModule } from 'src/components/core/news/module/news.module';
 import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
+import { NestjsFormDataModule } from 'nestjs-form-data';
 
 
 
@@ -34,6 +35,7 @@ import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
 			MulterModule.register({
 				dest: './public/static/shop',
 			}),
+		NestjsFormDataModule,	
     AuthModule,
     UnloadModule,
     OrganizationModule,

@@ -1,5 +1,4 @@
 import { Tfile } from '@type';
-import { useFroms } from 'application/hooks/useForms';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { RequestBanners, RequestNews, RequestOrganization } from 'servises/repository/Axios/Request';

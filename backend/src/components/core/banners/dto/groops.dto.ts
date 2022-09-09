@@ -9,6 +9,6 @@ export class GroopsDto{
 
 	id:UniqueId
 
-	groop:ObjectId[]
+	banners:ObjectId
 
 }

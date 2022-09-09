@@ -45,3 +45,31 @@ a {
 	background-color: #f9f9f9;
 	cursor: no-drop;
 }
+
+.modal_box{
+	
+}
+.modal_overfloy{
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.3);
+	width: 100%;
+	height: 100%;
+	z-index: 88;
+	top: 0;
+	left: 0;
+}
+.modales{
+	position: fixed;
+	
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 30%;
+	z-index: 999;
+}
+.banners_box{
+	flex-wrap: wrap !important;
+}
+.banner-item{
+	min-width: 200px;
+}

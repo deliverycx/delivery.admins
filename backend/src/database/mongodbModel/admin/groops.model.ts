@@ -11,6 +11,6 @@ export class GroopsModel{
   public category:string
 
 	@prop({ ref: () => MainBannerModel }) 
-	public groop: Ref<MainBannerModel>[];
+	public banners: Ref<MainBannerModel>[];
 
 }

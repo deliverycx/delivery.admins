@@ -15,6 +15,21 @@ export class GroopsRepository extends BaseRepository<MainBannerModel>{
 		super(Model)
 	 }
 
+	async addGroopsBanner(id:string,banners:string){
+		const res = await this.Model.findOneAndUpdate(
+			{
+        _id: id
+      },
+      {
+        $push: {
+          banners: banners
+        }
+      },
+      { new: true }
+		)
+		return res
+	}
+
 	async getGroopsBannes(){
 		const res = await this.Model
 			.find({ 'groopbanner':{ $in:['63108a0d0ae175af986b14c3','6310da3bc2e8458448c21ed3']}})

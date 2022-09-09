@@ -1,5 +1,4 @@
 import { Tfile } from '@type';
-import { useFroms } from 'application/hooks/useForms';
 import { useCallback, useReducer, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { RequestBanners, RequestOrganization } from 'servises/repository/Axios/Request';
@@ -258,6 +257,36 @@ export function useMainBannerForm(this: any) {
 		handlerInput
   })
   this.status({
+
+  })
+}
+
+
+export function useBannerModal(this: any) {
+	const [banners,setBanners] = useState()
+	const [modal,setModal] = useState(false)
+
+	const getBanners = async () =>{
+		try {
+			const {data} = await RequestBanners.getAll()
+			setBanners(data)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	useEffect(()=>{
+		getBanners()
+	},[])
+	
+	this.data({
+		banners,
+		modal
+  })
+	this.handlers({
+		setModal
+  })
+	this.status({
 
   })
 }

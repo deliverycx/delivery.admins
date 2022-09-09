@@ -1,4 +1,8 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UseInterceptors } from "@nestjs/common";
+import { AnyFilesInterceptor } from "@nestjs/platform-express";
+import { diskStorage } from "multer";
+import { FormDataRequest } from "nestjs-form-data";
+import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
 import { GroopsDto } from "../dto/groops.dto";
 import { GroopsServises } from "../servises/groops.servises";
 
@@ -21,6 +25,7 @@ export class GroopsControllers{
 
 	@Post('add')
 	addGroop(@Body() body:GroopsDto){	
+		console.log(body);
 		return this.groopsServises.create(body)
 	}
 	@Post('edit')
@@ -37,4 +42,12 @@ export class GroopsControllers{
 	){
 		return this.groopsServises.delete(query.id)
 	}
+
+	@Post('addbanner')
+	addBanner(@Body() body:GroopsDto){	
+		console.log(body);
+		return this.groopsServises.addGroopsBanner(body)
+	}
+
+
 }
