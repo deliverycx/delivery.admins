@@ -1,12 +1,13 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { useGroopsBanner } from "domains/useCase/banners/useCase.GroopsBanner"
 import { useMainBannerForm } from "domains/useCase/banners/useCase.MainBanner"
+import BannerList from "../view/BannerList"
 import BannerModal from "../view/BannerModal"
 
-const GroopsBannerFrom = () =>{
+const GroopsBannerEdit = () =>{
 	const useCasePoints = adapterComponentUseCase(useGroopsBanner)
 	const {pageid,data} = useCasePoints.data
-	const {register,handleSubmit,onSubmit,router,onDelet,addBanner} = useCasePoints.handlers
+	const {register,handleSubmit,onSubmit,router,onDelet,addBanner,deleteBanner} = useCasePoints.handlers
 
 	return(
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -24,32 +25,31 @@ const GroopsBannerFrom = () =>{
               </div>
             </div>
             <div className="card-body">
+							{
+								data && data.name &&
+								<div className="popBox_item form-group"> 
+				            <label className="form-label">Название</label>
+				            <input type="text" {...register('name')} defaultValue={data.name} name="name" className="form-control" />
+				        </div>
+								
+							}
 							
-
-
-							 
+							{
+								data && data.category &&
+								<div className="popBox_item form-group"> 
+										<label className="form-label">Категория</label><br />
+				            <select {...register('category')} defaultChecked={data.category} name="category">
+											<option selected={data && data.category === 'доставка'}>доставка</option>
+											<option selected={data && data.category === 'меню'}>меню</option>
+										</select>
+								</div>
+								
+							} 
 							
-							 <div className="popBox_item form-group"> 
-			            <label className="form-label">Название</label>
-			            <input type="text" {...register('name')} defaultValue={'qqqq'} name="name" className="form-control" />
-			        </div>
-							<div className="popBox_item form-group"> 
-									<label className="form-label">Категория</label><br />
-			            <select {...register('category')} name="category">
-										<option>доставка</option>
-										<option>меню</option>
-									</select>
-							</div>
 							<div className="popBox_item form-group">
-								{pageid && <BannerModal selectbanners={data} addBanner={addBanner} />}
+								
 								
 							</div>
-							
-							
-							
-							
-
-              
             </div>
 
           </div>
@@ -74,4 +74,4 @@ const GroopsBannerFrom = () =>{
 		</form>
 	)
 }
-export default GroopsBannerFrom
+export default GroopsBannerEdit

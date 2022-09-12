@@ -19,6 +19,15 @@ class RequestGroops  extends ApiSuper {
 		})
 		
 	}
+
+	deletGroopsBanner(data:{id:string,banners:string}){
+		return this.api({
+			method: 'post',
+			url: `/groops/deletebanner`,
+			data
+		})
+		
+	}
 }
 
 export default new RequestGroops()

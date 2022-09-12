@@ -21,7 +21,6 @@ export class BannerRepository extends BaseRepository<MainBannerModel>{
 					images:arr
 			}
 		},{ upsert: true, new: true })
-		console.log('res',res);
 		return res
 	}
 }

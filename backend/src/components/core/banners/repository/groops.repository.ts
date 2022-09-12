@@ -25,8 +25,23 @@ export class GroopsRepository extends BaseRepository<MainBannerModel>{
           banners: banners
         }
       },
-      { new: true }
-		)
+      { upsert: true, new: true }
+		).populate('banners').lean()
+		return res
+	}
+
+	async deletGroopsBanner(id:string,banners:string){
+		const res = await this.Model.findOneAndUpdate(
+			{
+        _id: id
+      },
+      {
+        $pull: {
+          banners: banners
+        }
+      },
+      { upsert: true, new: true }
+		).populate('banners').lean()
 		return res
 	}
 

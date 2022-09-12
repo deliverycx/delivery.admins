@@ -22,5 +22,8 @@ export class GroopsServises extends BaseServises{
 	addGroopsBanner({id,banners}){
 		return this.Repository.addGroopsBanner(id,banners)
 	}
+	deleteGroopsBanner({id,banners}){
+		return this.Repository.deletGroopsBanner(id,banners)
+	}
 	
 }

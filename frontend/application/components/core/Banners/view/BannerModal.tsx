@@ -2,23 +2,17 @@ import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { imgRout } from "application/helpers/imgInit"
 import { useBannerModal } from "domains/useCase/banners/useCase.MainBanner"
 import { FC } from 'react';
+import BannerList from "./BannerList";
 
 type IProps = {
-	selectbanners:string[]
-	addBanner:(id:string) => void
+	addBanner:(id:string,idgroop:string) => void
+	idgroop:string
 }
 
-const BannerModal:FC<IProps> = ({selectbanners,addBanner}) => {
+const BannerModal:FC<IProps> = ({addBanner,idgroop}) => {
 	const useCaseBannerModal = adapterComponentUseCase(useBannerModal)
 	const {banners,modal} = useCaseBannerModal.data
 	const {setModal} = useCaseBannerModal.handlers
-
-	const grid = 4;
-	const getItemStyle = () => ({
-	  padding: grid * 2,
-	  margin: `0 ${grid}px 0 0`,
-	  background: '#f0f0f0',
-	});
 
 	return (
 		<>
@@ -41,49 +35,10 @@ const BannerModal:FC<IProps> = ({selectbanners,addBanner}) => {
 								
 							</div>
 							
-							<div className="card-body">
-							<div className="row banners_box">
-										{
-											banners &&
-											banners.sort((a:any,b:any) => (a.order - b.order)).map((val:any) =>{
-												return (
-													<div
-													key={val._id}
-													style={getItemStyle()}
-													className="col-sm-2 banner-item"
-													onClick={()=> addBanner(val._id)}
-													>
-													<a data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-													<img src={imgRout(val.images[0])} className="img-fluid mb-2" alt="white sample"/>
-												</a>
-												</div>
-												)
-											})
-										}
-
-
-										{
-											/*
-
-											<DragDropHorizontal list={banners.images} render={(val:any) =>(
-												<a href={`/banners/${banners._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-												<img src={imgRout(val.content)} className="img-fluid mb-2" alt="white sample"/>
-											</a>
-											)}
-											handle={(items:any)=>{
-												setBuImages(banners._id,items)
-											}}
-											
-											/>
-											*/
-										}
-										
-										
-								
-	                  
-	                  
-	                </div>
-							</div>
+							<BannerList banners={banners} handler={(id) => {
+								addBanner(id,idgroop)
+								setModal(false)
+							}} />
 							
 						</div>
 						

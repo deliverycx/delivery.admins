@@ -16,11 +16,11 @@ export class GroopsControllers{
 
 	@Get('all')
 	getAll(@Query() query: GroopsDto){
-		return this.groopsServises.getAll(query)
+		return this.groopsServises.getAll(query,'banners')
 	}
 	@Get('bu')
 	geBu(@Query() query: GroopsDto){
-		return this.groopsServises.getOneBuId(query.id)
+		return this.groopsServises.getOneBuId(query.id,'banners')
 	}
 
 	@Post('add')
@@ -45,9 +45,12 @@ export class GroopsControllers{
 
 	@Post('addbanner')
 	addBanner(@Body() body:GroopsDto){	
-		console.log(body);
 		return this.groopsServises.addGroopsBanner(body)
 	}
 
+	@Post('deletebanner')
+	deleteBanner(@Body() body:GroopsDto){	
+		return this.groopsServises.deleteGroopsBanner(body)
+	}
 
 }
