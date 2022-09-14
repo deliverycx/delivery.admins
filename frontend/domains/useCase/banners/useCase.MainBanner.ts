@@ -8,19 +8,15 @@ import { imgRout } from 'application/helpers/imgInit';
 import { BannerReducer,initialStateBanner,ReducerActionTypePoints } from 'application/reducers/BannerReducer';
 
 export function useMainBanner(this: any) {
-	const [banners,setBanners] = useState<any[] | null>()
-	const [organizations, setOrganizations] = useState<any>()
-	const [selectOrg, setSelectOrg] = useState<string>('all')
+	const [banners, setBanners] = useState<any[] | null>()
 
 	useEffect(()=>{
-		getBuOrg()
-		fetchOrg()
-	},[selectOrg])
+		getBanners()
+	},[])
 
-
-	const getBuOrg = async () =>{
+	const getBanners = async () =>{
 		try {
-			const result = await RequestBanners.getAll(selectOrg)
+			const result = await RequestBanners.getAll()
 			if(result.status === 200){
 				setBanners(result.data)
 			}else{
@@ -29,16 +25,8 @@ export function useMainBanner(this: any) {
 		} catch (error) {
 			setBanners(null)
 		}
-		
 	}
-	const fetchOrg = async () => {
-    try {
-      const { data } = await RequestOrganization.getAll()
-      setOrganizations(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
 	const setBuImages = async (id:string,data:[]) =>{
 		try {
 			const result = await RequestBanners.setImages(id,{images:data})
@@ -51,22 +39,16 @@ export function useMainBanner(this: any) {
 		} catch (error) {
 			setBanners(null)
 		}
-		
 	}
 
-	
-	
-
 	this.data({
-		banners,
-		organizations
+		banners
   })
   this.handlers({
-		setSelectOrg,
 		setBuImages
   })
   this.status({
-    
+
   })
 }
 
@@ -90,7 +72,6 @@ export function useMainBannerForm(this: any) {
 
 	const getBu = async (id:string) =>{
 		try {
-			
 			const result = await RequestBanners.getBu(id)
 			if(result.status === 200){
 				dispatchBanners({
@@ -107,7 +88,6 @@ export function useMainBannerForm(this: any) {
 						payload: result.data.url
 					});
 				}
-				
 
 			}else{
 				dispatchBanners({
@@ -121,7 +101,6 @@ export function useMainBannerForm(this: any) {
 				payload: null
 			});
 		}
-		
 	}
 	const fetchOrg = async () => {
     try {
@@ -170,10 +149,9 @@ export function useMainBannerForm(this: any) {
 
 	const onSubmit = async (data:any) => {
     try {
-			
       const formData = new FormData()
       fomrdata(formData,data)
-			!slideId 
+			!slideId
 						? await RequestBanners.create(formData)
 						: await RequestBanners.edit(formData,slideId)
 			router.push('/banners/mainbanner')
@@ -196,7 +174,6 @@ export function useMainBannerForm(this: any) {
 			type: ReducerActionTypePoints.setSuccsSelectOrg,
 			payload: org
 		});
-		
 	}
 
 	const handlerFile = (cases:string,file:[]) =>{
@@ -222,7 +199,6 @@ export function useMainBannerForm(this: any) {
 				});
 			break;
 		}
-		
 	}
 
 	const handlerInput = (url:string) =>{
@@ -236,11 +212,8 @@ export function useMainBannerForm(this: any) {
 		return mass.map((val:string) => {
 			return imgRout(val)
 		})
-    
   },[slideId])
 
-
-	
 	this.data({
 		stateBanners,
 		slideId,
@@ -261,7 +234,6 @@ export function useMainBannerForm(this: any) {
   })
 }
 
-
 export function useBannerModal(this: any,request?:any) {
 	const [banners,setBanners] = useState()
 	const [modal,setModal] = useState(false)
@@ -276,7 +248,6 @@ export function useBannerModal(this: any,request?:any) {
 				console.log(data);
 				setBanners(data)
 			}
-			
 		} catch (error) {
 			console.log(error);
 		}
@@ -285,7 +256,7 @@ export function useBannerModal(this: any,request?:any) {
 	useEffect(()=>{
 		getBanners()
 	},[])
-	
+
 	this.data({
 		banners,
 		modal
