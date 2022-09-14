@@ -7,10 +7,11 @@ import BannerList from "./BannerList";
 type IProps = {
 	addBanner:(id:string,idgroop:string) => void
 	idgroop:string
+	request?:any
 }
 
-const BannerModal:FC<IProps> = ({addBanner,idgroop}) => {
-	const useCaseBannerModal = adapterComponentUseCase(useBannerModal)
+const BannerModal:FC<IProps> = ({addBanner,idgroop,request}) => {
+	const useCaseBannerModal = adapterComponentUseCase(useBannerModal,request)
 	const {banners,modal} = useCaseBannerModal.data
 	const {setModal} = useCaseBannerModal.handlers
 

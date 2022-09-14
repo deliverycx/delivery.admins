@@ -26,4 +26,83 @@ export class DisplayBannerRepository extends BaseRepository<MainBannerModel>{
 		console.log('res',res);
 		return res
 	}
+
+	async getAll(bu: Record<string, any>): Promise<any[]> {
+		const res = await this.Model.find(bu)
+		.populate({ 
+			path : 'groopbanner',
+			populate : { path : 'banners'}//to find friends of friends
+		})
+		.populate("banners")
+		.select('-__v')
+		.lean()
+		return res
+	}
+	async getOneBuId(id: string, populate?: string): Promise<any> {
+		const res = await this.Model.findById(id)
+		.populate({ 
+			path : 'groopbanner',
+			populate : { path : 'banners'}//to find friends of friends
+		})
+		.populate("banners")
+		.select('-__v')
+		.lean()
+		return res
+	}
+
+	async addBaanerGroop(id:string,{field,banner}){
+		console.log(id,field);
+		const res =
+		field === 'groopbanner' ? await this.Model.findOneAndUpdate(
+			{
+        _id: id
+      },
+      {
+        $push: {
+          groopbanner: banner
+        }
+      },
+      { upsert: true, new: true }
+		).populate('banners').lean()
+		: await this.Model.findOneAndUpdate(
+			{
+        _id: id
+      },
+      {
+        $push: {
+          banners: banner
+        }
+      },
+      { upsert: true, new: true }
+		).populate('banners').lean()
+		return res
+	}
+
+	async deletBaanerGroop(id:string,{field,banner}){
+		console.log('del',id,field);
+		const res =
+		field === 'groopbanner' ? await this.Model.findOneAndUpdate(
+			{
+        _id: id
+      },
+      {
+        $pull: {
+          groopbanner: banner
+        }
+      },
+      { upsert: true, new: true }
+		).populate('banners').lean()
+		: await this.Model.findOneAndUpdate(
+			{
+        _id: id
+      },
+      {
+        $pull: {
+          banners: banner
+        }
+      },
+      { upsert: true, new: true }
+		).populate('banners').lean()
+		return res
+	}
 }

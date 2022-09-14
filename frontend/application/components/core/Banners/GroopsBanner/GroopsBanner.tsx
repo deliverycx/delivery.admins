@@ -1,7 +1,9 @@
 import { IGroopsBanner } from "@type"
 import { adapterComponentUseCase } from "adapters/adapterComponents"
+import Modal from "application/components/common/Modal/Modal"
 import { imgRout } from "application/helpers/imgInit"
 import { useGroopsBanner } from "domains/useCase/banners/useCase.GroopsBanner"
+import { useState } from "react"
 import BannerList from "../view/BannerList"
 import BannerModal from "../view/BannerModal"
 
@@ -9,6 +11,8 @@ const GroopsBanner = () =>{
 	const useCaseGroops = adapterComponentUseCase(useGroopsBanner)
 	const {data} = useCaseGroops.data
 	const {addBanner,deleteBanner} = useCaseGroops.handlers
+
+
 
 	const grid = 4;
 	const getItemStyle = () => ({
@@ -44,6 +48,8 @@ const GroopsBanner = () =>{
 															 <br /> 
                             	 
 															 	<BannerModal addBanner={addBanner} idgroop={val._id} />
+																
+																
 																<BannerList banners={val.banners} handler={(id) => deleteBanner(id,val._id)}>
 																<div className="banner_delete">
 																	<span className="banner_delete-del">Удалить</span>

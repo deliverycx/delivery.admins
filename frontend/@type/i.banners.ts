@@ -13,3 +13,10 @@ export type IBanner = {
 	smallimages: string[]
 	url: string
 ​​}
+
+export type IDisplayBanner = {
+	_id: string
+	organization:string
+	groopbanner:IGroopsBanner
+	banners:IBanner
+}

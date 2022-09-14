@@ -23,4 +23,6 @@ export class BannerRepository extends BaseRepository<MainBannerModel>{
 		},{ upsert: true, new: true })
 		return res
 	}
+	
+
 }

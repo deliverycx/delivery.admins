@@ -2,13 +2,10 @@ import { isArray, isObject, IsOptional, IsString } from "class-validator"
 import { ObjectId } from 'mongoose';
 
 export class DisplayBannerDto{
-	
+
 	@IsString()
-	name:string
-	category:string
-
+	organization:ObjectId
 	id:UniqueId
-
-	groop:ObjectId[]
-
+	field:string
+	banner:string
 }

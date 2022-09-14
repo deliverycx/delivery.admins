@@ -20,7 +20,7 @@ const MainBanner = () =>{
 	return(
 		<div className="col-12 ma0-l">
 			<div className="col-2 card-header">
-				<a href="/banners/add" className="btn btn-block bg-gradient-secondary">Добавить банер</a>
+				<a href="/banners/mainbanner/add" className="btn btn-block bg-gradient-secondary">Добавить банер</a>
 			</div>
 			
             <div className="card card-primary">
@@ -66,7 +66,7 @@ const MainBanner = () =>{
 												style={getItemStyle()}
 												className="col-sm-2"
 												>
-												<a href={`/banners/${val._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+												<a href={`/banners/mainbanner/${val._id}`} data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
 												<img src={imgRout(val.images[0])} className="img-fluid mb-2" alt="white sample"/>
 											</a>
 											</div>

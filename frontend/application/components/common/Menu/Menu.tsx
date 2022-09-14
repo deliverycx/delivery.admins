@@ -68,13 +68,13 @@ const Menu = () =>{
                 </a>
               </li>
               <li className="nav-item">
-                <a href="../index2.html" className="nav-link">
+                <a href="/banners/mainbanner" className="nav-link">
                   <i className="far fa-circle nav-icon"></i>
                   <p>Баннеры</p>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="../index3.html" className="nav-link">
+                <a href="/banners/display" className="nav-link">
                   <i className="far fa-circle nav-icon"></i>
                   <p>Отоброжение</p>
                 </a>

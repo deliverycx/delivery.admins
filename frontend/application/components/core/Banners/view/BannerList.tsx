@@ -1,6 +1,6 @@
 import { IBanner } from "@type";
 import { imgRout } from "application/helpers/imgInit";
-import { FC, ReactNode } from "react"
+import { FC, memo, ReactNode } from "react"
 
 type IProps = {
 	banners:IBanner[],
@@ -16,6 +16,7 @@ const BannerList:FC<IProps> = ({banners,handler,children}) => {
 	  margin: `0 ${grid}px 0 0`,
 	  background: '#f0f0f0',
 	});
+	console.log('banners',banners);
 
 	return (
 		<div className="card-body">
@@ -46,4 +47,4 @@ const BannerList:FC<IProps> = ({banners,handler,children}) => {
 		</div>
 	)
 }
-export default BannerList
+export default memo(BannerList) 

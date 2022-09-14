@@ -1,11 +1,9 @@
 import { Tfile } from '@type';
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
-import FormSelect from 'application/components/core/Banners/MainBanner/BannerFormSelect';
-import axios from 'axios';
+import FormSelectOrganization from 'application/components/common/Form/FormSelectOrganization';
 import { useMainBanner, useMainBannerForm } from 'domains/useCase/banners/useCase.MainBanner';
 import { DropzoneArea } from 'material-ui-dropzone';
-import { useForm } from 'react-hook-form';
-import { RequestBanners } from 'servises/repository/Axios/Request';
+
 
 const MainBannerForm = () =>{
 	const useCasePoints = adapterComponentUseCase(useMainBannerForm)
@@ -34,7 +32,7 @@ const MainBannerForm = () =>{
 
 							 {
 									stateBanners.organizations &&
-									<FormSelect options={stateBanners.organizations} selected={stateBanners.selectOrg}  setter={handlSelectOrg} />
+									<FormSelectOrganization selected={stateBanners.selectOrg}  setter={handlSelectOrg} />
 							 }
 							
 							 <div className="popBox_item"> 

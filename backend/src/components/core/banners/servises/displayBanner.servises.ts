@@ -15,5 +15,11 @@ export class DisplayBannerServises extends BaseServises{
 	getGroop(){
 		return this.Repository.getGroopsBannes()
 	}
+	addBannerGroops(body:any,id:string){
+		return this.Repository.addBaanerGroop(id,body)
+	}
+	deletBannerGroops(body:any,id:string){
+		return this.Repository.deletBaanerGroop(id,body)
+	}
 	
 }

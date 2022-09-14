@@ -176,7 +176,7 @@ export function useMainBannerForm(this: any) {
 			!slideId 
 						? await RequestBanners.create(formData)
 						: await RequestBanners.edit(formData,slideId)
-			router.push('/banners')
+			router.push('/banners/mainbanner')
     } catch (error) {
       console.log(error);
     }
@@ -185,7 +185,7 @@ export function useMainBannerForm(this: any) {
 	const onDelet = async (id:string) => {
     try {
       await RequestBanners.delet(id)
-			router.push('/banners')
+			router.push('/banners/mainbanner')
     } catch (error) {
       console.log(error);
     }
@@ -262,14 +262,21 @@ export function useMainBannerForm(this: any) {
 }
 
 
-export function useBannerModal(this: any) {
+export function useBannerModal(this: any,request?:any) {
 	const [banners,setBanners] = useState()
 	const [modal,setModal] = useState(false)
 
 	const getBanners = async () =>{
 		try {
-			const {data} = await RequestBanners.getAll()
-			setBanners(data)
+			if(request){
+				const data = await request()
+				setBanners(data)
+			}else{
+				const {data} = await RequestBanners.getAll()
+				console.log(data);
+				setBanners(data)
+			}
+			
 		} catch (error) {
 			console.log(error);
 		}

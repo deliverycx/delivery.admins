@@ -60,12 +60,13 @@ a {
 }
 .modales{
 	position: fixed;
-	
+	max-height: 600px;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
 	top: 30%;
 	z-index: 999;
+	overflow: auto;
 }
 .banners_box{
 	flex-wrap: wrap !important;

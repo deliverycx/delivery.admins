@@ -1,24 +1,39 @@
 import { FC, RefObject, useEffect, useRef, useState } from "react"
 import cn from "classnames";
+import { RequestOrganization } from "servises/repository/Axios/Request";
 
 type IProps ={
-  options: any,
-  selected: any,
-  setter: any
+  setter: (id:string) => void
+	selected?: string
 }
-const FormSelect:FC<IProps> = ({ options, selected, setter }) => {
+const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
+	const [organizations, setOrganizations] = useState<any>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selecteds, setSelecteds] = useState<string>('');
   const ref = useRef() as RefObject<HTMLDivElement> | null;
 
+	useEffect(()=>{
+		fetchOrg()
+	},[])
 
 	useEffect(()=>{
 		if(selected === 'all'){
 			setSelecteds('Все точки')
 		}else{
-			options.map((val:any) => val.organizations.map((org:any) => selected === org.id && setSelecteds(org.address.street)))
+			organizations &&
+			organizations.map((val:any) => val.organizations.map((org:any) => selected === org.id && setSelecteds(org.address.street)))
 		}
-	},[selected])
+		
+	},[selected,organizations])
+
+	const fetchOrg = async () => {
+    try {
+      const { data } = await RequestOrganization.getAll()
+			setOrganizations(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
     const dynamycCN = (value: string)=>cn(value, {open: isOpen});
 
@@ -32,7 +47,7 @@ const FormSelect:FC<IProps> = ({ options, selected, setter }) => {
     }
 
     return (
-        <div className="form__field__type" onClick={openToggle} ref={ref}>
+        <div className="form__field__type col-2" onClick={openToggle} ref={ref}>
             <div className="form__field__valueselect">
                 {
                     selecteds
@@ -41,7 +56,8 @@ const FormSelect:FC<IProps> = ({ options, selected, setter }) => {
             <div className={dynamycCN("form__field__values")}>
 								<div className="form__field__values__item" onClick={()=> valueClickHandler('all','Все точки')}>Все точки</div>
                 {
-                    options.map((option:any) => {
+										organizations &&
+                    organizations.map((option:any) => {
 
 
                         
@@ -71,4 +87,4 @@ const FormSelect:FC<IProps> = ({ options, selected, setter }) => {
         </div>
     )
 }
-export default FormSelect
+export default FormSelectOrganization
