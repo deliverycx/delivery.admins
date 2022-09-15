@@ -1,6 +1,4 @@
-import { AxiosInstance } from "axios";
 import { ApiSuper } from "../AxiosApi";
-import Api from "../AxiosCreate";
 import { CRUDFabric } from "../Fabric/CRUD.fabric";
 import { RequestFabric } from '../Fabric/FabricApi';
 
@@ -8,7 +6,7 @@ import { RequestFabric } from '../Fabric/FabricApi';
 	request:'mainbanner',
 	fabric:[CRUDFabric]
 })
-class RequestGroops  extends ApiSuper {
+class RequestBanners  extends ApiSuper {
 	CRUDFabric!:CRUDFabric
 
 	getAll(data:{org?:string}){
