@@ -1,60 +1,56 @@
 import { AxiosInstance } from "axios";
-import { ApiSuper, methods } from "../AxiosApi";
+import { ApiSuper } from "../AxiosApi";
 import Api from "../AxiosCreate";
+import { CRUDFabric } from "../Fabric/CRUD.fabric";
+import { RequestFabric } from '../Fabric/FabricApi';
 
-class RequestBanners  extends ApiSuper{
-	protected readonly api: AxiosInstance = Api.getInstance.api;
-	
-	getAll(org?:string){
+@RequestFabric({
+	request:'mainbanner',
+	fabric:[CRUDFabric]
+})
+class RequestGroops  extends ApiSuper {
+	CRUDFabric!:CRUDFabric
+
+	getAll(data:{org?:string}){
 		return this.api({
 			method: 'get',
-			url: `/mainbanner/all?organization=${org}`,
+			url: `/mainbanner/all?organization=${data?.org}`,
 		})
 	}
-	getBuOrg(org:string){
+
+	getBu(data: {slide:string}){
 		return this.api({
 			method: 'get',
-			url: `/mainbanner/buorg?organization=${org}`,
+			url: `/mainbanner/bu?id=${data.slide}`,
 		})
 	}
-	getBuAllOrg(org:string){
+	create(data:any) {
 		return this.api({
-			method: 'get',
-			url: `/mainbanner/buallorg?organization=${org}`,
-		})
-	}
-	getBu(slide:string){
-		return this.api({
-			method: 'get',
-			url: `/mainbanner/bu?id=${slide}`,
-		})
-	}
-  create(data:any) {
-    return this.api({
 			method: 'post',
 			url: `/mainbanner/add`,
 			data: data
 		})
-  }
+	}
 	edit(data:any,slide:string) {
-    return this.api({
+		return this.api({
 			method: 'post',
 			url: `/mainbanner/edit?id=${slide}`,
 			data: data
 		})
-  }
+	}
 	setImages(slide:any,data:any) {
-    return this.api({
+		return this.api({
 			method: 'post',
 			url: `/mainbanner/setImages?id=${slide}`,
 			data: data
 		})
-  }
+	}
 	delet(slide:string) {
-    return this.api({
+		return this.api({
 			method: 'post',
 			url: `/mainbanner/delet?id=${slide}`,
 		})
-  }
+	}
 }
+
 export default new RequestBanners()
