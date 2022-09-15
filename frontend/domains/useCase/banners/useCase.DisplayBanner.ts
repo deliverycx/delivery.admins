@@ -8,9 +8,11 @@ import RequestGroops from "servises/repository/Axios/Request/Request.Groops";
 
 export function useDisplayBanner(this: any) {
 	const [display,setDisplay] = useState()
+	const [groops,setGroops] = useState()
 
 	useEffect(()=>{
 		getAllDisplay()
+		getAllGroops()
 	},[])
 
 	const getAllDisplay = async () =>{
@@ -22,12 +24,26 @@ export function useDisplayBanner(this: any) {
 		}
 	}
 
+	const getAllGroops = async () =>{
+		try {
+			const {data} = await RequestGroops.CRUDFabric.getAll()
+			setGroops(data)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const handlerFilter = (id:string) =>{
+
+	}
+
 
 	this.data({
-		display
+		display,
+		groops
   })
   this.handlers({
-		
+		handlerFilter
   })
 }
 

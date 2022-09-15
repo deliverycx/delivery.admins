@@ -44,7 +44,7 @@ export const useFromsCRUD =
 					: await request.edit(fomrdata(data),pageid)
 			}
       
-			//router.back()
+			router.back()
     } catch (error) {
       console.log(error);
     }

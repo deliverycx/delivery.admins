@@ -1,12 +1,19 @@
 import { IDisplayBanner } from "@type"
-import { adapterComponentUseCase } from "adapters/adapterComponents"
+import { adapterComponentUseCase, TadapterCaseCallback } from "adapters/adapterComponents"
 import { useDisplayBanner } from "domains/useCase/banners/useCase.DisplayBanner"
+import React from "react"
+import DisplayBannerFilter from "./DisplayBannerFilter"
 import DisplayBannerItem from "./DisplayBannerItem"
 
+export const DisplayContext = React.createContext<TadapterCaseCallback>({
+  data: {},
+  handlers: {},
+  status:{}
+});
 const DisplayBanner = () =>{
-	const useCasePoints = adapterComponentUseCase(useDisplayBanner)
-	const {display} = useCasePoints.data
-	const {} = useCasePoints.handlers
+	const useCaseDisplay = adapterComponentUseCase(useDisplayBanner)
+	const {display} = useCaseDisplay.data
+	const {} = useCaseDisplay.handlers
 
 	return(
 		<div className="col-12 ma0-l">
@@ -14,6 +21,10 @@ const DisplayBanner = () =>{
 			<div className="col-2 card-header">
 				<a href="/banners/display/add" className="btn btn-block bg-gradient-secondary">Добавить банер</a>
 			</div>
+			<DisplayContext.Provider value={useCaseDisplay}>
+				<DisplayBannerFilter />
+			</DisplayContext.Provider>
+			
 			<div className="card card-primary">
 		              <div className="card-header">
 		                <h4 className="card-title">Категория Меню</h4>
