@@ -16,7 +16,7 @@ export function useMainBanner(this: any) {
 
 	const getBanners = async () =>{
 		try {
-			const result = await RequestBanners.getAll()
+			const result = await RequestBanners.CRUDFabric.getAll()
 			if(result.status === 200){
 				setBanners(result.data)
 			}else{
@@ -29,7 +29,7 @@ export function useMainBanner(this: any) {
 
 	const setBuImages = async (id:string,data:[]) =>{
 		try {
-			const result = await RequestBanners.setImages(id,{images:data})
+			const result = await RequestBanners.CRUDFabric.setImages(id,{images:data})
 
 			if(result.status === 200){
 				setBanners(result.data)
@@ -56,7 +56,7 @@ export function useMainBannerForm(this: any) {
 	const router = useRouter()
 	const slideId = router.query.id as string
 
-	const { register, handleSubmit, watch } = useForm<{img:Tfile}>();
+	const { register, handleSubmit } = useForm<{img:Tfile}>();
 
 	const [stateBanners, dispatchBanners] = useReducer(
     BannerReducer,
@@ -72,7 +72,7 @@ export function useMainBannerForm(this: any) {
 
 	const getBu = async (id:string) =>{
 		try {
-			const result = await RequestBanners.getBu(id)
+			const result = await RequestBanners.CRUDFabric.getBu(id)
 			if(result.status === 200){
 				dispatchBanners({
 					type: ReducerActionTypePoints.setBanners,
@@ -137,23 +137,13 @@ export function useMainBannerForm(this: any) {
 
 	}
 
-	const helpOrg = (data:any) =>{
-		if(stateBanners.banners){
-			return stateBanners.banners.organization
-		}else{
-			return data
-		}
-	}
-
-
-
 	const onSubmit = async (data:any) => {
     try {
       const formData = new FormData()
       fomrdata(formData,data)
 			!slideId
-						? await RequestBanners.create(formData)
-						: await RequestBanners.edit(formData,slideId)
+						? await RequestBanners.CRUDFabric.create(formData)
+						: await RequestBanners.CRUDFabric.edit(formData,slideId)
 			router.push('/banners/mainbanner')
     } catch (error) {
       console.log(error);
@@ -162,7 +152,7 @@ export function useMainBannerForm(this: any) {
 
 	const onDelet = async (id:string) => {
     try {
-      await RequestBanners.delet(id)
+      await RequestBanners.CRUDFabric.delet(id)
 			router.push('/banners/mainbanner')
     } catch (error) {
       console.log(error);
@@ -244,7 +234,7 @@ export function useBannerModal(this: any,request?:any) {
 				const data = await request()
 				setBanners(data)
 			}else{
-				const {data} = await RequestBanners.getAll()
+				const {data} = await RequestBanners.CRUDFabric.getAll()
 				console.log(data);
 				setBanners(data)
 			}

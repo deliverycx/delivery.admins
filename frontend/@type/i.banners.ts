@@ -12,7 +12,7 @@ export type IBanner = {
 	order:number
 	smallimages: string[]
 	url: string
-​​}
+}
 
 export type IDisplayBanner = {
 	_id: string
