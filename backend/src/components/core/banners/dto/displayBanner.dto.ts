@@ -8,4 +8,6 @@ export class DisplayBannerDto{
 	id:UniqueId
 	field:string
 	banner:string
+
+	filter:string[]
 }

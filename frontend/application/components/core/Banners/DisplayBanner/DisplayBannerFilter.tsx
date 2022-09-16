@@ -4,8 +4,8 @@ import { DisplayContext } from "./DisplayBanner"
 
 const DisplayBannerFilter = () => {
 	const useCaseDisplay = useContext(DisplayContext)
-	const { groops } = useCaseDisplay.data
-	const {handlerFilter} = useCaseDisplay.handlers
+	const { groops,filter } = useCaseDisplay.data
+	const {setFilter} = useCaseDisplay.handlers
 
 	return (
 
@@ -24,7 +24,15 @@ const DisplayBannerFilter = () => {
 									return (
 										val.category === 'меню' &&
 											<>
-												<div key={val._id} className="title" onClick={()=> handlerFilter(val._id)}>{val.name}	</div><br />
+												<div key={val._id} className="title" 
+													onClick={()=> setFilter((prev:any) => [...prev,val._id])}>
+														{val.name} <span> --{filter.includes(val._id) && 'active'}</span>
+														- 
+												</div>
+												{<span onClick={() => setFilter((prev:any) => {
+																return prev.filter((id:string)=> id != val._id)
+														})}>удалить</span>}
+												<br />		
 											</>
 									)
 								})
@@ -37,10 +45,17 @@ const DisplayBannerFilter = () => {
 								groops && groops.map((val: IGroopsBanner) => {
 									return (
 										val.category === 'доставка' &&
-											<>
-												<div key={val._id} className="title" onClick={()=> handlerFilter(val._id)}>{val.name}	</div><br />
-												
-											</>
+										<>
+											<div key={val._id} className="title" 
+												onClick={()=> setFilter((prev:any) => [...prev,val._id])}>
+													{val.name} <span> --{filter.includes(val._id) && 'active'}</span>
+													- 
+											</div>
+											{<span onClick={() => setFilter((prev:any) => {
+															return prev.filter((id:string)=> id != val._id)
+													})}>удалить</span>}
+											<br />		
+										</>
 									)
 								})
 							}

@@ -21,5 +21,8 @@ export class DisplayBannerServises extends BaseServises{
 	deletBannerGroops(body:any,id:string){
 		return this.Repository.deletBaanerGroop(id,body)
 	}
+	filterBu({filter}){
+		return this.Repository.filterBuGroops(filter)
+	}
 	
 }

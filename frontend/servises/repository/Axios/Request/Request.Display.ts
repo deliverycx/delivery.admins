@@ -26,6 +26,14 @@ class RequestDisplay  extends ApiSuper {
 		})
 	}
 
+	filterBu(data:{filter:string[]}){
+		return this.api({
+			method: 'post',
+			url: `/display/filter`,
+			data
+		})
+	}
+
 }
 
 export default new RequestDisplay()

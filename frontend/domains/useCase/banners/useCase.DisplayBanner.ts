@@ -9,11 +9,15 @@ import RequestGroops from "servises/repository/Axios/Request/Request.Groops";
 export function useDisplayBanner(this: any) {
 	const [display,setDisplay] = useState()
 	const [groops,setGroops] = useState()
+	const [filter,setFilter] = useState<string[]>([])
 
 	useEffect(()=>{
-		getAllDisplay()
 		getAllGroops()
 	},[])
+
+	useEffect(()=>{
+		filter.length > 0 ? requestFilter() : getAllDisplay()
+	},[filter])
 
 	const getAllDisplay = async () =>{
 		try {
@@ -33,17 +37,24 @@ export function useDisplayBanner(this: any) {
 		}
 	}
 
-	const handlerFilter = (id:string) =>{
-
+	const requestFilter = async () =>{
+		try {
+			const {data} = await RequestDisplay.filterBu({filter})
+			setDisplay(data)
+		} catch (error) {
+			console.log(error);
+		}
+		
 	}
 
 
 	this.data({
 		display,
-		groops
+		groops,
+		filter
   })
   this.handlers({
-		handlerFilter
+		setFilter
   })
 }
 

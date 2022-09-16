@@ -105,4 +105,17 @@ export class DisplayBannerRepository extends BaseRepository<MainBannerModel>{
 		).populate('banners').lean()
 		return res
 	}
+
+	async filterBuGroops (data:string[]){
+		const res = await this.Model
+			.find({ 'groopbanner':{ $in:data}})
+			//.populate("groopbanner")
+			.populate({ 
+        path : 'groopbanner',
+        populate : { path : 'banners'}//to find friends of friends
+    	})
+      .lean();
+		console.log('res',res);
+		return res
+	}
 }

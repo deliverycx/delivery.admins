@@ -53,4 +53,11 @@ export class DisplayBannerControllers{
 	){
 		return this.displayServises.deletBannerGroops(body,query.id)
 	}
+
+	@Post('filter')
+	async filter(
+		@Body() body:DisplayBannerDto
+	){
+		return this.displayServises.filterBu(body)
+	}
 }
