@@ -18,7 +18,7 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
 
 	useEffect(()=>{
 		if(selected === 'all'){
-			setSelecteds('Все точки')
+			setSelecteds('Выбрать точку')
 		}else{
 			organizations &&
 			organizations.map((val:any) => val.organizations.map((org:any) => selected === org.id && setSelecteds(org.address.street)))
@@ -54,7 +54,7 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
                 }
             </div>
             <div className={dynamycCN("form__field__values")}>
-								<div className="form__field__values__item" onClick={()=> valueClickHandler('all','Все точки')}>Все точки</div>
+								
                 {
 										organizations &&
                     organizations.map((option:any) => {
