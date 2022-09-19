@@ -19,6 +19,11 @@ export class DisplayBannerControllers{
 	geBu(@Query() query: DisplayBannerDto){
 		return this.displayServises.getOneBuId(query.id)
 	}
+	@Get('buorg')
+	geBuOrg(@Query() query: DisplayBannerDto){
+		console.log(query);
+		return this.displayServises.getOne(query)
+	}
 
 	@Post('add')
 	add(@Body() body:DisplayBannerDto){	

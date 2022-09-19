@@ -1,12 +1,12 @@
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { useOrganizationSetting } from 'domains/useCase/organization/useCase.OrganizationSetting';
+import OrganizationBanner from './viewSetting/OrganizationBanner';
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
 	const {organization,social,slideId} = useCasePoints.data
 	const {setInput,onSubmit,handleReserveTable} = useCasePoints.handlers
 	
-	console.log('org',organization);
 
 	return(
 		<section className="content">
@@ -71,6 +71,12 @@ const OrganizationSetting = () =>{
             </div>
 
           </div>
+
+					{
+						organization &&
+						<OrganizationBanner id={organization.id} />
+					}
+					
 
 					
 

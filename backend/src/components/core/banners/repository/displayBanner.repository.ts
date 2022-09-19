@@ -115,7 +115,6 @@ export class DisplayBannerRepository extends BaseRepository<MainBannerModel>{
         populate : { path : 'banners'}//to find friends of friends
     	})
       .lean();
-		console.log('res',res);
 		return res
 	}
 }
