@@ -1,15 +1,26 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import FormSelectOrganization from "application/components/common/Form/FormSelectOrganization"
 import { useDisplayBannerFrom } from "domains/useCase/banners/useCase.DisplayBanner"
+import { RequestDisplay } from "servises/repository/Axios/Request"
+import { useState } from 'react';
+import { useRouter } from "next/router";
 
 const DisplayBannerAdd = () =>{
-	const useCasePoints = adapterComponentUseCase(useDisplayBannerFrom)
-	const {pageid} = useCasePoints.data
-	const {handleSubmit,onSubmit,router,onDelet,handlSelectOrg} = useCasePoints.handlers
+	const router = useRouter()
+	const [orgid,setOrgid] = useState<string>()
+
+	const handlSelectOrg = async () =>{
+		try {
+			await RequestDisplay.CRUDFabric.create({organization:orgid})
+			router.reload()
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	
 	return(
-		<form onSubmit={handleSubmit(onSubmit)}>
+		
 		<section className="content">
       <div className="row">
         <div className="col-md-12">
@@ -23,8 +34,9 @@ const DisplayBannerAdd = () =>{
               </div>
             </div>
 						<div className="card-body">
-						<FormSelectOrganization  setter={handlSelectOrg} />
-							
+						<FormSelectOrganization  setter={setOrgid} />		
+						
+						<button onClick={()=> handlSelectOrg()} className="btn btn-success float-left">Сохранить</button>	
 							
 							
 						</div>
@@ -34,21 +46,9 @@ const DisplayBannerAdd = () =>{
         </div>
         
       </div>
-      <div className="row">
-        <div className="col-12">
-          <a onClick={router.back} className="btn btn-secondary">Cancel</a>
-					
-					<input type="submit"  value="Сохранить" className="btn btn-success float-right"/>
-					{
-						pageid &&
-						<a className="btn btn-secondary float-right" onClick={() => onDelet(pageid)}>Удалить</a>
-					}
-					
-        </div>
-				
-      </div>
+      
     </section>
-		</form>
+	
 	)
 }
 export default DisplayBannerAdd
