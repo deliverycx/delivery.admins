@@ -1,16 +1,15 @@
 import '../styles/adminlte.min.css'
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { RequestUsers } from 'servises/repository/Axios/Request'
-import { useAuthCheck } from 'application/hooks/useAuthCheck'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-
-
+// import your fontawesome library
+import './fontawesome';
+import './../styles/index.scss'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
+
   /**/
   const router = useRouter()
   const check = async () => {
@@ -21,13 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.push('/auth')
     }
   }
-  
-  
+
+
   useEffect(() => {
     check()
   }, [])
-  
-  
+
+
   return <Component {...pageProps} />
 }
 

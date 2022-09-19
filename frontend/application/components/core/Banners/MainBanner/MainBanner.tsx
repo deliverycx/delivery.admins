@@ -2,6 +2,10 @@ import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { imgRout } from 'application/helpers/imgInit';
 import { useMainBanner } from 'domains/useCase/banners/useCase.MainBanner';
 
+// import fontawesome from '@fortawesome/fontawesome'
+// import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+// import { faCode, faHighlighter } from '@fortawesome/fontawesome-free-solid'
+
 const MainBanner = () => {
   const useCasePoints = adapterComponentUseCase(useMainBanner);
   const { banners } = useCasePoints.data;
@@ -9,19 +13,19 @@ const MainBanner = () => {
   const grid = 4;
   const getItemStyle = () => ({
     padding: grid * 2,
-    margin: `0 ${grid}px 0 0`,
     background: '#f0f0f0',
   });
 
   return (
-    <div className='col-12 ma0-l'>
-      <div className='col-2 card-header'>
+    <div className='col-12 ma0-l mainbanner'>
+      <div className="mainbanner__btn-container">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a href='/banners/mainbanner/add' className='btn btn-block bg-gradient-secondary'>Добавить банер</a>
+        <a href='/banners/mainbanner/add' className='add-banner-btn'>Добавить баннер</a>
       </div>
+      {/*<FontAwesomeIcon icon="fa-solid fa-arrow-right" />*/}
       <div className='card card-primary'>
-        <div className='card-header'>
-          <h4 className='card-title'>Баннеры в топе</h4>
+        <div className='mainbanner__title'>
+          <h4>Баннеры в топе</h4>
         </div>
         <div className='card-body'>
           <div className='row'>
@@ -32,7 +36,7 @@ const MainBanner = () => {
                   <div
                     key={val._id}
                     style={getItemStyle()}
-                    className='col-sm-2'
+                    className='main-banner-small'
                   >
                     <a href={`/banners/mainbanner/${val._id}`} data-toggle='lightbox' data-title='sample 1 - white'
                        data-gallery='gallery'>

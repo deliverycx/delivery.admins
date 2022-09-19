@@ -1,0 +1,28 @@
+@mixin custom-btn($main-color) {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid $main-color;
+    border-radius: 0.6em;
+    color: $main-color;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 1em 2.2em;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      outline: 0;
+      box-shadow: 0 0 40px 40px $main-color inset;
+    }
+    &:active {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+    }
+}

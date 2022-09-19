@@ -33,22 +33,22 @@ a {
 	z-index: 9999;
 	height: 500px;
 	overflow-y: auto;
+
+	&.open{
+		display: block;
+	}
 }
-.form__field__values.open{
-	display: block;
-}
+
 .form__field__values__item{
 	margin: 5px 0;
 	cursor: pointer;
-}
-.form__field__values__item.active{
-	background-color: #f9f9f9;
-	cursor: no-drop;
+
+	&.active{
+		background-color: #f9f9f9;
+		cursor: no-drop;
+	}
 }
 
-.modal_box{
-
-}
 .modal_overfloy{
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.3);
@@ -196,24 +196,4 @@ p.css-button-text {
 
 .css-button:hover {
 	color: #fff;
-}
-
-@keyframes buttonx-in {
-	from {transform:skew(-42deg) translate(-300px, 0);}
-	to {transform:skew(-42deg) translate(-20px, -0px);}
-}
-
-@keyframes buttonx-out {
-	from {transform: skew(-42deg) translate(0, 0);}
-	to {transform: skew(-42deg) translate(300px, -0px);}
-}
-
-@-webkit-keyframes buttonx-in {
-	from {transform:skew(-42deg) translate(-300px, 0);}
-	to {transform:skew(-42deg) translate(-20px, -0px);}
-}
-
-@-webkit-keyframes buttonx-out {
-	from {transform: skew(-42deg) translate(0, 0);}
-	to {transform: skew(-42deg) translate(300px, -0px);}
 }
