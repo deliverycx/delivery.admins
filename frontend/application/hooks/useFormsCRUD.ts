@@ -44,6 +44,7 @@ export const useFromsCRUD =
 			}
       
 			router.back()
+			router.reload()
     } catch (error) {
       console.log(error);
     }
