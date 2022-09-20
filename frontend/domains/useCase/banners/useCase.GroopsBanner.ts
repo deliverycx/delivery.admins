@@ -9,6 +9,7 @@ export function useGroopsBanner(this: any) {
 	const router = useRouter()
 	const pageid = router.query.id as string
 
+
 	const initState = {
 		name:'',
 		category:''
@@ -40,7 +41,7 @@ export function useGroopsBanner(this: any) {
 
 	useEffect(()=>{
 		getAll()
-	},[])
+	},[router.asPath])
 
 
 	this.data({
