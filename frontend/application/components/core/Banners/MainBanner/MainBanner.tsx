@@ -2,9 +2,6 @@ import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { imgRout } from 'application/helpers/imgInit';
 import { useMainBanner } from 'domains/useCase/banners/useCase.MainBanner';
 
-// import fontawesome from '@fortawesome/fontawesome'
-// import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-// import { faCode, faHighlighter } from '@fortawesome/fontawesome-free-solid'
 
 const MainBanner = () => {
   const useCasePoints = adapterComponentUseCase(useMainBanner);
@@ -22,7 +19,6 @@ const MainBanner = () => {
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a href='/banners/mainbanner/add' className='add-banner-btn'>Добавить баннер</a>
       </div>
-      {/*<FontAwesomeIcon icon="fa-solid fa-arrow-right" />*/}
       <div className='card card-primary'>
         <div className='mainbanner__title'>
           <h4>Баннеры в топе</h4>

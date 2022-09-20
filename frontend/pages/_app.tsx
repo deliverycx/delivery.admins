@@ -3,8 +3,6 @@ import type { AppProps } from 'next/app'
 import { RequestUsers } from 'servises/repository/Axios/Request'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-// import your fontawesome library
-import './fontawesome';
 import './../styles/index.scss'
 
 
