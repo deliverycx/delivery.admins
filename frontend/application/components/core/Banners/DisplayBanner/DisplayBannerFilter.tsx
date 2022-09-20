@@ -1,11 +1,14 @@
 import { IGroopsBanner } from "@type"
 import { useContext } from "react"
 import { DisplayContext } from "./DisplayBanner"
+import cn from "classnames";
 
 const DisplayBannerFilter = () => {
 	const useCaseDisplay = useContext(DisplayContext)
 	const { groops,filter } = useCaseDisplay.data
 	const {setFilter} = useCaseDisplay.handlers
+
+	
 
 	return (
 
@@ -21,19 +24,24 @@ const DisplayBannerFilter = () => {
 							<hr />
 							{
 								groops && groops.map((val: IGroopsBanner) => {
+									const CN = cn("filter_items", { selected: filter.includes(val._id)})
 									return (
 										val.category === 'меню' &&
-											<>
-												<div key={val._id} className="title" 
+											<div className={CN}>
+												<div key={val._id} 
 													onClick={()=> setFilter((prev:any) => [...prev,val._id])}>
-														{val.name} <span> --{filter.includes(val._id) && 'active'}</span>
-														- 
+														{val.name} 
 												</div>
-												{<span onClick={() => setFilter((prev:any) => {
-																return prev.filter((id:string)=> id != val._id)
-														})}>удалить</span>}
-												<br />		
-											</>
+												{
+													filter.includes(val._id) &&
+													<img width="15" height="15" className="cansel" src="/img/cansel.png"
+														onClick={() => setFilter((prev:any) => {
+															return prev.filter((id:string)=> id != val._id)
+														})}
+													/>	
+												}
+												
+												</div>
 									)
 								})
 							}
@@ -43,19 +51,24 @@ const DisplayBannerFilter = () => {
 							<hr />
 							{
 								groops && groops.map((val: IGroopsBanner) => {
+									const CN = cn("filter_items", { selected: filter.includes(val._id)})
 									return (
 										val.category === 'доставка' &&
-										<>
-											<div key={val._id} className="title" 
-												onClick={()=> setFilter((prev:any) => [...prev,val._id])}>
-													{val.name} <span> --{filter.includes(val._id) && 'active'}</span>
-													- 
-											</div>
-											{<span onClick={() => setFilter((prev:any) => {
+										<div className={CN}>
+												<div key={val._id} 
+													onClick={()=> setFilter((prev:any) => [...prev,val._id])}>
+														{val.name} 
+												</div>
+												{
+													filter.includes(val._id) &&
+													<img width="15" height="15" className="cansel" src="/img/cansel.png"
+														onClick={() => setFilter((prev:any) => {
 															return prev.filter((id:string)=> id != val._id)
-													})}>удалить</span>}
-											<br />		
-										</>
+														})}
+													/>	
+												}
+												
+												</div>
 									)
 								})
 							}

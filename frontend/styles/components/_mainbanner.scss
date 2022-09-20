@@ -73,3 +73,17 @@
     @include custom-btn(#2ecc71);
   }
 }
+
+.filter_items{
+	display: flex;
+	padding: 10px;
+	margin-right: 15px;
+}
+
+.filter_items.selected{
+	background-color: #eaeaea;
+}
+.filter_items .cansel{
+	margin-top: 5px;
+	margin-left: 10px;
+}

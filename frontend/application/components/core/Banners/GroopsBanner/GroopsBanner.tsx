@@ -25,7 +25,7 @@ const GroopsBanner = () =>{
 		<div className="col-12 ma0-l">
 			
 			<div className="col-2 card-header">
-				<a href="/banners/groops/add" className="btn btn-block bg-gradient-secondary">Добавить банер</a>
+				<a href="/banners/groops/add" className="btn btn-block bg-gradient-secondary">Добавить группу</a>
 			</div>
 
 					{
