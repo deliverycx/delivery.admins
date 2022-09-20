@@ -6,10 +6,14 @@ import { RequestFabric } from "../Fabric/FabricApi";
 
 @RequestFabric({
 	request:'display',
-	fabric:[CRUDFabric]
+	factory:[{
+		name:'CRUDFabric',
+		fabric:CRUDFabric
+	}]
 })
+
 class RequestDisplay  extends ApiSuper {
-	CRUDFabric!:CRUDFabric
+	CRUDFabric:CRUDFabric
 
 	addBuField(data:{field:string,banner:string},id:string){
 		return this.api({

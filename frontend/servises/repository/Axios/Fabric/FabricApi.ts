@@ -1,17 +1,22 @@
 import { AxiosInstance } from "axios";
 import Api from "../AxiosCreate";
 
+interface factory {
+	name:string,
+	fabric:any
+}
+
 export function RequestFabric(filter:{
 	request:string,
-	fabric:any[]
+	factory:factory[]
 }) {
 	return function<T extends {new (...args: any[]): {}}>(targetConstructor:T):T { 
 		return class extends targetConstructor{
 			[x: string]: any;
 			constructor(...args:any) {
 				super(...args);
-				filter.fabric.forEach((Component:typeof Function) => {
-					this[Component.name] = new Component(filter.request)
+				filter.factory.forEach((val:factory ) => {
+					this[val.name] = new val.fabric(filter.request)
 				})
 				
 			}

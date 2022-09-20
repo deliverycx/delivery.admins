@@ -4,7 +4,10 @@ import { RequestFabric } from '../Fabric/FabricApi';
 
 @RequestFabric({
 	request:'mainbanner',
-	fabric:[CRUDFabric]
+	factory:[{
+		name:'CRUDFabric',
+		fabric:CRUDFabric
+	}]
 })
 class RequestBanners  extends ApiSuper {
 	CRUDFabric!:CRUDFabric

@@ -6,7 +6,10 @@ import { RequestFabric } from "../Fabric/FabricApi";
 
 @RequestFabric({
 	request:'groops',
-	fabric:[CRUDFabric]
+	factory:[{
+		name:'CRUDFabric',
+		fabric:CRUDFabric
+	}]
 })
 class RequestGroops  extends ApiSuper {
 	CRUDFabric!:CRUDFabric
