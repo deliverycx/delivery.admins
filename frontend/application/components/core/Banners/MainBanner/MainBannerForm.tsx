@@ -1,5 +1,4 @@
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
-import FormSelectOrganization from 'application/components/common/Form/FormSelectOrganization';
 import { useMainBannerForm } from 'domains/useCase/banners/useCase.MainBanner';
 import { DropzoneArea } from 'material-ui-dropzone';
 
@@ -12,7 +11,6 @@ const MainBannerForm = () => {
     handleSubmit,
     onSubmit,
     handlerFile,
-    handlSelectOrg,
     router,
     onDelet,
     handlerInput,
@@ -24,19 +22,8 @@ const MainBannerForm = () => {
         <div className='row'>
           <div className='col-md-12'>
             <div className='card card-primary'>
-              <div className='card-header'>
-                <h3 className='card-title'>Основной баннер</h3>
-                <div className='card-tools'>
-                  <button type='button' className='btn btn-tool' data-card-widget='collapse' title='Collapse'>
-                    <i className='fas fa-minus'/>
-                  </button>
-                </div>
-              </div>
+                <h3 className='mainbanner__title'>Основной баннер</h3>
               <div className='card-body'>
-                {/*{*/}
-                {/*  stateBanners.organizations &&*/}
-                {/*  <FormSelectOrganization selected={stateBanners.selectOrg} setter={handlSelectOrg} />*/}
-                {/*}*/}
                 <div className='popBox_item'>
                   <label className='form-label'>Ссылка</label>
                   <input type='text' {...register('url')} name='url' onChange={e => handlerInput(e.target.value)}
