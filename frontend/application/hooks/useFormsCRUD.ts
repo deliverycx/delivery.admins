@@ -29,7 +29,6 @@ export const useFromsCRUD =
 	},[pageid])
 
 	const onSubmit = async (data:any) => {
-		console.log(data);
     try {
 			if(filee){
 				const formData = new FormData()

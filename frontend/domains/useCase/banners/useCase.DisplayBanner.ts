@@ -13,6 +13,7 @@ export function useDisplayBanner(this: any) {
 
 	useEffect(()=>{
 		getAllGroops()
+		getAllDisplay()
 	},[])
 
 	useEffect(()=>{

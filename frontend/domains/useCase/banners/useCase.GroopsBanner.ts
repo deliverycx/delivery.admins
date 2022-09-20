@@ -38,6 +38,10 @@ export function useGroopsBanner(this: any) {
 		}
 	}
 
+	useEffect(()=>{
+		getAll()
+	},[])
+
 
 	this.data({
 		data,
