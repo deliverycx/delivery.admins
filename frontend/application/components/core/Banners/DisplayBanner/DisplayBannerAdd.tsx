@@ -36,7 +36,7 @@ const DisplayBannerAdd = () =>{
 						<div className="card-body">
 						<FormSelectOrganization  setter={setOrgid} />		
 						
-						<button onClick={()=> handlSelectOrg()} className="btn btn-success float-left">Сохранить</button>	
+						<button onClick={()=> handlSelectOrg()} className="btn btn-success float-left">Добавить</button>	
 							
 							
 						</div>
