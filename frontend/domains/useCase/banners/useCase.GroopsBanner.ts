@@ -51,7 +51,8 @@ export function useGroopsBanner(this: any,id:string) {
 		router,
 		addBanner,
 		deleteBanner,
-		onDelet
+		onDelet,
+		getAll
   })
   this.status({
     

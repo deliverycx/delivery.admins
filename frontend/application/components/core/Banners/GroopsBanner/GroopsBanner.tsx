@@ -3,16 +3,19 @@ import { adapterComponentUseCase } from "adapters/adapterComponents"
 import Modal from "application/components/common/Modal/Modal"
 import { imgRout } from "application/helpers/imgInit"
 import { useGroopsBanner } from "domains/useCase/banners/useCase.GroopsBanner"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import BannerList from "../view/BannerList"
 import BannerModal from "../view/BannerModal"
 
 const GroopsBanner = () =>{
 	const useCaseGroops = adapterComponentUseCase(useGroopsBanner)
 	const {data} = useCaseGroops.data
-	const {addBanner,deleteBanner} = useCaseGroops.handlers
+	const {addBanner,deleteBanner,getAll} = useCaseGroops.handlers
 
 
+	useEffect(()=>{
+		getAll()
+	},[])
 
 	const grid = 4;
 	const getItemStyle = () => ({
