@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import RequestGroops from 'servises/repository/Axios/Request/Request.Groops';
 
-export function useGroopsBanner(this: any) {
+export function useGroopsBanner(this: any,id:string) {
 	const router = useRouter()
 	const pageid = router.query.id as string
 
@@ -17,7 +17,7 @@ export function useGroopsBanner(this: any) {
 
 	const { register, handleSubmit, watch,setValue } = useForm<typeof initState>();
 	const fomrdata = (value:typeof initState) => value
-	const [data,{onSubmit,onDelet,setData,getAll}] = useFromsCRUD<IGroopsBanner>(fomrdata,RequestGroops.CRUDFabric)
+	const [data,{onSubmit,onDelet,setData,getAll}] = useFromsCRUD<IGroopsBanner>(fomrdata,RequestGroops.CRUDFabric,id)
 
 	const addBanner = async (idbanner:string,idgroop:string) => {
 		try {
@@ -38,10 +38,6 @@ export function useGroopsBanner(this: any) {
 			console.log(error);
 		}
 	}
-
-	useEffect(()=>{
-		getAll()
-	},[router.asPath])
 
 
 	this.data({

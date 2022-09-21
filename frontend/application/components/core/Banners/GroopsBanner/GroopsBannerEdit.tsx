@@ -1,11 +1,12 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import { useGroopsBanner } from "domains/useCase/banners/useCase.GroopsBanner"
 import { useMainBannerForm } from "domains/useCase/banners/useCase.MainBanner"
+import { FC } from "react"
 import BannerList from "../view/BannerList"
 import BannerModal from "../view/BannerModal"
 
-const GroopsBannerEdit = () =>{
-	const useCasePoints = adapterComponentUseCase(useGroopsBanner)
+const GroopsBannerEdit:FC<{id:string}> = ({id}) =>{
+	const useCasePoints = adapterComponentUseCase(useGroopsBanner,id)
 	const {pageid,data} = useCasePoints.data
 	const {register,handleSubmit,onSubmit,router,onDelet,addBanner,deleteBanner} = useCasePoints.handlers
 

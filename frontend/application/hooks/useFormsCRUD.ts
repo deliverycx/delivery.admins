@@ -14,22 +14,22 @@ type handler<T> = {
 
 export const useFromsCRUD = 
 	<T>
-	(fomrdata:Tfomrdata,request:CRUDFabric,filee?:Tfile) 
+	(fomrdata:Tfomrdata,request:CRUDFabric,id?:string,filee?:Tfile) 
 	: [T | undefined,handler<T>] =>{
 	const router = useRouter()
-	const pageid = router.query.id as string
+	const pageid = id ? id : router.query.id as string
 	const [data,setData] = useState<T>()
 
+	
 	useEffect(()=>{
-		if(!pageid){
-			getAll()
-		}else{
+		if(pageid){
 			getBu(pageid)
+		}else{
+			getAll()
 		}
+
 	},[pageid])
 
-
-	console.log(pageid,data);
 
 	const onSubmit = async (data:any) => {
     try {
