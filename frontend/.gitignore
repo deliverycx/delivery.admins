@@ -16,7 +16,6 @@
 /build
 /public/build
 /public/pages
-/public
 
 # misc
 .DS_Store

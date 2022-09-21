@@ -16,6 +16,9 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 	const [groops,setGroops] = useState<IGroopsBanner[]>()
 	const [modal,setModal] = useState(false)
 	const [modalBanner,setModalBanner] = useState(false)
+	const [banner,setBanner] = useState<any>()
+
+	console.log('clickban',banner);
 
 	const fetchGroopsBanner = async () => {
     try {
@@ -41,7 +44,7 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 						<div className="col-md-8 modales">
 						<div className="card card-warning">
 							<div className="card-header">
-								<h3 className="card-title">Removable</h3>
+								
 
 								<div className="card-tools">
 									<button type="button" className="btn btn-tool" data-card-widget="remove" onClick={()=> setModal(false)}>
@@ -71,13 +74,17 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 																	addGroop(val._id,idgroop)
 																	setModal(false)
 																}}>{val.name}	</a>
-																<a onClick={() => setModalBanner(true)}>Посмотреть банеры</a>
+																<a className="display_banner" onClick={() => {
+																	setModalBanner(true)
+																	setBanner(val.banners)
+																}}>Посмотреть банеры</a>
 														 	</div>
+															 
 															 
 																{
 																	modalBanner &&
 																	<Modal setter={setModalBanner}>
-																		<BannerList banners={val.banners} handler={(id) => {
+																		<BannerList banners={banner} handler={(id) => {
 																			
 																			setModalBanner(false)
 																		}} />
@@ -114,13 +121,16 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 																	addGroop(val._id,idgroop)
 																	setModal(false)
 																} }>{val.name}	</a>
-																<a onClick={() => setModalBanner(true)}>Посмотреть банеры</a>
+																<a className="display_banner" onClick={() => {
+																	setModalBanner(true)
+																	setBanner(val.banners)
+																}}>Посмотреть банеры</a>
 														 	</div>
 															 
 																{
 																	modalBanner &&
 																	<Modal setter={setModalBanner}>
-																		<BannerList banners={val.banners} handler={(id) => {
+																		<BannerList banners={banner} handler={(id) => {
 																			
 																			setModalBanner(false)
 																		}} />
