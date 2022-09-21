@@ -28,6 +28,9 @@ export const useFromsCRUD =
 		}
 	},[pageid])
 
+
+	console.log(pageid,data);
+
 	const onSubmit = async (data:any) => {
     try {
 			if(filee){
@@ -44,7 +47,6 @@ export const useFromsCRUD =
 			}
       
 			router.back()
-			router.reload()
     } catch (error) {
       console.log(error);
     }
