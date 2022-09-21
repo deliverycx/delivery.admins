@@ -17,7 +17,7 @@ export function useGroopsBanner(this: any,id:string) {
 
 	const { register, handleSubmit, watch,setValue } = useForm<typeof initState>();
 	const fomrdata = (value:typeof initState) => value
-	const [data,{onSubmit,onDelet,setData,getAll}] = useFromsCRUD<IGroopsBanner>(fomrdata,RequestGroops.CRUDFabric,id)
+	const [data,{onSubmit,onDelet,setData,getAll}] = useFromsCRUD<IGroopsBanner>(fomrdata,RequestGroops.CRUDFabric,'/banners/groops',id)
 
 	const addBanner = async (idbanner:string,idgroop:string) => {
 		try {

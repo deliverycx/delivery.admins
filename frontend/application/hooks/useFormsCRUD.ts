@@ -14,7 +14,7 @@ type handler<T> = {
 
 export const useFromsCRUD = 
 	<T>
-	(fomrdata:Tfomrdata,request:CRUDFabric,id?:string,filee?:Tfile) 
+	(fomrdata:Tfomrdata,request:CRUDFabric,rout:string,id?:string,filee?:Tfile) 
 	: [T | undefined,handler<T>] =>{
 	const router = useRouter()
 	const pageid = id ? id : router.query.id as string
@@ -46,7 +46,7 @@ export const useFromsCRUD =
 					: await request.edit(fomrdata(data),pageid)
 			}
       
-			router.back()
+			router.push(rout)
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +73,7 @@ export const useFromsCRUD =
 	const onDelet = async (id:string) => {
     try {
       await request.delet(id)
-			router.back()
+			router.push(rout)
     } catch (error) {
       console.log(error);
     }
