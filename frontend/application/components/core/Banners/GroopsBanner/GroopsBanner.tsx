@@ -45,9 +45,9 @@ const GroopsBanner = () =>{
 														val.category === 'меню' &&
 														<div key={val._id} className="card-body">
 															<hr />
-															<a className="card-footer card-title" href={`/banners/groops/${val._id}`}>
-														 		<span className="card-title">{val.name}	</span>
-														 	</a>
+															<div className="card-footer">
+														 		<a className="card-title" href={`/banners/groops/${val._id}`}>{val.name}	</a>
+														 	</div>
 															 <br /> 
                             	 
 															 	<BannerModal addBanner={addBanner} idgroop={val._id} />
