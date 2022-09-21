@@ -21,10 +21,10 @@ export const useFromsCRUD =
 	const [data,setData] = useState<T>()
 
 	useEffect(()=>{
-		if(pageid){
-			getBu(pageid)
-		}else{
+		if(!pageid){
 			getAll()
+		}else{
+			getBu(pageid)
 		}
 	},[pageid])
 
