@@ -5,8 +5,6 @@ export class MainBannerModel{
   @prop({ type: () => Array })
   public images: string[]
   
-	@prop({ type: () => String })
-  public organization:string
 
 	@prop({ type: () => String })
   public url:string

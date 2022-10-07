@@ -1,60 +1,17 @@
-import { AxiosInstance } from "axios";
-import { ApiSuper, methods } from "../AxiosApi";
-import Api from "../AxiosCreate";
+import { ApiSuper } from "../AxiosApi";
+import { CRUDFabric } from "../Fabric/CRUD.fabric";
+import { RequestFabric } from '../Fabric/FabricApi';
 
-class RequestBanners  extends ApiSuper{
-	protected readonly api: AxiosInstance = Api.getInstance.api;
-	
-	getAll(org?:string){
-		return this.api({
-			method: 'get',
-			url: `/mainbanner/all?organization=${org}`,
-		})
-	}
-	getBuOrg(org:string){
-		return this.api({
-			method: 'get',
-			url: `/mainbanner/buorg?organization=${org}`,
-		})
-	}
-	getBuAllOrg(org:string){
-		return this.api({
-			method: 'get',
-			url: `/mainbanner/buallorg?organization=${org}`,
-		})
-	}
-	getBu(slide:string){
-		return this.api({
-			method: 'get',
-			url: `/mainbanner/bu?id=${slide}`,
-		})
-	}
-  create(data:any) {
-    return this.api({
-			method: 'post',
-			url: `/mainbanner/add`,
-			data: data
-		})
-  }
-	edit(data:any,slide:string) {
-    return this.api({
-			method: 'post',
-			url: `/mainbanner/edit?id=${slide}`,
-			data: data
-		})
-  }
-	setImages(slide:any,data:any) {
-    return this.api({
-			method: 'post',
-			url: `/mainbanner/setImages?id=${slide}`,
-			data: data
-		})
-  }
-	delet(slide:string) {
-    return this.api({
-			method: 'post',
-			url: `/mainbanner/delet?id=${slide}`,
-		})
-  }
+@RequestFabric({
+	request:'mainbanner',
+	factory:[{
+		name:'CRUDFabric',
+		fabric:CRUDFabric
+	}]
+})
+class RequestBanners  extends ApiSuper {
+	CRUDFabric!:CRUDFabric
+
 }
+
 export default new RequestBanners()

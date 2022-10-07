@@ -27,8 +27,8 @@ export function useOrganization(this: any) {
   
   const handlePuckUp = async (idorganization: string, metod: string | null) => {
     try {
-      const delivmetod = metod === CART_CHOICE.PICKUP ? null : CART_CHOICE.PICKUP
-      await RequestOrganization.switchDelivMetod({ idorganization, delivmetod })
+      
+      await RequestOrganization.switchDelivMetod({ idorganization, delivmetod:metod })
       await handleAllOrg()
     } catch (error) {
       console.log(error)

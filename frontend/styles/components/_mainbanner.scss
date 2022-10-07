@@ -1,0 +1,97 @@
+.mainbanner {
+  &__btn-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  &__title {
+    padding: 20px;
+    color: #fff;
+    background-color: darken(#0cf, 15%)
+  }
+
+  .main-banner-small {
+    width: 20%;
+    min-width: 7rem;
+    margin: .5rem;
+  }
+}
+
+.add-banner-btn {
+  display: inline-block;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0cf;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: darken(#0cf, 15%);
+    transition: all .3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .cancel-btn {
+    @include custom-btn(#e74c3c);
+  }
+  .add-btn {
+    @include custom-btn(#2ecc71);
+  }
+}
+
+.filter_items{
+	display: flex;
+	padding: 10px;
+	margin-right: 15px;
+}
+
+.filter_items.selected{
+	background-color: #eaeaea;
+}
+.filter_items .cansel{
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.display_banner{
+	color: #e74c3c;
+	margin-left: 15px;
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}

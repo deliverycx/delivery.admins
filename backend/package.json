@@ -43,7 +43,7 @@
     "jimp": "^0.16.1",
     "longjohn": "^0.2.12",
     "mongoose": "^6.2.7",
-    "nestjs-form-data": "^1.6.3",
+    "nestjs-form-data": "^1.8.0",
     "nestjs-typegoose": "^7.1.38",
     "npm": "^8.5.4",
     "or": "^0.2.0",

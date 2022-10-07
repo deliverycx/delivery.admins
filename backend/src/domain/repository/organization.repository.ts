@@ -142,6 +142,7 @@ export class OrganizationRepository {
       },
       { new: true }
     )
+		console.log('заказ стоилка',result);
 
 		return result
 	}
