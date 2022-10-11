@@ -1,11 +1,12 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { BaseServises } from "src/services/base.services";
-import { OrganizationPaymentRepository } from "../repository/organizationPayment.repository";
+import { OrganizationRecvisitesRepository } from "../repository/organizationRecvisites.repository";
+
 
 @Injectable()
-export class OrganizationPaymentServises extends BaseServises{
+export class OrganizationRecvisitesServises extends BaseServises{
   constructor(
-		@Inject(OrganizationPaymentRepository)
+		@Inject(OrganizationRecvisitesRepository)
 		private readonly Repository
 	) {
 		super(Repository);

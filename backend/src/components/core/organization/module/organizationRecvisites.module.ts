@@ -4,25 +4,25 @@ import { SocialModel } from "src/database/mongodbModel/admin/social.model";
 import { ADMIN_DB, DELIVERY_DB } from "src/database/mongodbModel/config.mongodb";
 import { CityClass } from "src/database/mongodbModel/delivery/city.model";
 import { OrganizationClass } from "src/database/mongodbModel/delivery/organization.model";
-import { PaymentinfosClass } from "src/database/mongodbModel/delivery/paymentinfos.model";
+import { PaymentRecvisitesClass } from "src/database/mongodbModel/delivery/paymentRecvisites.model";
 import { OrganizationRepository } from "src/domain/repository/organization.repository";
-import { OrganizationPaymentControllers } from "../controllers/organizationPayment.controller";
-import { OrganizationPaymentRepository } from "../repository/organizationPayment.repository";
-import { OrganizationServises } from "../servises/organization.servises";
-import { OrganizationPaymentServises } from "../servises/organizationPayment.servises";
+import { OrganizationRecvisitesControllers } from "../controllers/organizationRecvisites.controller";
+import { OrganizationRecvisitesRepository } from "../repository/organizationRecvisites.repository";
+import { OrganizationRecvisitesServises } from "../servises/organizationRecvisites.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
+
 
 @Module({
   imports: [
-    TypegooseModule.forFeature([OrganizationClass,CityClass,PaymentinfosClass], DELIVERY_DB),
+    TypegooseModule.forFeature([OrganizationClass,CityClass,PaymentRecvisitesClass], DELIVERY_DB),
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
-  controllers: [OrganizationPaymentControllers], 
+  controllers: [OrganizationRecvisitesControllers], 
   providers:[
-		OrganizationPaymentServises,
-		OrganizationPaymentRepository,
+		OrganizationRecvisitesServises,
+		OrganizationRecvisitesRepository,
 		OrganizationRepository,
 		OrganizationSettingServises
 	]
 })
-export class OrganizationPaymentModule {}
+export class OrganizationRecvisitesModule {}

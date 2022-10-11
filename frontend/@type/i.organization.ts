@@ -21,3 +21,10 @@ export type IOrganization =  {
   isHidden: boolean;
 	reservetable:boolean
 }
+
+export type IOrganizationPayment = {
+	isActive:boolean
+	token:string
+	merchantId:string
+	organization:string
+}

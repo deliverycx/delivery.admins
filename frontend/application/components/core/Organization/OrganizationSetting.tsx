@@ -1,6 +1,7 @@
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { useOrganizationSetting } from 'domains/useCase/organization/useCase.OrganizationSetting';
-import OrganizationSettingFrom from './OrganizationSettingFrom';
+import OrganizationPayment from './OrganizationPayment/OrganizationPayment';
+import OrganizationSettingFrom from './OrganizationSetting/OrganizationInfo';
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
@@ -76,7 +77,10 @@ const OrganizationSetting = () =>{
 						organization &&
 						<OrganizationSettingFrom organization={organization} />
 					}
-					
+					{
+						organization &&
+						<OrganizationPayment organization={organization} />
+					}
 
 					
 

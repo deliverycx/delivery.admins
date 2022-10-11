@@ -1,61 +1,63 @@
 import { Controller, Post, Body, Get, Query } from "@nestjs/common"
 import OrganizationPaymentDTO from "../dto/organizationPayment.dto"
+import OrganizationRecvisitesDTO from "../dto/organizationRecvisites.dto"
 import OrganizationSettingDTO from "../dto/organizationSetting.dto"
 import { OrganizationPaymentServises } from "../servises/organizationPayment.servises"
+import { OrganizationRecvisitesServises } from "../servises/organizationRecvisites.servises"
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises"
 
-@Controller('organization_payment')
-export class OrganizationPaymentControllers{
+@Controller('organization_recvisites')
+export class OrganizationRecvisitesControllers{
   constructor(
-    private readonly servises: OrganizationPaymentServises
+    private readonly servises: OrganizationRecvisitesServises
   ) { }
   
   
   @Get('all')
-	getAll(@Query() query: OrganizationPaymentDTO){
+	getAll(@Query() query: OrganizationRecvisitesDTO){
 		return this.servises.getAll(query)
 	}
 	@Get('bu')
-	geBu(@Query() query: OrganizationPaymentDTO){
+	geBu(@Query() query: OrganizationRecvisitesDTO){
 		return this.servises.getOneBuId(query.id)
 	}
 	@Get('buorg')
-	geBuOrg(@Query() query: OrganizationPaymentDTO){
+	geBuOrg(@Query() query: OrganizationRecvisitesDTO){
 		console.log(query);
 		return this.servises.getOne(query)
 	}
 
 	@Post('add')
-	add(@Body() body:OrganizationPaymentDTO){	
+	add(@Body() body:OrganizationRecvisitesDTO){	
 		
 		return this.servises.create(body)
 	}
 	@Post('edit')
 	edit(
-		@Body() body:OrganizationPaymentDTO,
-		@Query() query: OrganizationPaymentDTO
+		@Body() body:OrganizationRecvisitesDTO,
+		@Query() query: OrganizationRecvisitesDTO
 		){	
 		return this.servises.edit(body,query.id)
 	}
 
 	@Post('delet')
 	async delete(
-		@Query() query: OrganizationPaymentDTO,
+		@Query() query: OrganizationRecvisitesDTO,
 	){
 		return this.servises.delete(query.id)
 	}
 
 	@Post('find')
 	async findBuOrg(
-		@Body() body:OrganizationPaymentDTO
+		@Body() body:OrganizationRecvisitesDTO
 	){
 		return this.servises.metodFindBuOrg(body)
 	}
 
 	@Post('switchpay')
 	async switchPay(
-		@Body() body:OrganizationPaymentDTO,
-		@Query() query: OrganizationPaymentDTO
+		@Body() body:OrganizationRecvisitesDTO,
+		@Query() query: OrganizationRecvisitesDTO
 	){
 		return this.servises.metodSwitchPayMent(query.id,body)
 	}

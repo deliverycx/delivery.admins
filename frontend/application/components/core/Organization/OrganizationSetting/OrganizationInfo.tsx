@@ -8,7 +8,7 @@ type IProps = {
 	organization:IOrganization
 }
 
-const OrganizationSettingFrom:FC<IProps> = ({organization}) =>{
+const OrganizationInfo:FC<IProps> = ({organization}) =>{
 	const useSettingForm = adapterComponentUseCase(useOrganizationSettingFrom,organization)
 	const {formik} = useSettingForm.data
 	const {} = useSettingForm.handlers
@@ -43,4 +43,4 @@ const OrganizationSettingFrom:FC<IProps> = ({organization}) =>{
 		</FormikProvider>			
 	)
 }
-export default OrganizationSettingFrom
+export default OrganizationInfo

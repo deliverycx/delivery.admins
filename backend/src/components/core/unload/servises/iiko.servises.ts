@@ -108,11 +108,13 @@ export class IikoRequesterServises {
       if (matchesAddress) {
         const { city, street } = matchesAddress.groups;
         
-				
+				/*
         const { position } = await this.geoCoder.resolve(
           city.trim() + street
         );
-
+				*/
+				
+				const position = [ 34.08837, 44.966058 ]	
 				
 
         const organizationInArray = {
