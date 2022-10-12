@@ -16,7 +16,7 @@ const DisplayBannerItem: FC<IProps> = ({ idorganization,idpage }) => {
 	return (
 			<>
 			{
-				organization &&
+				organization && city && 
 				<div className="card-footer">
 						<a className="card-title" href={`/banners/display/${idpage}`}>{organization.address.street} - <strong>({city.name})</strong> </a>
 				</div>
