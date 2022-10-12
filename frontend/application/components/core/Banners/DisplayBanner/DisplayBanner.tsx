@@ -19,12 +19,12 @@ const DisplayBanner = () =>{
 	return(
 		<div className="col-12 ma0-l">
 
-			<DisplayBannerAdd />
+			
 
 			<DisplayContext.Provider value={useCaseDisplay}>
 				<DisplayBannerFilter />
 			</DisplayContext.Provider>
-			
+			<DisplayBannerAdd />
 			
 			<div className="card card-primary">
 		              <div className="card-header">

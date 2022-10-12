@@ -9,6 +9,9 @@ export class OrganizationServises{
   getAllOrganization() {
     return this.OrganizationRepository.getAllOrganization()
   }
+	getSityBu({cityid}){
+		return this.OrganizationRepository.findCity(cityid)
+	}
 	getBuOrganization({idorganization}) {
     return this.OrganizationRepository.getBuOrganization(idorganization)
   }

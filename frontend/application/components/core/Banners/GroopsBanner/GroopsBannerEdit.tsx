@@ -1,4 +1,5 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
+import { bannerCategory } from "application/contstans/banners.const"
 import { useGroopsBanner } from "domains/useCase/banners/useCase.GroopsBanner"
 import { useMainBannerForm } from "domains/useCase/banners/useCase.MainBanner"
 import BannerList from "../view/BannerList"
@@ -39,8 +40,9 @@ const GroopsBannerEdit = () =>{
 								<div className="popBox_item form-group"> 
 										<label className="form-label">Категория</label><br />
 				            <select {...register('category')} defaultChecked={data.category} name="category">
-											<option selected={data && data.category === 'доставка'}>доставка</option>
-											<option selected={data && data.category === 'меню'}>меню</option>
+											<option selected={data && data.category === bannerCategory.default}>{bannerCategory.default}</option>
+											<option selected={data && data.category === bannerCategory.delivery}>{bannerCategory.delivery}</option>
+											<option selected={data && data.category === bannerCategory.menu}>{bannerCategory.menu}</option>
 										</select>
 								</div>
 								

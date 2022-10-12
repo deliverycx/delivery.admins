@@ -1,6 +1,7 @@
 import { IGroopsBanner } from "@type";
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import Modal from "application/components/common/Modal/Modal";
+import { bannerCategory } from "application/contstans/banners.const";
 import { imgRout } from "application/helpers/imgInit"
 import { useBannerModal } from "domains/useCase/banners/useCase.MainBanner"
 import { FC, useEffect, useState } from 'react';
@@ -51,7 +52,49 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 								</div>
 								
 							</div>
+							{
+								<div className="card card-primary">
+		              <div className="card-header">
+		                <h4 className="card-title">Категория общая</h4>
+		              </div>
+		              <div className="card-body">
+										<div className="form-group">
 
+											{
+												groops && groops.map((val:IGroopsBanner)=>{
+													return (
+														val.category === bannerCategory.default &&
+														<div key={val._id}>
+															<hr />
+															<div className="card-footer">
+														 		<a className="card-title" onClick={()=> {
+																	addGroop(val._id,idgroop)
+																	setModal(false)
+																}}>{val.name}	</a>
+																<a onClick={() => setModalBanner(true)}>Посмотреть банеры</a>
+														 	</div>
+															 
+																{
+																	modalBanner &&
+																	<Modal setter={setModalBanner}>
+																		<BannerList banners={val.banners} handler={(id) => {
+																			
+																			setModalBanner(false)
+																		}} />
+																 	</Modal>
+																}
+
+														</div>
+													)
+												})	
+											}
+
+			               </div>
+		              </div>
+		            </div>
+
+						
+					}
 							{
 								<div className="card card-primary">
 		              <div className="card-header">
@@ -63,7 +106,7 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 											{
 												groops && groops.map((val:IGroopsBanner)=>{
 													return (
-														val.category === 'меню' &&
+														val.category === bannerCategory.menu &&
 														<div key={val._id}>
 															<hr />
 															<div className="card-footer">
@@ -106,7 +149,7 @@ const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
 											{
 												groops && groops.map((val:IGroopsBanner)=>{
 													return (
-														val.category === 'доставка' &&
+														val.category === bannerCategory.delivery &&
 														<div key={val._id}>
 															<hr />
 															<div className="card-footer">
