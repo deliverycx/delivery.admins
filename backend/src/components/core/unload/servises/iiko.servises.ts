@@ -114,7 +114,7 @@ export class IikoRequesterServises {
         );
 				*/
 				
-				const position = [ 34.08837, 44.966058 ]	
+				const position = [ organization.latitude, organization.longitude ]	
 				
 
         const organizationInArray = {
