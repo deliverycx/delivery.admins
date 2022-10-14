@@ -1,10 +1,8 @@
-import { ISocial, ListOrganization } from "@type";
+import { IPoint, ISocial, ListOrganization } from "@type";
 import { ApiSuper, methods, token } from "../AxiosApi";
 
 namespace Req{
-  export type  org = {
-    data:ListOrganization
-  }
+  export type  org = IPoint
   export type  DelivMetod = {
     orgid: string,
     delivmetod:string
@@ -46,6 +44,12 @@ class RequestOrganization extends ApiSuper {
   getAll() {
     return this.request<Req.org>(`/organization/getAll`)
   }
+
+	@methods('get')
+  getCityBu(query:string) {
+    return this.request(`/organization/getcity?cityid=${query}`)
+  }
+
 	@methods('post')
   getBu(idorg:Res.OrgBu) {
     return this.request<Req.org>(`/organization/getorgbu`)

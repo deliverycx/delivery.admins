@@ -23,6 +23,7 @@ export function useDisplayBanner(this: any) {
 	const getAllDisplay = async () =>{
 		try {
 			const {data} = await RequestDisplay.CRUDFabric.getAll()
+			console.log(data);
 			setDisplay(data)
 		} catch (error) {
 			console.log(error);
@@ -129,5 +130,31 @@ export function useDisplayBannerFrom(this: any) {
   })
   this.status({
     
+  })
+}
+
+
+export function useDisplayBannerListItem(this: any,idorganization:string) {
+	const [organization,setOrganization] = useState<any>()
+	const [city,setСity] = useState<any>()
+
+	useEffect(()=>{
+		getOrganization(idorganization)
+	},[idorganization])
+
+	const getOrganization = async (id:string) =>{
+		try {
+			const {data:org}  = await RequestOrganization.getBu({idorganization:id})
+			const {data:citys} = await RequestOrganization.getCityBu(org.city)
+			setOrganization(org)	
+			setСity(citys)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	
+	this.data({
+		organization,
+		city
   })
 }

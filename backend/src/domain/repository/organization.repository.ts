@@ -22,6 +22,11 @@ export class OrganizationRepository {
 
         return result
   }
+
+	async findCity(id:string){
+		return await this.cityModel.findById(id).lean()
+	}
+
   async swtchDelivMetod(orgid:string,metod:string) {
     const result = await this.organizationModel.findOneAndUpdate(
       {

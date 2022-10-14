@@ -1,6 +1,7 @@
 import { IGroopsBanner } from "@type"
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import Modal from "application/components/common/Modal/Modal"
+import { bannerCategory } from "application/contstans/banners.const"
 import { imgRout } from "application/helpers/imgInit"
 import { useGroopsBanner } from "domains/useCase/banners/useCase.GroopsBanner"
 import { useEffect, useState } from "react"
@@ -34,6 +35,45 @@ const GroopsBanner = () =>{
 					{
 								<div className="card card-primary">
 		              <div className="card-header">
+		                <h4 className="card-title">Категория Общая</h4>
+		              </div>
+		              <div className="card-body">
+										<div className="form-group">
+
+											{
+												data && data.map((val:IGroopsBanner)=>{
+													return (
+														val.category === bannerCategory.default &&
+														<div key={val._id} className="card-body">
+															<hr />
+															<div className="card-footer">
+														 		<a className="card-title" href={`/banners/groops/${val._id}`}>{val.name}	</a>
+														 	</div>
+															 <br /> 
+                            	 
+															 	<BannerModal addBanner={addBanner} idgroop={val._id} />
+																
+																
+																<BannerList banners={val.banners} handler={(id) => deleteBanner(id,val._id)}>
+																<div className="banner_delete">
+																	<span className="banner_delete-del">Удалить</span>
+																</div>
+																</BannerList>
+														</div>
+													)
+												})	
+											}
+
+			               </div>
+		              </div>
+		            </div>
+
+						
+					}
+
+					{
+								<div className="card card-primary">
+		              <div className="card-header">
 		                <h4 className="card-title">Категория Меню</h4>
 		              </div>
 		              <div className="card-body">
@@ -42,7 +82,7 @@ const GroopsBanner = () =>{
 											{
 												data && data.map((val:IGroopsBanner)=>{
 													return (
-														val.category === 'меню' &&
+														val.category === bannerCategory.menu &&
 														<div key={val._id} className="card-body">
 															<hr />
 															<div className="card-footer">
@@ -80,7 +120,7 @@ const GroopsBanner = () =>{
 								{
 									data && data.map((val:IGroopsBanner)=>{
 										return (
-											val.category === 'доставка' &&
+											val.category === bannerCategory.delivery &&
 											<div key={val._id} className="card-body">
 												<div className="card-footer">
 													 <a className="card-title" href={`/banners/groops/${val._id}`}>{val.name}	</a>
