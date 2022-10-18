@@ -13,6 +13,7 @@ import { NewsModule } from 'src/components/core/news/module/news.module';
 import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
 import { NestjsFormDataModule } from 'nestjs-form-data';
 import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
+import { OrderModule } from 'src/components/core/orders/module/order.module';
 
 
 
@@ -41,7 +42,8 @@ import { OrganizationModule } from 'src/components/core/organization/module/orga
     OrganizationModule,
 		BannersModule,
 		NewsModule,
-		StocksModule
+		StocksModule,
+		OrderModule
   ],
   
 })

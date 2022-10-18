@@ -83,6 +83,25 @@ const Menu = () =>{
             </ul>
             </a>
 					</li>
+					<li className="nav-item">
+
+					<a href="/banners" className="nav-link">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Заказы
+                <i className="right fas fa-angle-left"></i>
+              </p>
+							<ul className="nav nav-treeview">
+							<li className="nav-item">
+                <a href="/order/orderPayment" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>Оплата картой</p>
+                </a>
+              </li>
+              
+            </ul>
+            </a>
+					</li>
           
         </ul>
       </nav>
