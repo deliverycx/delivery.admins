@@ -29,6 +29,12 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
                           </a>
                           
                       </td>
+											<td>
+                          <a>
+													{order.orderId}
+                          </a>
+                          
+                      </td>
                       <td>
 													<a>
                               {statePaymentItem.organization && statePaymentItem.organization}

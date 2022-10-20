@@ -9,6 +9,10 @@ export enum PaymentStatuses {
 }
 
 export enum  OrderStatus {
-	Unconfirmed = "Обработка заказа"
-	
+	Unconfirmed = "Обработка заказа",
+	placed = "Создали заказ",
+	сooking = "Готовится",
+	in_road = "В пути",
+	completed = "Доставлена",
+	canceled = "Отменен"
 }

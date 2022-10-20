@@ -15,8 +15,20 @@ export class orderPaymentServises extends BaseServises{
 	}
 
 	async returnPamyMent({token,order}){
-		const pay = await this.metodReturnPamyMent(token,order)
-		const statuspay = await this.repeatReturnUntilSuccess(token,pay.id)
+		try {
+			const pay = await this.metodReturnPamyMent(token,order)
+			return this.statusReturnPamyMent(token,order,pay.id)
+		} catch (error) {
+			console.log(error);
+			return {
+				error:'ошибка в возврате'
+			}
+		}
+		
+	}
+
+	async statusReturnPamyMent(token:string,order:any,id:string){
+		const statuspay = await this.repeatReturnUntilSuccess(token,id)
 		if(statuspay.status === 'Success'){
 			await this.Repository.setReturnPayment(order.paymentid,'Return')
 		}else if(statuspay.status === 'Rejected'){
@@ -86,10 +98,10 @@ export class orderPaymentServises extends BaseServises{
 									}, 5000);
 							}
 						}else if(result.status === 'Success'){
-							console.log('tik succ',tik);
+							
 								resolve(result);
 						}
-						
+						console.log('tik succ',tik);
 
 						
 				} catch (e) {

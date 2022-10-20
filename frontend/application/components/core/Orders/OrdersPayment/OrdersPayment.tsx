@@ -57,9 +57,13 @@ const OrdersPayment = () =>{
                       <th >
                           сумма
                       </th>
+											<th >
+                          ид заказа
+                      </th>
                       <th >
                           точка
                       </th>
+											
                       <th className="text-center">
                           статус оплаты
                       </th>

@@ -34,12 +34,16 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
       <div className="card">
         <div className="card-header">
           <h3 className="card-title">ИД оплаты - <strong>{order.paymentid}</strong></h3>
-
+					<br />
+					{
+						statePaymentItem.errors &&
+						<span><strong>ошибка</strong> - {statePaymentItem.errors}</span>
+					}
           <div className="card-tools">
 								<a className="btn btn-sm btn-primary" onClick={refresh} >обновить</a>
 								{
 									PaymentStatuses.Return !== order.paymentStatus &&
-									<a className="btn btn-sm btn-warning" onClick={()=> handlerReturns(order)}>возврат</a>
+									<button className="btn btn-sm btn-warning" disabled={statePaymentItem.retunrs} onClick={()=> handlerReturns(order)}>возврат</button>
 								}
                 
 								<a className="btn btn-danger btn-sm" onClick={()=> onDelet(order._id)}>удалить</a>

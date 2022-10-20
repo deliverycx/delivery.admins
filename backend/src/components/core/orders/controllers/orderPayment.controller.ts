@@ -37,6 +37,15 @@ export class orderPaymentControllers{
 			response.status(400).json({});
 		}
 	}
+
+	@Post('statusReturn')
+	statusreturnPamyMent(
+		@Query() query: orderPaymentDTO,
+		@Body() body:orderPaymentDTO,
+		){
+			return this.Servises.statusReturnPamyMent(body.token,body.order,query.id)
+	}
+
 	@Post('delet')
 	async delete(
 		@Query() query: orderPaymentDTO,

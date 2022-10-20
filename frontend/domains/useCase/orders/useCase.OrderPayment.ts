@@ -79,13 +79,21 @@ export function useOrderPaymentCart(this: any,id:string) {
 	}
 
 	const handlerReturns = async (order:IOrderPayment) =>{
+		
 		try {
 			if(statePaymentItem.token){
+				dispatchPaymentItem({
+					type: ReducerActionType.setReturns,
+					payload: true
+				});
 				const response = await RequestOrderPayment.returnPamyMent({token:statePaymentItem.token,order:order})
-				console.log('возврат',response.data);
-				if(response.status === 200){
-					getBu(id)
+				if(response.data.error){
+					dispatchPaymentItem({
+						type: ReducerActionType.setError,
+						payload: response.data.error
+					});
 				}
+				getBu(id)
 			}
 		} catch (error) {
 			
