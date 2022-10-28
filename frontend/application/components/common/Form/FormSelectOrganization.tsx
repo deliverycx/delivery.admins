@@ -47,7 +47,12 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
     }
 
     return (
-        <div className="form__field__type col-2" onClick={openToggle} ref={ref}>
+			<>
+				{
+					isOpen && <div className="select_overfloy" onClick={openToggle}></div>
+				} 
+        <div className="form__field__type col-2 boxselect" onClick={openToggle} ref={ref}>
+						
             <div className="form__field__valueselect">
                 {
                     selecteds
@@ -85,6 +90,7 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
             </div>
             
         </div>
+				</>	
     )
 }
 export default FormSelectOrganization

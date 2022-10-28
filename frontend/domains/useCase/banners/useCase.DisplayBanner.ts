@@ -79,7 +79,7 @@ export function useDisplayBannerFrom(this: any) {
 
 	const { register, handleSubmit, watch,setValue } = useForm<typeof initState>();
 	const fomrdata = (value:typeof initState) => value
-	const [data,{onSubmit,onDelet,setData,getAll,getBu}] = useFromsCRUD<IDisplayBanner>(fomrdata,RequestDisplay.CRUDFabric,'/banners/display')
+	const [data,{onSubmit,onDelet,setData,getAll,getBu}] = useFromsCRUD<IDisplayBanner>(fomrdata,RequestDisplay.CRUDFabric)
 
 
 	const fetchGroopsBanner = async () => {

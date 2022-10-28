@@ -54,7 +54,7 @@ const Menu = () =>{
           </li>
 					<li className="nav-item">
 
-					<a href="/banners" className="nav-link">
+					<a href="#" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Баннеры
@@ -77,7 +77,7 @@ const Menu = () =>{
               <li className="nav-item">
                 <a href="/banners/display" className="nav-link">
                   <i className="far fa-circle nav-icon"></i>
-                  <p>Отоброжение</p>
+                  <p>Отображение</p>
                 </a>
               </li>
             </ul>

@@ -1,15 +1,27 @@
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
+import { useOrganization } from 'domains/useCase/organization/useCase.Organization';
 import { useOrganizationSetting } from 'domains/useCase/organization/useCase.OrganizationSetting';
 import OrganizationBanner from './viewSetting/OrganizationBanner';
+import OrganizationContlols from './viewSetting/OrganizationContlols';
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
 	const {organization,social,slideId} = useCasePoints.data
 	const {setInput,onSubmit,handleReserveTable} = useCasePoints.handlers
+
+	const useCaseOrg = adapterComponentUseCase(useOrganization,true);
 	
 
 	return(
 		<section className="content">
+			<div className='card'>
+                
+                {
+									organization &&
+									<OrganizationContlols point={organization} handels={useCaseOrg.handlers} />
+								}
+								
+              </div>
       <div className="row">
         <div className="col-md-12">
           <div className="card card-primary">

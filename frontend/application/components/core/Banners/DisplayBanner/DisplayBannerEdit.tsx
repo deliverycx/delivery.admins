@@ -51,8 +51,8 @@ const DisplayBannerEdit = () => {
 													<div key={val._id}>
 															<hr />
 															<div className="card-footer">
-														 		<a className="card-title">{val.name}	</a>
-																<a onClick={()=> deleteBanner(val._id, 'groopbanner')}>Удалить</a>
+														 		<h3 className="card-title">{val.name}	</h3>
+																<div className="col-2 btn btn-danger dispdel" onClick={()=> deleteBanner(val._id, 'groopbanner')}>Удалить</div>
 														 	</div>
 															 
 															 <BannerList banners={val.banners} handler={(id) => {
