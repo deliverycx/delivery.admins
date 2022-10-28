@@ -3,12 +3,16 @@ import { BaseServises } from "src/services/base.services";
 import { orderPaymentRepository } from "../repository/orderPayment.repository";
 import axios, { AxiosInstance } from "axios";
 import { Axios } from "src/application/repository/axios";
+import { BotAxios } from "src/components/common/bot/bot.axios";
 
 @Injectable()
 export class orderPaymentServises extends BaseServises{
 	constructor(
 		@Inject(orderPaymentRepository)
-		private readonly Repository
+		private readonly Repository,
+
+		@Inject(BotAxios)
+		private readonly botAxios
 	) {
 		super(Repository);
 		
@@ -17,7 +21,10 @@ export class orderPaymentServises extends BaseServises{
 	async returnPamyMent({token,order}){
 		try {
 			const pay = await this.metodReturnPamyMent(token,order)
-			return this.statusReturnPamyMent(token,order,pay.id)
+			const result = await this.statusReturnPamyMent(token,order,pay.id)
+
+			await this.botAxios.ReturntPayment(order.paymentparams.orgguid,result)
+			return result
 		} catch (error) {
 			console.log(error);
 			return {
