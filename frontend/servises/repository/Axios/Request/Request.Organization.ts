@@ -34,6 +34,10 @@ namespace Res{
     idorganization: string
 		reservetable:boolean
   }
+	export type worktime = {
+		idorganization: string
+    worktime:string[]
+  }
 }
 
 
@@ -82,6 +86,11 @@ class RequestOrganization extends ApiSuper {
 	@methods('post')
   reserveTable(data:Res.reserve) {
     return this.request(`/organization/reservetable`)
+  }
+
+	@methods('post')
+  organizationTime(data:Res.worktime) {
+    return this.request(`/organization/organizationTime`)
   }
   
   

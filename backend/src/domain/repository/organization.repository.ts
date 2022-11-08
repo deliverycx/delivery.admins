@@ -152,4 +152,21 @@ export class OrganizationRepository {
 		return result
 	}
 
+	async OrganizationTimeMetod(idorganization:string,time:string[]){
+		const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: idorganization
+      },
+      {
+        $set: {
+          workTime: time
+        }
+      },
+      { new: true }
+    )
+		console.log('время точки',result);
+		return result
+	}
+	
+
 }

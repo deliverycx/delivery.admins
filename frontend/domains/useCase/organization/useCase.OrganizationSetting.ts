@@ -77,7 +77,8 @@ export function  useOrganizationSetting(this: any){
   this.handlers({
 		setInput,
 		onSubmit,
-		handleReserveTable
+		handleReserveTable,
+		getOrgBu
   })
   this.status({
     

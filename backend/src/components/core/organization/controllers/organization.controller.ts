@@ -86,5 +86,15 @@ export class OrganizationControllers{
     return result
   }
 
+	@Post('organizationTime')
+	async OrganizationTime(
+		@Body() body: OrganizationDTO,
+		@Query() query: OrganizationDTO
+	){
+		console.log('body time',body);
+		const result = await this.OrganizationServises.organizationTime(body)
+		
+    return result
+	}
 
 }

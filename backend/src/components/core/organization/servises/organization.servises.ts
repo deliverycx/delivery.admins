@@ -35,5 +35,7 @@ export class OrganizationServises{
 		return this.OrganizationRepository.reservetableMetod(idorganization,reservetable)
 	}
 	
-
+	organizationTime({idorganization,worktime}){
+		return this.OrganizationRepository.OrganizationTimeMetod(idorganization,worktime)
+	}
 }

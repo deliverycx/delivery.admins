@@ -21,4 +21,6 @@ export default class OrganizationDTO {
 	@IsOptional()
 	reservetable:boolean
 
+	@IsOptional()
+	worktime:string[]
 }
