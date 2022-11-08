@@ -18,7 +18,7 @@ const OrganizationWorkTime:FC<{organization:any,refresh:any}> = ({organization,r
 		} catch (error) {
 			
 		}
-	},1500)
+	},200)
 
 	
 
