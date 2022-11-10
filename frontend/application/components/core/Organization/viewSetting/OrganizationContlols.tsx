@@ -18,6 +18,10 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
                       'btn-success':
                         (point.delivMetod === CART_CHOICE.NODELIVERY),
                     });
+										const CNdelivMetodOPEN = cn('col-2 btn btn-block', {
+                      'btn-success':
+                        (point.delivMetod === CART_CHOICE.OPEN),
+                    });
 	const CNhiddenMetod = cn('col-2 btn btn-block', { 'btn-success': point.isHidden });									
 	return (
 		<div className='card-body'>
@@ -40,6 +44,12 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
                                        point.id,
                                        point.delivMetod === CART_CHOICE.NODELIVERY ? null : CART_CHOICE.NODELIVERY)}
                                 >Только просмотр
+                                </div>
+																<div className={CNdelivMetodOPEN}
+                                     onClick={() => handlePuckUp(
+                                       point.id,
+                                       point.delivMetod === CART_CHOICE.OPEN ? null : CART_CHOICE.OPEN)}
+                                >Открытие
                                 </div>
 													</div>						
                         </div>
