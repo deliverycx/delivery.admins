@@ -113,7 +113,7 @@ export class IikoRequesterServises {
 											latitude
 										},
                     phone,
-                   
+										workTime
                 }
             },
             { upsert: true, new: true }
