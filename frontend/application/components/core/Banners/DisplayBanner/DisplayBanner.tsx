@@ -26,7 +26,7 @@ const DisplayBanner = () =>{
 			</DisplayContext.Provider>
 			{
 				display &&
-				<DisplayBannerAdd organizations={display} />
+				<DisplayBannerAdd/>
 			}
 			
 			

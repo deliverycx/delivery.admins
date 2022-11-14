@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { IDisplayBanner } from "@type";
 import { useEffect } from 'react';
 
-const DisplayBannerAdd:FC<{organizations:IDisplayBanner[]}> = ({organizations}) =>{
+const DisplayBannerAdd= () =>{
 	const router = useRouter()
 	const [orgid,setOrgid] = useState<string>()
 	const [status,setStatus] = useState<boolean>(false)
@@ -38,7 +38,7 @@ const DisplayBannerAdd:FC<{organizations:IDisplayBanner[]}> = ({organizations}) 
               </div>
             </div>
 						<div className="card-body">
-						<FormSelectOrganization selected="all" orglist={organizations}  setter={setOrgid} />		
+						<FormSelectOrganization selected="all"  setter={setOrgid} />		
 						
 						<button onClick={()=> handlSelectOrg()} className="btn btn-success float-left">Добавить</button>	
 						{
