@@ -24,7 +24,11 @@ const DisplayBanner = () =>{
 			<DisplayContext.Provider value={useCaseDisplay}>
 				<DisplayBannerFilter />
 			</DisplayContext.Provider>
-			<DisplayBannerAdd />
+			{
+				display &&
+				<DisplayBannerAdd organizations={display} />
+			}
+			
 			
 			<div className="card card-primary">
 		              <div className="card-header">
