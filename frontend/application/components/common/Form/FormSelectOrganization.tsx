@@ -1,12 +1,14 @@
 import { FC, RefObject, useEffect, useRef, useState } from "react"
 import cn from "classnames";
 import { RequestOrganization } from "servises/repository/Axios/Request";
+import { IDisplayBanner } from "@type";
 
 type IProps ={
   setter: (id:string) => void
-	selected?: string
+	selected?: string,
+	orglist?:IDisplayBanner[]
 }
-const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
+const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter,orglist }) => {
 	const [organizations, setOrganizations] = useState<any>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selecteds, setSelecteds] = useState<string>('');
@@ -21,7 +23,9 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
 			setSelecteds('Выбрать точку')
 		}else{
 			organizations &&
-			organizations.map((val:any) => val.organizations.map((org:any) => selected === org.id && setSelecteds(org.address.street)))
+			organizations.map((val:any) => val.organizations.map((org:any) => {
+				selected === org.id && setSelecteds(org.address.street)
+			}))
 		}
 		
 	},[selected,organizations])
@@ -46,6 +50,8 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
         openToggle();
     }
 
+		
+
     return (
 			<>
 				{
@@ -62,7 +68,7 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
 								
                 {
 										organizations &&
-                    organizations.map((option:any) => {
+										organizations.map((option:any) => {
 
 
                         
@@ -71,15 +77,20 @@ const FormSelectOrganization:FC<IProps> = ({selected = 'all', setter }) => {
 						
 														<option disabled>{option.name}</option>
 														{
-															option.organizations.map((org:any)=>{
+															option.organizations
+															
+															.map((org:any,index:number)=>{
 																 const CN = cn("form__field__values__item", {active: selected === org.id})
-																return <div
-																	className={CN}
-																	key={org.id} 
-																	onClick={()=> valueClickHandler(org.id,org.address.street)} 
+																 return <div
+																	 className={CN}
+																	 key={org.id} 
+																	 onClick={()=> valueClickHandler(org.id,org.address.street)} 
+																	 
+																	 >- {org.address.street}
+																	 
+																	 </div>
 																	
-																	>- {org.address.street}</div>
-															})
+																})
 														}
 														
 													</>
