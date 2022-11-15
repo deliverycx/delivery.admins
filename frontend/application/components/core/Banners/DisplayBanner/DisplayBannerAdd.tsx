@@ -7,16 +7,27 @@ import { useRouter } from "next/router";
 import { IDisplayBanner } from "@type";
 import { useEffect } from 'react';
 
-const DisplayBannerAdd= () =>{
+const DisplayBannerAdd:FC<{organizations:IDisplayBanner[]}> = ({organizations}) =>{
 	const router = useRouter()
 	const [orgid,setOrgid] = useState<string>()
 	const [status,setStatus] = useState<boolean>(false)
 
 	const handlSelectOrg = async () =>{
 		try {
-			
-			await RequestDisplay.CRUDFabric.create({organization:orgid})
-			router.reload()
+			let dable = false
+			organizations.map((val)=>{
+				if(val.organization){
+					if(val.organization === orgid){
+						dable = true
+						setStatus(true)
+					}
+				}
+			})
+
+			if(!dable){
+				await RequestDisplay.CRUDFabric.create({organization:orgid})
+				router.reload()
+			}
 
 		} catch (error) {
 			console.log(error);
@@ -38,7 +49,7 @@ const DisplayBannerAdd= () =>{
               </div>
             </div>
 						<div className="card-body">
-						<FormSelectOrganization selected="all"  setter={setOrgid} />		
+						<FormSelectOrganization selected="all" orglist={organizations}  setter={setOrgid} />		
 						
 						<button onClick={()=> handlSelectOrg()} className="btn btn-success float-left">Добавить</button>	
 						{
