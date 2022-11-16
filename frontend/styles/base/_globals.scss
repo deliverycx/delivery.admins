@@ -41,6 +41,24 @@ a {
 	.organization_control{
 		flex-wrap: wrap;
 	}
+	.main-sidebar{
+		width: 100%;
+		margin-left: 0 !important;
+	}
+	.mainbanner .main-banner-small{
+		width: 40% !important;
+	}
+	.filtersdisplay{
+		.col-3{
+			width: 100% !important;
+			max-width: 100% !important;
+			flex: 0 0 100% !important;
+		}
+	}
+	.boxselect{
+		width: 100% !important;
+		max-width: 100% !important;
+	}
 }
 
 * {

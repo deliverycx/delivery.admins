@@ -14,11 +14,14 @@ const OrganizationList = () => {
   const { organizations } = useCasePoints.data;
   const { handlePuckUp, handleHiddenOrg, handleHiddenCity } = useCasePoints.handlers;
 
+	let sortedCities;
+	if (organizations) sortedCities = organizations.slice().sort((a: { name: string; }, b: { name: string; }) => a.name > b.name ? 1 : -1);
+
   return (
     <>
       {
-        organizations &&
-        organizations.map((org: ListOrganization, index: number) => {
+        sortedCities &&
+        sortedCities.map((org: ListOrganization, index: number) => {
           if (org) {
             const CNCity = cn('col-2 btn btn-block', { 'btn-success': org.isHidden });
             return (

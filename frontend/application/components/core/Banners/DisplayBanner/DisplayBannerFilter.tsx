@@ -18,7 +18,7 @@ const DisplayBannerFilter = () => {
 				<h4 className="card-title">Фильтр</h4>
 			</div>
 			<div className="card-body">
-				<div className="form-group">
+				<div className="form-group filtersdisplay">
 					<div className="row">
 					<div className="col-3">
 							<h3>Общая</h3>	
