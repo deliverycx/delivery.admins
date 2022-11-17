@@ -3,7 +3,8 @@ import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { useOrganization } from 'domains/useCase/organization/useCase.Organization';
 import cn from 'classnames';
 import { CART_CHOICE } from 'application/contstans/cart.const';
-import OrganizationContlols from './viewSetting/OrganizationContlols';
+import OrganizationContlols from './OrganizationSetting/OrganizationContlols';
+
 
 type IProps = {
   orgs: ListOrganization[]
