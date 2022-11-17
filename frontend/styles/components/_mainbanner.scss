@@ -95,3 +95,37 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.succses_save{
+	width: 100%;
+	text-align: center;
+	background-color: #2ecc71;
+	color: #fff;
+	padding: 10px;
+	margin: 15px 0;
+}
+
+.modal_delite{
+	position: fixed;
+	display: flex;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba($color: #000000, $alpha: 0.5);
+	z-index: 999;
+	.modal_delite__box{
+		background-color: #fff;
+		padding: 20px;
+		width: 350px;
+		.btn{
+			margin-right: 10px;
+		}
+	}
+}
+.content{
+	position: relative;
+}

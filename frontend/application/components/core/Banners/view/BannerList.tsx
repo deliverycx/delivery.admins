@@ -16,7 +16,6 @@ const BannerList:FC<IProps> = ({banners,handler,children}) => {
 	  margin: `0 ${grid}px 0 0`,
 	  background: '#f0f0f0',
 	});
-	console.log('banners',banners);
 
 	return (
 		<div className="card-body">

@@ -9,6 +9,9 @@ export class OrganizationServises{
   getAllOrganization() {
     return this.OrganizationRepository.getAllOrganization()
   }
+	getSityBu({cityid}){
+		return this.OrganizationRepository.findCity(cityid)
+	}
 	getBuOrganization({idorganization}) {
     return this.OrganizationRepository.getBuOrganization(idorganization)
   }
@@ -32,5 +35,7 @@ export class OrganizationServises{
 		return this.OrganizationRepository.reservetableMetod(idorganization,reservetable)
 	}
 	
-
+	organizationTime({idorganization,worktime}){
+		return this.OrganizationRepository.OrganizationTimeMetod(idorganization,worktime)
+	}
 }

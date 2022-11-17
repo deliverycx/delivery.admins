@@ -16,7 +16,7 @@ const Modal:FC<IProps> = ({setter,children}) =>{
 						<div className="col-md-8 modales">
 						<div className="card card-warning">
 							<div className="card-header">
-								<h3 className="card-title">Removable</h3>
+								
 
 								<div className="card-tools">
 									<button type="button" className="btn btn-tool" data-card-widget="remove" onClick={()=> setter(false)}>

@@ -1,4 +1,6 @@
 import { IDisplayBanner } from "@type"
+import { adapterComponentUseCase } from "adapters/adapterComponents"
+import { useDisplayBannerListItem } from "domains/useCase/banners/useCase.DisplayBanner"
 import { FC, useEffect, useState } from "react"
 import { RequestOrganization } from "servises/repository/Axios/Request"
 
@@ -8,27 +10,15 @@ type IProps = {
 }
 
 const DisplayBannerItem: FC<IProps> = ({ idorganization,idpage }) => {
-	const [organization,setOrganization] = useState<any>()
-
-	useEffect(()=>{
-		getOrganization(idorganization)
-	},[idorganization])
-
-	const getOrganization = async (id:string) =>{
-		try {
-			const {data}  = await RequestOrganization.getBu({idorganization:id})
-			setOrganization(data)	
-		} catch (error) {
-			console.log(error);
-		}
-	}
+	const useCase = adapterComponentUseCase(useDisplayBannerListItem,idorganization)
+	const {organization,city} = useCase.data
 
 	return (
 			<>
 			{
-				organization &&
+				organization && city && 
 				<div className="card-footer">
-						<a className="card-title" href={`/banners/display/${idpage}`}>{organization.address.street}</a>
+						<a className="card-title" href={`/banners/display/${idpage}`}>{organization.address.street} - <strong>({city.name})</strong> </a>
 				</div>
 			}
 			</>

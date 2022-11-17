@@ -2,10 +2,12 @@ import { CART_CHOICE } from "application/contstans/cart.const"
 import { useState, useEffect } from 'react';
 import { ListOrganization } from "@type";
 import { RequestOrganization } from "servises/repository/Axios/Request";
+import { useRouter } from 'next/router';
 
 
-export function useOrganization(this: any) {
+export function useOrganization(this: any,reset:boolean = false) {
   const [organizations, setOrganizations] = useState<any>()
+	const router = useRouter()
 
   const fetchOrg = async () => {
     try {
@@ -23,6 +25,7 @@ export function useOrganization(this: any) {
   const handleAllOrg = async () => {
     const {data} = await RequestOrganization.getAll()
     setOrganizations(data)
+		reset && router.reload()
   }
   
   const handlePuckUp = async (idorganization: string, metod: string | null) => {

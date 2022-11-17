@@ -23,6 +23,7 @@ export function useDisplayBanner(this: any) {
 	const getAllDisplay = async () =>{
 		try {
 			const {data} = await RequestDisplay.CRUDFabric.getAll()
+			console.log(data);
 			setDisplay(data)
 		} catch (error) {
 			console.log(error);
@@ -66,11 +67,23 @@ export function useDisplayBannerFrom(this: any) {
 
 	const [organizations,setOrganizations] = useState<any>()
 	const [groops,setGroops] = useState<IGroopsBanner>()
+	const [status,setStatus] = useState(false)
+	const [delite,setDelite] = useState(false)
 
 
 	useEffect(()=>{
 		fetchGroopsBanner()
 	},[pageid])
+
+	useEffect(()=>{
+		let timer:ReturnType<typeof setTimeout>
+		if(status){
+			timer = setTimeout(()=>{
+				setStatus(false)
+			},3000)
+		}
+		return () => clearTimeout(timer)
+	},[status])
 
 	const initState = {
 		organization:''
@@ -78,7 +91,7 @@ export function useDisplayBannerFrom(this: any) {
 
 	const { register, handleSubmit, watch,setValue } = useForm<typeof initState>();
 	const fomrdata = (value:typeof initState) => value
-	const [data,{onSubmit,onDelet,setData,getAll,getBu}] = useFromsCRUD<IDisplayBanner>(fomrdata,RequestDisplay.CRUDFabric,'/banners/display')
+	const [data,{setData,getAll,getBu}] = useFromsCRUD<IDisplayBanner>(fomrdata,RequestDisplay.CRUDFabric)
 
 
 	const fetchGroopsBanner = async () => {
@@ -111,6 +124,26 @@ export function useDisplayBannerFrom(this: any) {
 		}
 	}
 
+	const onSubmit = async (data:any) => {
+    try {
+			pageid
+					? await RequestDisplay.CRUDFabric.create(fomrdata(data))
+					: await RequestDisplay.CRUDFabric.edit(fomrdata(data),pageid)
+			setStatus(true)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+	const onDelet = async (id:string) => {
+    try {
+      await RequestDisplay.CRUDFabric.delet(id)
+			router.push('/banners/display/')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 	this.data({
 		organizations,
 		data,
@@ -125,9 +158,38 @@ export function useDisplayBannerFrom(this: any) {
 		router,
 		onDelet,
 		addBuField,
-		deleteBanner
+		deleteBanner,
+		setStatus,
+		setDelite
   })
   this.status({
-    
+    status,
+		delite
+  })
+}
+
+
+export function useDisplayBannerListItem(this: any,idorganization:string) {
+	const [organization,setOrganization] = useState<any>()
+	const [city,setСity] = useState<any>()
+
+	useEffect(()=>{
+		getOrganization(idorganization)
+	},[idorganization])
+
+	const getOrganization = async (id:string) =>{
+		try {
+			const {data:org}  = await RequestOrganization.getBu({idorganization:id})
+			const {data:citys} = await RequestOrganization.getCityBu(org.city)
+			setOrganization(org)	
+			setСity(citys)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	
+	this.data({
+		organization,
+		city
   })
 }

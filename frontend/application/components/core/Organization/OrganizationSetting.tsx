@@ -1,16 +1,32 @@
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
+import { useOrganization } from 'domains/useCase/organization/useCase.Organization';
 import { useOrganizationSetting } from 'domains/useCase/organization/useCase.OrganizationSetting';
+
 import OrganizationPayment from './OrganizationPayment/OrganizationPayment';
+import OrganizationContlols from './OrganizationSetting/OrganizationContlols';
 import OrganizationSettingFrom from './OrganizationSetting/OrganizationInfo';
+import OrganizationWorkTime from './OrganizationSetting/OrganizationWorkTime';
+
+
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
 	const {organization,social,slideId} = useCasePoints.data
-	const {setInput,onSubmit,handleReserveTable} = useCasePoints.handlers
+	const {setInput,onSubmit,handleReserveTable,getOrgBu} = useCasePoints.handlers
+
+	const useCaseOrg = adapterComponentUseCase(useOrganization,true);
 	
 
 	return(
 		<section className="content">
+			<div className='card'>
+                
+                {
+									organization &&
+									<OrganizationContlols point={organization} handels={useCaseOrg.handlers} />
+								}
+								
+              </div>
       <div className="row">
         <div className="col-md-12">
           <div className="card card-primary">
@@ -30,6 +46,20 @@ const OrganizationSetting = () =>{
 
           </div>
 
+					<div className="card card-primary">
+            <div className="card-header">
+              <h3 className="card-title">Время работы</h3>
+            </div>
+            <div className="card-body">
+							{
+								organization &&
+								<OrganizationWorkTime organization={organization} refresh={getOrgBu} />
+							}
+							
+              
+            </div>
+
+          </div>			
 
 					<div className="card card-primary">
             <div className="card-header">

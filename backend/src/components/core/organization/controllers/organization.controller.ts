@@ -18,6 +18,13 @@ export class OrganizationControllers{
     const result = this.OrganizationServises.getAllOrganization()
     return result
   }
+
+	@Get('getcity')
+  getCity(@Query() query: OrganizationDTO) {
+    const result = this.OrganizationServises.getSityBu(query)
+    return result
+  }
+
 	@Post('getorgbu')
   getOrganizationBu(@Body() body:OrganizationDTO) {
     const result = this.OrganizationServises.getBuOrganization(body)
@@ -79,5 +86,15 @@ export class OrganizationControllers{
     return result
   }
 
+	@Post('organizationTime')
+	async OrganizationTime(
+		@Body() body: OrganizationDTO,
+		@Query() query: OrganizationDTO
+	){
+		console.log('body time',body);
+		const result = await this.OrganizationServises.organizationTime(body)
+		
+    return result
+	}
 
 }

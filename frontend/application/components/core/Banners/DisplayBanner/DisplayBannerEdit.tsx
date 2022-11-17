@@ -11,7 +11,8 @@ import { IGroopsBanner } from "@type"
 const DisplayBannerEdit = () => {
 	const useCasePoints = adapterComponentUseCase(useDisplayBannerFrom)
 	const { pageid, data, groops } = useCasePoints.data
-	const { handleSubmit, onSubmit, router, onDelet, handlSelectOrg, addBuField, deleteBanner } = useCasePoints.handlers
+	const { handleSubmit, onSubmit, router, onDelet, handlSelectOrg, addBuField, deleteBanner,setDelite } = useCasePoints.handlers
+	const {status,delite} = useCasePoints.status
 
 	const [modalBanner,setModalBanner] = useState(false)
 	
@@ -19,6 +20,19 @@ const DisplayBannerEdit = () => {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<section className="content">
+			{
+				delite &&
+				<div className="modal_delite">
+					<div className="modal_delite__box">
+						<h4>Вы точно хотите удалить</h4>
+						<div className="modal_delite_but">
+							<button className="btn btn-success" onClick={() => onDelet(pageid)}>да</button>
+							<button className="btn btn-secondary" onClick={()=> setDelite(false)}>нет</button>
+						</div>
+					</div>
+				</div>
+			}
+			
 				<div className="row">
 					<div className="col-md-12">
 						<div className="card card-primary">
@@ -51,8 +65,8 @@ const DisplayBannerEdit = () => {
 													<div key={val._id}>
 															<hr />
 															<div className="card-footer">
-														 		<a className="card-title">{val.name}	</a>
-																<a onClick={()=> deleteBanner(val._id, 'groopbanner')}>Удалить</a>
+														 		<h3 className="card-title">{val.name}	</h3>
+																<div className="col-2 btn btn-danger dispdel" onClick={()=> deleteBanner(val._id, 'groopbanner')}>Удалить</div>
 														 	</div>
 															 
 															 <BannerList banners={val.banners} handler={(id) => {
@@ -92,19 +106,25 @@ const DisplayBannerEdit = () => {
 					</div>
 
 				</div>
+				{
+					status &&
+					<div className="succses_save">Сохранено!!!</div>
+				}
 				<div className="row">
 					<div className="col-12">
-						<a onClick={router.back} className="btn btn-secondary">Cancel</a>
+						
+						<a onClick={router.back} className="btn btn-secondary">Назад</a>
 
 						<input type="submit" value="Сохранить" className="btn btn-success float-right" />
 						{
 							pageid &&
-							<a className="btn btn-secondary float-right" onClick={() => onDelet(pageid)}>Удалить</a>
+							<a className="btn btn-secondary float-right" onClick={() => setDelite(true)}>Удалить</a>
 						}
 
 					</div>
 
 				</div>
+				
 			</section>
 		</form>
 	)

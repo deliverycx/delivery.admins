@@ -22,6 +22,11 @@ export class OrganizationRepository {
 
         return result
   }
+
+	async findCity(id:string){
+		return await this.cityModel.findById(id).lean()
+	}
+
   async swtchDelivMetod(orgid:string,metod:string) {
     const result = await this.organizationModel.findOneAndUpdate(
       {
@@ -97,6 +102,25 @@ export class OrganizationRepository {
     
     return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
+	async OpenOrgMetod(orgid: string, metod: boolean) {
+		console.log(orgid,metod);
+    const result = await this.cityModel.findOneAndUpdate(
+      {
+        _id: orgid
+      },
+      {
+        $set: {
+          isHidden: metod
+        }
+      },
+      { new: true }
+    )
+		console.log('res',result);
+    
+    return organizationEntities.hiddenMetod(result._id,result.isHidden)
+  }
+
+
 	async socialMetod(idorganization:string,social:[]){
 		
 		const result = await this.socialModel.findOneAndUpdate(
@@ -147,6 +171,7 @@ export class OrganizationRepository {
 		return result
 	}
 
+
 	async settingOrgMetod(idorganization:string,setting){
 		const result = await this.organizationModel.findOneAndUpdate(
       {
@@ -155,12 +180,32 @@ export class OrganizationRepository {
       {
         $set: {
           phone: setting.phone
+
+        }
+      },
+      { new: true }
+    )
+		return result
+	}		
+
+	async OrganizationTimeMetod(idorganization:string,time:string[]){
+
+		const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: idorganization
+      },
+      {
+        $set: {
+          workTime: time
+
         }
       },
       { new: true }
     )
 
+		console.log('время точки',result);
 		return result
 	}
+
 
 }

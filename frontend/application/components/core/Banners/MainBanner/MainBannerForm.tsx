@@ -85,9 +85,9 @@ const MainBannerForm = () => {
           </div>
         </div>
         <div className='row'>
-          <div className='col-12 buttons-container'>
-            <a onClick={router.back} className='cancel-btn'>Отменить добавление</a>
-            <input type='submit' value='Добавить баннер' className='add-btn' />
+          <div className='col-12'>
+            <a onClick={router.back} className='btn btn-secondary'>Отменить добавление</a>
+            <input type='submit' value='Добавить баннер' className='btn btn-success float-right' />
             {
               slideId &&
               <a className='btn btn-secondary float-right' onClick={() => onDelet(slideId)}>Удалить</a>

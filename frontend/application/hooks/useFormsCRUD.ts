@@ -14,7 +14,9 @@ type handler<T> = {
 
 export const useFromsCRUD = 
 	<T>
-	(fomrdata:Tfomrdata,request:CRUDFabric,rout:string | any,id?:string | any,filee?:Tfile) 
+
+	(fomrdata:Tfomrdata,request:CRUDFabric,rout?:string | any,id?:string | any,filee?:Tfile) 
+
 	: [T | undefined,handler<T>] =>{
 	const router = useRouter()
 	const pageid = 
@@ -49,12 +51,9 @@ export const useFromsCRUD =
 					: await request.edit(fomrdata(data),pageid)
 			}
       
-			if(typeof rout !== 'string'){
-				//rout()
-			}else{
-				//router.push(rout)
-			}
-			
+
+			rout && router.push(rout)
+
     } catch (error) {
       console.log(error);
     }
@@ -81,11 +80,9 @@ export const useFromsCRUD =
 	const onDelet = async (id:string) => {
     try {
       await request.delet(id)
-			if(typeof rout !== 'string'){
-				rout()
-			}else{
-				router.push(rout)
-			}
+
+			rout && router.push(rout)
+
     } catch (error) {
       console.log(error);
     }

@@ -2,8 +2,11 @@ import { isBoolean, IsOptional, IsString } from 'class-validator';
 
 export default class OrganizationDTO {
 
+	@IsOptional()
   @IsString()
   idorganization: string
+	cityid:string
+
 
   @IsOptional()
   @IsString()
@@ -18,4 +21,6 @@ export default class OrganizationDTO {
 	@IsOptional()
 	reservetable:boolean
 
+	@IsOptional()
+	worktime:string[]
 }
