@@ -173,13 +173,19 @@ export class OrganizationRepository {
 
 
 	async settingOrgMetod(idorganization:string,setting){
+		console.log(setting);
 		const result = await this.organizationModel.findOneAndUpdate(
       {
         id: idorganization
       },
       {
         $set: {
-          phone: setting.phone
+          phone: setting.phone,
+					address:{
+						street:setting.adress,
+						longitude:setting.longitude,
+						latitude:setting.latitude
+					}
 
         }
       },

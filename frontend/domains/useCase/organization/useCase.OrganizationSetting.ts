@@ -90,7 +90,10 @@ export function  useOrganizationSetting(this: any){
 export function  useOrganizationSettingFrom(this: any,organization:IOrganization){
 
 	const initialValues = {
-		phone:organization.phone
+		phone:organization.phone,
+		adress:organization.address.street,
+		longitude:organization.address.longitude,
+		latitude:organization.address.latitude
 	}
 
 	const handlerOrgSetting = async (values:typeof initialValues) =>{

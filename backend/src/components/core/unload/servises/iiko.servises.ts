@@ -167,16 +167,15 @@ export class IikoRequesterServises {
                     id: guid,
                     city: cityId,
 										cyid:cityguid,
-										isHidden:true
-                },
-                $set: {
+										isHidden:true,
 										address: {
 											street,
 											longitude,
 											latitude
 										},
                     phone,
-                }
+                },
+								
             },
             { upsert: true, new: true }
           );

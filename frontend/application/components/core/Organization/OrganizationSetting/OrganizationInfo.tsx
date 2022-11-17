@@ -24,6 +24,43 @@ const OrganizationInfo:FC<IProps> = ({organization}) =>{
 						
 						<div className="form-group">
 							<div className="popBox_item col-3"> 
+			            <label className="form-label">Адресс</label>
+			            <input type="text"className="form-control"
+									name="adress"
+									placeholder="Адресс"
+									value={formik.values.adress}
+									onChange={formik.handleChange}
+									/>
+			        </div>
+						</div>
+						<div className="form-group">
+							<div className="popBox_item col-6"> 
+			            <label className="form-label">Кординаты</label>
+									<div className="row">
+										<div className="col-3">
+										<input type="text"className="form-control"
+											name="longitude"
+											placeholder="longitude"
+											value={formik.values.longitude}
+											onChange={formik.handleChange}
+											/>
+										</div>
+										<div className="col-3">
+											<input type="text"className="form-control"
+												name="latitude"
+												placeholder="latitude"
+												value={formik.values.latitude}
+												onChange={formik.handleChange}
+											/>
+										
+										</div>
+									
+									</div>
+			            
+			        </div>
+						</div>
+						<div className="form-group">
+							<div className="popBox_item col-3"> 
 			            <label className="form-label">Телефон</label>
 			            <input type="text"className="form-control"
 									name="phone"
