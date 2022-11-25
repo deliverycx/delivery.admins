@@ -3,7 +3,7 @@ import { connection } from "src/database/mongodbModel/config.mongodb";
 import { JwtAuthGuard } from "src/guard/jwt.guard";
 import { OrganizationServises } from '../servises/organization.servises'
 import { Response } from "express";
-import OrganizationDTO from "../dto/organization.dto";
+import OrganizationDTO, { CityDTO } from "../dto/organization.dto";
 
 //@UseGuards(JwtAuthGuard)
 @Controller('organization')
@@ -93,6 +93,27 @@ export class OrganizationControllers{
 	){
 		console.log('body time',body);
 		const result = await this.OrganizationServises.organizationTime(body)
+		
+    return result
+	}
+
+
+	@Post('cityadd')
+	async CityAdd(
+		@Body() body: CityDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.addCity(body)
+		
+    return result
+	}
+
+	@Post('organizationAdd')
+	async organizationAdd(
+		@Body() body: OrganizationDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.organizationAdd(body)
 		
     return result
 	}

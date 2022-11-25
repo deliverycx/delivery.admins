@@ -24,3 +24,8 @@ export default class OrganizationDTO {
 	@IsOptional()
 	worktime:string[]
 }
+
+export class CityDTO{
+	@IsString()
+	name:string
+}

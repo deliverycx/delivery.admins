@@ -93,6 +93,15 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/organizationTime`)
   }
   
+	@methods('post')
+  organizationAdd(data:any) {
+    return this.request(`/organization/organizationAdd`)
+  }
+
+	@methods('post')
+  CityAdd(data:any) {
+    return this.request(`/organization/cityadd`)
+  }
   
 }
 export default new RequestOrganization()

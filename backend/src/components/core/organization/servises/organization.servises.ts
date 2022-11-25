@@ -38,4 +38,12 @@ export class OrganizationServises{
 	organizationTime({idorganization,worktime}){
 		return this.OrganizationRepository.OrganizationTimeMetod(idorganization,worktime)
 	}
+
+	addCity(city: any){
+		return this.OrganizationRepository.addCityMetod(city)
+	}
+
+	organizationAdd(org: any){
+		return this.OrganizationRepository.addOrganizationMetod(org)
+	}
 }

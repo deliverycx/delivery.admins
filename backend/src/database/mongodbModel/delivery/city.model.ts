@@ -13,16 +13,14 @@ import { Types } from "mongoose";
     schemaOptions: { collection: 'cities',versionKey: false, timestamps: true }
 })
 export class CityClass {
-    @prop({ type: mongoose.Types.ObjectId })
-    public _id!: Types.ObjectId;
-
+    
     @prop()
     public name!: string;
 
     @prop({ ref: "Organization" })
-    public organizations!: Ref<OrganizationClass>[];
+    public organizations: Ref<OrganizationClass>[];
 
-		@prop({ type: () => Boolean,default:false })
+		@prop({ type: () => Boolean,default:true }) 
     isHidden:boolean
 }
 
