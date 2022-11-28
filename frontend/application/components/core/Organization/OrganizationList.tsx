@@ -20,12 +20,8 @@ const OrganizationList = () => {
   return (
     <>
 			<div className='row'>
-				<div className='card'>
-				<div className='card-header'>
 					<a href="/organization/cityadd" className="col-2 btn btn-block btn-outline-primary">Добавить город</a>
 					<a href="/organization/add" className="col-2 btn btn-block btn-outline-primary">Добавить точку</a>
-				</div>
-				</div>
 			</div>
 			
       {
