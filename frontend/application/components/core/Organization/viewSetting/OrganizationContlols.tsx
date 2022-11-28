@@ -26,7 +26,10 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
 	return (
 		<div className='card-body'>
                         <div className='card-footer'>
-                          <a className='card-title title_org' href={`/organization/${point.id}`}>{point.address.street}</a>
+                          <a className='card-title title_org' href={`/organization/${point.id}`}>
+														{point.address.street}
+														<span>{point.delivMetod === CART_CHOICE.NOWORK && 'Онлайн заказ не доступен'}</span>
+													</a>
                           
                           
 													<div className="organization_control" >
