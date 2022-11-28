@@ -77,6 +77,7 @@ export function useCityAdd(this: any) {
     try {
 			console.log(org);
 			const {data} = await RequestOrganization.CityAdd(org) 
+			router.push('/organization/')
     } catch (error) {
       console.log(error);
     }
@@ -139,6 +140,7 @@ export function useOrganizationAdd(this: any) {
 				isHidden:true
 			}
 			const {data} = await RequestOrganization.organizationAdd(body) 
+			router.push('/organization/')
     } catch (error) {
       console.log(error);
     }
