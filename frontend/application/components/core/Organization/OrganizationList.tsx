@@ -19,6 +19,11 @@ const OrganizationList = () => {
 
   return (
     <>
+			<div className='row'>
+				<a href="/organization/cityadd" className="col-2 btn btn-bloc">Добавить город</a>
+				<a href="/organization/add" className="col-2 btn btn-bloc">Добавить точку</a>
+			</div>
+			
       {
         sortedCities &&
         sortedCities.map((org: ListOrganization, index: number) => {

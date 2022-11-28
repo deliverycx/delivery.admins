@@ -17,8 +17,6 @@ const Organization: NextPage = () => {
       <Header />
       <Menu />
       <Container>
-				<a href="/organization/cityadd" className="btn">Добавить город</a>
-				<a href="/organization/add" className="btn">Добавить точку</a>
         <OrganizationList />
       </Container>
     </div>
