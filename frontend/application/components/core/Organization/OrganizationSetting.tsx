@@ -11,7 +11,6 @@ const OrganizationSetting = () =>{
 	const {setInput,onSubmit,handleReserveTable,getOrgBu} = useCasePoints.handlers
 
 	const useCaseOrg = adapterComponentUseCase(useOrganization,true);
-	
 
 	return(
 		<section className="content">

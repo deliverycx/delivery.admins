@@ -133,6 +133,7 @@ export function useOrganizationAdd(this: any) {
 					longitude:org.longitude,
 					latitude:org.latitude
 				},
+				id:Math.random(),
 				city:org.city,
 				phone:org.phone,
 				workTime:'10:00-22:00',
