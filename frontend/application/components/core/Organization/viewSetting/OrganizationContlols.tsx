@@ -28,7 +28,7 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
                         <div className='card-footer'>
                           <a className='card-title title_org' href={`/organization/${point.id}`}>
 														{point.address.street}
-														<small>  - {point.delivMetod === CART_CHOICE.NOWORK && 'Онлайн заказ не доступен'}</small>
+														<small>  - {point.delivMetod === CART_CHOICE.NOWORK && 'Онлайн-заказ не доступен'}</small>
 													</a>
                           
                           

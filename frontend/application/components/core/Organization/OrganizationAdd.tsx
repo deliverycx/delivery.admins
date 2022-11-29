@@ -30,7 +30,7 @@ const OrganizationAdd = () =>{
 									}
 								</div>
                 <div className='popBox_item'>
-                  <label className='form-label'>Адресс</label>
+                  <label className='form-label'>Адрес</label>
                   <input type='text' {...register('street')} name='street' className='form-control' />
                 </div>
 								<div className="row">
