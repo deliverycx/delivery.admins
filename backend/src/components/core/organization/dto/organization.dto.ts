@@ -4,6 +4,7 @@ export default class OrganizationDTO {
 
 	@IsOptional()
   @IsString()
+	id:string
   idorganization: string
 	cityid:string
 

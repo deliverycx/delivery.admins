@@ -8,7 +8,7 @@ import OrganizationWorkTime from './viewSetting/OrganizationWorkTime';
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
 	const {organization,social,slideId} = useCasePoints.data
-	const {setInput,onSubmit,handleReserveTable,getOrgBu} = useCasePoints.handlers
+	const {setInput,onSubmit,handleReserveTable,getOrgBu,deliteOrganization} = useCasePoints.handlers
 
 	const useCaseOrg = adapterComponentUseCase(useOrganization,true);
 
@@ -105,7 +105,7 @@ const OrganizationSetting = () =>{
 					
 
 					
-
+					<button onClick={()=> deliteOrganization(organization._id)}>удалить точку</button>
         </div>
         
       </div>

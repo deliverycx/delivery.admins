@@ -118,4 +118,14 @@ export class OrganizationControllers{
     return result
 	}
 
+	@Post('organizationDelite')
+	async organizationDel(
+		@Body() body: OrganizationDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.organizationDelite(body)
+		
+    return result
+	}
+
 }

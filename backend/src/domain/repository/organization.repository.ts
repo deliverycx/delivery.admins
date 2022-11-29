@@ -211,6 +211,12 @@ export class OrganizationRepository {
 		
 		return result
 	}
+
+	async DeliteOrgMetod(id:any){
+		const result = await this.organizationModel.deleteOne({_id:id})
+		
+		return result
+	}
 	
 
 }

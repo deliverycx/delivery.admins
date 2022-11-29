@@ -99,9 +99,16 @@ class RequestOrganization extends ApiSuper {
   }
 
 	@methods('post')
+  organizationDelite(data:any) {
+    return this.request(`/organization/organizationDelite`)
+  }
+
+	@methods('post')
   CityAdd(data:any) {
     return this.request(`/organization/cityadd`)
   }
+
+
   
 }
 export default new RequestOrganization()

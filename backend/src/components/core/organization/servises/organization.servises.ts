@@ -46,4 +46,8 @@ export class OrganizationServises{
 	organizationAdd(org: any){
 		return this.OrganizationRepository.addOrganizationMetod(org)
 	}
+
+	organizationDelite({id}){
+		return this.OrganizationRepository.DeliteOrgMetod(id)
+	}
 }
