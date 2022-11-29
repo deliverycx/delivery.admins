@@ -56,7 +56,14 @@ export function  useOrganizationSetting(this: any){
 		
 	}
 
-
+	const deliteOrganization = async (id:string) =>{
+		try {
+			const {data} = await RequestOrganization.organizationDelite({id})
+			router.push('/organization/')
+		} catch (error) {
+			
+		}
+	}
 
 
 	const handleReserveTable = async (event:any) =>{
@@ -68,6 +75,8 @@ export function  useOrganizationSetting(this: any){
 		})
 		getOrgBu(slideId)
 	}
+
+
 	
 
 	this.data({
@@ -79,7 +88,8 @@ export function  useOrganizationSetting(this: any){
 		setInput,
 		onSubmit,
 		handleReserveTable,
-		getOrgBu
+		getOrgBu,
+		deliteOrganization
   })
   this.status({
     

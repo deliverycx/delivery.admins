@@ -26,7 +26,10 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
 	return (
 		<div className='card-body'>
                         <div className='card-footer'>
-                          <a className='card-title title_org' href={`/organization/${point.id}`}>{point.address.street}</a>
+                          <a className='card-title title_org' href={`/organization/${point.id}`}>
+														{point.address.street}
+														<small>  - {point.delivMetod === CART_CHOICE.NOWORK && 'Онлайн-заказ не доступен'}</small>
+													</a>
                           
                           
 													<div className="organization_control" >
@@ -43,7 +46,7 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
                                      onClick={() => handlePuckUp(
                                        point.id,
                                        point.delivMetod === CART_CHOICE.NODELIVERY ? null : CART_CHOICE.NODELIVERY)}
-                                >Запуск
+                                >Только просмотр
                                 </div>
 																<div className={CNdelivMetodOPEN}
                                      onClick={() => handlePuckUp(

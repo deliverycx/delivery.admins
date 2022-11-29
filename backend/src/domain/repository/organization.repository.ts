@@ -10,7 +10,7 @@ import { organizationEntities } from "../entities/organization.entities";
 export class OrganizationRepository {
   constructor(
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
+    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>, 
 		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>
   ) { }
 
@@ -171,31 +171,7 @@ export class OrganizationRepository {
 		return result
 	}
 
-
-	async settingOrgMetod(idorganization:string,setting){
-		console.log(setting);
-		const result = await this.organizationModel.findOneAndUpdate(
-      {
-        id: idorganization
-      },
-      {
-        $set: {
-          phone: setting.phone,
-					address:{
-						street:setting.adress,
-						longitude:setting.longitude,
-						latitude:setting.latitude
-					}
-
-        }
-      },
-      { new: true }
-    )
-		return result
-	}		
-
 	async OrganizationTimeMetod(idorganization:string,time:string[]){
-
 		const result = await this.organizationModel.findOneAndUpdate(
       {
         id: idorganization
@@ -203,15 +179,44 @@ export class OrganizationRepository {
       {
         $set: {
           workTime: time
-
         }
       },
       { new: true }
     )
-
 		console.log('время точки',result);
 		return result
 	}
 
+	async addCityMetod(city:any){
+		console.log(city);
+		const result = await this.cityModel.create(city)
+		
+		return result
+	}
+
+	async addOrganizationMetod(org:any){
+		console.log(org);
+		const neworg = await this.organizationModel.create(org)
+		const result = await this.cityModel.findOneAndUpdate(
+			{
+				_id:org.city
+			},
+			{
+				$push:{
+					organizations:neworg._id
+				}
+			}
+		)
+		console.log('ress',result);
+		
+		return result
+	}
+
+	async DeliteOrgMetod(id:any){
+		const result = await this.organizationModel.deleteOne({_id:id})
+		
+		return result
+	}
+	
 
 }
