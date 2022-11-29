@@ -58,6 +58,7 @@ export function  useOrganizationSetting(this: any){
 	const deliteOrganization = async (id:string) =>{
 		try {
 			const {data} = await RequestOrganization.organizationDelite({id})
+			router.push('/organization/')
 		} catch (error) {
 			
 		}
