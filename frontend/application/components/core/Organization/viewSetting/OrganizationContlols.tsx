@@ -46,7 +46,7 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
                                      onClick={() => handlePuckUp(
                                        point.id,
                                        point.delivMetod === CART_CHOICE.NODELIVERY ? null : CART_CHOICE.NODELIVERY)}
-                                >Запуск
+                                >Только просмотр
                                 </div>
 																<div className={CNdelivMetodOPEN}
                                      onClick={() => handlePuckUp(
