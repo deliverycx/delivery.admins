@@ -27,7 +27,7 @@ const OrganizationInfo:FC<IProps> = ({organization}) =>{
 			            <label className="form-label">Адресс</label>
 			            <input type="text"className="form-control"
 									name="adress"
-									placeholder="Адресс"
+									placeholder="Адрес"
 									value={formik.values.adress}
 									onChange={formik.handleChange}
 									/>
@@ -35,7 +35,7 @@ const OrganizationInfo:FC<IProps> = ({organization}) =>{
 						</div>
 						<div className="form-group">
 							<div className="popBox_item col-6"> 
-			            <label className="form-label">Кординаты</label>
+			            <label className="form-label">Координаты</label>
 									<div className="row">
 										<div className="col-3">
 										<input type="text"className="form-control"
