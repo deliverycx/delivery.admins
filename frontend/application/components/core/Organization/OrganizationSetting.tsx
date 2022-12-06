@@ -6,6 +6,7 @@ import OrganizationPayment from './OrganizationPayment/OrganizationPayment';
 import OrganizationContlols from './OrganizationSetting/OrganizationContlols';
 import OrganizationSettingFrom from './OrganizationSetting/OrganizationInfo';
 import OrganizationWorkTime from './OrganizationSetting/OrganizationWorkTime';
+import OrganizationTables from './OrganizationTables/OrganizationTables';
 
 
 
@@ -101,6 +102,11 @@ const OrganizationSetting = () =>{
             </div>
 
           </div>
+
+					{
+						organization &&
+						<OrganizationTables organization={organization} />
+					}
 
 					{
 						organization &&

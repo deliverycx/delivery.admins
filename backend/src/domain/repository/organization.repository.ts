@@ -187,6 +187,28 @@ export class OrganizationRepository {
 		return result
 	}
 
+	async settingOrgMetod(idorganization:string,setting){
+		console.log(setting);
+		const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: idorganization
+      },
+      {
+        $set: {
+          phone: setting.phone,
+					address:{
+						street:setting.adress,
+						longitude:setting.longitude,
+						latitude:setting.latitude
+					}
+
+        }
+      },
+      { new: true }
+    )
+		return result
+	}
+
 	async addCityMetod(city:any){
 		console.log(city);
 		const result = await this.cityModel.create(city)

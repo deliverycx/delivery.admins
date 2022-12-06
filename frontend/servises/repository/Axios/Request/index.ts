@@ -5,6 +5,7 @@ import RequestBanners from './Request.Banners'
 import RequestNews from './Request.News'
 import RequestDisplay from './Request.Display'
 import RequestOrderPayment from './Request.OrderPayment'
+import RequestOrganizationTables from './Request.OrganizationTables'
 
 export {
   RequestOrganization,
@@ -13,5 +14,6 @@ export {
 	RequestBanners,
 	RequestNews,
 	RequestDisplay,
-	RequestOrderPayment
+	RequestOrderPayment,
+	RequestOrganizationTables
 }

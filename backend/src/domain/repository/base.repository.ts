@@ -21,9 +21,9 @@ export class BaseRepository<ModelClass> {
 	}
 	async getBuAll(bu:Record<string,any>,populate?:string){
 		if(populate){
-			return await this.model.findOne(bu).populate(populate).select('-__v')
+			return await this.model.find(bu).populate(populate).select('-__v')
 		}else{
-			return await this.model.findOne(bu).select('-__v')
+			return await this.model.find(bu).select('-__v')
 		}
 	}
 	async getOneBuId(id:string,populate?:string){
