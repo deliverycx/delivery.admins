@@ -26,6 +26,8 @@ export function useOrganizationTables(this: any,idorganization:string) {
 			const {data} = await RequestOrganizationTables.CRUDFabric.getBuAllOrg(idorganization)
 			if(data && data.length !== 0){
 				setOrganizationTable(data)
+			}else{
+				setOrganizationTable(null)
 			}
 			
 		} catch (error) {
@@ -35,7 +37,9 @@ export function useOrganizationTables(this: any,idorganization:string) {
 
 	const deliteTables = async (id:string) =>{
 		try {
+			
 			const {data} = await RequestOrganizationTables.CRUDFabric.delet(id)
+			console.log('delet',id,data);
 			getOrgTables()
 			
 		} catch (error) {

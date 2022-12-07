@@ -13,7 +13,6 @@ const OrganizationTables:FC<{organization:any}> = ({organization}) =>{
 		tableindex:0
 	})
 
-	console.log(tableModal);
 
 	return (
 		<div className="card card-primary">
