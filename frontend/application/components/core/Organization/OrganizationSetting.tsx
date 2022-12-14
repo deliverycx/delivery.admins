@@ -7,6 +7,7 @@ import OrganizationContlols from './OrganizationSetting/OrganizationContlols';
 import OrganizationSettingFrom from './OrganizationSetting/OrganizationInfo';
 import OrganizationWorkTime from './OrganizationSetting/OrganizationWorkTime';
 import OrganizationTables from './OrganizationTables/OrganizationTables';
+import OrgTabPanel from './Tabs/OrgTabPanel';
 
 
 
@@ -19,6 +20,7 @@ const OrganizationSetting = () =>{
 
 	return(
 		<section className="content">
+			
 			<div className='card'>
                 
                 {
@@ -122,6 +124,7 @@ const OrganizationSetting = () =>{
         </div>
         
       </div>
+			<OrgTabPanel />
       
     </section>
 

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Script from 'next/script'
@@ -26,6 +27,7 @@ const Home: NextPage = () => {
   */
   
   return (
+		<>
     <div className="wrapper">
 
     <Header />
@@ -37,9 +39,10 @@ const Home: NextPage = () => {
   
 
   
-  <Footer />
-  
-</div>
+  	<Footer />
+		  
+		</div>
+		</>
   )
 }
 
