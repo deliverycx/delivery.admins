@@ -10,6 +10,8 @@ import { OrganizationClass } from "src/database/mongodbModel/delivery/organizati
 import { CityClass } from "src/database/mongodbModel/delivery/city.model";
 import { CategoryClass } from "src/database/mongodbModel/delivery/category.model";
 import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
+import { DELIVERY_METODS, ORG_STATUS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
 
 
 const header = (token:string) =>{
@@ -29,7 +31,8 @@ export class IikoRequesterServises {
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
     @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
     @InjectModel(CategoryClass) private readonly categoryModel: ReturnModelType<typeof CategoryClass>,
-    @InjectModel(ProductClass) private readonly productModel: ReturnModelType<typeof ProductClass>
+    @InjectModel(ProductClass) private readonly productModel: ReturnModelType<typeof ProductClass>,
+		@InjectModel(OrganizationStatusClass) private readonly orgstatusModel: ReturnModelType<typeof OrganizationStatusClass>
   ) {
     this.geoCoder = new GeoCoder(process.env.YANDEX_APIKEY);
     this.downloader = new DownloadImage();
@@ -139,7 +142,16 @@ export class IikoRequesterServises {
             };
         }
 				
-				
+				await this.orgstatusModel.findOneAndUpdate(
+					{organization:organization.id},
+					{
+						$setOnInsert:{
+							organizationStatus:ORG_STATUS.NOWORK,
+							deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.ONSPOT],
+							paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
+						}
+					},
+					{ upsert: true, new: true })
 
 				
         

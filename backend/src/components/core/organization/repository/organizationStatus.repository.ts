@@ -10,5 +10,23 @@ export class OrganizationStatusRepository{
     @InjectModel(OrganizationStatusClass) private readonly Model: ReturnModelType<typeof OrganizationStatusClass>,
   ) {}
 
+	async getOrgStatusMetod(organization:string){
+		return await this.Model.findOne({
+			organization
+		})
+	}
 
+	async updateStatusMetod(organization:string,metod:Record<string,string[] | string> ){
+		
+		return await this.Model.findOneAndUpdate(
+			{
+				organization
+			},
+			{
+				$set:{
+					...metod
+				}
+			}
+		)
+	}
 }

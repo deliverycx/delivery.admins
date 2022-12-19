@@ -28,3 +28,11 @@ export type IOrganizationPayment = {
 	merchantId:string
 	organization:string
 }
+
+export type IOrganizationStatus = {
+	_id:string,
+	organization:string,
+	deliveryMetod:string[]
+	organizationStatus:string
+	paymentMetod:string[]
+}

@@ -7,7 +7,7 @@ export default class OrganizationStatusDTO {
 
   @IsOptional()
   @IsString()
-  phone: string
-  
+  statusMetod: string
+  metod:string |  string[]
 
 }

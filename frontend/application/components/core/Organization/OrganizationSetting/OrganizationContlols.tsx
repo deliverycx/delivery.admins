@@ -32,29 +32,7 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
 													</a>
                           
                           
-													<div className="organization_control" >
-															<div className={CNhiddenMetod} onClick={() => handleHiddenOrg(point.id, !point.isHidden)}>
-															Скрыть точку
-                              </div>
-                                <div className={CNdelivMetod}
-                                     onClick={() => handlePuckUp(
-                                       point.id,
-                                       point.delivMetod === CART_CHOICE.PICKUP ? null : CART_CHOICE.PICKUP)}
-                                >Только Самовывоз
-                                </div>
-                                <div className={CNdelivMetodNODELIV}
-                                     onClick={() => handlePuckUp(
-                                       point.id,
-                                       point.delivMetod === CART_CHOICE.NODELIVERY ? null : CART_CHOICE.NODELIVERY)}
-                                >Только просмотр
-                                </div>
-																<div className={CNdelivMetodOPEN}
-                                     onClick={() => handlePuckUp(
-                                       point.id,
-                                       point.delivMetod === CART_CHOICE.OPEN ? null : CART_CHOICE.OPEN)}
-                                >Открытие
-                                </div>
-													</div>						
+																			
                         </div>
                       </div>
 	)

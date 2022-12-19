@@ -4,6 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TabsStatus from './TabsStatus';
+import TabsSettings from './TabsSettings';
+import TabsDefault from './TabsDefault';
+import TabsShop from './TabsShop';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -50,22 +53,22 @@ export default function OrgTabPanel() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Статусы" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-					<Tab label="Item Three 33" {...a11yProps(3)} />
+          <Tab label="Настройки точки" {...a11yProps(1)} />
+          <Tab label="Общее " {...a11yProps(2)} />
+					<Tab label="Магазин" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <TabsStatus />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <TabsSettings />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <TabsDefault />
       </TabPanel>
 			<TabPanel value={value} index={3}>
-        Item Three 33
+        <TabsShop />
       </TabPanel>
     </Box>
   );
