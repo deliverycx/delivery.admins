@@ -15,7 +15,7 @@ export function  useOrganizationSetting(this: any){
 	useEffect(()=>{
 		if(slideId){
 			getSocial(slideId)
-			getOrgBu(slideId)
+			getOrgBu()
 		}
 
 	},[slideId])
@@ -30,9 +30,9 @@ export function  useOrganizationSetting(this: any){
 		
 	}
 
-	const getOrgBu = async (id:string) =>{
+	const getOrgBu = async () =>{
 		try {
-			const {data} = await RequestOrganization.getBu({idorganization: id})
+			const {data} = await RequestOrganization.getBu({idorganization: slideId})
 			setOrganization(data)
 		} catch (error) {
 			console.log(error);
@@ -65,6 +65,11 @@ export function  useOrganizationSetting(this: any){
 		}
 	}
 
+	const handleHiddenOrg = async (idorganization: string,isHidden:boolean) => {
+    await RequestOrganization.hiddenOrganization({ idorganization, isHidden })
+    await getOrgBu()
+  }
+
 
 	const handleReserveTable = async (event:any) =>{
 		const value = event.target.value
@@ -73,7 +78,7 @@ export function  useOrganizationSetting(this: any){
 			idorganization: slideId,
 			reservetable:tobol
 		})
-		getOrgBu(slideId)
+		getOrgBu()
 	}
 
 
@@ -89,7 +94,8 @@ export function  useOrganizationSetting(this: any){
 		onSubmit,
 		handleReserveTable,
 		getOrgBu,
-		deliteOrganization
+		deliteOrganization,
+		handleHiddenOrg
   })
   this.status({
     

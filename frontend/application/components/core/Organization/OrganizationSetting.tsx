@@ -21,7 +21,7 @@ const OrganizationSetting = () =>{
 	const {organization,social,slideId} = useCase.data
 	const {setInput,onSubmit,handleReserveTable,getOrgBu,deliteOrganization} = useCase.handlers
 
-	const useCaseOrg = adapterComponentUseCase(useOrganization,true);
+
 
 	return(
 		<section className="content">
@@ -30,7 +30,7 @@ const OrganizationSetting = () =>{
                 
                 {
 									organization &&
-									<OrganizationContlols point={organization} handels={useCaseOrg.handlers} />
+									<OrganizationContlols point={organization} handels={useCase.handlers} />
 								}
 								
               </div>
@@ -89,7 +89,7 @@ const OrganizationSetting = () =>{
 					
 
 					
-					<button onClick={()=> deliteOrganization(organization._id)}>удалить точку</button>
+					
         </div>
         
       </div>

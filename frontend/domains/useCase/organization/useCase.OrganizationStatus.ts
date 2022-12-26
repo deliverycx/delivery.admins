@@ -2,8 +2,11 @@ import RequestOrganizationStatus from "servises/repository/Axios/Request/Request
 import { useState } from 'react';
 import { IOrganizationStatus } from "@type";
 import { useEffect } from 'react';
+import { RequestOrganization } from "servises/repository/Axios/Request";
+import { useRouter } from "next/router";
 
 export function  useOrganizationStatus(this: any,organization:string){
+	const router = useRouter()
 	const [organizationStatus,setOrganizationStatus] = useState<IOrganizationStatus | null>(null)
 
 	const getStatus = async () =>{

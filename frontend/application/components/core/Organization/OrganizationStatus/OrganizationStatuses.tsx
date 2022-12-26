@@ -22,7 +22,7 @@ const OrganizationStatuses:FC<IPoprs> = ({organizationStatus,swtchStatus}) =>{
         <span className='card-title title_org'>Статусы точки</span>
 			<div className="organization_control" >
 				<div className={CN(ORG_STATUS.WORK)} onClick={()=> handler(ORG_STATUS.WORK)} >Работает</div>
-				<div className={CN(ORG_STATUS.NOWORK)} onClick={()=> handler(ORG_STATUS.NOWORK)}>Скрытая</div>
+				<div className={CN(ORG_STATUS.NOWORK)} onClick={()=> handler(ORG_STATUS.NOWORK)}>Не работает</div>
 				<div className={CN(ORG_STATUS.NODELIVERY)} onClick={()=> handler(ORG_STATUS.NODELIVERY)}>Нет онлайн заказа</div>
 				<div className={CN(ORG_STATUS.OPEN)} onClick={()=> handler(ORG_STATUS.OPEN)}>Открытие</div>
 			</div>

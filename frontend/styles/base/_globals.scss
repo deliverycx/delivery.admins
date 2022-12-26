@@ -252,14 +252,22 @@ p.css-button-text {
 	display: flex;
 	clear: both;
 	margin-top: 30px;
-	
+	section{
+		width: 100%;
+		display: flex;
+	}
 	.btn{
 		margin-right: 15px;
 		margin-top: 10px;
 		border: 1px solid #333;
 		height: 36px;
 	}
+	
 }
+.organization_control-box{
+	justify-content: space-between;
+}
+
 .title_org{
 	margin-right: 30px;
 }

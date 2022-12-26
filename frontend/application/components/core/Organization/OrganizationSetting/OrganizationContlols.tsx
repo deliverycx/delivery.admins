@@ -9,28 +9,24 @@ type IProps = {
 }
 
 const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
-	const {handlePuckUp, handleHiddenOrg} = handels
-	const CNdelivMetod = cn('col-2 btn btn-block', {
-                      'btn-success':
-                        (point.delivMetod === CART_CHOICE.PICKUP),
-                    });
-                    const CNdelivMetodNODELIV = cn('col-2 btn btn-block', {
-                      'btn-success':
-                        (point.delivMetod === CART_CHOICE.NODELIVERY),
-                    });
-										const CNdelivMetodOPEN = cn('col-2 btn btn-block', {
-                      'btn-success':
-                        (point.delivMetod === CART_CHOICE.OPEN),
-                    });
+	const {handleHiddenOrg,deliteOrganization} = handels
+	
 	const CNhiddenMetod = cn('col-2 btn btn-block', { 'btn-success': point.isHidden });									
 	return (
 		<div className='card-body'>
                         <div className='card-footer'>
                           <a className='card-title title_org' href={`/organization/${point.id}`}>
 														{point.address.street}
-														<small> {point.delivMetod === CART_CHOICE.NOWORK && ' - Онлайн-заказ не доступен'}</small>
+														
 													</a>
-                          
+                          <div className="organization_control organization_control-box" >
+														<section>
+															<div className={CNhiddenMetod} onClick={()=> handleHiddenOrg(point.id,!point.isHidden)}>Скрыть точку</div>
+															<div className="col-2 btn btn-primary" onClick={()=> deliteOrganization(point.id)}>Обновить точку</div>
+														</section>
+														
+														<div className="col-2 btn btn-danger" onClick={()=> deliteOrganization(point.id)}>Удалить точку</div>
+													</div>
                           
 																			
                         </div>
