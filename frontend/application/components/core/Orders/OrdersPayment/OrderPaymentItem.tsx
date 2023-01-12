@@ -12,6 +12,8 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
 	const useCase = adapterComponentUseCase(useOrderPaymentItem,order)
 	const {statePaymentItem} = useCase.data
 
+	console.log('заказ',order);
+
 	return(
 		<tr>
                       <td>

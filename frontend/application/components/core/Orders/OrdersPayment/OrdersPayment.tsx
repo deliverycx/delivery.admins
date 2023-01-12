@@ -12,12 +12,19 @@ const OrdersPayment = () =>{
 	const getAll = async () =>{
 		try {
 			const {data} = await RequestOrderPayment.CRUDFabric.getAll()
-			console.log(data);
 			data && setOrders(data)
 		} catch (error) {
 			console.log(error);
 		}
 	}
+
+	let sortedOrder;
+
+	console.log(orders);
+		if (orders) sortedOrder = orders.sortBy((d:any) => d.paymentparams.date)  //orders.sort((a:any, b:any) => new Date(a.paymentparams.date) - new Date(b.paymentparams.date));
+		
+		
+		
 
 	return (
 		<>
@@ -74,8 +81,8 @@ const OrdersPayment = () =>{
                   </tr>
               </thead>
               <tbody>
-							{
-								orders && orders.map((order:any)=>{
+							{ 
+								orders && sortedOrder && sortedOrder.map((order:any)=>{
 									return <OrderPaymentItem key={order._id} order={order} />
 								})
 								
