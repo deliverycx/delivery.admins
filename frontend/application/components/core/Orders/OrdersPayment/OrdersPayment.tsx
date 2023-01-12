@@ -21,7 +21,7 @@ const OrdersPayment = () =>{
 	let sortedOrder;
 
 	console.log(orders);
-		if (orders) sortedOrder = orders.sortBy((d:any) => d.paymentparams.date)  //orders.sort((a:any, b:any) => new Date(a.paymentparams.date) - new Date(b.paymentparams.date));
+		//if (orders) sortedOrder = orders.sortBy((d:any) => d.paymentparams.date)  //orders.sort((a:any, b:any) => new Date(a.paymentparams.date) - new Date(b.paymentparams.date));
 		
 		
 		
@@ -82,7 +82,7 @@ const OrdersPayment = () =>{
               </thead>
               <tbody>
 							{ 
-								orders && sortedOrder && sortedOrder.map((order:any)=>{
+								orders && orders.map((order:any)=>{
 									return <OrderPaymentItem key={order._id} order={order} />
 								})
 								
