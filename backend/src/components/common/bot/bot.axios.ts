@@ -11,14 +11,18 @@ export class BotAxios {
     }
 
     private init() {
-        this.axios = axios.create({
-            baseURL: process.env.BOT_URL
-        });
+			this.axios = axios.create({
+				baseURL: process.env.BOT_URL,
+				headers: {
+					Authorization : `Bearer ${process.env.BOT_TOKEN}`
+					}
+		});
 
         this.axios.interceptors.response.use(
             (response) => response,
             (error) => {
-                throw new ServiceUnavailableException();
+							console.log(error.response)
+                //throw new ServiceUnavailableException();
             }
         );
     }
@@ -28,7 +32,6 @@ export class BotAxios {
 			organization: UniqueId,
 			data:any
 		): Promise<void> {
-			console.log(process.env.BOT_URL);
 				this.axios.post(`/return_payment/${organization}`, data);
 		}
 
