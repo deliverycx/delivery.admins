@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { OrganizationContext } from "../OrganizationSetting"
 import OrganizationInfo from "../OrganizationSetting/OrganizationInfo"
 import OrganizationWorkTime from "../OrganizationSetting/OrganizationWorkTime"
+import OrganizationReverseTable from "../OrganizationSetting/OrganizationReverseTable"
 
 const TabsSettings = () =>{
 	const useCaseContext = useContext(OrganizationContext)
@@ -13,6 +14,7 @@ const TabsSettings = () =>{
 		<>
 			<OrganizationWorkTime organization={organization} refresh={getOrgBu} />
 			<OrganizationInfo organization={organization} />
+			<OrganizationReverseTable organization={organization} refresh={getOrgBu} />
 		</>
 	)
 }

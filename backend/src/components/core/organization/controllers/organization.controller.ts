@@ -54,6 +54,12 @@ export class OrganizationControllers{
     return result
   }
 
+	@Post('checkorg')
+  async checkOrg(@Body() body: OrganizationDTO) {
+    const result = await this.OrganizationServises.checkOranizationMetod(body)
+    return result
+  }
+
 	@Post('social')
   async Social(@Body() body: OrganizationDTO) {
     const result = await this.OrganizationServises.socialMetod(body)

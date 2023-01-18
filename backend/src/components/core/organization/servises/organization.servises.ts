@@ -21,6 +21,10 @@ export class OrganizationServises{
   hiddenOranizationMetod({idorganization,isHidden}) {
     return this.OrganizationRepository.hiddenOranizationMetod(idorganization,isHidden)
   }
+	checkOranizationMetod({idorganization}) {
+    return this.OrganizationRepository.checkOranizationMetod(idorganization)
+  }
+
 	hiddenCityMetod({idorganization,isHidden}) {
     return this.OrganizationRepository.hiddenCityMetod(idorganization,isHidden)
   }

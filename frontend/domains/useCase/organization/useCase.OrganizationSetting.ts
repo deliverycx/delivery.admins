@@ -14,21 +14,11 @@ export function  useOrganizationSetting(this: any){
 
 	useEffect(()=>{
 		if(slideId){
-			getSocial(slideId)
 			getOrgBu()
 		}
 
 	},[slideId])
 
-	const getSocial = async (id:string) =>{
-		try {
-			const {data} = await RequestOrganization.socialBu(id)
-			setSocial(data)
-		} catch (error) {
-			console.log(error);
-		}
-		
-	}
 
 	const getOrgBu = async () =>{
 		try {
@@ -41,20 +31,6 @@ export function  useOrganizationSetting(this: any){
 	}
 
 
-	const onSubmit = async () =>{
-		try {
-				const data = {
-				idorganization:slideId,
-				social:{
-					vk:input
-				}
-			}
-			await RequestOrganization.social(data)
-		} catch (error) {
-			
-		}
-		
-	}
 
 	const deliteOrganization = async (id:string) =>{
 		try {
@@ -70,16 +46,15 @@ export function  useOrganizationSetting(this: any){
     await getOrgBu()
   }
 
-
-	const handleReserveTable = async (event:any) =>{
-		const value = event.target.value
-		const tobol = value === 'true' ? true : false
-		await RequestOrganization.reserveTable({
-			idorganization: slideId,
-			reservetable:tobol
-		})
-		getOrgBu()
+	const checkOrganization = async (idorganization: string) =>{
+		try {
+			await RequestOrganization.checkOrganization({idorganization})
+		} catch (error) {
+			
+		}
 	}
+
+
 
 
 	
@@ -91,11 +66,10 @@ export function  useOrganizationSetting(this: any){
   })
   this.handlers({
 		setInput,
-		onSubmit,
-		handleReserveTable,
 		getOrgBu,
 		deliteOrganization,
-		handleHiddenOrg
+		handleHiddenOrg,
+		checkOrganization
   })
   this.status({
     

@@ -62,11 +62,23 @@ export class OrganizationRepository {
       },
       { new: true }
     )
+		
+    
+    return organizationEntities.hiddenMetod(result.id,result.isHidden)
+  }
+
+	async checkOranizationMetod(orgid: string) {
+    const result = await this.organizationModel.findOne(
+      {
+        id: orgid
+      }
+    )
 		const city = await  this.cityModel.find({
 			organizations:{
 				$all:[result._id]
 			}
 		})
+		console.log('город',city);
 
 		if(JSON.stringify(result.city)  !== JSON.stringify(city[0]._id)){
 			await this.organizationModel.findOneAndUpdate(
@@ -83,8 +95,10 @@ export class OrganizationRepository {
 			
 		}
     
-    return organizationEntities.hiddenMetod(result.id,result.isHidden)
+    return city
   }
+
+
 	async hiddenCityMetod(orgid: string, metod: boolean) {
 		console.log(orgid,metod);
     const result = await this.cityModel.findOneAndUpdate(
