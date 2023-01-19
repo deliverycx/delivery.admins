@@ -26,6 +26,8 @@ export class mainBannerServises extends BaseServises{
 				acc.smallimages.push(images.originalname)
 			}else if(images.fieldname === 'mobfile'){
 				acc.mobimages.push(images.originalname)
+			}else if(images.fieldname === 'stories'){
+				acc.stories.push(images.originalname)
 			}
 
 
@@ -33,13 +35,15 @@ export class mainBannerServises extends BaseServises{
 		},{
 			images:[],
 			smallimages:[],
-			mobimages:[]
+			mobimages:[],
+			stories:[]
 		});
 
 		this.Repository.create({...body,
 			images:imagesMass.images,
 			smallimages:imagesMass.smallimages,
-			mobimages:imagesMass.mobimages
+			mobimages:imagesMass.mobimages,
+			stories:imagesMass.stories
 		})
 	}
 	async edit<T>(body:any,id:string,files?:any[]){
@@ -50,19 +54,23 @@ export class mainBannerServises extends BaseServises{
 				acc.smallimages.push(images.originalname)
 			}else if(images.fieldname === 'mobfile'){
 				acc.mobimages.push(images.originalname)
+			}else if(images.fieldname === 'stories'){
+				acc.stories.push(images.originalname)
 			}
 
 			return acc
 		},{
 			images:[],
 			smallimages:[],
-			mobimages:[]
+			mobimages:[],
+			stories:[]
 		});
 
 		this.Repository.edit(id,{...body,
 			images:imagesMass.images,
 			smallimages:imagesMass.smallimages,
-			mobimages:imagesMass.mobimages
+			mobimages:imagesMass.mobimages,
+			stories:imagesMass.stories
 		})
 	}
 	

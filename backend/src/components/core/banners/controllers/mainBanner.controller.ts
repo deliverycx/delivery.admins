@@ -46,7 +46,7 @@ export class MainBannerControllers{
 		@Body() body:MainBannerDTO,
 		@Res() response,
 		){
-			console.log(body);
+			console.log('добавить',body);
 			this.BannerServises.create(body,files)
 			response.status(200).json({error:false})
 		
@@ -67,7 +67,7 @@ export class MainBannerControllers{
 		@Res() response,
 		@Query() query: MainBannerDTO
 		){
-			console.log(body); 
+			console.log('редакт',body); 
 			this.BannerServises.edit(body,query.id,files)
 			response.status(200).json({error:false})
 		
