@@ -7,7 +7,7 @@ import {
 } from "@typegoose/typegoose";
 import { OrganizationClass } from "./organization.model";
 import { Types } from "mongoose";
-import { ORG_STATUS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
+import { DELIVERY_METODS, ORG_STATUS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
 
 @ModelOptions({
 	schemaOptions: { collection: 'organizationstatus'}
@@ -17,7 +17,7 @@ export class OrganizationStatusClass {
 	@prop()
 	public organization!: string;
 
-	@prop({ type: () => Array, default: null })
+	@prop({ type: () => Array, default: [DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP] })
 	public deliveryMetod!: string[] | null;
 
 	@prop({default:ORG_STATUS.NOWORK})
