@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { OrganizationContext } from "../OrganizationSetting"
 import OrganuzationSocial from "../OrganizationSetting/OrganuzationSocial"
+import OrganizationBanner from "../OrganizationSetting/OrganizationBanner"
 
 const TabsDefault = () =>{
 	const useCaseContext = useContext(OrganizationContext)
@@ -20,6 +21,7 @@ const TabsDefault = () =>{
             </div>
 
           </div>
+			<OrganizationBanner id={organization.id} />
 		</>
 	)
 }
