@@ -67,8 +67,8 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
                       <span className="info-box-text text-center text-muted">Статус оплаты</span>
                       <span className="info-box-number text-center text-muted mb-0">
 													{
-														PaymentStatuses.SUCCESSED === order.paymentStatus &&
-														<span className="badge badge-success">оплачено</span>
+														PaymentStatuses.AUTHORIZED === order.paymentStatus &&
+														<span className="badge badge-success">холдирование</span>
 													}
 													{
 														

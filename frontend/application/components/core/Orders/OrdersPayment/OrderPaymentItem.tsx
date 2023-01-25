@@ -48,8 +48,8 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
                       </td>
                       <td className="project-state">
 													{
-														PaymentStatuses.SUCCESSED === order.paymentStatus &&
-														<span className="badge badge-success">оплачено</span>
+														PaymentStatuses.AUTHORIZED === order.paymentStatus &&
+														<span className="badge badge-success">холдирование</span>
 													}
 													{
 														
