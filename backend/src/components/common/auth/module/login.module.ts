@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
 import { AdminUsersModel } from "src/database/mongodbModel/admin/users.model";
-import { UsersRepository } from "src/domain/repository/users.repository";
+import { UsersRepository } from "src/components/common/auth/repository/users.repository";
 import { LoginController } from "../controllers/login.controller";
 import { LoginServises } from "../servises/login.servises";
 import { JwtModule } from '@nestjs/jwt';

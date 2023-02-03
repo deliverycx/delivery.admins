@@ -1,5 +1,5 @@
 import { Injectable, Logger, UnauthorizedException } from "@nestjs/common"
-import { UsersRepository } from '../../../../domain/repository/users.repository'
+import { UsersRepository } from '../repository/users.repository'
 import { genSalt, hash, compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 

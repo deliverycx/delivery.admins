@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ReturnModelType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
 import { AdminUsersModel } from "src/database/mongodbModel/admin/users.model";
-import { IUsersEntities, usersEntities } from "../entities/users.entities";
+import { IUsersEntities, usersEntities } from "../../../../domain/entities/users.entities";
 
 
 @Injectable()
@@ -12,7 +12,7 @@ export class UsersRepository {
   ) {}
   async create(entiti:IUsersEntities) {
     const newadmin = await this.userModel.create(entiti)
-    return usersEntities.mapper(newadmin)
+    return newadmin
   }
   async getOne(name:string) {
     return await this.userModel.findOne({ name }).exec();

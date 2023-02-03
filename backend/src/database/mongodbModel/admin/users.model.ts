@@ -9,6 +9,12 @@ export class AdminUsersModel implements IUsersEntities{
   @prop({ type: () => String })
   public password:string
 
+	@prop({ type: () => String })
+  public role:string
+
+	@prop({ type: () => String })
+  public organization:string
+
 }
 
 //export const RegisterSchema = buildSchema(RegisterClass);

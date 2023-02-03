@@ -2,7 +2,6 @@ import { Body, Controller, Get,Post, UseGuards, UsePipes, ValidationPipe } from 
 import { JwtAuthGuard } from "src/guard/jwt.guard";
 import { LocalAuthGuard } from "src/guard/local-auth.guard";
 import LoginDTO from "../dto/login.dto";
-import RegisterDTO from "../dto/register.dto";
 import { LoginServises } from "../servises/login.servises";
 
 

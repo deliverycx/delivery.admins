@@ -1,9 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
-export default class RegisterDTO{
+export class RegisterDTO{
   @ApiProperty()
-  @IsString()
   name: string
   password:string
+}
+
+export class RegisterAdminDTO{
+  @ApiProperty()
+  name: string
+  password:string
+	role:string
+	organization:string
 }

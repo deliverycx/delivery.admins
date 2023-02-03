@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { genSalt, hash, compare } from 'bcryptjs';
-import RegisterDTO from './../dto/register.dto';
-import {UsersRepository} from '../../../../domain/repository/users.repository'
+import {UsersRepository} from '../repository/users.repository'
+import { RegisterAdminDTO, RegisterDTO } from "../dto/register.dto";
 
 @Injectable()
 export class RegisterServises{
@@ -10,6 +10,13 @@ export class RegisterServises{
   ){}
 
   async createAdmin(body:RegisterDTO) {
+    const salt = await genSalt(10)
+    const password = await hash(body.password, salt)
+    return this.UsersRepository.create({...body,password})
+    
+  }
+
+	async createOrganizationAdmin(body:RegisterAdminDTO) {
     const salt = await genSalt(10)
     const password = await hash(body.password, salt)
     return this.UsersRepository.create({...body,password})
