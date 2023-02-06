@@ -15,6 +15,12 @@ export class AdminUsersModel implements IUsersEntities{
 	@prop({ type: () => String })
   public organization:string
 
+	@prop({ type: () => String })
+	public refreshToken:string
+
+	@prop({ type: () => String })
+	public refreshTokenExp:string
+
 }
 
 //export const RegisterSchema = buildSchema(RegisterClass);

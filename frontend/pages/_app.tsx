@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const check = async () => {
     try {
       const user = await RequestUsers.check()
+			console.log(user);
       return user.data
     } catch (error) {
       router.push('/auth')

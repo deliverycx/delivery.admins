@@ -17,4 +17,10 @@ export class UsersRepository {
   async getOne(name:string) {
     return await this.userModel.findOne({ name }).exec();
   }
+	async getOneToken(body:{name:string,refreshToken:string}) {
+    return await this.userModel.findOne(body).exec();
+  }
+	async updateUser(name:string,body:any){
+		return await this.userModel.findOneAndUpdate({name},body)
+	}
 }

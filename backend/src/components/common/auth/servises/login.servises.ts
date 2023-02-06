@@ -2,6 +2,8 @@ import { Injectable, Logger, UnauthorizedException } from "@nestjs/common"
 import { UsersRepository } from '../repository/users.repository'
 import { genSalt, hash, compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import * as randomToken from 'rand-token';
+import * as moment from 'moment';
 
 @Injectable()
 export class LoginServises{
@@ -24,11 +26,36 @@ export class LoginServises{
 		}
 		return user
   }
-  async login(name:string) {
+  async getJwtToken(name:string) {
     const payload = { name };
-    console.log('name',await this.jwtService.signAsync(payload));
-		return {
-			access_token: await this.jwtService.signAsync(payload)
-		};
+		return await this.jwtService.signAsync(payload)
+  }
+
+	async getRefreshToken(userName: string): Promise<string> {
+    const userDataToUpdate = {
+      refreshToken: randomToken.generate(16),
+      refreshTokenExp: moment().day(1).format('YYYY/MM/DD'),
+    };
+
+    await this.UsersRepository.updateUser(userName, userDataToUpdate);
+    return userDataToUpdate.refreshToken;
+  }
+
+	async validRefreshToken(
+    name: string,
+    refreshToken: string,
+  ){
+    const currentDate = moment().day(1).format('YYYY/MM/DD');
+    let user = await this.UsersRepository.getOneToken({
+      
+        name: name,
+        refreshToken: refreshToken,
+      
+    });
+
+    if (!user) {
+      return null;
+    }
+		return user
   }
 }
