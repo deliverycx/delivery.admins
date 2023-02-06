@@ -26,7 +26,7 @@ export class LoginServises{
   }
   async login(name:string) {
     const payload = { name };
-    console.log(payload);
+    console.log('name',await this.jwtService.signAsync(payload));
 		return {
 			access_token: await this.jwtService.signAsync(payload)
 		};
