@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 
   useEffect(() => {
-    check()
+    //check()
   }, [])
 
 

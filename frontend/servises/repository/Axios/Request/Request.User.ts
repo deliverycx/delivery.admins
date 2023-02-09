@@ -22,6 +22,8 @@ class RequestUsers extends ApiSuper {
   login(user:Res.Login) {
     return this.request<Req.Login>(`/autorizate/login`)
   }
+
+	
   
   @methods('get')
   check() {

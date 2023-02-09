@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useForm } from "react-hook-form";
 import { IAdminUser } from "@type";
 import { requestUserRegister } from "servises/repository/Axios/Request/Request.User";
+import axios from "axios";
 
 export function useCaseAuth(this: any) {
   const [error, setError] = useState(false)
@@ -18,8 +19,8 @@ export function useCaseAuth(this: any) {
     try {
       const { data } = await RequestUsers.login(user)
       if (data) {
-        localStorage.setItem("authToken", data.access_token)
-        router.push('/')
+        //const response = await axios.post('/api/auth/login',user)
+        //router.push('/')
       }
       
     } catch (error) {

@@ -5,3 +5,7 @@ export type IAdminUser = {
 	role:string
 	organization:string
 }
+
+export type User = {
+  isLoggedIn: boolean
+}
