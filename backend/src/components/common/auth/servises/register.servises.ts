@@ -19,7 +19,7 @@ export class RegisterServises{
 	async createOrganizationAdmin(body:RegisterAdminDTO) {
     const salt = await genSalt(10)
     const password = await hash(body.password, salt)
-    return this.UsersRepository.create({...body,password})
+    return this.UsersRepository.createAdmins({...body,password})
     
   }
 }

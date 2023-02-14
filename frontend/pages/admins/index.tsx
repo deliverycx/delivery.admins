@@ -1,23 +1,23 @@
 import Container from "application/components/common/Container/Container"
+import Footer from "application/components/common/Footer/Footer"
 import Header from "application/components/common/Header/Header"
 import Menu from "application/components/common/Menu/Menu"
-import NewsList from "application/components/core/News/NewsList"
+import MenuAdmins from "application/components/common/Menu/MenuAdmins"
 import OrdersPayment from "application/components/core/Orders/OrdersPayment/OrdersPayment"
+import { userRout } from "application/contstans/userRout.const"
 import { withCheckSession } from "application/helpers/session"
 import { NextPage } from "next"
 
-
-
-const News: NextPage = () => {
-	return(
+const AdminPage: NextPage = ({user}:any) => {
+  return (
 		<div className="wrapper">
       <Header />
-      <Menu />
+      <MenuAdmins />
       <Container>
-				<OrdersPayment organization="123" />
+				<OrdersPayment organization={user.organization} />
       </Container>
     </div>
-	)
+  )
 }
-export default News
-export const getServerSideProps = withCheckSession({roles:'admin',rout:'/'})
+export default AdminPage
+export const getServerSideProps = withCheckSession({...userRout.admins})

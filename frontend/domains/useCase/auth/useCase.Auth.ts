@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { RequestUsers } from "servises/repository/Axios/Request"
 import { useRouter } from 'next/router';
 import { useForm } from "react-hook-form";
 import { IAdminUser } from "@type";
 import { requestUserRegister } from "servises/repository/Axios/Request/Request.User";
 import axios from "axios";
+import { useAuthCheck } from "application/hooks/useAuthCheck";
 
 export function useCaseAuth(this: any) {
   const [error, setError] = useState(false)
   const router = useRouter()
+	const {userRout} = useAuthCheck()
 
   const onSubmitAuth = async (event: any) => {
     event.preventDefault()
@@ -19,9 +21,13 @@ export function useCaseAuth(this: any) {
     try {
       const { data } = await RequestUsers.login(user)
       if (data) {
-        //const response = await axios.post('/api/auth/login',user)
-        //router.push('/')
+        const response = await axios.post('/api/auth/login',data)
+				if(response.data){
+					userRout(response.data)
+				}
+        
       }
+			
       
     } catch (error) {
       setError(true)
@@ -55,18 +61,37 @@ export function useCaseAuthOrgUser(this: any,id:string) {
 	const onSubmit = async (data:any) => {
 		console.log(data);
     try {
-			!users
-					? await requestUserRegister.regUsers({...data,organization:id,role})
-					: await requestUserRegister.CRUDFabric.edit({...data,organization:id},users._id)
+			await requestUserRegister.regUsers({...data,organization:id,role})
 			setModal(false)
-			router.reload()
+			getUsers()
     } catch (error) {
       console.log(error);
     }
   }
 
+	useEffect(()=>{
+		id && getUsers()
+	},[id])
+
+	const getUsers = async () =>{
+		try {
+			const {data} = await RequestUsers.CRUDFabric.getBuAllOrg(id)
+			setUsers(data)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const deliteUser = async (id:string) =>{
+		try {
+			await RequestUsers.CRUDFabric.delet(id)
+			getUsers()
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	const onChangeUser = (event:any) =>{
-		console.log(event.target.value);
 		setRole(event.target.value)
 	}
 
@@ -79,7 +104,8 @@ export function useCaseAuthOrgUser(this: any,id:string) {
 		handleSubmit,
 		register,
 		onSubmit,
-		onChangeUser
+		onChangeUser,
+		deliteUser
   })
   this.status({
     

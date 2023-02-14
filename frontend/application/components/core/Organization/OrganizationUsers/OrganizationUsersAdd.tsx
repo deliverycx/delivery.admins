@@ -8,12 +8,12 @@ const OrganizationUsersAdd = () =>{
 	const {modal,users} = useCase.data
 	const {setModal,handleSubmit,register,onSubmit,onChangeUser} = useCase.handlers
 
-	console.log(modal);
+
 	return (
 		<>
 			<div className="organization_control">
-								<div className="col-2 btn btn-primary" onClick={()=> setModal(true)}>Добавить админа</div>
-								<div className="col-2 btn btn-primary">Добавить офицанта</div>
+								<div className="col-2 btn btn-primary" onClick={()=> setModal(true)}>Добавить пользователя</div>
+								
 							</div>
 			{
 				modal &&

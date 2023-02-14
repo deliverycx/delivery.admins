@@ -8,4 +8,7 @@ export type IAdminUser = {
 
 export type User = {
   isLoggedIn: boolean
+	name:string
+	role:string
+	organization:string
 }

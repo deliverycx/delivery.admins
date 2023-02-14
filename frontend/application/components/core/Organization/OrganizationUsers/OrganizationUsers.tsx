@@ -16,8 +16,8 @@ export const OrganizationUsersContext = React.createContext<TadapterCaseCallback
 });
 const OrganizationUsers:FC<IProps> = ({organization}) =>{
 	const useCase = adapterComponentUseCase(useCaseAuthOrgUser,organization.id)
-	const {info} = useCase.data
-	const {handlerSwitchPayment} = useCase.handlers
+	const {users} = useCase.data
+	const {deliteUser} = useCase.handlers
 
 	return(
 		<section className="content">
@@ -35,7 +35,28 @@ const OrganizationUsers:FC<IProps> = ({organization}) =>{
 						</div>
             <div className="card-body">
 								
+						<div className="card card-widget widget-user-2">
+
+							<div className="card-footer p-0">
+								<ul className="nav flex-column">
+									{
+										users &&	users.map((value:any,index:number)=>{
+											return (
+												<li key={value._id} className="nav-item">
+													<span className="nav-link float-left">
+														{value.name} 
+													</span>
+													<button className="float-right nav-link btn badge-danger" onClick={()=> deliteUser(value._id)}>Удалить</button>
+												</li>
+											)
+										})
+									}
 									
+									
+									
+								</ul>
+							</div>
+							</div>		
 								
             </div>
 

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import RequestOrderPayment from "servises/repository/Axios/Request/Request.OrderPayment";
 import OrderPaymentItem from "./OrderPaymentItem";
 
-const OrdersPayment = () =>{
+const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
 	const [orders,setOrders] = useState<any>(null)
 	useEffect(()=>{
 		getAll()
@@ -11,7 +11,8 @@ const OrdersPayment = () =>{
 
 	const getAll = async () =>{
 		try {
-			const {data} = await RequestOrderPayment.CRUDFabric.getAll()
+			const {data} = await RequestOrderPayment.getBuOrg(organization)
+			//console.log(data);
 			data && setOrders(data)
 		} catch (error) {
 			console.log(error);
@@ -20,7 +21,7 @@ const OrdersPayment = () =>{
 
 	let sortedOrder;
 
-	console.log(orders);
+	//console.log(orders);
 		//if (orders) sortedOrder = orders.sortBy((d:any) => d.paymentparams.date)  //orders.sort((a:any, b:any) => new Date(a.paymentparams.date) - new Date(b.paymentparams.date));
 		
 		

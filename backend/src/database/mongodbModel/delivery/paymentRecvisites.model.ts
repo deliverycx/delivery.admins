@@ -23,8 +23,8 @@ export class PaymentRecvisitesClass {
 	@prop()
 	public name!: string;
 
-	@prop({ ref: "Organization" })
-	public organization!: Ref<OrganizationClass>; 
+	@prop()
+	public organization!: string; 
 
 }
 //Recvisites

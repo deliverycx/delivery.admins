@@ -15,8 +15,15 @@ namespace Res{
 }
 
 
-
+@RequestFabric({
+	request:'autorizate',
+	factory:[{
+		name:'CRUDFabric',
+		fabric:CRUDFabric
+	}]
+})
 class RequestUsers extends ApiSuper {
+	CRUDFabric!:CRUDFabric
  
   @methods('post')
   login(user:Res.Login) {

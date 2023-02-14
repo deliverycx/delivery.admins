@@ -6,6 +6,7 @@ export default class OrganizationPaymentDTO {
   @IsString()
 	id:string
 
+	name:string
   isActive:boolean
 	token:string
 	merchantId:string

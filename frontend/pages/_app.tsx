@@ -4,11 +4,16 @@ import { RequestUsers } from 'servises/repository/Axios/Request'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import './../styles/index.scss'
+import { useAuthCheck } from 'application/hooks/useAuthCheck'
+import { User } from '@type'
+import { sessionOptions } from 'application/helpers/session'
+import { withIronSessionSsr } from 'iron-session/next'
 
 
-function MyApp({ Component, pageProps }: AppProps) {
 
-  /**/
+export default function MyApp({ Component, pageProps }: AppProps) {
+
+  /*
   const router = useRouter()
   const check = async () => {
     try {
@@ -22,11 +27,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 
   useEffect(() => {
-    //check()
+    check()
   }, [])
-
+*/
+	useAuthCheck()
 
   return <Component {...pageProps} />
 }
-
-export default MyApp

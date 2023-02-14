@@ -4,18 +4,21 @@ import { genSalt, hash, compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import * as randomToken from 'rand-token';
 import * as moment from 'moment';
+import { BaseServises } from "src/services/base.services";
 
 @Injectable()
-export class LoginServises{
+export class LoginServises extends BaseServises{
   private readonly logger = new Logger(LoginServises.name)
   constructor(
     private readonly UsersRepository: UsersRepository,
     private readonly jwtService: JwtService
-  ){}
+  ){
+		super(UsersRepository);
+	}
 
   async validateUsers(name: string, password: string) {
     console.log(name,password)
-    const user = await this.UsersRepository.getOne(name)
+    const user = await this.UsersRepository.getOneAdmin(name)
     this.logger.log(user);
     if (!user) {
 			throw new UnauthorizedException();
@@ -58,4 +61,9 @@ export class LoginServises{
     }
 		return user
   }
+
+	async getUser(name:string){
+		const user = await this.UsersRepository.getOneAdmin(name)
+		return user
+	}
 }

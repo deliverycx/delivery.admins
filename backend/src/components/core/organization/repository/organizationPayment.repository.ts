@@ -14,8 +14,7 @@ export class OrganizationPaymentRepository extends BaseRepository<PaymentinfosCl
 	}
 
 	async findBuOrg(bu:{organization:string}){
-		console.log(bu);
-		return await this.organizationpaymentModel.findOne(bu).select('-__v')
+		return await this.organizationpaymentModel.find(bu).select('-__v')
 	}
 	async stwitchPayMent(id:string,body:{isActive:boolean}){
 		await this.organizationpaymentModel.findOneAndUpdate(

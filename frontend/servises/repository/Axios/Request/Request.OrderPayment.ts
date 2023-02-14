@@ -1,6 +1,6 @@
 import { IOrderPayment } from "@type";
 import axios, { AxiosInstance } from "axios";
-import { ApiSuper } from "../AxiosApi";
+import { ApiSuper, methods } from "../AxiosApi";
 import { CRUDFabric } from "../Fabric/CRUD.fabric";
 import { RequestFabric } from "../Fabric/FabricApi";
 
@@ -14,6 +14,11 @@ import { RequestFabric } from "../Fabric/FabricApi";
 })
 class RequestOrderPayment  extends ApiSuper {
 	CRUDFabric!:CRUDFabric
+
+	@methods('get')
+  getBuOrg(query:string) {
+    return this.request(`/orderPayment/all?idorganization=${query}`)
+  }
 
 	returnPamyMent(data:any){
 		return this.api({
