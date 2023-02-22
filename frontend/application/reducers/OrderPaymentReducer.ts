@@ -1,16 +1,22 @@
 import { ReducerAction } from ".";
 
 export const initialStateOrderPayment = {
+		order:null,
+		barPayment:null,
 		organization:'',
 		token:'',
+		tokenBar:'',
 		retunrs:false,
 		errors:''
 };
 type typeinitialState = typeof initialStateOrderPayment
 
 export enum ReducerActionType {
+	setOrder,
+	setBarPayment,
 	setOrganization,
 	setToken,
+	setTokenBar,
 	setReturns,
 	setError
 }
@@ -29,6 +35,21 @@ export function OrderPaymentReducer(state: typeinitialState, action: ReducerActi
 					...state,
 					token: action.payload,
 				};	
+			case ReducerActionType.setTokenBar:
+				return {
+					...state,
+					tokenBar: action.payload,
+				};		
+			case ReducerActionType.setOrder:
+				return {
+					...state,
+					order: action.payload,
+				};
+			case ReducerActionType.setBarPayment:
+				return {
+					...state,
+					barPayment: action.payload,
+				};		
 			case ReducerActionType.setReturns:
 				return {
 					...state,

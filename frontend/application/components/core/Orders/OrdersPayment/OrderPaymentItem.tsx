@@ -12,12 +12,16 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
 	const useCase = adapterComponentUseCase(useOrderPaymentItem,order)
 	const {statePaymentItem} = useCase.data
 
-	console.log('заказ',order);
 
 	return(
 		<tr>
+											<td className="project-state">
+											<a href={`admins/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
+                              {order.orderNumber}
+                          </a>
+											</td>
                       <td>
-													<a href={`orderPayment/${order._id}`}>
+													<a href={`admins/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
                               {order.paymentid}
                           </a>
 													<br/>
@@ -38,28 +42,14 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
                           
                       </td>
                       <td>
-													<a>
-                              {statePaymentItem.organization && statePaymentItem.organization}
-                          </a>
-													<br/>
-                          <small>
-                              {order.idorganization}
-                          </small>
+													{
+														order.paymentparams.phone
+													}
                       </td>
                       <td className="project-state">
 													{
-														PaymentStatuses.AUTHORIZED === order.paymentStatus &&
-														<span className="badge badge-success">холдирование</span>
-													}
-													{
-														
-														PaymentStatuses.Return === order.paymentStatus &&
-														<span className="badge badge-warning">возврат</span>
-													}
-													{
-														
-														PaymentStatuses.REJECTED === order.paymentStatus &&
-														<span className="badge badge-danger">отмена</span>
+													 `${order.paymentparams.address_street} ${order.paymentparams.address_home}`
+
 													}
                           
                       </td>

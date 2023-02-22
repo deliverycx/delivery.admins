@@ -19,9 +19,9 @@ export class orderPaymentControllers{
 	getAll(@Query() query: orderPaymentDTO){
 		return this.Servises.getAll(query)
 	}
-	@Get('bu')
+	@Get('buone')
 	geBu(@Query() query: orderPaymentDTO){
-		return this.Servises.getOneBuId(query.id)
+		return this.Servises.getOne(query)
 	}
 
 	@Post('returnPamyMent')
@@ -36,6 +36,21 @@ export class orderPaymentControllers{
 			console.log(error);
 			response.status(400).json({});
 		}
+	}
+
+	@Post('statusPayment')
+	statusPay(@Body() body:orderPaymentDTO){
+		return this.Servises.statusPayment(body)
+	}
+
+	@Post('paymentConfirm')
+	payconf(@Body() body:orderPaymentDTO){
+		return this.Servises.payConfirm(body)
+	}
+
+	@Post('canselpayment')
+	canselpay(@Body() body:orderPaymentDTO){
+		return this.Servises.canselPayment(body)
 	}
 
 	@Post('statusReturn')

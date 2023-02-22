@@ -37,9 +37,9 @@ export class orderPaymentServises extends BaseServises{
 	async statusReturnPamyMent(token:string,order:any,id:string){
 		const statuspay = await this.repeatReturnUntilSuccess(token,id)
 		if(statuspay.status === 'Success'){
-			await this.Repository.setReturnPayment(order.paymentid,'Return')
+			await this.Repository.setStatusPayment(order.paymentid,'Return')
 		}else if(statuspay.status === 'Rejected'){
-			await this.Repository.setReturnPayment(order.paymentid,'Rejected')
+			await this.Repository.setStatusPayment(order.paymentid,'Rejected')
 		}
 		return statuspay
 	}
@@ -75,8 +75,74 @@ export class orderPaymentServises extends BaseServises{
 					}
 			}
 		)
-		console.log(data);
+		
 		return data
+	}
+
+
+	async statusPayment({token,id}){
+		try {
+			const {data} = await axios.get(
+				`https://paymaster.ru/api/v2/payments/${id}`,
+					{
+						headers: {
+								Authorization: `Bearer ${token}`,
+								"Content-Type": "application/json" 
+						}
+				}
+			)
+
+			await this.Repository.setStatusPayment(data.id,data.status)
+			return data
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async payConfirm({token,id,price}){
+		try {
+			const {data} = await axios.put(
+				`https://paymaster.ru/api/v2/payments/${id}/confirm`,
+					{
+						amount: {
+								value: price,
+								currency: "RUB"
+						}
+					},
+					{
+						headers: {
+								Authorization: `Bearer ${token}`,
+								"Content-Type": "application/json" 
+						}
+				},
+				
+			)
+			console.log('подтверждение платежа',data,token,id,price);
+			return data
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async canselPayment({token,id}){
+		try {
+			console.log('отмена платежа',token,id);
+			const {data} = await axios.put(
+				`https://paymaster.ru/api/v2/payments/${id}/cancel`,
+					{},
+					{
+						headers: {
+								Authorization: `Bearer ${token}`,
+								"Content-Type": "application/json" 
+						}
+				},
+				
+			)
+			await this.Repository.setStatusPayment(id,'Cancelled')
+			return data
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 

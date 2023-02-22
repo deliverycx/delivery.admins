@@ -14,6 +14,9 @@ export class PaymentModel{
 	@prop({ type: () => String })
 	public paymentStatus:string
 
+	@prop()
+	public dyalPayment:any
+
 	@prop({ type: () => Number })
 	public paymentAmount:number
 
@@ -28,6 +31,9 @@ export class PaymentModel{
 
 	@prop({ type: () => String })
 	public orderId:string
+
+	@prop()
+	public orderNumber:number
 
 	@prop({ type: () => String })
 	public orderStatus:string

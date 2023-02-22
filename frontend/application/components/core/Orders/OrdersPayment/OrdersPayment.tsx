@@ -19,25 +19,12 @@ const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
 		}
 	}
 
-	let sortedOrder;
-
-	//console.log(orders);
-		//if (orders) sortedOrder = orders.sortBy((d:any) => d.paymentparams.date)  //orders.sort((a:any, b:any) => new Date(a.paymentparams.date) - new Date(b.paymentparams.date));
-		
-		
-		
+	
 
 	return (
 		<>
 		<section className="content-header">
-	      <div className="container-fluid">
-	        <div className="row mb-2">
-	          <div className="col-sm-6">
-	            <h1>Projects</h1>
-	          </div>
-	          
-	        </div>
-	      </div>
+	      
 	    </section>
 			<section className="content">
 
@@ -59,6 +46,9 @@ const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
           <table className="table table-striped projects">
               <thead>
                   <tr>
+											<th>
+												номер заказа
+											</th>
                       <th >
                           номер платежа
                       </th>
@@ -69,12 +59,12 @@ const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
                           ид заказа
                       </th>
                       <th >
-                          точка
+                          телефон
                       </th>
-											
-                      <th className="text-center">
-                          статус оплаты
+											<th >
+                          адресс
                       </th>
+                      
                       <th  className="text-center">
                           статус заказа
                       </th>

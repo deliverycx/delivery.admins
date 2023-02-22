@@ -5,6 +5,12 @@ import { CRUDFabric } from "../Fabric/CRUD.fabric";
 import { RequestFabric } from "../Fabric/FabricApi";
 
 
+type IStatusPayment = {
+	id:number,
+	token:string
+	price?:number
+}
+
 @RequestFabric({
 	request:'orderPayment',
 	factory:[{
@@ -18,6 +24,26 @@ class RequestOrderPayment  extends ApiSuper {
 	@methods('get')
   getBuOrg(query:string) {
     return this.request(`/orderPayment/all?idorganization=${query}`)
+  }
+
+	@methods('get')
+  getBuOrder(query:number) {
+    return this.request<any>(`/orderPayment/buone?paymentid=${query}`)
+  }
+
+	@methods('post')
+  getStatusPayment(body:IStatusPayment) {
+    return this.request(`/orderPayment/statusPayment`)
+  }
+
+	@methods('post')
+  confimPayment(body:IStatusPayment) {
+    return this.request(`/orderPayment/paymentConfirm`)
+  }
+
+	@methods('post')
+  canselPayment(body:IStatusPayment) {
+    return this.request<any>(`/orderPayment/canselpayment`)
   }
 
 	returnPamyMent(data:any){
@@ -36,6 +62,7 @@ class RequestOrderPayment  extends ApiSuper {
 		}
 		)
 	}
+
 	
 }
 
