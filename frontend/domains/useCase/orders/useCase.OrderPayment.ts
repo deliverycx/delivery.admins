@@ -5,6 +5,7 @@ import { useState, useEffect, useReducer } from "react"
 import { RequestOrderPayment, RequestOrganization } from "servises/repository/Axios/Request";
 import { requestOrganizationPayment } from "servises/repository/Axios/Request/Request.OrganizationPayment";
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 export function useOrderPaymentItem(this: any,order:IOrderPayment) {
 	const [statePaymentItem, dispatchPaymentItem] = useReducer(
@@ -43,36 +44,121 @@ export function useOrderPaymentItem(this: any,order:IOrderPayment) {
   })
 }
 
-export function useOrderPaymentCart(this: any,id:string) {
+export function useOrderPaymentCart(this: any,id:number) {
 	const router = useRouter()
+	const [barpay,setBarPay] = useState<any>(null)
 	const [statePaymentItem, dispatchPaymentItem] = useReducer(
     OrderPaymentReducer,
     initialStateOrderPayment
   );
 
-
-	const fomrdata = (value:any) => value
-	const [data,{onSubmit,onDelet,setData,getAll,getBu}] = useFromsCRUD<IOrderPayment>(
-		fomrdata,RequestOrderPayment.CRUDFabric,'/order/orderPayment',id)
-	
+	const organization = router.query.organization
 
 	useEffect(()=>{
-		data && init(data)
-	},[data])
+		if(id && organization){
+			init(organization as string)
+		}
+		
+	},[id,organization])
 
-	const init = async (order:IOrderPayment) =>{
+
+	useEffect(()=>{
+		(async()=>{
+			 if(statePaymentItem.token){
+					 
+				await statusPayment(id)
+				await	getOrder()
+			 }
+		 })()
+		 
+		 
+	 },[statePaymentItem.token,statePaymentItem.tokenBar])
+
+	 //console.log(statePaymentItem);
+
+	const init = async (organization:string) =>{
 		try {
-			const {data:org}:any = await RequestOrganization.getBu({idorganization:order.idorganization})
-			const {data:payorg} = await requestOrganizationPayment.findBuOrg({organization:org._id})
-			
+			const {data:org}:any =  await RequestOrganization.getBu({idorganization:organization})
+			const {data:payorg} = await requestOrganizationPayment.findBuOrg({organization})
+
+			payorg.forEach((val:any) => {
+				if(val.typemagaz == 'ip'){
+					dispatchPaymentItem({
+						type: ReducerActionType.setToken,
+						payload: val.token
+					});
+				}else if(val.typemagaz == 'ooo'){
+					dispatchPaymentItem({
+						type: ReducerActionType.setTokenBar,
+						payload: val.token
+					});
+				}
+			});
 			dispatchPaymentItem({
 				type: ReducerActionType.setOrganization,
 				payload: org.address.street
 			});
+			
+
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const getOrder = async () =>{
+		try {
+			const {data} = await RequestOrderPayment.getBuOrder(id)
 			dispatchPaymentItem({
-				type: ReducerActionType.setToken,
-				payload: payorg.token
+				type: ReducerActionType.setOrder,
+				payload: data
 			});
+			
+			if(data.dyalPayment.BarPaymentid && statePaymentItem.tokenBar){
+				const barPay = await statusPayment(Number(data.dyalPayment.BarPaymentid),statePaymentItem.tokenBar)
+				dispatchPaymentItem({
+					type: ReducerActionType.setBarPayment,
+					payload: barPay
+				});
+			}
+		} catch (error) {
+			
+		}
+	}
+
+	const statusPayment = async (payid:number,token?:string) =>{
+		try {
+			const {data} = await RequestOrderPayment.getStatusPayment({
+				id:payid,
+				token:token || statePaymentItem.token
+			})
+			//console.log(payid,statePaymentItem.token,token);
+			return data
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const successPayment = async (id:number,price:number,token?:string) =>{
+		try {
+			await RequestOrderPayment.confimPayment({
+				id,
+				token:token || statePaymentItem.token,
+				price
+			})
+			router.reload()
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const canselPayment = async (id:number,token?:string) =>{
+		try {
+			console.log(token);
+			await RequestOrderPayment.canselPayment({
+				id,
+				token:token || statePaymentItem.token,
+			})
+			router.reload()
 		} catch (error) {
 			console.log(error);
 		}
@@ -93,7 +179,7 @@ export function useOrderPaymentCart(this: any,id:string) {
 						payload: response.data.error
 					});
 				}
-				getBu(id)
+
 			}
 		} catch (error) {
 			
@@ -115,13 +201,14 @@ export function useOrderPaymentCart(this: any,id:string) {
 
 
 	this.data({
-		data,
+		
     statePaymentItem
   })
   this.handlers({
     handlerReturns,
 		refresh,
-		onDelet
+		canselPayment,
+		successPayment
   })
   this.status({
     

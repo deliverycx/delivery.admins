@@ -4,8 +4,9 @@ import { JwtAuthGuard } from "src/guard/jwt.guard";
 import { OrganizationServises } from '../servises/organization.servises'
 import { Response } from "express";
 import OrganizationDTO, { CityDTO } from "../dto/organization.dto";
+import { AuthGuard } from "@nestjs/passport";
 
-//@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard('jwt'))
 @Controller('organization')
 export class OrganizationControllers{
   constructor(

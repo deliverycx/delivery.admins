@@ -6,7 +6,11 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
 export function useOrganizationPayment(this: any,id:string) {
-	const [info,setInfo] = useState<IPayMaster | null>(null)
+	const [oragPayInfo,setOragPayInfo] = useState<IPayMaster | null>(null)
+	const [payInfoModal,setPayInfoModal] = useState<{modal:boolean,idpay:string}>({
+		modal:false,
+		idpay:''
+	})
 	useEffect(()=>{
 		getBu()
 
@@ -15,17 +19,26 @@ export function useOrganizationPayment(this: any,id:string) {
 	const getBu = async () =>{
 		try {
 			const {data} = await requestOrganizationPayment.findBuOrg({organization:id})
-			data && setInfo(data)
+			data && setOragPayInfo(data)
 		} catch (error) {
 			console.log(error);
 		}
 	}
 	const handlerSwitchPayment = async (active:boolean) =>{
 		try {
-			if(info){
-				await requestOrganizationPayment.swtchPamyMent(info._id,{isActive:active})
+			if(oragPayInfo){
+				await requestOrganizationPayment.swtchPamyMent(oragPayInfo._id,{isActive:active})
 				getBu()
 			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const delitePay = async (id:string) =>{
+		try {
+			await requestOrganizationPayment.CRUDFabric.delet(id)
+			getBu()
 		} catch (error) {
 			console.log(error);
 		}
@@ -34,53 +47,50 @@ export function useOrganizationPayment(this: any,id:string) {
 
   
   this.data({
-    info
+    oragPayInfo,
+		payInfoModal
   })
   this.handlers({
-    handlerSwitchPayment
+    handlerSwitchPayment,
+		setPayInfoModal,
+		delitePay
   })
   this.status({
     
   })
 }
 
-export function useOrganizationPayMaster(this: any,id:string) {
+export function useOrganizationPayMaster(this: any,{paymodal,id}:any) {
 	const router = useRouter()
 	const initState = {
+			name:'',
 			token:'',
-			merchantId:''
+			merchantId:'',
+			typemagaz:''
 		}
 
 	const [modal,setModal] = useState<boolean>()
 	const [info,setInfo] = useState<IPayMaster | null>(null)
-	
-	useEffect(()=>{
-		getBu()
 
-	},[id])
+
+
 	
 	const { register, handleSubmit, watch,setValue } = useForm<typeof initState>();
-
+	
 	const onSubmit = async (data:any) => {
     try {
-			!info
+			/*
+			!paymodal.pay
 					? await requestOrganizationPayment.CRUDFabric.create({...data,organization:id})
-					: await requestOrganizationPayment.CRUDFabric.edit({...data,organization:id},info._id)
+					: await requestOrganizationPayment.CRUDFabric.edit({...data,organization:id},paymodal.pay._id)
+			*/		
+			await requestOrganizationPayment.CRUDFabric.create({...data,organization:id})		
 			setModal(false)
 			router.reload()
     } catch (error) {
       console.log(error);
     }
   }
-
-	const getBu = async () =>{
-		try {
-			const {data} = await requestOrganizationPayment.findBuOrg({organization:id})
-			data && setInfo(data)
-		} catch (error) {
-			console.log(error);
-		}
-	}
 
 	
 
@@ -94,6 +104,7 @@ export function useOrganizationPayMaster(this: any,id:string) {
 		handleSubmit,
 		register,
 		onSubmit,
+		
   })
   this.status({
     

@@ -17,13 +17,19 @@ export class PaymentinfosClass {
 	public isActive!: boolean;
 
 	@prop()
+	public name!: string;
+
+	@prop()
 	public token!: string;
 
 	@prop()
 	public merchantId!: string;
 
-	@prop({ ref: "Organization" })
-	public organization!: Ref<OrganizationClass>; 
+	@prop()
+	public organization!: string; 
+
+	@prop()
+	public typemagaz!: string; 
 
 }
 

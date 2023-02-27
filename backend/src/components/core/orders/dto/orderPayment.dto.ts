@@ -3,4 +3,6 @@ export class orderPaymentDTO{
 
 	token:string
 	order:any
+	price:number
+	paymentid:number
 }

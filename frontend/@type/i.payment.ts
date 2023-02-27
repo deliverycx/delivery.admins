@@ -17,7 +17,7 @@ export type IRecvisites = {
 
 export type IOrderPayment = {
 	_id:string
-	paymentid:string
+	paymentid:number
 	idorganization:string
 	merchantId:string
 	paymentStatus:string
@@ -25,9 +25,14 @@ export type IOrderPayment = {
 	orderAmount:number
 	paymentAmount:number,
 	orderId:string
+	orderNumber:number
 	paymentData:{
 		paymentMethod:string,
 		paymentInstrumentTitle:string
+	}
+	dyalPayment:{
+		BarPaymentAmount: number
+​​		BarPaymentid:string
 	}
 	paymentparams:{
 		organization:string

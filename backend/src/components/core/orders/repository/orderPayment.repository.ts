@@ -13,15 +13,19 @@ export class orderPaymentRepository extends BaseRepository<PaymentModel>{
 		super(Model)
 	 }
 
+	 async getAll(bu: Record<string, any>, populate?: string): Promise<any[]> {
+		return await this.Model.find(bu).select('-__v').sort({paymentTime:'desc'})
+	 }
 
-	 async setReturnPayment(payid:string,status:string){
+
+	 async setStatusPayment(payid:string,status:string){
 		console.log('запись',payid,status);
 		const result = await this.Model.findOneAndUpdate({
 			paymentid:payid
 		},
 		{
 			$set:{
-				paymentStatus:status
+				paymentStatus:status 
 			}
 		},{
 			new:true
@@ -31,4 +35,6 @@ export class orderPaymentRepository extends BaseRepository<PaymentModel>{
 		console.log('запись статуса',result);
 		return result
 	 }
+
+
 }

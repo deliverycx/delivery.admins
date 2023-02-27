@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import RequestOrderPayment from "servises/repository/Axios/Request/Request.OrderPayment";
 import OrderPaymentItem from "./OrderPaymentItem";
 
-const OrdersPayment = () =>{
+const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
 	const [orders,setOrders] = useState<any>(null)
 	useEffect(()=>{
 		getAll()
@@ -11,32 +11,20 @@ const OrdersPayment = () =>{
 
 	const getAll = async () =>{
 		try {
-			const {data} = await RequestOrderPayment.CRUDFabric.getAll()
+			const {data} = await RequestOrderPayment.getBuOrg(organization)
+			//console.log(data);
 			data && setOrders(data)
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	let sortedOrder;
-
-	console.log(orders);
-		//if (orders) sortedOrder = orders.sortBy((d:any) => d.paymentparams.date)  //orders.sort((a:any, b:any) => new Date(a.paymentparams.date) - new Date(b.paymentparams.date));
-		
-		
-		
+	
 
 	return (
 		<>
 		<section className="content-header">
-	      <div className="container-fluid">
-	        <div className="row mb-2">
-	          <div className="col-sm-6">
-	            <h1>Projects</h1>
-	          </div>
-	          
-	        </div>
-	      </div>
+	      
 	    </section>
 			<section className="content">
 
@@ -58,6 +46,9 @@ const OrdersPayment = () =>{
           <table className="table table-striped projects">
               <thead>
                   <tr>
+											<th>
+												номер заказа
+											</th>
                       <th >
                           номер платежа
                       </th>
@@ -68,12 +59,12 @@ const OrdersPayment = () =>{
                           ид заказа
                       </th>
                       <th >
-                          точка
+                          телефон
                       </th>
-											
-                      <th className="text-center">
-                          статус оплаты
+											<th >
+                          адресс
                       </th>
+                      
                       <th  className="text-center">
                           статус заказа
                       </th>
