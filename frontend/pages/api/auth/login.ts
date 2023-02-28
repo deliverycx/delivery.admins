@@ -25,7 +25,8 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
 		} as User
     req.session.user = user
     await req.session.save()
-		console.log(user,byuser);
+
+		console.log(user,req.session.user);
     res.json(user)
   } catch (error) {
     res.status(500).json({ message: (error as Error).message })
