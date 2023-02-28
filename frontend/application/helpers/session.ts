@@ -3,11 +3,11 @@ import type { IronSessionOptions } from 'iron-session'
 import { withIronSessionSsr } from 'iron-session/next'
 
 export const sessionOptions: IronSessionOptions = {
-  password: '123', //process.env.SECRET_COOKIE_PASSWORD as string,
-  cookieName: 'iron-session/examples/next.js',
+  password: process.env.SECRET_COOKIE_PASSWORD as string,
+  cookieName: 'myapp_cookiename',
   // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
   cookieOptions: {
-    secure: false //process.env.NODE_ENV === 'production',
+    secure: true //process.env.NODE_ENV === 'production',
   },
 }
 
