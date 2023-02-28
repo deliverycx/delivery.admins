@@ -16,14 +16,12 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
 	return(
 		<tr>
 											<td className="project-state">
-											<a href={`admins/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
+											<a href={`managers/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
                               {order.orderNumber}
                           </a>
 											</td>
                       <td>
-													<a href={`admins/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
-                              {order.paymentid}
-                          </a>
+														{order.paymentid}
 													<br/>
                           <small>
                               {order.paymentparams.date}
