@@ -23,7 +23,7 @@ export function useCaseAuth(this: any) {
       if (data) {
         const response = await axios.post('/api/auth/login',data)
 				if(response.data){
-					userRout(response.data)
+					//userRout(response.data)
 				}
         
       }
