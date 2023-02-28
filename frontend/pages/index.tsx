@@ -14,7 +14,7 @@ import { withIronSessionSsr } from 'iron-session/next'
 import { userRout } from 'application/contstans/userRout.const'
 
 const Home: NextPage = () => {
-  
+
   return (
 		<>
     <div className="wrapper">
@@ -36,18 +36,4 @@ const Home: NextPage = () => {
 }
 
 export default Home
-//export const getServerSideProps = withCheckSession({...userRout.superAdmin})
-export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps({ req }) {
-    const user = req.session.user;
-
-    console.log(user);
-
-    return {
-      props: {
-        user: req.session.user,
-      },
-    };
-  },
-  sessionOptions
-);
+export const getServerSideProps = withCheckSession({...userRout.superAdmin})
