@@ -45,89 +45,39 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
       <div className="card">
         <div className="card-header">
 					<div className="user-block">
-						<section>
-							<h3 className="card-title">Платеж заказа - <strong>{order.paymentid}</strong></h3>
-							<br />
-							<h5 className="text-warning">{order.dyalPayment.BarPaymentid && 'Двойная оплата'}</h5>
-							<br />
 							{
 								statePaymentItem.errors &&
 								<span><strong>ошибка</strong> - {statePaymentItem.errors}</span>
 							}
-						</section>
+							<h5 className="text-warning">{order.dyalPayment.BarPaymentid && 'Двойная оплата'}</h5>
+							<br />
+						<h5 className="mt-5 text-muted">Информация о заказе - {order.orderNumber}</h5>
+              <ul className="list-unstyled">
+                <li>
+                  <small>адресс:</small> {`${order.paymentparams.address_city}, ${order.paymentparams.address_street}, ${order.paymentparams.address_home}`}
+                </li>
+                <li>
+								<	small>тип заказа:</small> {order.paymentparams.orderType}
+                </li>
+                <li>
+									<small>телефон:</small> {order.paymentparams.phone}
+                </li>
+                <li>
+									<small>дата:</small> {order.paymentparams.date}
+                </li>
+                
+              </ul>
 
 					</div>
           
-          <div className="card-tools">
-								
-								<a className="btn  btn-success" onClick={() => successPayment(order.paymentid,order.paymentAmount)} >подтвердить</a>
-								{
-									false && PaymentStatuses.Return !== order.paymentStatus &&
-									<button className="btn btn-sm btn-warning" disabled={statePaymentItem.retunrs} onClick={()=> handlerReturns(order)}>возврат</button>
-								}
-                
-								<a className="btn btn-danger " onClick={()=> canselPayment(order.paymentid)}>отменить</a>
-								
-          </div>
+          
 					<div className="clearfix"></div>
-					<section className="col-4 float-right">
-								<label className='form-label'>Частичное списание платежа</label>
-								<FormikProvider value={formik}>
-								<form onSubmit={formik.handleSubmit}>
-									
-									<div className='popBox_item col-6 float-left'>
-	                 
-	                  <input type='text'  name='orderPrice' className='form-control' onChange={formik.handleChange} />
-	                </div>
-									<input type="submit"  className='btn btn-success float-right col-6' value="подтвердить" />
-								</form>
-								</FormikProvider>
-								</section>
+					
         </div>
         <div className="card-body">
           <div className="row">
             <div className="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-              <div className="row">
-                <div className="col-12 col-sm-4">
-                  <div className="info-box bg-light">
-                    <div className="info-box-content">
-                      <span className="info-box-text text-center text-muted">Сумма оплаты</span>
-                      <span className="info-box-number text-center text-muted mb-0">{order.paymentAmount}p</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-sm-4">
-                  <div className="info-box bg-light">
-                    <div className="info-box-content">
-                      <span className="info-box-text text-center text-muted">Статус оплаты</span>
-                      <span className="info-box-number text-center text-muted mb-0">
-													{
-														PaymentStatuses.SUCCESSED === order.paymentStatus &&
-														<span className="badge badge-success">Оплачено</span>
-													}
-													{
-														
-														PaymentStatuses.AUTHORIZED === order.paymentStatus &&
-														<span className="badge badge-warning">холдирование</span>
-													}
-													{
-														
-														PaymentStatuses.CANCELLED === order.paymentStatus &&
-														<span className="badge badge-danger">отменен</span>
-													}
-											</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-sm-4">
-                  <div className="info-box bg-light">
-                    <div className="info-box-content">
-                      <span className="info-box-text text-center text-muted">Статус заказа</span>
-                      <span className="info-box-number text-center text-muted mb-0">{OrderStatus[order.orderStatus]}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
               <div className="row">
                 <div className="col-12">
                   <h4>Товары</h4>
@@ -170,9 +120,7 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 								<p className="text-sm">ИД заказа
                   <b className="d-block">{order.orderId}</b>
                 </p>
-                <p className="text-sm">сумма в заказе
-                  <b className="d-block">{order.orderAmount}p <small>(без учета доставки 150р)</small> </b>
-                </p>
+                
                 <p className="text-sm">ИД магазина(точки)
                   <b className="d-block">{order.merchantId}</b>
                 </p>
@@ -181,25 +129,93 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
                 </p>
               </div>
 
-              <h5 className="mt-5 text-muted">Информация о заказе</h5>
-              <ul className="list-unstyled">
-                <li>
-                  <small>адресс:</small> {`${order.paymentparams.address_city}, ${order.paymentparams.address_street}, ${order.paymentparams.address_home}`}
-                </li>
-                <li>
-								<	small>тип заказа:</small> {order.paymentparams.orderType}
-                </li>
-                <li>
-									<small>телефон:</small> {order.paymentparams.phone}
-                </li>
-                <li>
-									<small>дата:</small> {order.paymentparams.date}
-                </li>
-                
-              </ul>
+              
               
             </div>
           </div>
+					<hr />
+					
+
+					<div className="card-header">
+						<section>
+								<h3 className="card-title">Платеж заказа - <strong>{order.paymentid}</strong></h3>
+								
+							</section>
+							<div className="card-tools cardlefttoll">
+									
+									<a className="btn  btn-success" onClick={() => successPayment(order.paymentid,order.paymentAmount)} >подтвердить</a>
+									{
+										false && PaymentStatuses.Return !== order.paymentStatus &&
+										<button className="btn btn-sm btn-warning" disabled={statePaymentItem.retunrs} onClick={()=> handlerReturns(order)}>возврат</button>
+									}
+	                
+									<a className="btn btn-danger " onClick={()=> canselPayment(order.paymentid)}>отменить</a>
+									
+	          </div>	
+						<section className="sm-4 float-right chastplatej">
+								<label className='form-label'>Частичное списание платежа</label>
+								<FormikProvider value={formik}>
+								<form onSubmit={formik.handleSubmit}>
+									
+									<div className='popBox_item col-6 float-left'>
+	                 
+	                  <input type='text'  name='orderPrice' className='form-control' onChange={formik.handleChange} />
+	                </div>
+									<input type="submit"  className='btn btn-success float-right col-6' value="подтвердить" />
+								</form>
+								</FormikProvider>
+								</section>
+					</div>
+					
+					<div className="row">
+                <div className="col-12 col-sm-3">
+                  <div className="info-box bg-light">
+                    <div className="info-box-content">
+                      <span className="info-box-text text-center text-muted">Сумма оплаты</span>
+                      <span className="info-box-number text-center text-muted mb-0">{order.paymentAmount}p</span>
+                    </div>
+                  </div>
+                </div>
+								<div className="col-12 col-sm-3">
+                  <div className="info-box bg-light">
+                    <div className="info-box-content">
+                      <span className="info-box-text text-center text-muted">Сумма заказа</span>
+                      <span className="info-box-number text-center text-muted mb-0">{order.orderAmount}p</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 col-sm-3">
+                  <div className="info-box bg-light">
+                    <div className="info-box-content">
+                      <span className="info-box-text text-center text-muted">Статус оплаты</span>
+                      <span className="info-box-number text-center text-muted mb-0">
+													{
+														PaymentStatuses.SUCCESSED === order.paymentStatus &&
+														<span className="badge badge-success">Оплачено</span>
+													}
+													{
+														
+														PaymentStatuses.AUTHORIZED === order.paymentStatus &&
+														<span className="badge badge-warning">холдирование</span>
+													}
+													{
+														
+														PaymentStatuses.CANCELLED === order.paymentStatus &&
+														<span className="badge badge-danger">отменен</span>
+													}
+											</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 col-sm-3">
+                  <div className="info-box bg-light">
+                    <div className="info-box-content">
+                      <span className="info-box-text text-center text-muted">Статус заказа</span>
+                      <span className="info-box-number text-center text-muted mb-0">{OrderStatus[order.orderStatus]}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
         
       </div>

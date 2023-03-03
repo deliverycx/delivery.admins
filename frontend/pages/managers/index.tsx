@@ -13,9 +13,10 @@ const AdminPage: NextPage = ({user}:any) => {
 		<div className="wrapper">
       <Header />
       <MenuAdmins />
-      <Container>
+			<div className="content-wrapper ordertable">
 				<OrdersPayment organization={user.organization} />
-      </Container>
+			</div>
+      
     </div>
   )
 }
