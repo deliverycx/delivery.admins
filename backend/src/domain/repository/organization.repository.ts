@@ -249,7 +249,20 @@ export class OrganizationRepository {
 	}
 
 	async DeliteOrgMetod(id:any){
-		const result = await this.organizationModel.deleteOne({_id:id})
+		const result = await this.organizationModel.deleteOne({id:id})
+		
+		return result
+	}
+
+	async RedirectOrgMetod(idorganization,url:any){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				redirect:url
+			}
+		)
 		
 		return result
 	}

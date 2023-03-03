@@ -24,6 +24,9 @@ export default class OrganizationDTO {
 
 	@IsOptional()
 	worktime:string[]
+
+	@IsOptional()
+	redirect:string
 }
 
 export class CityDTO{

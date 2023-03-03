@@ -135,4 +135,14 @@ export class OrganizationControllers{
     return result
 	}
 
+	@Post('organizationRedirect')
+	async organizationRedirect(
+		@Body() body: OrganizationDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.organizationRedirect(body)
+		
+    return result
+	}
+
 }
