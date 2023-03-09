@@ -16,7 +16,7 @@ const TabsSettings = () =>{
 			<OrganizationWorkTime organization={organization} refresh={getOrgBu} />
 			<OrganizationInfo organization={organization} />
 			<OrganizationReverseTable organization={organization} refresh={getOrgBu} />
-			<OrganizationRedirect organization={organization} refresh={getOrgBu} />
+			
 		</>
 	)
 }
