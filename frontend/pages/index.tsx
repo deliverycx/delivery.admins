@@ -14,7 +14,7 @@ import { withIronSessionSsr } from 'iron-session/next'
 import { userRout } from 'application/contstans/userRout.const'
 
 const Home: NextPage = () => {
-  
+
   return (
 		<>
     <div className="wrapper">

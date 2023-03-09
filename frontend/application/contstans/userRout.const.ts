@@ -1,7 +1,7 @@
 export const userRout = {
 	superAdmin:{
 		roles:'admin',
-		rout:'/admins'
+		rout:'/managers'
 	},
 	admins:{
 		roles:'ofic',

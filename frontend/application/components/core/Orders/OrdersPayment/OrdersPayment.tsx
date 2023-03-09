@@ -22,28 +22,7 @@ const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
 	
 
 	return (
-		<>
-		<section className="content-header">
-	      
-	    </section>
-			<section className="content">
-
-
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Заказы с оплатой карты</h3>
-
-          <div className="card-tools">
-            <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i className="fas fa-minus"></i>
-            </button>
-            <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i className="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div className="card-body p-0">
-          <table className="table table-striped projects">
+		<table className="table table-striped projects">
               <thead>
                   <tr>
 											<th>
@@ -82,12 +61,6 @@ const OrdersPayment:FC<{organization:string}> = ({organization}) =>{
                   
               </tbody>
           </table>
-        </div>
-      
-      </div>
-    
-    </section>
-		</>
 		
 	)
 }
