@@ -91,7 +91,7 @@ class RequestOrganization extends ApiSuper {
 
 	@methods('get')
   socialBu(query:string) {
-    return this.request(`/organization/socialbu?idorganization=${query}`)
+    return this.request<{social:any}>(`/organization/socialbu?idorganization=${query}`)
   }
 
 	@methods('post')

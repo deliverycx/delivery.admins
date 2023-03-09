@@ -16,13 +16,12 @@ const OrganuzationSocial:FC<{organization:any}> = ({organization}) =>{
 	const getSocial = async (id:string) =>{
 		try {
 			const {data} = await RequestOrganization.socialBu(id)
-			setSocial(data)
+			data.social && setSocial(data.social)
 		} catch (error) {
 			console.log(error);
 		}
 		
 	}
-
 
 	const onSubmit = async () =>{
 		try {
@@ -45,13 +44,17 @@ const OrganuzationSocial:FC<{organization:any}> = ({organization}) =>{
             </div>
             <div className="card-body">
 						<div className="form-group">
-							{
-								social &&
+							
 								<div className="popBox_item col-3"> 
 				            <label className="form-label">VK</label>
-				            <input type="text" name="link" onChange={e => setInput(e.target.value)} defaultValue={social ? social.social && String(social.social.vk) : ' '} className="form-control" />
+				            {
+											social
+											? <input type="text" name="link" onChange={e => setInput(e.target.value)} defaultValue={social ? String(social.vk) : ' '} className="form-control" />
+								      : <input type="text" name="link" onChange={e => setInput(e.target.value)} defaultValue="" className="form-control" />
+								          
+										}
 				        </div>
-							}
+						
 							
 						</div>
 						<input type="submit" value="Сохранить" onClick={onSubmit} className="btn btn-success"/>
