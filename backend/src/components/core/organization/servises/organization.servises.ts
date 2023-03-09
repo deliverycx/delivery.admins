@@ -50,4 +50,11 @@ export class OrganizationServises{
 	organizationDelite({id}){
 		return this.OrganizationRepository.DeliteOrgMetod(id)
 	}
+
+	organizationRedirect({idorganization,redirect}){
+		return this.OrganizationRepository.RedirectOrgMetod(idorganization,redirect)
+	}
+	organizationRedirectON({idorganization,redirecton}){
+		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirecton)
+	}
 }

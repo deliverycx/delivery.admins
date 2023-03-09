@@ -217,6 +217,33 @@ export class OrganizationRepository {
 		
 		return result
 	}
+
+
+	async RedirectOrgMetod(idorganization,url:any){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				redirect:url
+			}
+		)
+
+		return result
+	}
+
+	async RedirectONOrgMetod(idorganization,url:any){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				redirectON:url
+			}
+		)
+
+		return result
+	}
 	
 
 }

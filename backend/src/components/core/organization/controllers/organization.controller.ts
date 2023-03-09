@@ -128,4 +128,24 @@ export class OrganizationControllers{
     return result
 	}
 
+	@Post('organizationRedirect')
+	async organizationRedirect(
+		@Body() body: OrganizationDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.organizationRedirect(body)
+
+    return result
+	}
+
+	@Post('organizationRedirectON')
+	async organizationRedirectOn(
+		@Body() body: OrganizationDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.organizationRedirectON(body)
+
+    return result
+	}
+
 }

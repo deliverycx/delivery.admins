@@ -4,6 +4,7 @@ import { useOrganizationSetting } from 'domains/useCase/organization/useCase.Org
 import OrganizationBanner from './viewSetting/OrganizationBanner';
 import OrganizationContlols from './viewSetting/OrganizationContlols';
 import OrganizationWorkTime from './viewSetting/OrganizationWorkTime';
+import OrganizationRedirect from './OrganizationRedirect';
 
 const OrganizationSetting = () =>{
 	const useCasePoints = adapterComponentUseCase(useOrganizationSetting)
@@ -102,7 +103,10 @@ const OrganizationSetting = () =>{
 						organization &&
 						<OrganizationBanner id={organization.id} />
 					}
-					
+					{
+						organization &&
+						<OrganizationRedirect organization={organization} refresh={getOrgBu} />
+					}
 
 					
 					<button onClick={()=> deliteOrganization(organization._id)}>удалить точку</button>

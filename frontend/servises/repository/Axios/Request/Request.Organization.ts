@@ -108,6 +108,16 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/cityadd`)
   }
 
+	@methods('post')
+  redirect(data:any) {
+    return this.request(`/organization/organizationRedirect`)
+  }
+
+	@methods('post')
+  redirectOn(data:any) {
+    return this.request(`/organization/organizationRedirectON`)
+  }
+
 
   
 }
