@@ -35,11 +35,11 @@ const OrganizationRedirect:FC<{organization:any,refresh:any}> = ({organization,r
             </div>
             <div className="card-body">
 						<div className="form-group">
-							<button className={CN} onClick={()=>handleOn()}>{organization.isHidden ? 'Редирект включен' : 'Редирект выключен'}</button>
+							<button className={CN} onClick={()=>handleOn()}>{organization.redirectON ? 'Редирект включен' : 'Редирект выключен'}</button>
 
 								<br />
 								<div className="popBox_item col-3"> 
-				            <label className="form-label">Ид точки с доставки</label>
+				            <label className="form-label">Ид точки с транспорта</label>
 				            <input type="text" name="link" onChange={e => setOnredirect(e.target.value)} defaultValue={organization.redirect ? organization.redirect : ''} className="form-control" />
 				        </div>
 
