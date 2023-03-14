@@ -131,6 +131,11 @@ export function useMainBannerForm(this: any) {
         formData.append('mobfile', stateBanners.mobfile[i])
       }
     }
+		if (stateBanners.stories) {
+      for (let i = 0; i < stateBanners.stories.length; i++) {
+        formData.append('stories', stateBanners.stories[i])
+      }
+    }
 		formData.append('organization',stateBanners.selectOrg) // data.org || (stateBanners.banners && stateBanners.banners.organization)
 		formData.append('url', stateBanners.url)
 		formData.append('order', data.order || (stateBanners.banners && stateBanners.banners.order) || 0)
@@ -188,6 +193,13 @@ export function useMainBannerForm(this: any) {
 					payload: file
 				});
 			break;
+
+			case 'stories':
+				dispatchBanners({
+					type: ReducerActionTypePoints.setStories,
+					payload: file
+				});
+			break;
 		}
 	}
 
@@ -203,6 +215,8 @@ export function useMainBannerForm(this: any) {
 			return imgRout(val)
 		})
   },[slideId])
+
+	console.log(stateBanners);
 
 	this.data({
 		stateBanners,

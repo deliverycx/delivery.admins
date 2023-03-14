@@ -5,6 +5,7 @@ export const initialStateBanner = {
     smallFilee: "",
 		mobfile:"",
     banners: null,
+		stories:"",
 		organizations:null,
 		selectOrg:"all",
 		error:false,
@@ -16,6 +17,7 @@ export enum ReducerActionTypePoints {
 	setFile,
   setSmallFile,
 	setMobfile,
+	setStories,
 	setBanners,
 	setOrganizations,
 	setSelectOrg,
@@ -41,6 +43,11 @@ export function BannerReducer(state: typeinitialState, action: ReducerAction<Red
       return {
         ...state,
         mobfile: action.payload,
+    };
+		case ReducerActionTypePoints.setStories:
+      return {
+        ...state,
+        stories: action.payload,
     };
     case ReducerActionTypePoints.setBanners:
       return {

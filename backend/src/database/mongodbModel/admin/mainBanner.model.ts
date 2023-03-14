@@ -15,6 +15,9 @@ export class MainBannerModel{
 	@prop({ type: () => Array })
   public mobimages: string[]
 
+	@prop({ type: () => Array })
+  public stories: string[]
+
 	@prop({ type: () => Number,default:() => 0 })
   public order:number
 }

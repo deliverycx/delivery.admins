@@ -80,6 +80,20 @@ const MainBannerForm = () => {
                     }
                   </div>
                 </div>
+
+								<div className='popBox_item'>
+                  <label htmlFor='exampleSelectBorder'>Сторисы</label>
+                  <div className='form-group'>
+                    {
+                      !slideId && <DropzoneArea onChange={e => handlerFile('stories', e)} />
+                    }
+                    {
+                      slideId && stateBanners.banners &&
+                      <DropzoneArea onChange={e => handlerFile('stories', e)}
+                                    initialFiles={imagesArr(stateBanners.banners.stories)} />
+                    }
+                  </div>
+                </div>
               </div>
             </div>
           </div>
