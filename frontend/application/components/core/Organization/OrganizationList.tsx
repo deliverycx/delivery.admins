@@ -52,7 +52,7 @@ const OrganizationList = () => {
                         <div className='card-footer'>
                           <a className='card-title title_org' href={`/organization/${point.id}`}>
 														{point.address.street}
-														
+														<small> {point.delivMetod === CART_CHOICE.NOWORK && ' - Онлайн-заказ не доступен'}</small>
 													</a>
 													
 														<div className="organization_control organization_control-box" >
