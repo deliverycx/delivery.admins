@@ -93,19 +93,32 @@ export class IikoRequesterServises {
 					headers: { Authorization: `Bearer ${token}` }
 				}
     	);
-				
 
-			const cityRes = rescity.cities[0] && rescity.cities[0].items.filter((val:any)=>{
-				 return val.id === organization.defaultDeliveryCityId
-			})[0]
+
+			const {data:terminal} = await axios.post(
+        'https://api-ru.iiko.services/api/1/terminal_groups',
+				{
+					organizationIds: [
+						organizations.id
+					],
+					includeDisabled: true
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+    	);
+
+			const cityRes = terminal.terminalGroups[0].items[0].name
 
 
 
 			
 
-      const matchesAddress = organization.restaurantAddress.match(
-        /(?<oblast>.*?),(?<city>.*?),\s?(?<street>.*)/i
+      const matchesAddress = cityRes.match(
+        /(?<city>.*?),\s?(?<street>.*)/i
       );
+
+			
 				
 			
       if (matchesAddress) {
@@ -363,7 +376,7 @@ export class IikoRequesterServises {
     console.log("start pooling");
     await this.getToken();
     await this.getAddresses();
-    await this.getNomenclature();
+    //await this.getNomenclature();
     console.log("end pooling");
   }
 }
