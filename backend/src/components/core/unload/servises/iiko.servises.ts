@@ -124,21 +124,20 @@ export class IikoRequesterServises {
       if (matchesAddress) {
         const { city, street } = matchesAddress.groups;
         
-				/*
+				/**/
         const { position } = await this.geoCoder.resolve(
-          city.trim() + street
+          cityRes
         );
-				*/
 				
-				const position = [ organization.latitude, organization.longitude ]	
 				
+				//const position = [ organization.longitude,organization.latitude ]	
 
         const organizationInArray = {
           street,
           guid: organization.id,
           longitude: position[0],
           latitude: position[1],
-          workTime: '10:00-22:00',
+          workTime: ['10:00-22:00'],
           phone: organization.phone,
 					
         };
@@ -198,6 +197,7 @@ export class IikoRequesterServises {
 											longitude,
 											latitude
 										},
+										workTime,
                     phone,
                 },
 								
@@ -376,7 +376,7 @@ export class IikoRequesterServises {
     console.log("start pooling");
     await this.getToken();
     await this.getAddresses();
-    await this.getNomenclature();
+    //await this.getNomenclature();
     console.log("end pooling");
   }
 }
