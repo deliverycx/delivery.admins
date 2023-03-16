@@ -159,7 +159,7 @@ export class IikoRequesterServises {
 					{
 						$setOnInsert:{
 							organizationStatus:ORG_STATUS.NOWORK,
-							deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.ONSPOT],
+							deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP],
 							paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
 						}
 					},
