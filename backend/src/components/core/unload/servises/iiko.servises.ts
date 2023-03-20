@@ -93,39 +93,51 @@ export class IikoRequesterServises {
 					headers: { Authorization: `Bearer ${token}` }
 				}
     	);
-				
 
-			const cityRes = rescity.cities[0] && rescity.cities[0].items.filter((val:any)=>{
-				 return val.id === organization.defaultDeliveryCityId
-			})[0]
+
+			const {data:terminal} = await axios.post(
+        'https://api-ru.iiko.services/api/1/terminal_groups',
+				{
+					organizationIds: [
+						organizations.id
+					],
+					includeDisabled: true
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+    	);
+
+			const cityRes = terminal.terminalGroups[0].items[0].name
 
 
 
 			
 
-      const matchesAddress = organization.restaurantAddress.match(
-        /(?<oblast>.*?),(?<city>.*?),\s?(?<street>.*)/i
+      const matchesAddress = cityRes.match(
+        /(?<city>.*?),\s?(?<street>.*)/i
       );
+
+			
 				
 			
       if (matchesAddress) {
         const { city, street } = matchesAddress.groups;
         
-				/*
+				/**/
         const { position } = await this.geoCoder.resolve(
-          city.trim() + street
+          cityRes
         );
-				*/
 				
-				const position = [ organization.latitude, organization.longitude ]	
 				
+				//const position = [ organization.longitude,organization.latitude ]	
 
         const organizationInArray = {
           street,
           guid: organization.id,
           longitude: position[0],
           latitude: position[1],
-          workTime: '10:00-22:00',
+          workTime: ['10:00-22:00'],
           phone: organization.phone,
 					
         };
@@ -147,7 +159,7 @@ export class IikoRequesterServises {
 					{
 						$setOnInsert:{
 							organizationStatus:ORG_STATUS.NOWORK,
-							deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.ONSPOT],
+							deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP],
 							paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
 						}
 					},
@@ -185,6 +197,7 @@ export class IikoRequesterServises {
 											longitude,
 											latitude
 										},
+										workTime,
                     phone,
                 },
 								
