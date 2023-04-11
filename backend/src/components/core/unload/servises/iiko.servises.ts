@@ -267,7 +267,7 @@ export class IikoRequesterServises {
         const { groups, products, revision } = data;
 
 				console.log('ревизия');
-        console.log(revisionFromDatabase, revision);
+        console.log(guid,revisionFromDatabase, revision);
 
         if (revision === revisionFromDatabase.revision) {
             continue;
