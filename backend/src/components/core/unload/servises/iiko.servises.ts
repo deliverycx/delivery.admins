@@ -266,7 +266,8 @@ export class IikoRequesterServises {
 
         const { groups, products, revision } = data;
 
-        //console.log(revisionFromDatabase, revision);
+				console.log('ревизия');
+        console.log(revisionFromDatabase, revision);
 
         if (revision === revisionFromDatabase.revision) {
             continue;
@@ -275,7 +276,7 @@ export class IikoRequesterServises {
         for (let i = 0; i < groups.length; i++) {
             const { name, order, images,imageLinks, id, description } = groups[i];
 
-						console.log('images',imageLinks);
+						//console.log('images',imageLinks);
             if (description === "HIDDEN") {
                 continue;
             }
@@ -368,7 +369,7 @@ export class IikoRequesterServises {
             { $set: { revision } }
         );
 
-        console.log(data); 
+        //console.log(data); 
         }
     }
   }
