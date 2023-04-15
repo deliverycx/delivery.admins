@@ -2,6 +2,7 @@ import { IOrganizationStatus } from "@type"
 import { DELIVERY_METODS } from "application/contstans/const.orgstatus"
 import { FC } from "react"
 import cn from 'classnames';
+import OrganizationDeliveryTime from "./OrganizationDeliveryTime";
 
 type IPoprs = {
 	organizationStatus:IOrganizationStatus
@@ -19,9 +20,13 @@ const OrganizationDeliveryMetods:FC<IPoprs> = ({organizationStatus,swtchStatus})
 		}
 	}
 
+	const findMetod = (metod:string) => organizationStatus.deliveryMetod.includes(metod)
+
 	const CN = (deliv:string) => cn('col-2 btn btn-block', {
-		'btn-success':organizationStatus.deliveryMetod.includes(deliv),
+		'btn-success':findMetod(deliv),
 	});
+
+
 
 	return(
 		<div className='card-body'>
@@ -32,6 +37,10 @@ const OrganizationDeliveryMetods:FC<IPoprs> = ({organizationStatus,swtchStatus})
 				<div className={CN(DELIVERY_METODS.PICKUP)} onClick={()=> handler(DELIVERY_METODS.PICKUP)}>Самовывоз</div>
 				<div className={CN(DELIVERY_METODS.ONSPOT)} onClick={()=> handler(DELIVERY_METODS.ONSPOT)}>За столом</div>
 			</div>
+			{
+				findMetod(DELIVERY_METODS.COURIER) &&
+				<OrganizationDeliveryTime organizationStatus={organizationStatus} swtchStatus={swtchStatus} />
+			} 
 			</div>
 		</div>
 	)

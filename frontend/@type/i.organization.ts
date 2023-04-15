@@ -35,4 +35,5 @@ export type IOrganizationStatus = {
 	deliveryMetod:string[]
 	organizationStatus:string
 	paymentMetod:string[]
+	deliveryTime:number
 }

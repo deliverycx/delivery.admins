@@ -21,10 +21,13 @@ export class OrganizationStatusClass {
 	public deliveryMetod!: string[] | null;
 
 	@prop({default:ORG_STATUS.NOWORK})
-	organizationStatus!:string
+	public organizationStatus!:string
 
 	@prop({ type: () => Array, default: [PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD] })
 	public paymentMetod!: string[] | null;
+
+	@prop()
+	public deliveryTime!:number | null
 
 }
 
