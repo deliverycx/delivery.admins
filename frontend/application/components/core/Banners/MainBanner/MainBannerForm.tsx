@@ -89,7 +89,7 @@ const MainBannerForm = () => {
                     }
                     {
                       slideId && stateBanners.banners &&
-                      <DropzoneArea onChange={e => handlerFile('stories', e)}
+                      <DropzoneArea onChange={e => handlerFile('stories', e)} filesLimit={6}
                                     initialFiles={imagesArr(stateBanners.banners.stories)} />
                     }
                   </div>
