@@ -7,9 +7,9 @@ const OrganizationRedirect:FC<{organization:any,refresh:any}> = ({organization,r
 	const [onRedirect,setOnredirect] = useState<any>()
 
 	const handleOn = async () =>{
-		await RequestOrganization.hiddenOrganization({
+		await RequestOrganization.redirectON({
 			idorganization:organization.id,
-			isHidden:!organization.isHidden
+			redirectON:!organization.redirectON
 		})
 		refresh(organization.id)
 	}
@@ -24,7 +24,7 @@ const OrganizationRedirect:FC<{organization:any,refresh:any}> = ({organization,r
 
 
 	const CN = cn('col-2 btn btn-block', {
-		'btn-success':organization.isHidden,
+		'btn-success':organization.redirectON,
 	});
 
 	return(
@@ -34,7 +34,7 @@ const OrganizationRedirect:FC<{organization:any,refresh:any}> = ({organization,r
             </div>
             <div className="card-body">
 						<div className="form-group">
-							<button className={CN} onClick={()=>handleOn()}>{organization.isHidden ? 'Редирект включен' : 'Редирект выключен'}</button>
+							<button className={CN} onClick={()=>handleOn()}>{organization.redirectON ? 'Редирект включен' : 'Редирект выключен'}</button>
 							
 								<br />
 								<div className="popBox_item col-3"> 

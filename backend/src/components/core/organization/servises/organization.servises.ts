@@ -58,4 +58,7 @@ export class OrganizationServises{
 	organizationRedirect({idorganization,redirect}){
 		return this.OrganizationRepository.RedirectOrgMetod(idorganization,redirect)
 	}
+	organizationRedirectON({idorganization,redirectON}){
+		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirectON)
+	}
 }

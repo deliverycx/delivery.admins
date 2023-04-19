@@ -266,6 +266,18 @@ export class OrganizationRepository {
 		
 		return result
 	}
+	async RedirectONOrgMetod(idorganization:string,metod:boolean){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				redirectON:metod
+			}
+		)
+		
+		return result
+	}
 	
 
 }

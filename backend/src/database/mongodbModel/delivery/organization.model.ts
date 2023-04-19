@@ -45,6 +45,9 @@ export class OrganizationClass {
     public redirect:string
 
 		@prop({ type: () => Boolean,default:false })
+    public redirectON:string
+
+		@prop({ type: () => Boolean,default:false })
 		reservetable:boolean
     
 }
