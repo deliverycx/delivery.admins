@@ -1,21 +1,28 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { AdminUsersModel } from 'src/database/mongodbModel/admin/users.model';
-
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { PassportStrategy } from "@nestjs/passport";
+import { Request } from "express";
+import { ExtractJwt, Strategy } from "passport-jwt";
 
 @Injectable()
-export class JwtStratagy extends PassportStrategy(Strategy) {
-	constructor(private readonly configService: ConfigService) {
-		super({
-			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-			ignoreExpiration: true,
-      secretOrKey: 'kek'
-		});
-	}
+export class JwtStrategy extends PassportStrategy(Strategy,'jwt') {
+    constructor(){
+        super({
+            ignoreExpiration: true,
+            secretOrKey:"kek",
+            jwtFromRequest:ExtractJwt.fromExtractors([(request:Request) => {
+                let data = request?.cookies["auth-cookie"];
+                if(!data){
+                    return null;
+                }
+                return data.token
+            }])
+        });
+    }
 
-	async validate({ name }: Pick<AdminUsersModel, 'name'>) {
-		return name;
-	}
+    async validate(payload:any){
+        if(payload === null){
+           throw new UnauthorizedException();
+        }
+        return payload;
+    }
 }

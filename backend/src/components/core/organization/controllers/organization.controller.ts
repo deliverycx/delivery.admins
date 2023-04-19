@@ -4,8 +4,9 @@ import { JwtAuthGuard } from "src/guard/jwt.guard";
 import { OrganizationServises } from '../servises/organization.servises'
 import { Response } from "express";
 import OrganizationDTO, { CityDTO } from "../dto/organization.dto";
+import { AuthGuard } from "@nestjs/passport";
 
-//@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard('jwt'))
 @Controller('organization')
 export class OrganizationControllers{
   constructor(
@@ -51,6 +52,12 @@ export class OrganizationControllers{
   async CityHidden(@Body() body: OrganizationDTO) {
     const result = await this.OrganizationServises.hiddenCityMetod(body)
 		
+    return result
+  }
+
+	@Post('checkorg')
+  async checkOrg(@Body() body: OrganizationDTO) {
+    const result = await this.OrganizationServises.checkOranizationMetod(body)
     return result
   }
 
@@ -134,17 +141,17 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationRedirect(body)
-
+		
     return result
 	}
 
 	@Post('organizationRedirectON')
-	async organizationRedirectOn(
+	async organizationRedirectON(
 		@Body() body: OrganizationDTO,
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationRedirectON(body)
-
+		
     return result
 	}
 

@@ -62,11 +62,23 @@ export class OrganizationRepository {
       },
       { new: true }
     )
+		
+    
+    return organizationEntities.hiddenMetod(result.id,result.isHidden)
+  }
+
+	async checkOranizationMetod(orgid: string) {
+    const result = await this.organizationModel.findOne(
+      {
+        id: orgid
+      }
+    )
 		const city = await  this.cityModel.find({
 			organizations:{
 				$all:[result._id]
 			}
 		})
+		console.log('город',city);
 
 		if(JSON.stringify(result.city)  !== JSON.stringify(city[0]._id)){
 			await this.organizationModel.findOneAndUpdate(
@@ -83,8 +95,10 @@ export class OrganizationRepository {
 			
 		}
     
-    return organizationEntities.hiddenMetod(result.id,result.isHidden)
+    return city
   }
+
+
 	async hiddenCityMetod(orgid: string, metod: boolean) {
 		console.log(orgid,metod);
     const result = await this.cityModel.findOneAndUpdate(
@@ -187,6 +201,28 @@ export class OrganizationRepository {
 		return result
 	}
 
+	async settingOrgMetod(idorganization:string,setting){
+		console.log(setting);
+		const result = await this.organizationModel.findOneAndUpdate(
+      {
+        id: idorganization
+      },
+      {
+        $set: {
+          phone: setting.phone,
+					address:{
+						street:setting.adress,
+						longitude:setting.longitude,
+						latitude:setting.latitude
+					}
+
+        }
+      },
+      { new: true }
+    )
+		return result
+	}
+
 	async addCityMetod(city:any){
 		console.log(city);
 		const result = await this.cityModel.create(city)
@@ -213,7 +249,32 @@ export class OrganizationRepository {
 	}
 
 	async DeliteOrgMetod(id:any){
-		const result = await this.organizationModel.deleteOne({_id:id})
+		const result = await this.organizationModel.deleteOne({id:id})
+		
+		return result
+	}
+
+	async RedirectOrgMetod(idorganization,url:any){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				redirect:url
+			}
+		)
+		
+		return result
+	}
+	async RedirectONOrgMetod(idorganization:string,metod:boolean){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				redirectON:metod
+			}
+		)
 		
 		return result
 	}

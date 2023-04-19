@@ -21,6 +21,10 @@ export class OrganizationServises{
   hiddenOranizationMetod({idorganization,isHidden}) {
     return this.OrganizationRepository.hiddenOranizationMetod(idorganization,isHidden)
   }
+	checkOranizationMetod({idorganization}) {
+    return this.OrganizationRepository.checkOranizationMetod(idorganization)
+  }
+
 	hiddenCityMetod({idorganization,isHidden}) {
     return this.OrganizationRepository.hiddenCityMetod(idorganization,isHidden)
   }
@@ -54,7 +58,7 @@ export class OrganizationServises{
 	organizationRedirect({idorganization,redirect}){
 		return this.OrganizationRepository.RedirectOrgMetod(idorganization,redirect)
 	}
-	organizationRedirectON({idorganization,redirecton}){
-		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirecton)
+	organizationRedirectON({idorganization,redirectON}){
+		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirectON)
 	}
 }

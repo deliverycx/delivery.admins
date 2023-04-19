@@ -1,7 +1,8 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { RequestOrganization } from "servises/repository/Axios/Request"
-import { ISocial, ListOrganization } from "@type";
+import { IOrganization, ISocial, ListOrganization } from "@type";
+import { useFormik, FormikProvider } from "formik";
 
 export function  useOrganizationSetting(this: any){
 	const router = useRouter()
@@ -9,29 +10,19 @@ export function  useOrganizationSetting(this: any){
 
 	const [input,setInput] = useState<string>()
 	const [social,setSocial] = useState<any>()
-	const [organization,setOrganization] = useState<any>()
+	const [organization,setOrganization] = useState<any>(null)
 
 	useEffect(()=>{
 		if(slideId){
-			getSocial(slideId)
-			getOrgBu(slideId)
+			getOrgBu()
 		}
 
 	},[slideId])
 
-	const getSocial = async (id:string) =>{
-		try {
-			const {data} = await RequestOrganization.socialBu(id)
-			setSocial(data)
-		} catch (error) {
-			console.log(error);
-		}
-		
-	}
 
-	const getOrgBu = async (id:string) =>{
+	const getOrgBu = async () =>{
 		try {
-			const {data} = await RequestOrganization.getBu({idorganization: id})
+			const {data} = await RequestOrganization.getBu({idorganization: slideId})
 			setOrganization(data)
 		} catch (error) {
 			console.log(error);
@@ -40,20 +31,6 @@ export function  useOrganizationSetting(this: any){
 	}
 
 
-	const onSubmit = async () =>{
-		try {
-				const data = {
-				idorganization:slideId,
-				social:{
-					vk:input
-				}
-			}
-			await RequestOrganization.social(data)
-		} catch (error) {
-			
-		}
-		
-	}
 
 	const deliteOrganization = async (id:string) =>{
 		try {
@@ -64,16 +41,20 @@ export function  useOrganizationSetting(this: any){
 		}
 	}
 
+	const handleHiddenOrg = async (idorganization: string,isHidden:boolean) => {
+    await RequestOrganization.hiddenOrganization({ idorganization, isHidden })
+    await getOrgBu()
+  }
 
-	const handleReserveTable = async (event:any) =>{
-		const value = event.target.value
-		const tobol = value === 'true' ? true : false
-		await RequestOrganization.reserveTable({
-			idorganization: slideId,
-			reservetable:tobol
-		})
-		getOrgBu(slideId)
+	const checkOrganization = async (idorganization: string) =>{
+		try {
+			await RequestOrganization.checkOrganization({idorganization})
+		} catch (error) {
+			
+		}
 	}
+
+
 
 
 	
@@ -85,10 +66,50 @@ export function  useOrganizationSetting(this: any){
   })
   this.handlers({
 		setInput,
-		onSubmit,
-		handleReserveTable,
 		getOrgBu,
-		deliteOrganization
+		deliteOrganization,
+		handleHiddenOrg,
+		checkOrganization
+  })
+  this.status({
+    
+  })
+}
+
+
+export function  useOrganizationSettingFrom(this: any,organization:IOrganization){
+
+	const initialValues = {
+		phone:organization.phone,
+		adress:organization.address.street,
+		longitude:organization.address.longitude,
+		latitude:organization.address.latitude
+	}
+
+	const handlerOrgSetting = async (values:typeof initialValues) =>{
+		await RequestOrganization.setSetting({
+			idorganization:organization.id,
+			...values
+		})
+	}
+
+
+	const formik = useFormik({
+    initialValues,
+    onSubmit: async (values, meta) => {
+      await handlerOrgSetting(values)
+
+    },
+  });
+
+
+
+
+	this.data({
+		formik
+  })
+  this.handlers({
+		
   })
   this.status({
     

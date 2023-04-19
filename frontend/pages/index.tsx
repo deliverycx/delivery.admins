@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Script from 'next/script'
@@ -7,25 +8,15 @@ import Menu from 'application/components/common/Menu/Menu'
 import { RequestUsers } from 'servises/repository/Axios/Request'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router'
+import { User } from '@type'
+import { sessionOptions, withCheckSession } from 'application/helpers/session'
+import { withIronSessionSsr } from 'iron-session/next'
+import { userRout } from 'application/contstans/userRout.const'
 
 const Home: NextPage = () => {
 
-  /*
-  const router = useRouter()
-  const check = async () => {
-    try {
-      const user = await RequestUsers.check()
-      return user.data
-    } catch (error) {
-      router.push('/auth')
-    }
-  }
-  useEffect(() => {
-    check()
-  }, [])
-  */
-  
   return (
+		<>
     <div className="wrapper">
 
     <Header />
@@ -37,10 +28,12 @@ const Home: NextPage = () => {
   
 
   
-  <Footer />
-  
-</div>
+  	<Footer />
+		  
+		</div>
+		</>
   )
 }
 
 export default Home
+export const getServerSideProps = withCheckSession({...userRout.superAdmin})
