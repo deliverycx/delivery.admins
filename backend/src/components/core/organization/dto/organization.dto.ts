@@ -27,7 +27,9 @@ export default class OrganizationDTO {
 
 	@IsOptional()
 	redirect:string
-	redirectON:boolean
+
+	@IsOptional()
+	redirecton:boolean
 }
 
 export class CityDTO{

@@ -3,8 +3,7 @@ import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { useOrganization } from 'domains/useCase/organization/useCase.Organization';
 import cn from 'classnames';
 import { CART_CHOICE } from 'application/contstans/cart.const';
-import OrganizationContlols from './OrganizationSetting/OrganizationContlols';
-
+import OrganizationContlols from './viewSetting/OrganizationContlols';
 
 type IProps = {
   orgs: ListOrganization[]
@@ -14,7 +13,6 @@ const OrganizationList = () => {
   const useCasePoints = adapterComponentUseCase(useOrganization);
   const { organizations } = useCasePoints.data;
   const { handlePuckUp, handleHiddenOrg, handleHiddenCity } = useCasePoints.handlers;
-
 
 	let sortedCities;
 	if (organizations) sortedCities = organizations.slice().sort((a: { name: string; }, b: { name: string; }) => a.name > b.name ? 1 : -1);
@@ -46,30 +44,7 @@ const OrganizationList = () => {
                 </div>
                 {
                   org.organizations.map((point: IPoint, i: number) => {
-										const CNhiddenMetod = cn('col-2 btn btn-block', { 'btn-success': point.isHidden });	
-                    return (
-											<div key={point.id} className='card-body'>
-                        <div className='card-footer'>
-                          <a className='card-title title_org' href={`/organization/${point.id}`}>
-														{point.address.street}
-														<small> {point.delivMetod === CART_CHOICE.NOWORK && ' - Онлайн-заказ не доступен'}</small>
-													</a>
-													
-														<div className="organization_control organization_control-box" >
-														<section>
-															<div className="text-danger">{point.isHidden && 'точка скрыта'}</div>
-															{
-														false &&
-															<div className={CNhiddenMetod} onClick={()=> handleHiddenOrg(point.id,!point.isHidden)}>Скрыть точку</div>
-															}
-														</section>
-													</div>
-													
-													
-                          
-                      	</div>
-											</div>
-										)
+                    return <OrganizationContlols key={point.id} point={point} handels={useCasePoints.handlers} />
                   })
                 }
 								

@@ -34,16 +34,10 @@ namespace Res{
     idorganization: string
 		reservetable:boolean
   }
-	export type setting = {
-    idorganization: string
-		phone:string
-  }
-
 	export type worktime = {
 		idorganization: string
     worktime:string[]
   }
-
 }
 
 
@@ -74,11 +68,6 @@ class RequestOrganization extends ApiSuper {
   hiddenOrganization(metods:Res.hiddenMetod) {
     return this.request<Req.hiddenMetod>(`/organization/hidden`)
   }
-
-	@methods('post')
-  checkOrganization(metods:Res.OrgBu) {
-    return this.request<Req.hiddenMetod>(`/organization/checkorg`)
-  }
 	@methods('post')
   hiddenCity(metods:Res.hiddenMetod) {
     return this.request<Req.hiddenMetod>(`/organization/cityhidden`)
@@ -91,7 +80,7 @@ class RequestOrganization extends ApiSuper {
 
 	@methods('get')
   socialBu(query:string) {
-    return this.request<{social:any}>(`/organization/socialbu?idorganization=${query}`)
+    return this.request(`/organization/socialbu?idorganization=${query}`)
   }
 
 	@methods('post')
@@ -99,11 +88,6 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/reservetable`)
   }
 
-	@methods('post')
-	setSetting(data:Res.setting) {
-    return this.request(`/organization_setting/setting`)
-  }
-	
 	@methods('post')
   organizationTime(data:Res.worktime) {
     return this.request(`/organization/organizationTime`)
@@ -130,9 +114,10 @@ class RequestOrganization extends ApiSuper {
   }
 
 	@methods('post')
-  redirectON(data:any) {
+  redirectOn(data:any) {
     return this.request(`/organization/organizationRedirectON`)
   }
+
 
   
 }

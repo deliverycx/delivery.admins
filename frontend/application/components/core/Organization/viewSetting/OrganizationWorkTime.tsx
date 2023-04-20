@@ -24,18 +24,7 @@ const OrganizationWorkTime:FC<{organization:any,refresh:any}> = ({organization,r
 
 	return(
 		<>
-			<div className="card card-primary">
-            <div className="card-header">
-              <h3 className="card-title">Время работы</h3>
-            </div>
-            <div className="card-body">
-						<button onClick={()=> setModal(true)}>Показать время</button>
-							
-              
-            </div>
-
-          </div>
-			
+			<button onClick={()=> setModal(true)}>Показать время</button>
 			{
 				modal &&
 				<Modal setter={()=> setModal(false)}>

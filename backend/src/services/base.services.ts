@@ -12,8 +12,8 @@ export class BaseServises{
 	async getOne(query?:any,populate?:string){
 		return this.repozitory.getOne(query,populate)
 	}
-	async getBuAll(query:any,populate?:string){
-		return this.repozitory.getBuAll(query,populate)
+	async getBuAll(id:string,populate?:string){
+		return this.repozitory.getOne(id,populate)
 	}
 	async getOneBuId(id:string,populate?:string){
 		return this.repozitory.getOneBuId(id,populate)

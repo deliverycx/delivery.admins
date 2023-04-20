@@ -3,7 +3,6 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { doc } from './docs/api.docs';
 import { AppModule } from './module/app.module';
-import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -39,7 +38,6 @@ async function bootstrap() {
     prefix: '/static', ///static/shop
   });
   */
-  app.use(cookieParser());
   
 
   doc(app); 

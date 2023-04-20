@@ -34,7 +34,9 @@ const Auth: NextPage = () => {
             </div>
           </div>
           <div className="row">
-            
+            <div className="col-8">
+              
+            </div>
             
             <div className="col-4">
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>

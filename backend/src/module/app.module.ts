@@ -7,13 +7,12 @@ import { AuthModule } from 'src/components/common/auth/module/auth.module';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UnloadModule } from 'src/components/core/unload/module/unload.module';
 import { ADMIN_DB, DELIVERY_DB } from 'src/database/mongodbModel/config.mongodb';
+import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 import { BannersModule } from 'src/components/core/banners/module/banners.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { NewsModule } from 'src/components/core/news/module/news.module';
 import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
 import { NestjsFormDataModule } from 'nestjs-form-data';
-import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
-import { OrderModule } from 'src/components/core/orders/module/order.module';
 
 
 
@@ -42,8 +41,7 @@ import { OrderModule } from 'src/components/core/orders/module/order.module';
     OrganizationModule,
 		BannersModule,
 		NewsModule,
-		StocksModule,
-		OrderModule
+		StocksModule
   ],
   
 })

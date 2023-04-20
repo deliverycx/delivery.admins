@@ -1,17 +1,22 @@
 import { Module } from "@nestjs/common";
-import { OrganizationPaymentModule } from "./organizationPayment.module";
-import { OrganizationRecvisitesModule } from "./organizationRecvisites.module";
-import { OrganizationSettingModule } from "./organizationSetting.module";
-import { OrganizationStatusModule } from "./organizationStatus.module";
-import { OrganizationTablesModule } from "./organizationTables.module";
+import { TypegooseModule } from "nestjs-typegoose";
+import { SocialModel } from "src/database/mongodbModel/admin/social.model";
+import { AdminUsersModel } from "src/database/mongodbModel/admin/users.model";
+import { ADMIN_DB, DELIVERY_DB } from "src/database/mongodbModel/config.mongodb";
+import { CategoryClass } from "src/database/mongodbModel/delivery/category.model";
+import { CityClass } from "src/database/mongodbModel/delivery/city.model";
+import { OrganizationClass } from "src/database/mongodbModel/delivery/organization.model";
+import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
+import { OrganizationRepository } from "src/domain/repository/organization.repository";
+import { OrganizationControllers } from "../controllers/organization.controller";
+import { OrganizationServises } from "../servises/organization.servises";
 
 @Module({
   imports: [
-    OrganizationPaymentModule,
-		OrganizationSettingModule,
-		OrganizationRecvisitesModule,
-		OrganizationTablesModule,
-		OrganizationStatusModule
-  ]
+    TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB),
+		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
+  ],
+  controllers: [OrganizationControllers], 
+  providers:[OrganizationServises,OrganizationRepository]
 })
-export class OrganizationModule{}
+export class OrganizationModule {}
