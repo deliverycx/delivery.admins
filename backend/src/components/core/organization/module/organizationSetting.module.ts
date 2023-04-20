@@ -12,10 +12,12 @@ import { OrganizationControllers } from "../controllers/organization.controller"
 import { OrganizationSettingControllers } from "../controllers/organizationSetting.controller";
 import { OrganizationServises } from "../servises/organization.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB),
+		TypegooseModule.forFeature([OrganizationStatusClass], DELIVERY_DB),
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
   controllers: [OrganizationControllers,OrganizationSettingControllers], 

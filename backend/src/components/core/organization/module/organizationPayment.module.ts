@@ -11,10 +11,12 @@ import { OrganizationPaymentRepository } from "../repository/organizationPayment
 import { OrganizationServises } from "../servises/organization.servises";
 import { OrganizationPaymentServises } from "../servises/organizationPayment.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass,PaymentinfosClass], DELIVERY_DB),
+		TypegooseModule.forFeature([OrganizationStatusClass], DELIVERY_DB),
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
   controllers: [OrganizationPaymentControllers], 

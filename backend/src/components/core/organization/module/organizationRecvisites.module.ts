@@ -10,11 +10,13 @@ import { OrganizationRecvisitesControllers } from "../controllers/organizationRe
 import { OrganizationRecvisitesRepository } from "../repository/organizationRecvisites.repository";
 import { OrganizationRecvisitesServises } from "../servises/organizationRecvisites.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass,PaymentRecvisitesClass], DELIVERY_DB),
+		TypegooseModule.forFeature([OrganizationStatusClass], DELIVERY_DB),
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
   controllers: [OrganizationRecvisitesControllers], 

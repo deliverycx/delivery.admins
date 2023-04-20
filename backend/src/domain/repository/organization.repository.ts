@@ -5,13 +5,16 @@ import { SocialModel } from "src/database/mongodbModel/admin/social.model";
 import { CityClass } from "src/database/mongodbModel/delivery/city.model";
 import { OrganizationClass } from "src/database/mongodbModel/delivery/organization.model";
 import { organizationEntities } from "../entities/organization.entities";
+import { ORG_STATUS, DELIVERY_METODS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 
 @Injectable()
 export class OrganizationRepository {
   constructor(
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
     @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>, 
-		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>
+		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>,
+		@InjectModel(OrganizationStatusClass) private readonly statusModel: ReturnModelType<typeof OrganizationStatusClass>
   ) { }
 
   async getAllOrganization() {
@@ -243,7 +246,17 @@ export class OrganizationRepository {
 				}
 			}
 		)
-		console.log('ress',result);
+		const status = await this.statusModel.findOneAndUpdate(
+			{organization:String(org.id)},
+			{
+				$setOnInsert:{
+					organizationStatus:ORG_STATUS.NOWORK,
+					deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP],
+					paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
+				}
+			},
+			{ upsert: true, new: true })
+		console.log('ress',status);
 		
 		return result
 	}
