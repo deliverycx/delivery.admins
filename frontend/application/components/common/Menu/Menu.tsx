@@ -94,6 +94,10 @@ const Menu = () =>{
               </p>
 							<ul className="nav nav-treeview">
 							<li className="nav-item">
+								<a href="/order/ordersDelivery" className="nav-link">
+                  <i className="far fa-circle nav-icon"></i>
+                  <p>Заказы доставка</p>
+                </a>
                 <a href="/order/orderPayment" className="nav-link">
                   <i className="far fa-circle nav-icon"></i>
                   <p>Оплата картой</p>
