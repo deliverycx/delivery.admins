@@ -13,6 +13,7 @@ export class BaseRepository<ModelClass> {
 		}
 	}
 	async getOne(bu:Record<string,any>,populate?:string){
+		console.log(bu);
 		if(populate){
 			return await this.model.findOne(bu).populate(populate).select('-__v')
 		}else{

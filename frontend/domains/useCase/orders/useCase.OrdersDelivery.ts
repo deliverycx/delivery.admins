@@ -3,7 +3,7 @@ import RequestOrdersDelivery from 'servises/repository/Axios/Request/Request.Ord
 import { useState } from 'react';
 
 export function useOrderDelivery(this: any,organization:string) {
-	const [orderList,setOrderList] = useState<any>()
+	const [orderList,setOrderList] = useState<any>(null)
 
 	const getOrders = async (organization:string) =>{
 		try {
@@ -18,7 +18,10 @@ export function useOrderDelivery(this: any,organization:string) {
 
 	useEffect(()=>{
 		getOrders(organization)
-	},[])
+	},[organization])
+
+	console.log(orderList);
+	
 
 
 	this.data({

@@ -13,7 +13,7 @@ import { useState } from "react"
 
 const News: NextPage = () => {
 	const [orgid,setOrgid] = useState<string>()
-	console.log(orgid);
+
 	return(
 		<div className="wrapper">
       <Header />

@@ -1,0 +1,24 @@
+.order_status{
+	display: inline-block ;
+	width: 15px;
+	height: 15px;
+	margin-top: 10px;
+	border-radius: 50%;
+	border: 1px solid #333;
+}
+
+.order_status-error{
+	background-color: red;
+}
+.order_status-prependig{
+	background-color: yellow;
+}
+.order_status-sucses{
+	background-color: green;
+}
+
+.flex-center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

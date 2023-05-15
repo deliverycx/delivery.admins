@@ -22,11 +22,14 @@ class RequestOrdersDelivery  extends ApiSuper {
 	CRUDFabric!:CRUDFabric
 
 	@methods('get')
-  getOrderBuOrg(query:string) {
-    return this.request(`/orderPayment/all?idorganization=${query}`)
+  getOrderBuOrg(org:string) {
+    return this.request(`/orderDelivery/buOrg?organization=${org}`)
   }
 
-	
+	@methods('get')
+  getOrderBu(id:string) {
+    return this.request(`/orderDelivery/buone?orderId=${id}`)
+  }
 
 	
 }

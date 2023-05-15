@@ -1,6 +1,6 @@
 import { buildSchema, getModelForClass, modelOptions, prop } from "@typegoose/typegoose";
 
-@modelOptions({ schemaOptions: { collection: 'order' } })
+@modelOptions({ schemaOptions: { collection: 'orders' } })
 export class OrderClass {
     @prop()
     user!: any;

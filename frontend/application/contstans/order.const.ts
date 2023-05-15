@@ -16,3 +16,10 @@ export enum  OrderStatus {
 	completed = "Доставлена",
 	canceled = "Отменен"
 }
+
+
+export const  OrderCreationStatus = {
+	ERROR:"ERROR",
+	"PROGRES":"InProgress",
+	SUCCESS:"Success"
+}
