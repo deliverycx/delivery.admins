@@ -152,7 +152,9 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 									<a className="btn btn-danger " onClick={()=> canselPayment(order.paymentid)}>отменить</a>
 									
 	          </div>	
-						<section className="sm-4 float-right chastplatej">
+						{
+							/**
+							 * <section className="sm-4 float-right chastplatej">
 								<label className='form-label'>Частичное списание платежа</label>
 								<FormikProvider value={formik}>
 								<form onSubmit={formik.handleSubmit}>
@@ -165,6 +167,9 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 								</form>
 								</FormikProvider>
 								</section>
+							 */
+						}
+						
 					</div>
 					
 					<div className="row">
