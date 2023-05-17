@@ -18,7 +18,7 @@ export class orderPaymentControllers{
 	@Get('all')
 	getAll(@Query() query: {idorganization:string}){
 		console.log(query);
-		return this.Servises.getAll(query.idorganization ? query.idorganization : {})
+		return this.Servises.getAll(query.idorganization ? query : {})
 	}
 	@Get('buone')
 	geBu(@Query() query: orderPaymentDTO){

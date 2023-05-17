@@ -3,6 +3,7 @@ import { FC, useContext } from "react"
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
 import { useOrderPaymentItem } from "domains/useCase/orders/useCase.OrderPayment";
 import { OrderStatus, PaymentStatuses } from "application/contstans/order.const";
+import { useRouter } from "next/router";
 
 type IProps = {
 	order:IOrderPayment
@@ -12,13 +13,22 @@ const OrderPaymentItem:FC<IProps> = ({order}) =>{
 	const useCase = adapterComponentUseCase(useOrderPaymentItem,order)
 	const {statePaymentItem} = useCase.data
 
+	const router = useRouter()
+
 
 	return(
 		<tr>
 											<td className="project-state">
-											<a href={`/order/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
+											{
+												(router.asPath == '/managers')
+												? <a href={`/managers/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
                               {order.orderNumber}
                           </a>
+												: <a href={`/order/orderPayment/${order.paymentid}?organization=${order.idorganization}`}>
+													{order.orderNumber}
+											</a>	
+											}
+											
 											</td>
                       <td>
 														{order.paymentid}
