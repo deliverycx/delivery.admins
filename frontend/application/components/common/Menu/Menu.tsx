@@ -51,7 +51,15 @@ const Menu = () =>{
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
           <li className="nav-item">
-            <a href="/upload" className="nav-link active">
+						<a href="/guestvip/" className="nav-link">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Дашборд
+                <i className="right fas fa-angle-left"></i>
+              </p>
+							
+            </a>
+            <a href="/upload" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Обновление Айко
