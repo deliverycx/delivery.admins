@@ -11,16 +11,13 @@ const GuestVip = () =>{
 				await RequestDashBord.switchGuestVip({})
 			}
 			setVip(data)
-			return data
 		} catch (error) {
-			
+			console.log(error);
 		}
 	}
 
 	const swtichDashbordVip = async () =>{
 		try {
-			//const res = await getDashbordVip()
-
 			if(vip){
 				const {data} = await RequestDashBord.switchGuestVip({
 					_id:vip._id,
@@ -30,7 +27,7 @@ const GuestVip = () =>{
 			}
 			getDashbordVip()
 		} catch (error) {
-			
+			console.log(error);
 		}
 	}
 
@@ -38,13 +35,15 @@ const GuestVip = () =>{
 		getDashbordVip()
 	},[])
 
-	console.log(vip);
+
 
 	return (
 		<>
-			<button onClick={swtichDashbordVip}>{
-				vip.guestvip ? 'выключить вип' : 'включить вип'
-			}</button>
+			<button onClick={swtichDashbordVip}>
+				{
+					vip && vip.guestvip ? 'выключить вип' : 'включить вип'
+				}
+			</button>
 		</>
 	)
 
