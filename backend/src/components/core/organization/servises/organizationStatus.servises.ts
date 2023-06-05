@@ -23,6 +23,7 @@ export class OrganizationStatusServises{
 			break;
 			case 'paymentMetod': 
 				setmetod = { paymentMetod:metod }
+			break;	
 			case 'deliveryTime': 
 				setmetod = { deliveryTime:metod }	
 			break;
