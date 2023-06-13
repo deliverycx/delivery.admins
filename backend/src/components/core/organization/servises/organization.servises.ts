@@ -1,11 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { OrganizationRepository } from "../../../../domain/repository/organization.repository";
 import axios from 'axios';
+import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 
 
 @Injectable()
 export class OrganizationServises{
-  constructor(private readonly OrganizationRepository: OrganizationRepository) { }
+  constructor(
+		private readonly OrganizationRepository: OrganizationRepository,
+		private readonly iikoAxios:IIkoAxios
+		) { }
   
   getAllOrganization() {
     return this.OrganizationRepository.getAllOrganization()
@@ -63,27 +67,15 @@ export class OrganizationServises{
 		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirectON)
 	}
 	async organizationTerminal(organizationsid:string){
-		const { data:ikkotoken } = await axios.post(
-				'https://api-ru.iiko.services/api/1/access_token',
-				{
-					apiLogin: "539ecfae"
-				}
-		);
-		const token = ikkotoken.token
-		const {data:getTerminal} = await axios.post(
-				'https://api-ru.iiko.services/api/1/terminal_groups',
-				{
-					organizationIds: [
-						organizationsid
-					],
-					includeDisabled: true
-				},
-				{
-					headers: { Authorization: `Bearer ${token}` }
-				}
-			);
-
-			const terminal = getTerminal.terminalGroups[0].items[0].name
-			return terminal
+		try {
+			const termitalid = await this.iikoAxios.termiralGroops(organizationsid)
+			if(termitalid && organizationsid){
+				const terminalAlive = await this.iikoAxios.termiralGroopsAlive(organizationsid,termitalid)
+				return terminalAlive
+			}
+			
+		} catch (error) {
+			console.log(error);
 		}
+	}
 }

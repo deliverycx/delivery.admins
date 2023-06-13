@@ -134,6 +134,11 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/organizationRedirectON`)
   }
 
+	@methods('post')
+  getinfoTerminal(data:any) {
+    return this.request(`/organization/organizationTerminal`)
+  }
+
   
 }
 export default new RequestOrganization()
