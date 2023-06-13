@@ -13,6 +13,7 @@ export function useOrganization(this: any,reset:boolean = false) {
   const fetchOrg = async () => {
     try {
       const { data } = await RequestOrganization.getAll()
+			console.log(data);
       setOrganizations(data)
     } catch (error) {
       console.log(error)
@@ -28,6 +29,7 @@ export function useOrganization(this: any,reset:boolean = false) {
     setOrganizations(data)
 		reset && router.reload()
   }
+	
   
   const handlePuckUp = async (idorganization: string, metod: string | null) => {
     try {

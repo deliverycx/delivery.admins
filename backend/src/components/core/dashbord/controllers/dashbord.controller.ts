@@ -17,4 +17,9 @@ export class DashbordControllers{
 	setVipGuest(@Body() body: DashbordDTO){
 		return this.dashbordServises.setVipGuest(body)
 	}
+
+	@Get('getactivetermitals')
+	getActiveTermitals(){
+
+	}
 }

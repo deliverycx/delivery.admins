@@ -9,6 +9,8 @@ import OrganizationSettingFrom from './OrganizationSetting/OrganizationInfo';
 import OrganizationWorkTime from './OrganizationSetting/OrganizationWorkTime';
 import OrganizationTables from './OrganizationTables/OrganizationTables';
 import OrgTabPanel from './Tabs/OrgTabPanel';
+import OrganizationAnalitiks from './OrganizationAnalitiks/OrganizationAnalitiks';
+import OrganizationMOKOrder from './OrganizationAnalitiks/OrganizationMOKOrder';
 
 
 export const OrganizationContext = React.createContext<TadapterCaseCallback>({
@@ -46,7 +48,16 @@ const OrganizationSetting = () =>{
         </div>
         
       </div>
-			
+			<div className="card">
+				<div className="card-body">
+					{
+						organization &&
+						<OrganizationMOKOrder organization={organization} />
+					}
+					
+				</div>
+				
+			</div>
 			
       
     </section>

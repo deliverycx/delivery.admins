@@ -31,7 +31,15 @@ class RequestOrdersDelivery  extends ApiSuper {
     return this.request(`/orderDelivery/buone?orderId=${id}`)
   }
 
-	
+	@methods('post')
+	mokOrder(body:any){
+		return this.request(`/orderDelivery/mokorder`)
+	}
+
+	@methods('post')
+	statusOrder(body:any){
+		return this.request(`/orderDelivery/statusOrders`)
+	}
 }
 
 export default new RequestOrdersDelivery()

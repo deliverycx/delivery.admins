@@ -1,13 +1,30 @@
 import { OrderCreationStatus } from "application/contstans/order.const";
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
+import { RequestOrganization } from "servises/repository/Axios/Request";
 
 type IProps = {
 	orderList:any
 }
 
 const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
-	console.log(orderList);
+	const [org,setOrg] = useState<string>('')
 
+	const getOrg = async () =>{
+		try {
+			const {data} = await RequestOrganization.getBu({
+				idorganization:orderList.organization
+			})
+			if(data && data.address.street){
+				setOrg(data.address.street)
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	useEffect(()=>{
+		(orderList && orderList.organization) && getOrg()
+	},[orderList])
 
 	const orderCreationStatusTSX = () =>{
 		switch(orderList.orderStatus){
@@ -41,6 +58,11 @@ const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
 					: <span>Неизвестен</span>
 				}
 				
+			</td>
+			<td className="project-state text-center">
+				{
+					org
+				}
 			</td>
 			<td className="project-state text-center">
 				{

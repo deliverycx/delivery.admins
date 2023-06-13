@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { OrganizationRepository } from "../../../../domain/repository/organization.repository";
+import axios from 'axios';
 
 
 @Injectable()
@@ -61,4 +62,28 @@ export class OrganizationServises{
 	organizationRedirectON({idorganization,redirectON}){
 		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirectON)
 	}
+	async organizationTerminal(organizationsid:string){
+		const { data:ikkotoken } = await axios.post(
+				'https://api-ru.iiko.services/api/1/access_token',
+				{
+					apiLogin: "539ecfae"
+				}
+		);
+		const token = ikkotoken.token
+		const {data:getTerminal} = await axios.post(
+				'https://api-ru.iiko.services/api/1/terminal_groups',
+				{
+					organizationIds: [
+						organizationsid
+					],
+					includeDisabled: true
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+			);
+
+			const terminal = getTerminal.terminalGroups[0].items[0].name
+			return terminal
+		}
 }

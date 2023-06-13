@@ -3,6 +3,7 @@ import { orderPaymentDTO } from "../dto/orderPayment.dto";
 import { orderPaymentServises } from "../servises/orderPayment.servise";
 import { response, Response } from "express";
 import { ordersServises } from "../servises/orders.servise";
+import { ordersDTO } from "../dto/orders.dto";
 
 @Controller('orderDelivery')
 export class ordersControllers{
@@ -20,5 +21,13 @@ export class ordersControllers{
 	geBu(@Query() query: orderPaymentDTO){
 		console.log(query);
 		return this.Servises.getOne(query)
+	}
+	@Post('mokorder')
+	mokOrder(@Body() body: any){
+		return this.Servises.mokOrderServises(body)
+	}
+	@Post('statusOrders')
+	statusmokOrder(@Body() body: ordersDTO){
+		return this.Servises.statusMokOrderServises(body)
 	}
 }

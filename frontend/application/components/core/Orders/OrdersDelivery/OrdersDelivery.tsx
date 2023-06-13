@@ -25,6 +25,9 @@ const OrdersDelivery:FC<IProps> = ({organization}) =>{
 											<th className="text-center">
 												номер заказа
 											</th>
+											<th className="text-center">
+												точка
+											</th>
                       <th className="text-center">
                           адресс/время
                       </th>

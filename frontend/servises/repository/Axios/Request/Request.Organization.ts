@@ -57,7 +57,7 @@ class RequestOrganization extends ApiSuper {
 
 	@methods('get')
   getCityBu(query:string) {
-    return this.request(`/organization/getcity?cityid=${query}`)
+    return this.request<any>(`/organization/getcity?cityid=${query}`)
   }
 
 	@methods('post')

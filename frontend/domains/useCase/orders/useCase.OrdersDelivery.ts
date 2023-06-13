@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import RequestOrdersDelivery from 'servises/repository/Axios/Request/Request.OrdersDelivery';
 import { useState } from 'react';
+import { RequestOrganization } from 'servises/repository/Axios/Request';
 
 export function useOrderDelivery(this: any,organization:string) {
 	const [orderList,setOrderList] = useState<any>(null)
@@ -8,6 +9,7 @@ export function useOrderDelivery(this: any,organization:string) {
 	const getOrders = async (organization:string) =>{
 		try {
 			const {data} = await RequestOrdersDelivery.getOrderBuOrg(organization)
+
 			if(data){
 				setOrderList(data)
 			}
@@ -20,7 +22,7 @@ export function useOrderDelivery(this: any,organization:string) {
 		getOrders(organization)
 	},[organization])
 
-	console.log(orderList);
+	//console.log(orderList);
 	
 
 
