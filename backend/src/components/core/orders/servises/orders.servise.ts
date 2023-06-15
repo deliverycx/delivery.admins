@@ -43,7 +43,7 @@ export class ordersServises extends BaseServises {
 		);
 		const terminal = ikkoterminal.terminalGroups[0].items[0].id
 		const { data: nomenclature } = await axios.get(
-			`http://localhost:5000/product/nomenclature?organization=${body.organization}`,
+			`${process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://xn--80apgfh0ct5a.xn--p1ai/api'}/product/nomenclature?organization=${body.organization}`,
 
 		);
 		const product = nomenclature.products[0]
