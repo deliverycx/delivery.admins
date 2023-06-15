@@ -17,9 +17,11 @@ export class ordersServises extends BaseServises {
 	}
 
 	async mokOrderServises(body: any) {
+		console.log('созал мок',body);
 
-
-
+		try {
+			
+		
 		const { data: ikkotoken } = await axios.post(
 			'https://api-ru.iiko.services/api/1/access_token',
 			{
@@ -96,11 +98,16 @@ export class ordersServises extends BaseServises {
 			})
 
 			return order
-
+		} catch (error) {
+			console.log(error);
+		}
 
 	}
 	
 	async statusMokOrderServises(body:ordersDTO) {
+		try {
+			
+		
 		const { data: ikkotoken } = await axios.post(
 			'https://api-ru.iiko.services/api/1/access_token',
 			{
@@ -122,5 +129,9 @@ export class ordersServises extends BaseServises {
 		})
 
 		return order.orders[0]
+		
+		} catch (error) {
+				console.log(error);
+		}
 	}
 }
