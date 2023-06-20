@@ -46,6 +46,7 @@ export class orderPaymentControllers{
 
 	@Post('paymentConfirm')
 	payconf(@Body() body:orderPaymentDTO){
+		console.log('qqqq',body);
 		return this.Servises.payConfirm(body)
 	}
 

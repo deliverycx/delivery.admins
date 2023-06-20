@@ -5,6 +5,7 @@ import { OrderCreationStatus, OrderStatus, PaymentStatuses } from "application/c
 import { IorderItems, IOrderPayment } from "@type";
 import { FormikProvider, useFormik } from "formik";
 import RequestOrdersDelivery from "servises/repository/Axios/Request/Request.OrdersDelivery";
+import OrderPaymentCart from "../OrdersPayment/OrderPaymentCart";
 
 
 const OrderDeliveryCart:FC<{id:string}> = ({id}) =>{
@@ -162,7 +163,10 @@ const OrderDeliveryCart:FC<{id:string}> = ({id}) =>{
       </div>
 
 			
-			
+			{
+				order.payment &&
+				<OrderPaymentCart orderid={id} payment={order.payment} />
+			}
       
 
     </section>

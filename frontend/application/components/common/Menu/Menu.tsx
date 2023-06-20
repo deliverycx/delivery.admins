@@ -124,10 +124,7 @@ const Menu = () =>{
                   <i className="far fa-circle nav-icon"></i>
                   <p>Заказы доставка</p>
                 </a>
-                <a href="/order/orderPayment" className="nav-link">
-                  <i className="far fa-circle nav-icon"></i>
-                  <p>Оплата картой</p>
-                </a>
+                
               </li>
               
             </ul>

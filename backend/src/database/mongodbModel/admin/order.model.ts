@@ -31,6 +31,9 @@ export class OrderClass {
 		public orderParams:any
 
 		@prop({default: null })
+		payment:any
+
+		@prop({default: null })
 		public orderError:any
 }
 

@@ -42,7 +42,7 @@ const MenuAdmins = () =>{
             <a href="/managers" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Заказы оплата
+                Заказы
                 <i className="right fas fa-angle-left"></i>
               </p>
             </a>

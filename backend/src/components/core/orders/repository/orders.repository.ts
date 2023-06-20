@@ -14,6 +14,25 @@ export class ordersRepository extends BaseRepository<OrderClass>{
 	 }
 
 	 
+	 async getAll(bu: Record<string, any>, populate?: string): Promise<any[]> {
+		return await this.Model.find(bu).select('-__v').sort({createdAt:'desc'})
+	 }
 
+
+	 async setStatusPayment(orderid:string,status:string){
+		console.log('запись',orderid,status);
+		const result = await this.Model.findOneAndUpdate({
+			orderId:orderid
+		},
+		{
+			$set: { "payment.paymentStatus": status }
+		},{
+			new:true
+		}
+		
+		)
+		console.log('запись статуса',result);
+		return result
+	 }
 
 }

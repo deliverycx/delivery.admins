@@ -82,7 +82,11 @@ const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
 			</td>
 			<td className="project-state text-center">
 				{orderList.orderParams.orderAmount}
-
+				<br />
+				{
+					orderList.payment &&
+					<div className="badge bg-info">оплата картой</div>
+				}	
 			</td>
 			
 
