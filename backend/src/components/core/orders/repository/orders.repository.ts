@@ -15,7 +15,7 @@ export class ordersRepository extends BaseRepository<OrderClass>{
 
 	 
 	 async getAll(bu: Record<string, any>, populate?: string): Promise<any[]> {
-		return await this.Model.find(bu).select('-__v').sort({createdAt:'desc'})
+		return await this.Model.find(bu).select('-__v').sort({createdAt:'desc'}).limit(30).exec()
 	 }
 
 
