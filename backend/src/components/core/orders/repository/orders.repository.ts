@@ -14,10 +14,13 @@ export class ordersRepository extends BaseRepository<OrderClass>{
 	 }
 
 	 
-	 async getAll(bu: Record<string, any>, populate?: string): Promise<any[]> {
-		return await this.Model.find(bu).select('-__v').sort({createdAt:'desc'}).limit(30).exec()
+	 async getAllOrder(bu: Record<string, any>, limit: number): Promise<any[]> {
+		return await this.Model.find(bu).select('-__v').sort({createdAt:'desc'}).limit(limit).exec()
 	 }
 
+	 async getAllOrderErrors(): Promise<any[]> {
+		return await this.Model.find({orderError:{$ne:null}}).select('-__v').sort({createdAt:'desc'}).limit(90).exec()
+	 }
 
 	 async setStatusPayment(orderid:string,status:string){
 		console.log('запись',orderid,status);

@@ -6,9 +6,9 @@ import { RequestOrganization } from 'servises/repository/Axios/Request';
 export function useOrderDelivery(this: any,organization:string) {
 	const [orderList,setOrderList] = useState<any>(null)
 
-	const getOrders = async (organization:string) =>{
+	const getOrders = async (organization:string,limit?:number) =>{
 		try {
-			const {data} = await RequestOrdersDelivery.getOrderBuOrg(organization)
+			const {data} = await RequestOrdersDelivery.getOrderBuOrg(organization,limit)
 
 			if(data){
 				setOrderList(data)
@@ -19,18 +19,35 @@ export function useOrderDelivery(this: any,organization:string) {
 	}
 
 	useEffect(()=>{
-		getOrders(organization)
+		getOrders(organization,30)
 	},[organization])
 
 	//console.log(orderList);
 	
+	const handlerLimit = (count:number) =>{
+		getOrders(organization,count)
+	}
 
+	const handlerBuErrors = async () =>{
+		try {
+			const {data} = await RequestOrdersDelivery.getOrderBuError()
+
+			if(data){
+				setOrderList(data)
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	this.data({
-    orderList
+    orderList,
+		organization
   })
   this.handlers({
-    
+    handlerLimit,
+		handlerBuErrors,
+		getOrders
   })
   this.status({
     

@@ -16,6 +16,14 @@ export class ordersServises extends BaseServises {
 
 	}
 
+
+	async getAllOrderMetod(query:any = {},limit:number){
+		return this.Repository.getAllOrder(query,limit)
+	}
+	async getAllOrderErrorsMetod(){
+		return this.Repository.getAllOrderErrors()
+	}
+
 	async mokOrderServises(body: any) {
 		console.log('созал мок',body);
 
