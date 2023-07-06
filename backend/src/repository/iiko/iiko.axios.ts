@@ -50,7 +50,7 @@ export class IIkoAxios extends AxiosCreate {
 						organizationIds: [
 							organization
 						],
-						includeDisabled: true
+						includeDisabled: false
 					},
 					{
 						headers: { Authorization: `Bearer ${token}` }
