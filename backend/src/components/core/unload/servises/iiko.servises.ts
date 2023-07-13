@@ -183,6 +183,8 @@ export class IikoRequesterServises {
         
         for (let i = 0; i < this.cities[city].length; i++) {
           const { guid, longitude, latitude, street, workTime, phone,cityguid } = this.cities[city][i];
+
+					console.log(guid,street);
           
           const objectId = await this.organizationModel.findOneAndUpdate(
             { id: guid },
