@@ -101,7 +101,7 @@ export class IikoRequesterServises {
 					organizationIds: [
 						organizations.id
 					],
-					includeDisabled: true
+					includeDisabled: false
 				},
 				{
 					headers: { Authorization: `Bearer ${token}` }
