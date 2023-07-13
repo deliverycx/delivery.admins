@@ -377,7 +377,7 @@ export class IikoRequesterServises {
     console.log("start pooling");
     await this.getToken();
     await this.getAddresses();
-    await this.getNomenclature();
+    //await this.getNomenclature();
     console.log("end pooling");
   }
 }
