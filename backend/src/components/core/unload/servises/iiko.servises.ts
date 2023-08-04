@@ -107,11 +107,11 @@ export class IikoRequesterServises {
 					headers: { Authorization: `Bearer ${token}` }
 				}
     	);
-
-			const cityRes = terminal.terminalGroups[0].items[0].name
-			if(!cityRes){
+if(!terminal.terminalGroups[0].items){
 				console.log('инфы в терминале нету',organizations.id);
 			}	
+			const cityRes = terminal.terminalGroups[0].items[0].name
+			
 
 
 			
