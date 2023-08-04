@@ -109,7 +109,9 @@ export class IikoRequesterServises {
     	);
 
 			const cityRes = terminal.terminalGroups[0].items[0].name
-
+			if(!cityRes){
+				console.log('инфы в терминале нету',organizations.id);
+			}	
 
 
 			
