@@ -93,7 +93,7 @@ export class IikoRequesterServises {
 					headers: { Authorization: `Bearer ${token}` }
 				}
     	);
-
+				console.log(organizations.id);
 
 			const {data:terminal} = await axios.post(
         'https://api-ru.iiko.services/api/1/terminal_groups',
@@ -101,15 +101,17 @@ export class IikoRequesterServises {
 					organizationIds: [
 						organizations.id
 					],
-					includeDisabled: true
+					includeDisabled: false
 				},
 				{
 					headers: { Authorization: `Bearer ${token}` }
 				}
     	);
-
+if(!terminal.terminalGroups[0].items){
+				console.log('инфы в терминале нету',organizations.id);
+			}	
 			const cityRes = terminal.terminalGroups[0].items[0].name
-
+			
 
 
 			
@@ -183,6 +185,8 @@ export class IikoRequesterServises {
         
         for (let i = 0; i < this.cities[city].length; i++) {
           const { guid, longitude, latitude, street, workTime, phone,cityguid } = this.cities[city][i];
+
+					console.log(guid,street);
           
           const objectId = await this.organizationModel.findOneAndUpdate(
             { id: guid },
@@ -377,7 +381,7 @@ export class IikoRequesterServises {
     console.log("start pooling");
     await this.getToken();
     await this.getAddresses();
-    await this.getNomenclature();
+    //await this.getNomenclature();
     console.log("end pooling");
   }
 }

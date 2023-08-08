@@ -13,7 +13,7 @@ const News: NextPage = ({params}:any) => {
 		<div className="wrapper">
       <Header />
       <Menu />
-      <OrderPaymentCart id={params.id} />
+      
     </div>
 	)
 }

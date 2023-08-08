@@ -7,6 +7,7 @@ import OrdersPayment from "application/components/core/Orders/OrdersPayment/Orde
 import { userRout } from "application/contstans/userRout.const"
 import { withCheckSession } from "application/helpers/session"
 import { NextPage } from "next"
+import OrdersDelivery from "application/components/core/Orders/OrdersDelivery/OrdersDelivery"
 
 const AdminPage: NextPage = ({user}:any) => {
   return (
@@ -14,7 +15,7 @@ const AdminPage: NextPage = ({user}:any) => {
       <Header />
       <MenuAdmins />
 			<div className="content-wrapper ordertable">
-				<OrdersPayment organization={user.organization} />
+				<OrdersDelivery organization={user.organization} />
 			</div>
       
     </div>

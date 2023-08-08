@@ -100,7 +100,7 @@ const OrganizationTables:FC<{organization:any}> = ({organization}) =>{
 													<li key={val.id} className="nav-item"> <strong>столик - №{val.number},</strong> <br />
 													
 													{
-														`https://моб.трансфер.хинкалыч.рф/shop?organuzation=${organization.id}&table=${JSON.stringify({id:val.id,numb:val.number,section:organizationTable[tableModal.tableindex].idsection})}&delivMetod=ONSPOT
+														`https://с.хинкалыч.рф/shop?organuzation=${organization.id}&table=${JSON.stringify({id:val.id,numb:val.number,section:organizationTable[tableModal.tableindex].idsection})}&delivMetod=ONSPOT
 													`} 
 													</li>
 														

@@ -6,6 +6,7 @@ import RequestNews from './Request.News'
 import RequestDisplay from './Request.Display'
 import RequestOrderPayment from './Request.OrderPayment'
 import RequestOrganizationTables from './Request.OrganizationTables'
+import RequestDashBord from './Request.DashBord'
 
 export {
   RequestOrganization,
@@ -15,5 +16,6 @@ export {
 	RequestNews,
 	RequestDisplay,
 	RequestOrderPayment,
-	RequestOrganizationTables
+	RequestOrganizationTables,
+	RequestDashBord
 }

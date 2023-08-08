@@ -17,6 +17,7 @@ const TabsSettings = () =>{
 			<OrganizationInfo organization={organization} />
 			<OrganizationReverseTable organization={organization} refresh={getOrgBu} />
 			<OrganizationRedirect organization={organization} refresh={getOrgBu} />
+			
 		</>
 	)
 }

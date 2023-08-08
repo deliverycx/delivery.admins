@@ -155,4 +155,14 @@ export class OrganizationControllers{
     return result
 	}
 
+	@Post('organizationTerminal')
+	async organizationTerminal(
+		@Body() body: OrganizationDTO,
+	){
+		console.log('body',body);
+		const result = await this.OrganizationServises.organizationTerminal(body.idorganization)
+		
+    return result
+	}
+
 }

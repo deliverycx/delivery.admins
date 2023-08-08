@@ -1,10 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { OrganizationRepository } from "../../../../domain/repository/organization.repository";
+import axios from 'axios';
+import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 
 
 @Injectable()
 export class OrganizationServises{
-  constructor(private readonly OrganizationRepository: OrganizationRepository) { }
+  constructor(
+		private readonly OrganizationRepository: OrganizationRepository,
+		private readonly iikoAxios:IIkoAxios
+		) { }
   
   getAllOrganization() {
     return this.OrganizationRepository.getAllOrganization()
@@ -60,5 +65,17 @@ export class OrganizationServises{
 	}
 	organizationRedirectON({idorganization,redirectON}){
 		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirectON)
+	}
+	async organizationTerminal(organizationsid:string){
+		try {
+			const termitalid = await this.iikoAxios.termiralGroops(organizationsid)
+			if(termitalid && organizationsid){
+				const terminalAlive = await this.iikoAxios.termiralGroopsAlive(organizationsid,termitalid)
+				return terminalAlive
+			}
+			
+		} catch (error) {
+			console.log(error);
+		}
 	}
 }

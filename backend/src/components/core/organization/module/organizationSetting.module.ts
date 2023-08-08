@@ -13,6 +13,7 @@ import { OrganizationSettingControllers } from "../controllers/organizationSetti
 import { OrganizationServises } from "../servises/organization.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
 import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
+import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 
 @Module({
   imports: [
@@ -21,6 +22,6 @@ import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/orga
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
   controllers: [OrganizationControllers,OrganizationSettingControllers], 
-  providers:[OrganizationServises,OrganizationRepository,OrganizationSettingServises]
+  providers:[OrganizationServises,OrganizationRepository,OrganizationSettingServises,IIkoAxios]
 })
 export class OrganizationSettingModule {}

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 
 export function useOrganization(this: any,reset:boolean = false) {
   const [organizations, setOrganizations] = useState<any>()
+	
 	const router = useRouter()
 
   const fetchOrg = async () => {
@@ -18,6 +19,8 @@ export function useOrganization(this: any,reset:boolean = false) {
       console.log(error)
     }
   }
+
+
   
   useEffect(() => {
     fetchOrg()
@@ -28,6 +31,7 @@ export function useOrganization(this: any,reset:boolean = false) {
     setOrganizations(data)
 		reset && router.reload()
   }
+	
   
   const handlePuckUp = async (idorganization: string, metod: string | null) => {
     try {
@@ -48,14 +52,17 @@ export function useOrganization(this: any,reset:boolean = false) {
     await RequestOrganization.hiddenCity({ idorganization, isHidden })
     await handleAllOrg()
   }
+	
 
   this.data({
-    organizations
+    organizations,
+		
   })
   this.handlers({
     handlePuckUp,
     handleHiddenOrg,
-		handleHiddenCity
+		handleHiddenCity,
+		
   })
   this.status({
     

@@ -57,7 +57,7 @@ class RequestOrganization extends ApiSuper {
 
 	@methods('get')
   getCityBu(query:string) {
-    return this.request(`/organization/getcity?cityid=${query}`)
+    return this.request<any>(`/organization/getcity?cityid=${query}`)
   }
 
 	@methods('post')
@@ -132,6 +132,11 @@ class RequestOrganization extends ApiSuper {
 	@methods('post')
   redirectON(data:any) {
     return this.request(`/organization/organizationRedirectON`)
+  }
+
+	@methods('post')
+  getinfoTerminal(data:any) {
+    return this.request(`/organization/organizationTerminal`)
   }
 
   

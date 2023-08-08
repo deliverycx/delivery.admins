@@ -14,6 +14,7 @@ import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
 import { NestjsFormDataModule } from 'nestjs-form-data';
 import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 import { OrderModule } from 'src/components/core/orders/module/order.module';
+import { DashbordModule } from 'src/components/core/dashbord/module/dashbord.module';
 
 
 
@@ -43,7 +44,8 @@ import { OrderModule } from 'src/components/core/orders/module/order.module';
 		BannersModule,
 		NewsModule,
 		StocksModule,
-		OrderModule
+		OrderModule,
+		DashbordModule
   ],
   
 })

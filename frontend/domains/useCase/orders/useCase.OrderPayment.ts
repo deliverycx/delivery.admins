@@ -44,7 +44,7 @@ export function useOrderPaymentItem(this: any,order:IOrderPayment) {
   })
 }
 
-export function useOrderPaymentCart(this: any,id:number) {
+export function useOrderPaymentCart(this: any,{orderid,payment}:{orderid:string,payment:any}) {
 	const router = useRouter()
 	const [barpay,setBarPay] = useState<any>(null)
 	const [statePaymentItem, dispatchPaymentItem] = useReducer(
@@ -55,32 +55,32 @@ export function useOrderPaymentCart(this: any,id:number) {
 	const organization = router.query.organization
 
 	useEffect(()=>{
-		if(id && organization){
-			init(organization as string)
+
+		if(orderid && payment){
+			init(payment.organization)
 		}
 		
-	},[id,organization])
-
+	},[orderid,organization])
 
 	useEffect(()=>{
 		(async()=>{
-			 if(statePaymentItem.token){
+			 if(statePaymentItem.token && payment){
 					 
-				await statusPayment(id)
-				await	getOrder()
+				await statusPayment(payment.paymentid)
+				//await	getOrder()
 			 }
 		 })()
 		 
 		 
-	 },[statePaymentItem.token,statePaymentItem.tokenBar])
+	 },[statePaymentItem.token,statePaymentItem.tokenBar,payment])
 
-	 //console.log(statePaymentItem);
+	 
 
 	const init = async (organization:string) =>{
 		try {
-			const {data:org}:any =  await RequestOrganization.getBu({idorganization:organization})
+			//const {data:org}:any =  await RequestOrganization.getBu({idorganization:organization})
 			const {data:payorg} = await requestOrganizationPayment.findBuOrg({organization})
-
+			
 			payorg.forEach((val:any) => {
 				if(val.typemagaz == 'ip'){
 					dispatchPaymentItem({
@@ -94,11 +94,12 @@ export function useOrderPaymentCart(this: any,id:number) {
 					});
 				}
 			});
+			/*
 			dispatchPaymentItem({
 				type: ReducerActionType.setOrganization,
 				payload: org.address.street
 			});
-			
+			*/
 
 		} catch (error) {
 			console.log(error);
@@ -107,12 +108,12 @@ export function useOrderPaymentCart(this: any,id:number) {
 
 	const getOrder = async () =>{
 		try {
-			const {data} = await RequestOrderPayment.getBuOrder(id)
+
 			dispatchPaymentItem({
 				type: ReducerActionType.setOrder,
-				payload: data
+				payload: payment
 			});
-			
+			/*
 			if(data.dyalPayment.BarPaymentid && statePaymentItem.tokenBar){
 				const barPay = await statusPayment(Number(data.dyalPayment.BarPaymentid),statePaymentItem.tokenBar)
 				dispatchPaymentItem({
@@ -120,6 +121,7 @@ export function useOrderPaymentCart(this: any,id:number) {
 					payload: barPay
 				});
 			}
+			*/
 		} catch (error) {
 			
 		}
@@ -127,22 +129,28 @@ export function useOrderPaymentCart(this: any,id:number) {
 
 	const statusPayment = async (payid:number,token?:string) =>{
 		try {
+			/*
 			const {data} = await RequestOrderPayment.getStatusPayment({
 				id:payid,
+				orderid:payment.orderId,
 				token:token || statePaymentItem.token
 			})
-			//console.log(payid,statePaymentItem.token,token);
-			return data
+			*/
+			dispatchPaymentItem({
+				type: ReducerActionType.setOrder,
+				payload: payment
+			});
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	const successPayment = async (id:number,price:number,token?:string) =>{
+	const successPayment = async (id:number,price:number,orderId:string,token?:string) =>{
 		try {
 			await RequestOrderPayment.confimPayment({
 				id,
 				token:token || statePaymentItem.token,
+				orderId:orderid,
 				price
 			})
 			router.reload()
@@ -151,11 +159,12 @@ export function useOrderPaymentCart(this: any,id:number) {
 		}
 	}
 
-	const canselPayment = async (id:number,token?:string) =>{
+	const canselPayment = async (id:number,orderId:string,token?:string) =>{
 		try {
-			console.log(token);
+			
 			await RequestOrderPayment.canselPayment({
 				id,
+				orderId:orderid,
 				token:token || statePaymentItem.token,
 			})
 			router.reload()
@@ -199,6 +208,7 @@ export function useOrderPaymentCart(this: any,id:number) {
 		router.reload()
 	}
 
+	
 
 	this.data({
 		

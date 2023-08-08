@@ -9,6 +9,7 @@ type IStatusPayment = {
 	id:number,
 	token:string
 	price?:number
+	orderid:string
 }
 
 @RequestFabric({
@@ -37,12 +38,12 @@ class RequestOrderPayment  extends ApiSuper {
   }
 
 	@methods('post')
-  confimPayment(body:IStatusPayment) {
+  confimPayment(body:any) {
     return this.request(`/orderPayment/paymentConfirm`)
   }
 
 	@methods('post')
-  canselPayment(body:IStatusPayment) {
+  canselPayment(body:any) {
     return this.request<any>(`/orderPayment/canselpayment`)
   }
 
