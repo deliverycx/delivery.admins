@@ -14,7 +14,7 @@ import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/orga
 import { DELIVERY_METODS, ORG_STATUS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
 
 
-const header = (token:string) =>{
+const header = (token: string) => {
 	return {
 		headers: { Authorization: `Bearer ${token}` }
 	}
@@ -22,51 +22,51 @@ const header = (token:string) =>{
 
 @Injectable()
 export class IikoRequesterServises {
-  public token: string;
-  private cities: Record<string, Array<any>>;
-  private geoCoder
-  private downloader
-  
-  constructor(
-    @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
-    @InjectModel(CategoryClass) private readonly categoryModel: ReturnModelType<typeof CategoryClass>,
-    @InjectModel(ProductClass) private readonly productModel: ReturnModelType<typeof ProductClass>,
+	public token: string;
+	private cities: Record<string, Array<any>>;
+	private geoCoder
+	private downloader
+
+	constructor(
+		@InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
+		@InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
+		@InjectModel(CategoryClass) private readonly categoryModel: ReturnModelType<typeof CategoryClass>,
+		@InjectModel(ProductClass) private readonly productModel: ReturnModelType<typeof ProductClass>,
 		@InjectModel(OrganizationStatusClass) private readonly orgstatusModel: ReturnModelType<typeof OrganizationStatusClass>
-  ) {
-    this.geoCoder = new GeoCoder(process.env.YANDEX_APIKEY);
-    this.downloader = new DownloadImage();
-  }
+	) {
+		this.geoCoder = new GeoCoder(process.env.YANDEX_APIKEY);
+		this.downloader = new DownloadImage();
+	}
 
-  async getToken() {
-    
-    const { data } = await axios.post(
-        'https://api-ru.iiko.services/api/1/access_token',
-				{
-					apiLogin: "539ecfae"
-				}
-    );
-				
-    this.token = data.token
-  }
-  async getAddresses() {
-    const token = this.token;
+	async getToken() {
 
-    const { data } = await axios.get(
-      'https://api-ru.iiko.services/api/1/organizations',
+		const { data } = await axios.post(
+			'https://api-ru.iiko.services/api/1/access_token',
+			{
+				apiLogin: "539ecfae"
+			}
+		);
+
+		this.token = data.token
+	}
+	async getAddresses() {
+		const token = this.token;
+
+		const { data } = await axios.get(
+			'https://api-ru.iiko.services/api/1/organizations',
 			{
 				headers: { Authorization: `Bearer ${token}` }
 			}
-    );
-		
-		
-    this.cities = {};
-    for (let i = 0; i < data.organizations.length; i++) {
-      const organizations = data.organizations[i];
-			
+		);
 
-      const {data:resorg} = await axios.post(
-        'https://api-ru.iiko.services/api/1/organizations',
+
+		this.cities = {};
+		for (let i = 0; i < data.organizations.length; i++) {
+			const organizations = data.organizations[i];
+
+
+			const { data: resorg } = await axios.post(
+				'https://api-ru.iiko.services/api/1/organizations',
 				{
 					organizationIds: [
 						organizations.id
@@ -77,13 +77,13 @@ export class IikoRequesterServises {
 				{
 					headers: { Authorization: `Bearer ${token}` }
 				}
-    	);
+			);
 			const organization = resorg.organizations[0]
 
-			
 
-			const {data:rescity} = await axios.post(
-        'https://api-ru.iiko.services/api/1/cities',
+
+			const { data: rescity } = await axios.post(
+				'https://api-ru.iiko.services/api/1/cities',
 				{
 					organizationIds: [
 						organizations.id
@@ -92,11 +92,11 @@ export class IikoRequesterServises {
 				{
 					headers: { Authorization: `Bearer ${token}` }
 				}
-    	);
-				console.log(organizations.id);
+			);
+			console.log(organizations.id);
 
-			const {data:terminal} = await axios.post(
-        'https://api-ru.iiko.services/api/1/terminal_groups',
+			const { data: terminal } = await axios.post(
+				'https://api-ru.iiko.services/api/1/terminal_groups',
 				{
 					organizationIds: [
 						organizations.id
@@ -106,282 +106,280 @@ export class IikoRequesterServises {
 				{
 					headers: { Authorization: `Bearer ${token}` }
 				}
-    	);
-if(!terminal.terminalGroups[0].items){
-				console.log('инфы в терминале нету',organizations.id);
-			}	
-			const cityRes = terminal.terminalGroups[0].items[0].name
-			
+			);
 
 
-			
+			if (terminal.terminalGroups.length !== 0) {
 
-      const matchesAddress = cityRes.match(
-        /(?<city>.*?),\s?(?<street>.*)/i
-      );
+				const cityRes = terminal.terminalGroups[0].items[0].name
 
-			
-				
-			
-      if (matchesAddress) {
-        const { city, street } = matchesAddress.groups;
-        
-				/**/
-        const { position } = await this.geoCoder.resolve(
-          cityRes
-        );
-				
-				
-				//const position = [ organization.longitude,organization.latitude ]	
+				const matchesAddress = cityRes.match(
+					/(?<city>.*?),\s?(?<street>.*)/i
+				);
 
-        const organizationInArray = {
-          street,
-          guid: organization.id,
-          longitude: position[0],
-          latitude: position[1],
-          workTime: ['10:00-22:00'],
-          phone: organization.phone,
-					
-        };
+				if (matchesAddress) {
+					const { city, street } = matchesAddress.groups;
 
-				
-        if (city.trim() in this.cities) {
-					
-          this.cities[city.trim()].push(organizationInArray);
-        } else {
-						
-            this.cities = {
-                ...this.cities,
-                [city.trim()]: [organizationInArray]
-            };
-        }
-				
-				await this.orgstatusModel.findOneAndUpdate(
-					{organization:organization.id},
+					/**/
+					const { position } = await this.geoCoder.resolve(
+						cityRes
+					);
+
+
+					//const position = [ organization.longitude,organization.latitude ]	
+
+					const organizationInArray = {
+						street,
+						guid: organization.id,
+						longitude: position[0],
+						latitude: position[1],
+						workTime: ['10:00-22:00'],
+						phone: organization.phone,
+
+					};
+
+
+					if (city.trim() in this.cities) {
+
+						this.cities[city.trim()].push(organizationInArray);
+					} else {
+
+						this.cities = {
+							...this.cities,
+							[city.trim()]: [organizationInArray]
+						};
+					}
+
+					await this.orgstatusModel.findOneAndUpdate(
+						{ organization: organization.id },
+						{
+							$setOnInsert: {
+								organizationStatus: ORG_STATUS.NOWORK,
+								deliveryMetod: [DELIVERY_METODS.COURIER, DELIVERY_METODS.PICKUP],
+								paymentMetod: [PAYMENT_METODS.CASH, PAYMENT_METODS.BYCARD]
+							}
+						},
+						{ upsert: true, new: true })
+
+
+
+
+				}
+
+			} else {
+				console.log('инфы в терминале нету', organizations.id);
+			}
+
+		}
+
+
+
+
+		for (let city in this.cities) {
+			const cityId = new Types.ObjectId();
+
+			const organizations = [];
+
+
+			for (let i = 0; i < this.cities[city].length; i++) {
+				const { guid, longitude, latitude, street, workTime, phone, cityguid } = this.cities[city][i];
+
+				console.log(guid, street);
+
+				const objectId = await this.organizationModel.findOneAndUpdate(
+					{ id: guid },
 					{
-						$setOnInsert:{
-							organizationStatus:ORG_STATUS.NOWORK,
-							deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP],
-							paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
-						}
+						$setOnInsert: {
+							id: guid,
+							city: cityId,
+							cyid: cityguid,
+							isHidden: true,
+							address: {
+								street,
+								longitude,
+								latitude
+							},
+							workTime,
+							phone,
+						},
+
 					},
-					{ upsert: true, new: true })
+					{ upsert: true, new: true }
+				);
 
-				
-        
-        
-      }
+				this.cities[city][i] = {
+					...this.cities[city][i],
+					objectId
+				};
+				organizations.push(objectId);
 
-    }
-		
-		
-			
-		
-      for (let city in this.cities) {
-        const cityId = new Types.ObjectId();
-				
-        const organizations = [];
 
-        
-        for (let i = 0; i < this.cities[city].length; i++) {
-          const { guid, longitude, latitude, street, workTime, phone,cityguid } = this.cities[city][i];
+			}
 
-					console.log(guid,street);
-          
-          const objectId = await this.organizationModel.findOneAndUpdate(
-            { id: guid },
-            {
-                $setOnInsert: {
-                    id: guid,
-                    city: cityId,
-										cyid:cityguid,
-										isHidden:true,
-										address: {
-											street,
-											longitude,
-											latitude
-										},
-										workTime,
-                    phone,
-                },
-								
-            },
-            { upsert: true, new: true }
-          );
 
-          this.cities[city][i] = {
-            ...this.cities[city][i],
-            objectId
-          };
-          organizations.push(objectId);
-          
-          
-        }
 
-        
-        
-        await this.cityModel.updateOne(
-          { name: city },
-          {
-              $setOnInsert: {
-                  _id: cityId,
-                  name: city,
-									cyid:this.cities[city][0].cityguid
-              },
-              $set: {
-                  organizations
-              }
-          },
-          { upsert: true }
-        );
+			await this.cityModel.updateOne(
+				{ name: city },
+				{
+					$setOnInsert: {
+						_id: cityId,
+						name: city,
+						cyid: this.cities[city][0].cityguid
+					},
+					$set: {
+						organizations
+					}
+				},
+				{ upsert: true }
+			);
 
-        
-        
-      }
-      
-    
-  }
 
-  async getNomenclature() {
-    let categoriesArray = [];
-    let productsArray = [];
 
-    for (let city in this.cities) {
-      for (let i = 0; i < this.cities[city].length; i++) {
-        await this.getToken();
+		}
 
-        const { guid, objectId } = this.cities[city][i];
 
-        const { data } = await axios.post(
-          'https://api-ru.iiko.services/api/1/nomenclature',
+	}
+
+	async getNomenclature() {
+		let categoriesArray = [];
+		let productsArray = [];
+
+		for (let city in this.cities) {
+			for (let i = 0; i < this.cities[city].length; i++) {
+				await this.getToken();
+
+				const { guid, objectId } = this.cities[city][i];
+
+				const { data } = await axios.post(
+					'https://api-ru.iiko.services/api/1/nomenclature',
 					{
 						organizationId: guid
 					},
 					{
 						headers: { Authorization: `Bearer ${this.token}` }
 					}
-        );
-				
+				);
 
-        const revisionFromDatabase = await this.organizationModel.findOne(
-            { id: guid },
-            { revision: 1 }
-        ).lean();
 
-        const { groups, products, revision } = data;
+				const revisionFromDatabase = await this.organizationModel.findOne(
+					{ id: guid },
+					{ revision: 1 }
+				).lean();
+
+				const { groups, products, revision } = data;
 
 				console.log('ревизия -');
-        console.log(guid,revisionFromDatabase, revision);
+				console.log(guid, revisionFromDatabase, revision);
 
-        if (revision === revisionFromDatabase.revision) {
-            continue;
-        }
+				if (revision === revisionFromDatabase.revision) {
+					continue;
+				}
 
-        for (let i = 0; i < groups.length; i++) {
-            const { name, order, images,imageLinks, id, description } = groups[i];
+				for (let i = 0; i < groups.length; i++) {
+					const { name, order, images, imageLinks, id, description } = groups[i];
 
-						//console.log('images',imageLinks);
-            if (description === "HIDDEN") {
-                continue;
-            }
+					//console.log('images',imageLinks);
+					if (description === "HIDDEN") {
+						continue;
+					}
 
-            const image = imageLinks
-                ? imageLinks[imageLinks.length - 1]
-                : "";
+					const image = imageLinks
+						? imageLinks[imageLinks.length - 1]
+						: "";
 
-            const category = {
-                _id: new Types.ObjectId(),
-                id,
-                name,
-                order,
-                organization: objectId,
-                image: await this.downloader.download(image, 70)
-            };
-            categoriesArray.push(category);
-        }
+					const category = {
+						_id: new Types.ObjectId(),
+						id,
+						name,
+						order,
+						organization: objectId,
+						image: await this.downloader.download(image, 70)
+					};
+					categoriesArray.push(category);
+				}
 
-        categoriesArray.push({
-            _id: new Types.ObjectId(),
-            organization: objectId,
-            name: "Избранное",
-            order: categoriesArray.length,
-            image: "/static/shop/favorite.png"
-        });
+				categoriesArray.push({
+					_id: new Types.ObjectId(),
+					organization: objectId,
+					name: "Избранное",
+					order: categoriesArray.length,
+					image: "/static/shop/favorite.png"
+				});
 
-        for (let i = 0; i < products.length; i++) {
-            console.log(products[i].name);
+				for (let i = 0; i < products.length; i++) {
+					console.log(products[i].name);
 
-            const category = categoriesArray.find(
-                (category) => category.id === products[i].parentGroup
-            );
+					const category = categoriesArray.find(
+						(category) => category.id === products[i].parentGroup
+					);
 
-            if (!category) {
-                continue;
-            }
+					if (!category) {
+						continue;
+					}
 
 
 
-            const {
-                name,
-                description,
-                additionalInfo,
-                order,
-                id,
-                tags,
-								code,
-                images,
-								imageLinks,
-                measureUnit,
-                weight
-            } = products[i];
+					const {
+						name,
+						description,
+						additionalInfo,
+						order,
+						id,
+						tags,
+						code,
+						images,
+						imageLinks,
+						measureUnit,
+						weight
+					} = products[i];
 
-						const price = products[i].sizePrices[0].price.currentPrice
-						
+					const price = products[i].sizePrices[0].price.currentPrice
 
-            const image = imageLinks
-                ? imageLinks[imageLinks.length - 1]
-                : "";
-						
-            const product = {
-                category: category._id,
-                organization: objectId,
-                name,
-                description,
-                order,
-                id,
-                image: await this.downloader.download(image, 300,id),
-                additionalInfo,
-                tags,
-								code,
-                measureUnit: measureUnit,
-                price,
-                weight
-            };
-            productsArray.push(product);
-        }
 
-        await this.categoryModel.deleteMany({ organization: objectId });
-        await this.categoryModel.insertMany(categoriesArray);
-        categoriesArray = [];
+					const image = imageLinks
+						? imageLinks[imageLinks.length - 1]
+						: "";
 
-        await this.productModel.deleteMany({ organization: objectId });
-        await this.productModel.insertMany(productsArray);
-        productsArray = [];
+					const product = {
+						category: category._id,
+						organization: objectId,
+						name,
+						description,
+						order,
+						id,
+						image: await this.downloader.download(image, 300, id),
+						additionalInfo,
+						tags,
+						code,
+						measureUnit: measureUnit,
+						price,
+						weight
+					};
+					productsArray.push(product);
+				}
 
-        await this.organizationModel.updateOne(
-            { id: guid },
-            { $set: { revision } }
-        );
+				await this.categoryModel.deleteMany({ organization: objectId });
+				await this.categoryModel.insertMany(categoriesArray);
+				categoriesArray = [];
 
-        //console.log(data); 
-        }
-    }
-  }
-  public async polling() {
-    console.log("start pooling");
-    await this.getToken();
-    await this.getAddresses();
-    //await this.getNomenclature();
-    console.log("end pooling");
-  }
+				await this.productModel.deleteMany({ organization: objectId });
+				await this.productModel.insertMany(productsArray);
+				productsArray = [];
+
+				await this.organizationModel.updateOne(
+					{ id: guid },
+					{ $set: { revision } }
+				);
+
+				//console.log(data); 
+			}
+		}
+	}
+	public async polling() {
+		console.log("start pooling");
+		await this.getToken();
+		await this.getAddresses();
+		//await this.getNomenclature();
+		console.log("end pooling");
+	}
 }
