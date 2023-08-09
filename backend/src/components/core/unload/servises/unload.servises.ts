@@ -88,6 +88,22 @@ export class UnloadServises {
 		return resorg.organizations[0]
 	}
 
+	async getTeminalOrg(organizations){
+		const token = await this.getToken()
+		const { data: terminal } = await axios.post(
+			'https://api-ru.iiko.services/api/1/terminal_groups',
+			{
+				organizationIds: [
+					organizations
+				],
+				includeDisabled: false
+			},
+			{
+				headers: { Authorization: `Bearer ${token}` }
+			}
+		);
+	}
+
   async getOrganizationsResult() {
     await this.getOrganizations()
 		console.log(this.organizations);
