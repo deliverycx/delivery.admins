@@ -14,11 +14,13 @@ import { OrganizationServises } from "../servises/organization.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
 import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 import { IIkoAxios } from "src/repository/iiko/iiko.axios";
+import { OrganizationfilterModel } from "src/database/mongodbModel/delivery/organizationFilter";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB),
 		TypegooseModule.forFeature([OrganizationStatusClass], DELIVERY_DB),
+		TypegooseModule.forFeature([OrganizationfilterModel], DELIVERY_DB),
 		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
   ],
   controllers: [OrganizationControllers,OrganizationSettingControllers], 

@@ -7,6 +7,7 @@ import {
     Severity
 } from "@typegoose/typegoose";
 import { CityClass } from "./city.model";
+import { OrganizationfilterModel } from "./organizationFilter";
 
 @ModelOptions({
     options: { customName: "Organization", allowMixed: Severity.ALLOW },
@@ -49,6 +50,14 @@ export class OrganizationClass {
 
 		@prop({ type: () => Boolean,default:false })
 		reservetable:boolean
+
+		@prop()
+		gallery:string[]
+
+		@prop({ ref: () => OrganizationfilterModel })
+    public filters!: Ref<OrganizationfilterModel>[];
+
+
     
 }
 

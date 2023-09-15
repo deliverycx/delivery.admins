@@ -1,10 +1,14 @@
-import { Body, Controller, Get, Post, Query, Render, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Render, Res, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
 import { connection } from "src/database/mongodbModel/config.mongodb";
 import { JwtAuthGuard } from "src/guard/jwt.guard";
 import { OrganizationServises } from '../servises/organization.servises'
 import { Response } from "express";
 import OrganizationDTO, { CityDTO } from "../dto/organization.dto";
 import { AuthGuard } from "@nestjs/passport";
+import { AnyFilesInterceptor, FilesInterceptor } from "@nestjs/platform-express";
+import { diskStorage } from "multer";
+import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
+import { MainBannerDTO } from "../../banners/dto/mainBanner.dto";
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('organization')
@@ -163,6 +167,33 @@ export class OrganizationControllers{
 		const result = await this.OrganizationServises.organizationTerminal(body.idorganization)
 		
     return result
+	}
+
+
+	@Post('addPhoto')
+	@UseInterceptors(
+		FilesInterceptor('files', 20, {
+			storage: diskStorage({
+				destination: './public/static/shop',
+				filename: editFileName,
+			}),
+			fileFilter: imageFileFilter
+		}),
+	)
+	async addPhoto(
+		@UploadedFiles() files: Array<Express.Multer.File>,
+		@Body() body:{idorganization:string},
+		@Res() response,
+		){
+			console.log('добавить',body,files);
+			const result = await this.OrganizationServises.addOrgPhoto(body.idorganization,files)
+			response.status(200).json(result)
+	}
+
+	@Post('addfilter')
+	async addFilters(@Body() body:{filterlist:string[],idorganization:string},){
+		const result = await this.OrganizationServises.addFiltersServis(body)
+		return result
 	}
 
 }

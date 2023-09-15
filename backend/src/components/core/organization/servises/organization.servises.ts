@@ -78,4 +78,18 @@ export class OrganizationServises{
 			console.log(error);
 		}
 	}
+
+	addOrgPhoto(id:any,files:any){
+		if(files){
+			const imagesMass = files.reduce((acc,images) => {
+			acc.push(images.originalname)
+				return acc
+			},[]);
+			this.OrganizationRepository.AddGalleryOrgMetod(id,imagesMass)
+		}
+	}
+
+	addFiltersServis({filterlist,idorganization}){
+		return this.OrganizationRepository.filtersMetod(idorganization,filterlist)
+	}
 }

@@ -47,9 +47,10 @@ export class OrganizationRepository {
 	async getBuOrganization(idorg:string){
 		const result = await this.organizationModel
             .findOne({id:idorg})
+						.populate('filters')
             .lean();
 
-
+			console.log(result);
       return result
 	}
 
@@ -291,6 +292,33 @@ export class OrganizationRepository {
 		
 		return result
 	}
+	async AddGalleryOrgMetod(idorganization,images:[]){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				gallery:images
+			}
+		)
+		
+		return result
+	}
+	async filtersMetod(idorganization,filterlist:string){
+
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				$set:{
+					filters:filterlist
+				}
+			},
+			{ upsert: true, new: true }
+		)
 	
+		return result
+	}
 
 }

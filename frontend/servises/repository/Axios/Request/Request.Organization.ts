@@ -139,6 +139,20 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/organizationTerminal`)
   }
 
+  addCalleryOrg(data:any) {
+		console.log(data);
+		return this.api({
+			method: 'post',
+			url: `/organization/addPhoto`,
+			data: data
+		})
+  }
+	
+	@methods('post')
+  addfilter(data:any) {
+    return this.request(`/organization/addfilter`)
+  }
+
   
 }
 export default new RequestOrganization()

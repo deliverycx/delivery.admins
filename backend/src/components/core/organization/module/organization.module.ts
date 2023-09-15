@@ -5,6 +5,7 @@ import { OrganizationSettingModule } from "./organizationSetting.module";
 import { OrganizationStatusModule } from "./organizationStatus.module";
 import { OrganizationTablesModule } from "./organizationTables.module";
 import { OrganizationCountModule } from "./organizationCounter.module";
+import { OrganizationFilterModule } from "./organizationFilter.module";
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { OrganizationCountModule } from "./organizationCounter.module";
 		OrganizationRecvisitesModule,
 		OrganizationTablesModule,
 		OrganizationStatusModule,
-		OrganizationCountModule
+		OrganizationCountModule,
+		OrganizationFilterModule
   ]
 })
 export class OrganizationModule{}

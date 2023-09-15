@@ -7,6 +7,7 @@ import RequestDisplay from './Request.Display'
 import RequestOrderPayment from './Request.OrderPayment'
 import RequestOrganizationTables from './Request.OrganizationTables'
 import RequestDashBord from './Request.DashBord'
+import RequestOrganizationFilter from './Request.OraganizationFilter'
 
 export {
   RequestOrganization,
@@ -17,5 +18,6 @@ export {
 	RequestDisplay,
 	RequestOrderPayment,
 	RequestOrganizationTables,
-	RequestDashBord
+	RequestDashBord,
+	RequestOrganizationFilter
 }
