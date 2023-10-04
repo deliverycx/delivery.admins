@@ -1,10 +1,6 @@
 import { Controller, Post, Body, Get, Query } from "@nestjs/common"
-import OrganizationPaymentDTO from "../dto/organizationPayment.dto"
 import OrganizationRecvisitesDTO from "../dto/organizationRecvisites.dto"
-import OrganizationSettingDTO from "../dto/organizationSetting.dto"
-import { OrganizationPaymentServises } from "../servises/organizationPayment.servises"
 import { OrganizationRecvisitesServises } from "../servises/organizationRecvisites.servises"
-import { OrganizationSettingServises } from "../servises/organizationSetting.servises"
 
 @Controller('organization_recvisites')
 export class OrganizationRecvisitesControllers{
@@ -28,15 +24,15 @@ export class OrganizationRecvisitesControllers{
 	}
 
 	@Post('add')
-	add(@Body() body:OrganizationRecvisitesDTO){	
-		
+	add(@Body() body:OrganizationRecvisitesDTO){
+		console.log('ADD', body)
 		return this.servises.create(body)
 	}
 	@Post('edit')
 	edit(
 		@Body() body:OrganizationRecvisitesDTO,
 		@Query() query: OrganizationRecvisitesDTO
-		){	
+		){
 		return this.servises.edit(body,query.id)
 	}
 

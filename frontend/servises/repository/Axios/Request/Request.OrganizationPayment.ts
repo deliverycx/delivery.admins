@@ -9,7 +9,7 @@ import { RequestFabric } from '../Fabric/FabricApi';
 		fabric:CRUDFabric
 	}]
 })
-class RequestOrganizationPayment  extends ApiSuper {
+class RequestOrganizationPayment extends ApiSuper {
 	CRUDFabric!:CRUDFabric
 
 	findBuOrg(data:{organization:string}){

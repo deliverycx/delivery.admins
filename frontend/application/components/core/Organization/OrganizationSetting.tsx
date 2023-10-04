@@ -1,15 +1,9 @@
 import { adapterComponentUseCase, TadapterCaseCallback } from 'adapters/adapterComponents';
-import { useOrganization } from 'domains/useCase/organization/useCase.Organization';
 import { useOrganizationSetting } from 'domains/useCase/organization/useCase.OrganizationSetting';
 import React from 'react';
 
-import OrganizationPayment from './OrganizationPayment/OrganizationPayment';
 import OrganizationContlols from './OrganizationSetting/OrganizationContlols';
-import OrganizationSettingFrom from './OrganizationSetting/OrganizationInfo';
-import OrganizationWorkTime from './OrganizationSetting/OrganizationWorkTime';
-import OrganizationTables from './OrganizationTables/OrganizationTables';
 import OrgTabPanel from './Tabs/OrgTabPanel';
-import OrganizationAnalitiks from './OrganizationAnalitiks/OrganizationAnalitiks';
 import OrganizationMOKOrder from './OrganizationAnalitiks/OrganizationMOKOrder';
 
 

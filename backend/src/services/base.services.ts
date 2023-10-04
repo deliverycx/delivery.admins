@@ -1,6 +1,3 @@
-import { Injectable } from "@nestjs/common";
-
-
 export class BaseServises{
 	constructor(
 		private readonly repozitory
