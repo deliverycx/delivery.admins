@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query } from "@nestjs/common"
+import { Controller, Post, Body, Get, Query, Header } from "@nestjs/common"
 import OrganizationGoodPlaceDTO from "../dto/organizationGoodPlace.dto";
 import {OrganizationGoodPlaceServises} from "../servises/organizationGoodPlace.services";
 
@@ -9,17 +9,17 @@ export class OrganizationGoodPlaceControllers {
     ) { }
 
     @Get('all')
-    getAll(@Query() query: OrganizationGoodPlaceDTO){
+    getAll(@Query() query: any){
         return this.services.getAll(query)
     }
 
     @Get('bu')
-    geBu(@Query() query: OrganizationGoodPlaceDTO){
-        return this.services.getOneBuId(query.id)
+    geBu(@Query() query: any){
+        return this.services.getOneBuId(query)
     }
 
     @Get('buorg')
-    geBuOrg(@Query() query: OrganizationGoodPlaceDTO){
+    geBuOrg(@Query() query: any){
         return this.services.getOne(query)
     }
 

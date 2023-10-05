@@ -5,33 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/dto/organizationGoodPlace.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/module/OrganizationGoodPlace.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organizationGoodPlace.services.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/database/mongodbModel/delivery/organizationGoodPlace.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganizationGoodPlace.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationGoodPlace.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.development.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.development.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationRecvisites.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationRecvisites.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/module/organization.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/module/organization.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationTables.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationTables.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/services/base.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/base.services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/@type/i.organization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/@type/i.organization.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/@type/i.payment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/@type/i.payment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationPayment/OrganizationPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationPayment/OrganizationPayment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationPayment/OrganizationRecvisites.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationPayment/OrganizationRecvisites.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsShop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsShop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationPayment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationPayment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationPayment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationPayment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,22 +32,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "GoodPlace",
-    "last_opened_file_path": "D:/projects/sport-club",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "D:\\projects\\delivery.admins\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;GoodPlace&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projects/sport-club&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\projects\\delivery.admins\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -90,7 +68,8 @@
       <workItem from="1696240607254" duration="92000" />
       <workItem from="1696272094046" duration="325000" />
       <workItem from="1696410185501" duration="1245000" />
-      <workItem from="1696412267958" duration="17611000" />
+      <workItem from="1696412267958" duration="17764000" />
+      <workItem from="1696500257696" duration="10331000" />
     </task>
     <servers />
   </component>

@@ -10,17 +10,18 @@ export class OrganizationRecvisitesControllers{
   
   
   @Get('all')
-	getAll(@Query() query: OrganizationRecvisitesDTO){
-		return this.servises.getAll(query)
+	getAll(@Query() query: any){
+		return this.servises.getAll(query.organizationId)
 	}
+
 	@Get('bu')
 	geBu(@Query() query: OrganizationRecvisitesDTO){
 		return this.servises.getOneBuId(query.id)
 	}
+
 	@Get('buorg')
-	geBuOrg(@Query() query: OrganizationRecvisitesDTO){
-		console.log(query);
-		return this.servises.getOne(query)
+	geBuOrg(@Query() query: any){
+		return this.servises.getOne(query.organizationId)
 	}
 
 	@Post('add')
@@ -28,6 +29,7 @@ export class OrganizationRecvisitesControllers{
 		console.log('ADD', body)
 		return this.servises.create(body)
 	}
+
 	@Post('edit')
 	edit(
 		@Body() body:OrganizationRecvisitesDTO,

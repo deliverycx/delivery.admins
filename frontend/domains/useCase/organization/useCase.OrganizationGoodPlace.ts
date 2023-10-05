@@ -35,7 +35,6 @@ export function useOrganizationGoodPlace(this: any,id:string) {
         try {
             const {data} = await requestGoodPlacePayment.findBuOrg({organization:id})
             data && setInfo(data)
-            // console.log('USECASE DATA GOODPLACE getBu DATA', data)
         } catch (error) {
             console.log(error);
         }
