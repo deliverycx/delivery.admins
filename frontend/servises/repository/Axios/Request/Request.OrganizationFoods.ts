@@ -3,23 +3,23 @@ import { CRUDFabric } from "../Fabric/CRUD.fabric";
 import { RequestFabric } from '../Fabric/FabricApi';
 
 @RequestFabric({
-    request:'organization_goodplace',
+    request:'organization',
     factory:[{
         name:'CRUDFabric',
         fabric:CRUDFabric
     }]
 })
 
-class RequestOrganizationGoodPlace extends ApiSuper {
+class RequestOrganizationFoods extends ApiSuper {
     CRUDFabric!:CRUDFabric
 
-    findBuOrg(data:{organization:string}){
+    getAllFoods(data:{organizationId:string}) {
         return this.api({
             method: 'post',
-            url: `/organization_goodplace/find`,
+            url: 'organization/getfoods',
             data
         })
     }
 }
 
-export const requestGoodPlacePayment =  new RequestOrganizationGoodPlace()
+export const requestOrganizationFoods =  new RequestOrganizationFoods()

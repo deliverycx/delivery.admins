@@ -54,6 +54,11 @@ class RequestOrganization extends ApiSuper {
   getAll() {
     return this.request<Req.org>(`/organization/getAll`)
   }
+  //
+  // @methods('post')
+  // getOrganizationFoods(organizationId: string) {
+  //     return this.request('/organization/getfoods')
+  // }
 
 	@methods('get')
   getCityBu(query:string) {

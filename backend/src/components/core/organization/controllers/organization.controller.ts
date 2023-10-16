@@ -10,7 +10,7 @@ import { diskStorage } from "multer";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
 import { MainBannerDTO } from "../../banners/dto/mainBanner.dto";
 
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 @Controller('organization')
 export class OrganizationControllers{
   constructor(
@@ -22,6 +22,13 @@ export class OrganizationControllers{
   getOrganization() {
     const result = this.OrganizationServises.getAllOrganization()
     return result
+  }
+
+  @Post('getfoods')
+  async getOrganizationFoods(@Body() id: {organizationId: string}) {
+	  console.log('BODY FOODS CONTROLLER', id)
+	  const data = await this.OrganizationServises.getOrganizationFoods(id)
+	  return data
   }
 
 	@Get('getcity')

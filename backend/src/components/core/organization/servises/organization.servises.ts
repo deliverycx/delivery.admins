@@ -79,6 +79,15 @@ export class OrganizationServises{
 		}
 	}
 
+	async getOrganizationFoods(id: {organizationId: string}) {
+		try {
+			const data = await this.iikoAxios.getFoods(id)
+			return data
+		} catch (e) {
+			console.log('ERROR', e)
+		}
+	}
+
 	addOrgPhoto(id:any,files:any){
 		if(files){
 			const imagesMass = files.reduce((acc,images) => {

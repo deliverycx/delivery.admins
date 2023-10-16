@@ -8,6 +8,7 @@ import TabsSettings from './TabsSettings';
 import TabsDefault from './TabsDefault';
 import TabsShop from './TabsShop';
 import TabsUsers from './TabsUsers';
+import TabsMenu from "./TabsMenu";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,6 +59,7 @@ export default function OrgTabPanel() {
           <Tab label="Общее " {...a11yProps(2)} />
 					<Tab label="Магазин" {...a11yProps(3)} />
 					<Tab label="Пользователи" {...a11yProps(4)} />
+					<Tab label="Меню блюд" {...a11yProps(5)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -74,6 +76,11 @@ export default function OrgTabPanel() {
       </TabPanel>
 			<TabPanel value={value} index={4}>
         <TabsUsers />
+      </TabPanel>
+
+        {/*Menu*/}
+      <TabPanel value={value} index={5}>
+        <TabsMenu />
       </TabPanel>
     </Box>
   );

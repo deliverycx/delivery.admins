@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { RequestOrganization } from "servises/repository/Axios/Request"
 import { IOrganization, ISocial, ListOrganization } from "@type";
 import { useFormik, FormikProvider } from "formik";
+import {requestOrganizationFoods} from "../../../servises/repository/Axios/Request/Request.OrganizationFoods";
 
 export function  useOrganizationSetting(this: any){
 	const router = useRouter()
@@ -11,10 +12,12 @@ export function  useOrganizationSetting(this: any){
 	const [input,setInput] = useState<string>()
 	const [social,setSocial] = useState<any>()
 	const [organization,setOrganization] = useState<any>(null)
+	const [foods, setFoods] = useState<[]>()
 
 	useEffect(()=>{
 		if(slideId){
 			getOrgBu()
+			getOrganizationFoods()
 		}
 
 	},[slideId])
@@ -27,10 +30,16 @@ export function  useOrganizationSetting(this: any){
 		} catch (error) {
 			console.log(error);
 		}
-		
 	}
 
-
+	const getOrganizationFoods = async () => {
+		try {
+			const { data } = await requestOrganizationFoods.getAllFoods({organizationId: slideId})
+			setFoods(data)
+		} catch (e) {
+			console.log(e)
+		}
+	}
 
 	const deliteOrganization = async (id:string) =>{
 		try {
@@ -62,7 +71,8 @@ export function  useOrganizationSetting(this: any){
 	this.data({
 		social,
 		slideId,
-		organization
+		organization,
+		foods
   })
   this.handlers({
 		setInput,
