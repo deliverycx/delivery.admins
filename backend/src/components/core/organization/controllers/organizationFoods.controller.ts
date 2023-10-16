@@ -1,19 +1,18 @@
 import { Controller, Post, Body } from "@nestjs/common"
-import {OrganizationFoodsServises} from "../servises/organizationFoods.services";
 
 @Controller('organization_foods')
 export class OrganizationFoodsControllers {
     constructor(
-        private readonly services: OrganizationFoodsServises
+
     ) { }
 
-    @Post('all')
-    async getOrganizationFoods(
-        @Body() organizationId: string
-    ) {
-        const res = await this.services.getOrganizationFoods(organizationId)
-        return res
-    }
+    // @Post('all')
+    // async getOrganizationFoods(
+    //     @Body() organizationId: string
+    // ) {
+    //     const res = await this.services.getOrganizationFoods(organizationId)
+    //     return res
+    // }
 
     // @Get('all')
     // getAll(@Query() query: any){

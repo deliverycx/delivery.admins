@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationFoods.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsMenu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationFoods.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/application/components/common/Menu/MenuFoods.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/styles/components/_menu.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organization.servises.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organization.servises.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/repository/iiko/iiko.axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repository/iiko/iiko.axios.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/types/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/types/global.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/OrgTabPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/OrgTabPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationFoods.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationFoods.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/@type/i.organization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/@type/i.organization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsMenu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationSetting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationSetting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationTables.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationTables.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.Organization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.Organization.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationGoodPlace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationGoodPlace.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/styles/index.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +78,9 @@
       <workItem from="1697401606335" duration="2000" />
       <workItem from="1697447996627" duration="2224000" />
       <workItem from="1697450447967" duration="2000" />
-      <workItem from="1697457025653" duration="4768000" />
+      <workItem from="1697457025653" duration="4793000" />
+      <workItem from="1697473110334" duration="5226000" />
+      <workItem from="1697484561711" duration="3171000" />
     </task>
     <servers />
   </component>

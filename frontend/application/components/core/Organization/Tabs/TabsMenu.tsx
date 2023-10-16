@@ -1,14 +1,17 @@
 import {useContext, useEffect} from "react"
 import { OrganizationContext } from "../OrganizationSetting"
-import {requestOrganizationFoods} from "../../../../../servises/repository/Axios/Request/Request.OrganizationFoods";
+import Menu from "../../../common/Menu/MenuFoods";
 
 const TabsMenu = () =>{
     const useCaseContext = useContext(OrganizationContext)
     const {foods} = useCaseContext.data
 
     return(
+
         <>
-          Menu
+            {
+                !foods ? <div>Загрузка меню</div> : <Menu groups={foods.groups} products={foods.products} />
+            }
         </>
     )
 }

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { RequestOrganization } from "servises/repository/Axios/Request"
-import { IOrganization, ISocial, ListOrganization } from "@type";
+import {IFoodsArray, IOrganization, ISocial, ListOrganization} from "@type";
 import { useFormik, FormikProvider } from "formik";
 import {requestOrganizationFoods} from "../../../servises/repository/Axios/Request/Request.OrganizationFoods";
 
@@ -12,7 +12,7 @@ export function  useOrganizationSetting(this: any){
 	const [input,setInput] = useState<string>()
 	const [social,setSocial] = useState<any>()
 	const [organization,setOrganization] = useState<any>(null)
-	const [foods, setFoods] = useState<[]>()
+	const [foods, setFoods] = useState<IFoodsArray>()
 
 	useEffect(()=>{
 		if(slideId){

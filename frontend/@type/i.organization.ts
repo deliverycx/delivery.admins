@@ -19,6 +19,15 @@ export type IGoodPlace = {
 	organization: string
 }
 
+export type IFoodsArray = {
+	correlationId: string;
+	groups: []
+	productCategories: []
+	products: []
+	sizes: []
+	revision: number | string
+}
+
 export type IOrganization =  {
 	_id:string
 	id: string;
