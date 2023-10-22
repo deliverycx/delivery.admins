@@ -12,7 +12,7 @@ import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/orga
 export class OrganizationRepository {
   constructor(
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>, 
+    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
 		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>,
 		@InjectModel(OrganizationStatusClass) private readonly statusModel: ReturnModelType<typeof OrganizationStatusClass>
   ) { }
@@ -247,8 +247,9 @@ export class OrganizationRepository {
 				}
 			}
 		)
-		const status = await this.statusModel.findOneAndUpdate(
-			{organization:String(org.id)},
+		const status = await this.statusModel.findOneAndUpdate({
+				organization:String(org.id)
+			},
 			{
 				$setOnInsert:{
 					organizationStatus:ORG_STATUS.NOWORK,

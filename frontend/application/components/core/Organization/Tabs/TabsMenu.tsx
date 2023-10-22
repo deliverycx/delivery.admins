@@ -4,13 +4,20 @@ import Menu from "../../../common/Menu/MenuFoods";
 
 const TabsMenu = () =>{
     const useCaseContext = useContext(OrganizationContext)
-    const {foods} = useCaseContext.data
+    const {foods, slideId, hiddenProducts} = useCaseContext.data
+    const { hideProduct, getHiddenProductsByOrg } = useCaseContext.handlers
 
     return(
 
         <>
             {
-                !foods ? <div>Загрузка меню</div> : <Menu groups={foods.groups} products={foods.products} />
+                !foods ? <div>Загрузка меню</div> : <Menu
+                    // groups={foods.groups}
+                    // products={foods.products}
+                    organization={slideId}
+                    data={{groups: foods.groups, products: foods.products, hiddenProducts}}
+                    handlers={{hideProduct}}
+                />
             }
         </>
     )

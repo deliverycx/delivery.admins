@@ -20,6 +20,23 @@ class RequestOrganizationFoods extends ApiSuper {
             data
         })
     }
+
+    hideProduct(data: any) {
+        return this.api({
+            method: 'post',
+            url: 'organization/hide',
+            data
+        })
+    }
+
+    getHiddenProductsByOrg(data: any) {
+        return this.api({
+            method: 'post',
+            url: 'organization/get',
+            data
+        })
+    }
+
 }
 
 export const requestOrganizationFoods =  new RequestOrganizationFoods()

@@ -25,7 +25,6 @@ export class OrganizationGoodPlaceControllers {
 
     @Post('add')
     add(@Body() body:OrganizationGoodPlaceDTO){
-        console.log(body, 'BODY GOODPLACE REQUEST')
         return this.services.create(body)
     }
 

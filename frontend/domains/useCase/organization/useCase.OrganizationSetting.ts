@@ -13,15 +13,40 @@ export function  useOrganizationSetting(this: any){
 	const [social,setSocial] = useState<any>()
 	const [organization,setOrganization] = useState<any>(null)
 	const [foods, setFoods] = useState<IFoodsArray>()
+	const [hiddenProducts, setHiddenProducts] = useState<any>()
 
 	useEffect(()=>{
 		if(slideId){
 			getOrgBu()
 			getOrganizationFoods()
+			getHiddenProductsByOrg(slideId)
 		}
 
 	},[slideId])
 
+	const hideProduct = async (organization: any, productId: any) => {
+		try {
+			await requestOrganizationFoods.hideProduct({
+				organization,
+				productId
+			})
+		} catch (e) {
+			console.log('error hide', e)
+		}
+	}
+
+	const getHiddenProductsByOrg = async (organization: any) => {
+		try {
+			const res = await requestOrganizationFoods.getHiddenProductsByOrg({
+				organization
+			})
+			setHiddenProducts(res.data)
+			console.log(res)
+			return res
+		} catch (e) {
+			console.log('error get', e)
+		}
+	}
 
 	const getOrgBu = async () =>{
 		try {
@@ -46,44 +71,41 @@ export function  useOrganizationSetting(this: any){
 			const {data} = await RequestOrganization.organizationDelite({id})
 			router.push('/organization/')
 		} catch (error) {
-			
+
 		}
 	}
 
 	const handleHiddenOrg = async (idorganization: string,isHidden:boolean) => {
-    await RequestOrganization.hiddenOrganization({ idorganization, isHidden })
-    await getOrgBu()
-  }
+		await RequestOrganization.hiddenOrganization({ idorganization, isHidden })
+		await getOrgBu()
+	}
 
 	const checkOrganization = async (idorganization: string) =>{
 		try {
 			await RequestOrganization.checkOrganization({idorganization})
 		} catch (error) {
-			
+
 		}
 	}
-
-
-
-
-	
 
 	this.data({
 		social,
 		slideId,
 		organization,
-		foods
-  })
-  this.handlers({
+		foods,
+		hiddenProducts
+	})
+	this.handlers({
 		setInput,
 		getOrgBu,
 		deliteOrganization,
 		handleHiddenOrg,
-		checkOrganization
-  })
-  this.status({
-    
-  })
+		checkOrganization,
+		hideProduct,
+	})
+	this.status({
+
+	})
 }
 
 
@@ -105,23 +127,23 @@ export function  useOrganizationSettingFrom(this: any,organization:IOrganization
 
 
 	const formik = useFormik({
-    initialValues,
-    onSubmit: async (values, meta) => {
-      await handlerOrgSetting(values)
+		initialValues,
+		onSubmit: async (values, meta) => {
+			await handlerOrgSetting(values)
 
-    },
-  });
+		},
+	});
 
 
 
 
 	this.data({
 		formik
-  })
-  this.handlers({
-		
-  })
-  this.status({
-    
-  })
+	})
+	this.handlers({
+
+	})
+	this.status({
+
+	})
 }

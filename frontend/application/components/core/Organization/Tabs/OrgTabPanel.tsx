@@ -77,8 +77,6 @@ export default function OrgTabPanel() {
 			<TabPanel value={value} index={4}>
         <TabsUsers />
       </TabPanel>
-
-        {/*Menu*/}
       <TabPanel value={value} index={5}>
         <TabsMenu />
       </TabPanel>

@@ -8,7 +8,6 @@ import { PaymentinfosClass } from "src/database/mongodbModel/delivery/paymentinf
 import { OrganizationRepository } from "src/domain/repository/organization.repository";
 import { OrganizationPaymentControllers } from "../controllers/organizationPayment.controller";
 import { OrganizationPaymentRepository } from "../repository/organizationPayment.repository";
-import { OrganizationServises } from "../servises/organization.servises";
 import { OrganizationPaymentServises } from "../servises/organizationPayment.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
 import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
@@ -24,7 +23,7 @@ import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/orga
 		OrganizationPaymentServises,
 		OrganizationPaymentRepository,
 		OrganizationRepository,
-		OrganizationSettingServises
+		OrganizationSettingServises,
 	]
 })
 export class OrganizationPaymentModule {}

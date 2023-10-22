@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 
-const Menu = ({ groups, products }: any) => {
-    const [selectedGroup, setSelectedGroup] = useState<string | null>(groups[0].id); // Установите начальное значение на первый таб
+const Menu = ({
+                  organization,
+                  data,
+                  handlers
+              }: {
+    organization: string;
+    data: any;
+    handlers: any;
+}) => {
+    const [selectedGroup, setSelectedGroup] = useState<string | null>(
+        data.groups[0].id
+    );
     const [searchText, setSearchText] = useState('');
+    const [hiddenProducts, setHiddenProducts] = useState(
+        data.hiddenProducts?.hiddenProduct || []
+    );
 
     const handleTabClick = (groupId: string) => {
         setSelectedGroup(groupId);
@@ -12,14 +25,34 @@ const Menu = ({ groups, products }: any) => {
         setSearchText(event.target.value);
     };
 
-    const filteredProducts = products.filter((product: any) => {
-        return (product.parentGroup === selectedGroup) && (product.name.toLowerCase().includes(searchText.toLowerCase()));
-    });
+    const toggleProduct = async (product: any) => {
+        const productId = product.id;
+        if (hiddenProducts.includes(productId)) {
+            const updatedHiddenProducts = hiddenProducts.filter(
+                (id: string) => id !== productId
+            );
+            setHiddenProducts(updatedHiddenProducts);
+        } else {
+            setHiddenProducts([...hiddenProducts, productId]);
+        }
+
+        if (hiddenProducts.includes(productId)) {
+            await handlers.hideProduct(organization, productId);
+        } else {
+            await handlers.hideProduct(organization, productId);
+        }
+    };
+
+    const filteredProducts = data.products.filter(
+        (product: any) =>
+            product.parentGroup === selectedGroup &&
+            product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
 
     return (
         <div>
             <div className="tabs">
-                {groups.map((group: any) => (
+                {data.groups.map((group: any) => (
                     <div
                         key={group.id}
                         onClick={() => handleTabClick(group.id)}
@@ -29,7 +62,7 @@ const Menu = ({ groups, products }: any) => {
                     </div>
                 ))}
             </div>
-            <div className='search-block'>
+            <div className="search-block">
                 <input
                     type="text"
                     placeholder="Поиск по названию блюда"
@@ -39,16 +72,28 @@ const Menu = ({ groups, products }: any) => {
                 />
             </div>
             <div className="products">
-                {filteredProducts.map((product: any) => (
-                    <div key={product.id} className="product">
-                        <img src={product.imageLinks[0]} alt={product.name} />
-                        <div className='product-content'>
-                            <h3>{product.name}</h3>
-                            <p>{product.description}</p>
-                            <p>Цена: <strong>{product.sizePrices[0].price.currentPrice}</strong> ₽</p>
+                {filteredProducts.map((product: any) => {
+                    const isHidden = hiddenProducts.includes(product.id);
+
+                    return (
+                        <div
+                            key={product.id}
+                            className={`product ${isHidden ? 'hidden' : ''}`}
+                        >
+                            <img src={product.imageLinks[0]} alt={product.name} />
+                            <div className="product-content">
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                                <p>
+                                    Цена: <strong>{product.sizePrices[0].price.currentPrice}</strong> ₽
+                                </p>
+                                <button onClick={() => toggleProduct(product)}>
+                                    {isHidden ? 'Показать товар' : 'Скрыть товар'}
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

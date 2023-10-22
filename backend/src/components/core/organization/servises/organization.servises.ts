@@ -33,6 +33,7 @@ export class OrganizationServises{
 	hiddenCityMetod({idorganization,isHidden}) {
     return this.OrganizationRepository.hiddenCityMetod(idorganization,isHidden)
   }
+
 	socialMetod({idorganization,social}){
 		return this.OrganizationRepository.socialMetod(idorganization,social)
 	}

@@ -5,14 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/application/components/common/Menu/MenuFoods.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/styles/components/_menu.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationProduct.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/dto/organizationHiddenProduct.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/module/OrganizationProduct.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organizationProduct.services.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/database/mongodbModel/delivery/hiddenProduct.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/domain/repository/prganizationProduct.repository.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationFoods.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationFoods.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/@type/i.organization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/@type/i.organization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/application/constants/const.orgstatus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/constants/const.orgstatus.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationFoods.controller.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/dto/organizationGoodPlace.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/dto/organizationGoodPlace.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/module/organization.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/module/organization.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/module/organizationPayment.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/module/organizationPayment.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organization.servises.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organization.servises.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/domain/repository/organization.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/repository/organization.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/application/components/common/Menu/MenuFoods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/common/Menu/MenuFoods.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganizationGoodPlace.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganizationGoodPlace.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/OrgTabPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/OrgTabPanel.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/Tabs/TabsMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationSetting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationSetting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/styles/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.Organization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.Organization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationFoods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrganizationFoods.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/styles/components/_menu.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/styles/components/_menu.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +58,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;AdminMenuFood&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/projects/sport-club&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/projects/dota2-miniapp-backend-dev&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -51,6 +68,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\delivery.admins\backend\src\database\mongodbModel\delivery" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -80,7 +102,11 @@
       <workItem from="1697450447967" duration="2000" />
       <workItem from="1697457025653" duration="4793000" />
       <workItem from="1697473110334" duration="5226000" />
-      <workItem from="1697484561711" duration="3171000" />
+      <workItem from="1697484561711" duration="3219000" />
+      <workItem from="1697630046372" duration="4578000" />
+      <workItem from="1697707885605" duration="5476000" />
+      <workItem from="1697714687923" duration="9572000" />
+      <workItem from="1697992739374" duration="4253000" />
     </task>
     <servers />
   </component>
