@@ -5,13 +5,7 @@ export type ISocial = {
 	}
 }
 
-export type IRecvisites = {
-	_id:string
-	ogrn:string
-	inn:string
-	name:string
-	organization:string
-}
+
 
 export type IGoodPlace = {
 	_id: string
