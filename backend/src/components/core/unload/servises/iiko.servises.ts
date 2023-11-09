@@ -82,17 +82,7 @@ export class IikoRequesterServises {
 
 
 
-			const { data: rescity } = await axios.post(
-				'https://api-ru.iiko.services/api/1/cities',
-				{
-					organizationIds: [
-						organizations.id
-					]
-				},
-				{
-					headers: { Authorization: `Bearer ${token}` }
-				}
-			);
+			
 			console.log(organizations.id);
 
 			const { data: terminal } = await axios.post(
