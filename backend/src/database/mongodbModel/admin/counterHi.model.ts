@@ -4,7 +4,6 @@ import { MainBannerModel } from "./mainBanner.model";
 
 @modelOptions({ schemaOptions: { collection: 'counterhinkal' } })
 export class CounterHinkalModel{
-
 	@prop()
   public organization:string
 

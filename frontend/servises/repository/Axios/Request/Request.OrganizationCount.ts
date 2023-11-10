@@ -20,4 +20,7 @@ class RequestOrganizationCount  extends ApiSuper {
 		})
 		
 	}
+
+
 }
+export default new RequestOrganizationCount()
