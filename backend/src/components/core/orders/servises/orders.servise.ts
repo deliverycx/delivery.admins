@@ -146,23 +146,44 @@ export class ordersServises extends BaseServises {
 
 	async gamerser() {
 		const { data } = await axios.get("http://xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1ai/admin/orderDelivery/buOrg?organization=undefined&limit=1000")
-		const regex = new RegExp('gamer' + "-\\d+"); //'fourhach' 'gamer'
+		const regex = new RegExp('gamers' + "-\\d+"); //new RegExp('gamers' + "-\\d+"); //'fourhach' 'gamer' //HI-123, gamers
 
 		const gamers = new Set()
 
+		const HI = /(Hi)+/i;
+		const HIGAmer = /(gamers)+/i;
+
+		
+		//console.log(re.test(b),re2.test(b));
+
 		const q = data.map((values: any, index: number) => {
-			/**/
+			
+			const tik = {
+				count:0
+			}
+
 			if (values.orderStatus === "Success") {
 				values.orderItems.map((item: any, i: number) => {
 
 					//console.log(item.productTags);
-					const tagIndex = item.productTags.includes('fourhach')
-
+					const tagIndex = item.productTags.includes('gamers')				
 
 					if (tagIndex) {
+						//console.log(item.productTags);
 						//const duble = new Set(`${values.orderParams.name} - ${values.orderParams.phone}:${values.orderParams.date}`)
 						gamers.add(`${values.orderParams.name} - ${values.orderParams.phone} - ${values.orderParams.date}`)
 					}
+
+					const tage = item.productTags[0]
+
+					if(HI.test(tage) && HIGAmer.test(tage)){
+						tik.count = tik.count + item.amount
+						//console.log(values.orderParams.name,item.amount);
+						//console.log(values.orderParams.name,tik);
+						//console.log(`${values.orderParams.name} - ${values.orderParams.phone} - ${values.orderParams.date}`);
+					}
+
+
 				})
 			}
 
