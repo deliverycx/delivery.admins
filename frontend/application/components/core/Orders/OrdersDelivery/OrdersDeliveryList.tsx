@@ -66,7 +66,7 @@ const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
 			</td>
 			<td className="project-state text-center">
 				{
-					`${orderList.orderParams.address.street}, ${orderList.orderParams.address.home}`
+					orderList.orderParams.address && `${orderList.orderParams.address.street}, ${orderList.orderParams.address.home}`
 				}
 				<br />
 				<small>
