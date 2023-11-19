@@ -28,7 +28,8 @@ namespace Res{
   }
 	export type socialData = {
     idorganization: string
-		social:any
+		social?:any
+        like?: any
   }
 	export type reserve = {
     idorganization: string
@@ -89,9 +90,14 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/social`)
   }
 
+  @methods('post')
+  like(data:Res.socialData) {
+      return this.request('/organization/like')
+  }
+
 	@methods('get')
   socialBu(query:string) {
-    return this.request<{social:any}>(`/organization/socialbu?idorganization=${query}`)
+    return this.request<{social:any, like: string}>(`/organization/socialbu?idorganization=${query}`)
   }
 
 	@methods('post')

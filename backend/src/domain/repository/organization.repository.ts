@@ -12,7 +12,7 @@ import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/orga
 export class OrganizationRepository {
   constructor(
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>, 
+    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
 		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>,
 		@InjectModel(OrganizationStatusClass) private readonly statusModel: ReturnModelType<typeof OrganizationStatusClass>
   ) { }
@@ -66,8 +66,8 @@ export class OrganizationRepository {
       },
       { new: true }
     )
-		
-    
+
+
     return organizationEntities.hiddenMetod(result.id,result.isHidden)
   }
 
@@ -96,9 +96,9 @@ export class OrganizationRepository {
 				},
 				{ new: true }
 			)
-			
+
 		}
-    
+
     return city
   }
 
@@ -117,7 +117,7 @@ export class OrganizationRepository {
       { new: true }
     )
 		console.log('res',result);
-    
+
     return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
 	async OpenOrgMetod(orgid: string, metod: boolean) {
@@ -134,13 +134,12 @@ export class OrganizationRepository {
       { new: true }
     )
 		console.log('res',result);
-    
+
     return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
 
 
 	async socialMetod(idorganization:string,social:[]){
-		
 		const result = await this.socialModel.findOneAndUpdate(
       {
         idorganization: idorganization
@@ -158,21 +157,43 @@ export class OrganizationRepository {
 				social
 			})
 		}
-		
+
 	}
+
+	async socialLikeMethod(idorganization:string,like: any){
+		const result = await this.socialModel.findOneAndUpdate(
+			{
+				idorganization: idorganization
+			},
+			{
+				$set: {
+					like: like
+				}
+			},
+			{ new: true }
+		)
+
+		if(!result){
+			await this.socialModel.create({
+				idorganization,
+				like
+			})
+		}
+	}
+
 	async socialMetodBu(idorganization:string){
-		
+
 		const result = await this.socialModel.findOne(
       {
         idorganization: idorganization
       }
     )
 		return result
-		
+
 	}
 
 	async reservetableMetod(idorganization:string,metod:boolean){
-		
+
 		const result = await this.organizationModel.findOneAndUpdate(
       {
         id: idorganization
@@ -230,7 +251,7 @@ export class OrganizationRepository {
 	async addCityMetod(city:any){
 		console.log(city);
 		const result = await this.cityModel.create(city)
-		
+
 		return result
 	}
 
@@ -258,13 +279,13 @@ export class OrganizationRepository {
 			},
 			{ upsert: true, new: true })
 		console.log('ress',status);
-		
+
 		return result
 	}
 
 	async DeliteOrgMetod(id:any){
 		const result = await this.organizationModel.deleteOne({id:id})
-		
+
 		return result
 	}
 
@@ -277,7 +298,7 @@ export class OrganizationRepository {
 				redirect:url
 			}
 		)
-		
+
 		return result
 	}
 	async RedirectONOrgMetod(idorganization:string,metod:boolean){
@@ -289,7 +310,7 @@ export class OrganizationRepository {
 				redirectON:metod
 			}
 		)
-		
+
 		return result
 	}
 	async AddGalleryOrgMetod(idorganization,images:[]){
@@ -301,7 +322,7 @@ export class OrganizationRepository {
 				gallery:images
 			}
 		)
-		
+
 		return result
 	}
 	async filtersMetod(idorganization,filterlist:string){
@@ -317,7 +338,7 @@ export class OrganizationRepository {
 			},
 			{ upsert: true, new: true }
 		)
-	
+
 		return result
 	}
 

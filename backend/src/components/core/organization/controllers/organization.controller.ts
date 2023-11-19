@@ -71,6 +71,14 @@ export class OrganizationControllers{
 		
     return result
   }
+
+  @Post('like')
+  async like(@Body() body: OrganizationDTO) {
+	  const result = await this.OrganizationServises.socialLikeMethod(body)
+
+	  return result
+  }
+
 	@Get('socialbu')
   async SocialBu(
 		@Body() body: OrganizationDTO,

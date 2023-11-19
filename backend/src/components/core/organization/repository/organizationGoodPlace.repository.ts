@@ -15,5 +15,4 @@ export class OrganizationGoodPlaceRepository extends BaseRepository<Organization
     async findBuOrg(bu:{organization:string}){
         return await this.Model.findOne(bu).select('-__v')
     }
-
 }
