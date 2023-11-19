@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/guard/public-auth.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/dto/organization.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/dto/organization.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organization.servises.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/servises/organization.servises.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/database/mongodbModel/admin/social.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/database/mongodbModel/admin/social.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/domain/repository/organization.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/repository/organization.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganizationGoodPlace.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganizationGoodPlace.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganuzationSocial.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Organization/OrganizationSetting/OrganuzationSocial.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.Organization.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.Organization.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/guard/jwt.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/guard/jwt.guard.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +70,7 @@
       <workItem from="1696412267958" duration="17764000" />
       <workItem from="1696500257696" duration="10331000" />
       <workItem from="1700210406280" duration="3611000" />
-      <workItem from="1700409721741" duration="484000" />
+      <workItem from="1700409721741" duration="2798000" />
     </task>
     <servers />
   </component>
