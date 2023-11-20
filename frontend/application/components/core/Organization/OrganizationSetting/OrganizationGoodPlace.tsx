@@ -22,8 +22,6 @@ const OrganizationGoodPlace: FC<{organization:any,refresh:any}> = ({organization
                             <label className="form-label">Айди точки для фрейма (Хорошее место)</label>
                             <input type="text" {...register('goodplaceid')} defaultValue={info && info.goodplaceid} name="goodplaceid" className="form-control" />
                         </div>
-
-
                     </div>
                     <input type="submit" value="Сохранить" className="btn btn-success"/>
 

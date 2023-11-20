@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/guard/public-auth.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationGoodPlace.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationRecvisites.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organizationRecvisites.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/repository/organizationGoodPlace.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/organization/useCase.OrganizationGoodPlace.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/guard/jwt.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/guard/jwt.guard.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,14 +36,14 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;GoodPlace&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;LikeLink&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/projects/sport-club&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\projects\\delivery.admins\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\projects\\delivery.admins\\backend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -70,6 +69,8 @@
       <workItem from="1696410185501" duration="1245000" />
       <workItem from="1696412267958" duration="17764000" />
       <workItem from="1696500257696" duration="10331000" />
+      <workItem from="1700210406280" duration="3611000" />
+      <workItem from="1700409721741" duration="2798000" />
     </task>
     <servers />
   </component>

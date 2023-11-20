@@ -36,6 +36,11 @@ export class OrganizationServises{
 	socialMetod({idorganization,social}){
 		return this.OrganizationRepository.socialMetod(idorganization,social)
 	}
+
+	socialLikeMethod({idorganization, like}) {
+	  return this.OrganizationRepository.socialLikeMethod(idorganization, like)
+	}
+
 	socialMetodBu({idorganization}){
 		return this.OrganizationRepository.socialMetodBu(idorganization)
 	}

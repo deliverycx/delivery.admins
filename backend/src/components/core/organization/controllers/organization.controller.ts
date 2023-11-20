@@ -9,93 +9,103 @@ import { AnyFilesInterceptor, FilesInterceptor } from "@nestjs/platform-express"
 import { diskStorage } from "multer";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
 import { MainBannerDTO } from "../../banners/dto/mainBanner.dto";
+import {Public} from "../../../../guard/public-auth.guard";
 
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(JwtAuthGuard)
 @Controller('organization')
 export class OrganizationControllers{
-  constructor(
-    private readonly OrganizationServises: OrganizationServises
-  ) { }
-  
-  
-  @Get('getAll')
-  getOrganization() {
-    const result = this.OrganizationServises.getAllOrganization()
-    return result
-  }
+	constructor(
+		private readonly OrganizationServises: OrganizationServises
+	) { }
+
+
+	@Get('getAll')
+	getOrganization() {
+		const result = this.OrganizationServises.getAllOrganization()
+		return result
+	}
 
 	@Get('getcity')
-  getCity(@Query() query: OrganizationDTO) {
-    const result = this.OrganizationServises.getSityBu(query)
-    return result
-  }
+	getCity(@Query() query: OrganizationDTO) {
+		const result = this.OrganizationServises.getSityBu(query)
+		return result
+	}
 
 	@Post('getorgbu')
-  getOrganizationBu(@Body() body:OrganizationDTO) {
-    const result = this.OrganizationServises.getBuOrganization(body)
-    return result
-  }
+	getOrganizationBu(@Body() body:OrganizationDTO) {
+		const result = this.OrganizationServises.getBuOrganization(body)
+		return result
+	}
 	@Get('defaultsetting')
-  defaultSetting() {
-    const result = this.OrganizationServises.getAllOrganization()
-    return result
-  }
-  @Post('puckup')
-  swichPuckup(@Body() body:OrganizationDTO) {
-    const result = this.OrganizationServises.switchDelivMetod(body)
-    return result
-  }
-  @Post('hidden')
-  async hidenOrg(@Body() body: OrganizationDTO) {
-    console.log('body',body);
-    const result = await this.OrganizationServises.hiddenOranizationMetod(body)
+	defaultSetting() {
+		const result = this.OrganizationServises.getAllOrganization()
+		return result
+	}
+	@Post('puckup')
+	swichPuckup(@Body() body:OrganizationDTO) {
+		const result = this.OrganizationServises.switchDelivMetod(body)
+		return result
+	}
+	@Post('hidden')
+	async hidenOrg(@Body() body: OrganizationDTO) {
+		console.log('body',body);
+		const result = await this.OrganizationServises.hiddenOranizationMetod(body)
 		console.log('res',result);
-    return result
-  }
+		return result
+	}
 	@Post('cityhidden')
-  async CityHidden(@Body() body: OrganizationDTO) {
-    const result = await this.OrganizationServises.hiddenCityMetod(body)
-		
-    return result
-  }
+	async CityHidden(@Body() body: OrganizationDTO) {
+		const result = await this.OrganizationServises.hiddenCityMetod(body)
+
+		return result
+	}
 
 	@Post('checkorg')
-  async checkOrg(@Body() body: OrganizationDTO) {
-    const result = await this.OrganizationServises.checkOranizationMetod(body)
-    return result
-  }
+	async checkOrg(@Body() body: OrganizationDTO) {
+		const result = await this.OrganizationServises.checkOranizationMetod(body)
+		return result
+	}
 
 	@Post('social')
-  async Social(@Body() body: OrganizationDTO) {
-    const result = await this.OrganizationServises.socialMetod(body)
-		
-    return result
-  }
+	async Social(@Body() body: OrganizationDTO) {
+		const result = await this.OrganizationServises.socialMetod(body)
+
+		return result
+	}
+
+	@Post('like')
+	async like(@Body() body: OrganizationDTO) {
+		const result = await this.OrganizationServises.socialLikeMethod(body)
+
+		return result
+	}
+
 	@Get('socialbu')
-  async SocialBu(
+	@Public()
+	async SocialBu(
 		@Body() body: OrganizationDTO,
 		@Query() query: OrganizationDTO
-		) {
-    const result = await this.OrganizationServises.socialMetodBu(query)
-		
-    return result
-  }
+	) {
+		const result = await this.OrganizationServises.socialMetodBu(query)
+
+		return result
+	}
 
 	@Post('reservetable')
-  async Reservetable(@Body() body: OrganizationDTO) {
-    const result = await this.OrganizationServises.reservetable(body)
-		
-    return result
-  }
+	async Reservetable(@Body() body: OrganizationDTO) {
+		const result = await this.OrganizationServises.reservetable(body)
+
+		return result
+	}
 	@Get('reservetablebu')
-  async ReservetableBu(
+	async ReservetableBu(
 		@Body() body: OrganizationDTO,
 		@Query() query: OrganizationDTO
-		) {
-    const result = await this.OrganizationServises.socialMetodBu(query)
-		
-    return result
-  }
+	) {
+		const result = await this.OrganizationServises.socialMetodBu(query)
+
+		return result
+	}
 
 	@Post('organizationTime')
 	async OrganizationTime(
@@ -104,8 +114,8 @@ export class OrganizationControllers{
 	){
 		console.log('body time',body);
 		const result = await this.OrganizationServises.organizationTime(body)
-		
-    return result
+
+		return result
 	}
 
 
@@ -115,8 +125,8 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.addCity(body)
-		
-    return result
+
+		return result
 	}
 
 	@Post('organizationAdd')
@@ -125,8 +135,8 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationAdd(body)
-		
-    return result
+
+		return result
 	}
 
 	@Post('organizationDelite')
@@ -135,8 +145,8 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationDelite(body)
-		
-    return result
+
+		return result
 	}
 
 	@Post('organizationRedirect')
@@ -145,8 +155,8 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationRedirect(body)
-		
-    return result
+
+		return result
 	}
 
 	@Post('organizationRedirectON')
@@ -155,8 +165,8 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationRedirectON(body)
-		
-    return result
+
+		return result
 	}
 
 	@Post('organizationTerminal')
@@ -165,8 +175,8 @@ export class OrganizationControllers{
 	){
 		console.log('body',body);
 		const result = await this.OrganizationServises.organizationTerminal(body.idorganization)
-		
-    return result
+
+		return result
 	}
 
 
@@ -184,10 +194,10 @@ export class OrganizationControllers{
 		@UploadedFiles() files: Array<Express.Multer.File>,
 		@Body() body:{idorganization:string},
 		@Res() response,
-		){
-			console.log('добавить',body,files);
-			const result = await this.OrganizationServises.addOrgPhoto(body.idorganization,files)
-			response.status(200).json(result)
+	){
+		console.log('добавить',body,files);
+		const result = await this.OrganizationServises.addOrgPhoto(body.idorganization,files)
+		response.status(200).json(result)
 	}
 
 	@Post('addfilter')
