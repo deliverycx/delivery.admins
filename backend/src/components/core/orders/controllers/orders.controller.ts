@@ -35,4 +35,9 @@ export class ordersControllers{
 	statusmokOrder(@Body() body: ordersDTO){
 		return this.Servises.statusMokOrderServises(body)
 	}
+
+	@Get('gamer')
+	async getGamers(){
+		return await this.Servises.gamerser()
+	}
 }
