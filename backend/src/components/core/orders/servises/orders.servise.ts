@@ -145,7 +145,7 @@ export class ordersServises extends BaseServises {
 
 
 	async gamerser() {
-		const { data } = await axios.get("http://xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1ai/admin/orderDelivery/buOrg?organization=undefined&limit=1000")
+		const { data } = await axios.get("http://xn--80aimpg.xn--80aafg6avvi.xn--80apgfh0ct5a.xn--p1ai/admin/orderDelivery/buOrg?organization=undefined&limit=10000")
 		const regex = new RegExp('gamers' + "-\\d+"); //new RegExp('gamers' + "-\\d+"); //'fourhach' 'gamer' //HI-123, gamers
 
 		const gamers = new Set()
