@@ -23,7 +23,7 @@ export function useOrderDelivery(this: any,organization:string) {
 	},[organization])
 
 	//console.log(orderList);
-	
+
 	const handlerLimit = (count:number) =>{
 		getOrders(organization,count)
 	}
@@ -40,16 +40,30 @@ export function useOrderDelivery(this: any,organization:string) {
 		}
 	}
 
+	const handleByCard = async () => {
+		try {
+			const {data} = await RequestOrdersDelivery.getAllByCard()
+			console.log('data card', data)
+
+			if(data){
+				setOrderList(data)
+			}
+		} catch (e) {
+			console.log(e, 'CARD ERROR')
+		}
+	}
+
 	this.data({
-    orderList,
+		orderList,
 		organization
-  })
-  this.handlers({
-    handlerLimit,
+	})
+	this.handlers({
+		handlerLimit,
 		handlerBuErrors,
+		handleByCard,
 		getOrders
-  })
-  this.status({
-    
-  })
+	})
+	this.status({
+
+	})
 }

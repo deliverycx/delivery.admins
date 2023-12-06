@@ -22,6 +22,13 @@ export class ordersRepository extends BaseRepository<OrderClass>{
 		return await this.Model.find({orderError:{$ne:null}}).select('-__v').sort({createdAt:'desc'}).limit(90).exec()
 	 }
 
+	 async getAllCard(): Promise<any> {
+		 return await this.Model.find({
+			 'orderParams.paymentMethod': 'CARD',
+			 orderError: null
+		 })
+	 }
+
 	 async setStatusPayment(orderid:string,status:string){
 		console.log('запись',orderid,status);
 		const result = await this.Model.findOneAndUpdate({

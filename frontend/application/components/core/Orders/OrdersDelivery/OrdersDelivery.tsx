@@ -9,7 +9,7 @@ type IProps = {
 const OrdersDelivery: FC<IProps> = ({ organization }) => {
 	const useCase = adapterComponentUseCase(useOrderDelivery, organization)
 	const { orderList } = useCase.data
-	const {handlerLimit,getOrders,handlerBuErrors} = useCase.handlers
+	const {handlerLimit,getOrders,handlerBuErrors,handleByCard} = useCase.handlers
 
 
 	return (
@@ -34,6 +34,10 @@ const OrdersDelivery: FC<IProps> = ({ organization }) => {
 								<div className="filter_items">
 									<span onClick={handlerBuErrors}>Показать с ошибками</span>
 									<img width="15" height="15" className="cansel" src="/img/cansel.png" onClick={() => getOrders(organization,30)} />	
+								</div>
+								<div className="filter_items">
+									<span onClick={handleByCard}>Показать оплаты картой</span>
+									<img width="15" height="15" className="cansel" src="/img/cansel.png" onClick={() => getOrders(organization,30)} />
 								</div>
 								
 							</div>

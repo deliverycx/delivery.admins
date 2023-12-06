@@ -22,18 +22,23 @@ class RequestOrdersDelivery  extends ApiSuper {
 	CRUDFabric!:CRUDFabric
 
 	@methods('get')
-  getOrderBuOrg(org:string,limits?:number) {
-    return this.request(`/orderDelivery/buOrg?organization=${org}&limit=${limits}`)
-  }
+	getOrderBuOrg(org:string,limits?:number) {
+		return this.request(`/orderDelivery/buOrg?organization=${org}&limit=${limits}`)
+	}
 
 	getOrderBuError() {
-    return this.request(`/orderDelivery/buerrors`)
-  }
+		return this.request(`/orderDelivery/buerrors`)
+	}
 
 	@methods('get')
-  getOrderBu(id:string) {
-    return this.request(`/orderDelivery/buone?orderId=${id}`)
-  }
+	getAllByCard() {
+		return this.request(`/orderDelivery/bycard`)
+	}
+
+	@methods('get')
+	getOrderBu(id:string) {
+		return this.request(`/orderDelivery/buone?orderId=${id}`)
+	}
 
 	@methods('post')
 	mokOrder(body:any){

@@ -27,6 +27,12 @@ export class ordersControllers{
 		//console.log(query);
 		return this.Servises.getAllOrderErrorsMetod()
 	}
+
+	@Get('bycard')
+	getByCard(@Query() query: any) {
+	  return this.Servises.getAllByCard()
+	}
+
 	@Post('mokorder')
 	mokOrder(@Body() body: any){
 		return this.Servises.mokOrderServises(body)

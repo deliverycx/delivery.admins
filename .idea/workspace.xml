@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/guard/public-auth.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/organization/controllers/organization.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/guard/jwt.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/guard/jwt.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/orders/controllers/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/orders/controllers/orders.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/orders/repository/orders.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/orders/repository/orders.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/components/core/orders/servises/orders.servise.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/orders/servises/orders.servise.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Orders/OrdersDelivery/OrdersDelivery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Orders/OrdersDelivery/OrdersDelivery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/orders/useCase.OrdersDelivery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/orders/useCase.OrdersDelivery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrdersDelivery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrdersDelivery.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +39,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;LikeLink&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;FilterByOrderAndPagination&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/projects/sport-club&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -71,6 +74,8 @@
       <workItem from="1696500257696" duration="10331000" />
       <workItem from="1700210406280" duration="3611000" />
       <workItem from="1700409721741" duration="2798000" />
+      <workItem from="1701676410681" duration="7000" />
+      <workItem from="1701678456647" duration="3507000" />
     </task>
     <servers />
   </component>
