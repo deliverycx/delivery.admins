@@ -77,7 +77,13 @@ const OrderDeliveryCart:FC<{id:string}> = ({id}) =>{
 						<h5 className="mt-5 text-muted">Информация о заказе - {order.orderNumber}</h5>
               <ul className="list-unstyled">
                 <li>
-                  <small>адресс:</small> {`${order.orderParams.address.city}, ${order.orderParams.address.street}, ${order.orderParams.address.home} (kladr:${order.orderParams.address.kladrid})`}
+									{
+										order.orderParams.address &&
+										<>
+											<small>адресс:</small> {`${order.orderParams.address.city}, ${order.orderParams.address.street}, ${order.orderParams.address.home} (kladr:${order.orderParams.address.kladrid})`}
+										</>
+									}
+                  
                 </li>
                 <li>
 								<	small>тип заказа:</small> {order.orderParams.orderType}
