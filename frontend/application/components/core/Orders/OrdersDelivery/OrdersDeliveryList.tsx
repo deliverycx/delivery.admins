@@ -88,8 +88,6 @@ const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
 					<div className="badge bg-info">оплата картой</div>
 				}	
 			</td>
-			
-
 		</tr>
 	)
 }

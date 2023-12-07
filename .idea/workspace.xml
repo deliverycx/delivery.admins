@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="af4fe129-896a-4c7f-bd31-fc12e464f58b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/orders/controllers/orders.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/orders/controllers/orders.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/orders/repository/orders.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/orders/repository/orders.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/components/core/orders/servises/orders.servise.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/components/core/orders/servises/orders.servise.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Orders/OrdersDelivery/OrdersDelivery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Orders/OrdersDelivery/OrdersDelivery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/domains/useCase/orders/useCase.OrdersDelivery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/domains/useCase/orders/useCase.OrdersDelivery.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrdersDelivery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/servises/repository/Axios/Request/Request.OrdersDelivery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/application/components/core/Orders/OrdersDelivery/OrdersDeliveryList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/application/components/core/Orders/OrdersDelivery/OrdersDeliveryList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +75,7 @@
       <workItem from="1700409721741" duration="2798000" />
       <workItem from="1701676410681" duration="7000" />
       <workItem from="1701678456647" duration="3507000" />
+      <workItem from="1701860079814" duration="5398000" />
     </task>
     <servers />
   </component>
