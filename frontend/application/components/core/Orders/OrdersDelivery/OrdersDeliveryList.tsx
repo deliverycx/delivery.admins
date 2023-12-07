@@ -48,7 +48,7 @@ const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
 				
 			</td>
 			<td className="project-state text-center">
-				<a href={`/order/ordersDelivery/${orderList.orderId}`} >{orderList.orderId}</a>
+				<a href={`/order/ordersDelivery/${orderList.orderHash}`} >{orderList.orderId || orderList.orderHash}</a>
 				
 			</td>
 			<td className="project-state text-center">

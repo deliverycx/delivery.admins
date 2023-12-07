@@ -32,7 +32,7 @@ class RequestOrdersDelivery  extends ApiSuper {
 
 	@methods('get')
   getOrderBu(id:string) {
-    return this.request(`/orderDelivery/buone?orderId=${id}`)
+    return this.request(`/orderDelivery/buone?orderHash=${id}`)
   }
 
 	@methods('post')
