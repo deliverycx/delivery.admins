@@ -71,9 +71,9 @@ const OrderDeliveryCart:FC<{id:string}> = ({id}) =>{
       
       <div className="card">
         <div className="card-header">
-					<div className="user-block">
-						
-						
+					{
+							order.orderParams &&
+<div className="user-block">
 						<h5 className="mt-5 text-muted">Информация о заказе - {order.orderNumber}</h5>
               <ul className="list-unstyled">
                 <li>
@@ -94,6 +94,8 @@ const OrderDeliveryCart:FC<{id:string}> = ({id}) =>{
               </ul>
 
 					</div>
+						}
+					
           
           
 					<div className="clearfix"></div>
