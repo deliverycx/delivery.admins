@@ -22,9 +22,8 @@ export function useOrganizationGoodPlace(this: any,id:string) {
     const onSubmit = async (data:any) => {
         try {
             !info
-                ? console.log(await requestGoodPlacePayment.CRUDFabric.create({ ...data,organization:id }))
+                ? await requestGoodPlacePayment.CRUDFabric.create({ ...data,organization:id })
                 : await requestGoodPlacePayment.CRUDFabric.edit({ ...data,organization:id },info._id)
-            // router.reload()
             console.log(data)
         } catch (error) {
             console.log(error);

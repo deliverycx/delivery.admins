@@ -15,6 +15,7 @@ export function useOrganizationTables(this: any,idorganization:string) {
 	const getIikkoTables = async () =>{
 		try {
 			const {data} = await RequestOrganizationTables.getTables(idorganization)
+			console.log('TABLES', data)
 			setTable(data)
 		} catch (error) {
 			

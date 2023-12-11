@@ -33,6 +33,7 @@ export class OrganizationServises{
 	hiddenCityMetod({idorganization,isHidden}) {
     return this.OrganizationRepository.hiddenCityMetod(idorganization,isHidden)
   }
+
 	socialMetod({idorganization,social}){
 		return this.OrganizationRepository.socialMetod(idorganization,social)
 	}
@@ -81,6 +82,15 @@ export class OrganizationServises{
 			
 		} catch (error) {
 			console.log(error);
+		}
+	}
+
+	async getOrganizationFoods(id: {organizationId: string}) {
+		try {
+			const data = await this.iikoAxios.getFoods(id)
+			return data
+		} catch (e) {
+			console.log('ERROR', e)
 		}
 	}
 

@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {adapterComponentUseCase} from "../../../../../adapters/adapterComponents";
 import {useOrganizationGoodPlace} from "../../../../../domains/useCase/organization/useCase.OrganizationGoodPlace";
 
@@ -7,7 +7,6 @@ const OrganizationGoodPlace: FC<{organization:any,refresh:any}> = ({organization
     const { info } = useCase.data
     const { handleSubmit, register, onSubmit } = useCase.handlers
     console.log(info, 'INFO')
-
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>

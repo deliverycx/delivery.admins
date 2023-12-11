@@ -19,7 +19,6 @@ class RequestOrganizationGoodPlace extends ApiSuper {
             url: `/organization_goodplace/find`,
             data
         })
-
     }
 }
 

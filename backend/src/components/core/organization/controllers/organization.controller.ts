@@ -25,6 +25,12 @@ export class OrganizationControllers{
 		return result
 	}
 
+  @Post('getfoods')
+  async getOrganizationFoods(@Body() id: {organizationId: string}) {
+	  const data = await this.OrganizationServises.getOrganizationFoods(id)
+	  return data
+  }
+
 	@Get('getcity')
 	getCity(@Query() query: OrganizationDTO) {
 		const result = this.OrganizationServises.getSityBu(query)

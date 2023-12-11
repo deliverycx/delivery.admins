@@ -1,0 +1,144 @@
+.tabs {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000000;
+
+  .tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    &.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+  }
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .product {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 20px 53px 30px 0;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &.hidden {
+      opacity: 0.5;
+      cursor: not-allowed; // Запрещаем клик на скрытой карточке
+      button {
+        background-color: #dc3545; // Красный цвет для кнопки "Показать товар"
+        &:hover {
+          background-color: #dc3545; // То же самое для hover
+        }
+      }
+    }
+
+    .product-content {
+      height: 100%;
+      margin-bottom: 10px;
+
+      button {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 0 0 5px 5px;
+        font-weight: bold;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    h3 {
+      margin: 10px 0;
+    }
+
+    p {
+      margin: 10px 0 0 0 ;
+      font-size: 20px;
+    }
+  }
+}
+
+.product.hidden {
+  // Стили для скрытой карточки продукта
+  opacity: 0.5;
+  cursor: not-allowed;
+  button {
+    background-color: #dc3545;
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+}
+
+.product.hidden button {
+  background-color: #28a745;
+  &:hover {
+    background-color: #218838;
+  }
+}
+
+.search-block {
+  display: flex;
+  justify-content: center;
+
+  .search-input {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+
+    ::placeholder {
+      color: red;
+    }
+
+    /* Добавление тени при фокусе */
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+  }
+}

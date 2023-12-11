@@ -268,8 +268,9 @@ export class OrganizationRepository {
 				}
 			}
 		)
-		const status = await this.statusModel.findOneAndUpdate(
-			{organization:String(org.id)},
+		const status = await this.statusModel.findOneAndUpdate({
+				organization:String(org.id)
+			},
 			{
 				$setOnInsert:{
 					organizationStatus:ORG_STATUS.NOWORK,
