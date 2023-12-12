@@ -23,7 +23,7 @@ export class ProductClass {
     public organization!: Ref<OrganizationClass>;
 
     @prop()
-    public id!: UniqueId;
+    public id!: string;
 
     @prop()
     public name!: string;

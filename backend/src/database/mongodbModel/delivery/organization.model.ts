@@ -15,7 +15,7 @@ import { OrganizationfilterModel } from "./organizationFilter";
 })
 export class OrganizationClass {
     @prop()
-    public id!: UniqueId;
+    public id!: string;
 
     @prop({ ref: "City" })
     public city!: Ref<CityClass>;
