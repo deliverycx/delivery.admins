@@ -50,7 +50,7 @@ export class ProductClass {
     public category!: Ref<CategoryClass>;
 
     @prop()
-    public image!: ImagePath;
+    public image!: string;
 
     @prop()
     public measureUnit!: string;

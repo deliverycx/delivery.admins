@@ -19,7 +19,7 @@ export class CategoryClass {
     public name!: string;
 
     @prop()
-    public image!: ImagePath;
+    public image!: string;
 
     @prop()
     public order!: number;
