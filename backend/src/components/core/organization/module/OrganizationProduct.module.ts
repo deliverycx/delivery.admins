@@ -9,8 +9,9 @@ import { OrganizationSettingServises } from "../servises/organizationSetting.ser
 import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 import {OrganizationHiddenProduct} from "../../../../database/mongodbModel/delivery/hiddenProduct.model";
 import {OrganizationProductServices} from "../servises/organizationProduct.services";
-import {OrganizationProductRepository} from "../../../../domain/repository/prganizationProduct.repository";
+import {OrganizationProductRepository} from "../repository/organizationProduct.repository";
 import {OrganizationProductController} from "../controllers/organizationProduct.controller";
+import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 
 
 @Module({
@@ -24,7 +25,8 @@ import {OrganizationProductController} from "../controllers/organizationProduct.
         OrganizationProductServices,
         OrganizationProductRepository,
         OrganizationRepository,
-        OrganizationSettingServises
+        OrganizationSettingServises,
+				IIkoAxios
     ]
 })
 export class OrganizationProductModule {}

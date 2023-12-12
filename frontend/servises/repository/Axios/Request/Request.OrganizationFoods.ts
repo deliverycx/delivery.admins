@@ -3,7 +3,7 @@ import { CRUDFabric } from "../Fabric/CRUD.fabric";
 import { RequestFabric } from '../Fabric/FabricApi';
 
 @RequestFabric({
-    request:'organization',
+    request:'organizationProduct',
     factory:[{
         name:'CRUDFabric',
         fabric:CRUDFabric
@@ -16,7 +16,7 @@ class RequestOrganizationFoods extends ApiSuper {
     getAllFoods(data:{organizationId:string}) {
         return this.api({
             method: 'post',
-            url: 'organization/getfoods',
+            url: 'organizationProduct/getfoods',
             data
         })
     }
@@ -24,7 +24,7 @@ class RequestOrganizationFoods extends ApiSuper {
     hideProduct(data: any) {
         return this.api({
             method: 'post',
-            url: 'organization/hide',
+            url: 'organizationProduct/hide',
             data
         })
     }
@@ -32,7 +32,7 @@ class RequestOrganizationFoods extends ApiSuper {
     getHiddenProductsByOrg(data: any) {
         return this.api({
             method: 'post',
-            url: 'organization/get',
+            url: 'organizationProduct/hiddenProducts',
             data
         })
     }
