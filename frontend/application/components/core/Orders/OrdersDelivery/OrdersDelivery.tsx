@@ -5,7 +5,7 @@ import OrdersDeliveryList from "./OrdersDeliveryList";
 
 type IProps = {
 	organization: string | undefined
-	user:any
+	user?:any
 }
 const OrdersDelivery: FC<IProps> = ({ organization,user }) => {
 	const useCase = adapterComponentUseCase(useOrderDelivery, organization)
