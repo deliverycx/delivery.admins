@@ -46,6 +46,13 @@ const MenuAdmins = () =>{
                 <i className="right fas fa-angle-left"></i>
               </p>
             </a>
+						<a href="/managers/notification" className="nav-link">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Справочная
+                <i className="right fas fa-angle-left"></i>
+              </p>
+            </a>
             
 						
 						

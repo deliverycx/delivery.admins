@@ -10,12 +10,13 @@ import { NextPage } from "next"
 import OrdersDelivery from "application/components/core/Orders/OrdersDelivery/OrdersDelivery"
 
 const AdminPage: NextPage = ({user}:any) => {
+	console.log(user);
   return (
 		<div className="wrapper">
       <Header />
       <MenuAdmins />
 			<div className="content-wrapper ordertable">
-				<OrdersDelivery organization={user.organization} />
+				<OrdersDelivery organization={user.organization} user={user}  />
 			</div>
       
     </div>

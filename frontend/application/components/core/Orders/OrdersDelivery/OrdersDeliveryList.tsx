@@ -4,11 +4,12 @@ import { RequestOrganization } from "servises/repository/Axios/Request";
 
 type IProps = {
 	orderList:any
+	userrole:any
 }
 
-const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
+const OrdersDeliveryList:FC<IProps> = ({orderList,userrole}) => {
 	const [org,setOrg] = useState<string>('')
-
+	
 	const getOrg = async () =>{
 		try {
 			const {data} = await RequestOrganization.getBu({
@@ -48,7 +49,12 @@ const OrdersDeliveryList:FC<IProps> = ({orderList}) => {
 				
 			</td>
 			<td className="project-state text-center">
-				<a href={`/order/ordersDelivery/${orderList.orderHash}`} >{orderList.orderId || orderList.orderHash}</a>
+				{
+					userrole === 'admin'
+					? <a href={`/managers/orderPayment/${orderList.orderHash}`} >{orderList.orderId || orderList.orderHash}</a>
+					: <a href={`/order/ordersDelivery/${orderList.orderHash}`} >{orderList.orderId || orderList.orderHash}</a>
+				}
+				
 				
 			</td>
 			<td className="project-state text-center">

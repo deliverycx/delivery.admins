@@ -5,13 +5,14 @@ import OrdersDeliveryList from "./OrdersDeliveryList";
 
 type IProps = {
 	organization: string | undefined
+	user:any
 }
-const OrdersDelivery: FC<IProps> = ({ organization }) => {
+const OrdersDelivery: FC<IProps> = ({ organization,user }) => {
 	const useCase = adapterComponentUseCase(useOrderDelivery, organization)
 	const { orderList } = useCase.data
 	const {handlerLimit,getOrders,handlerBuErrors} = useCase.handlers
 
-
+	
 	return (
 		<>
 			<div className="card card-primary">
@@ -75,7 +76,7 @@ const OrdersDelivery: FC<IProps> = ({ organization }) => {
 				<tbody>
 					{
 						orderList && orderList.map((val: any) => {
-							return <OrdersDeliveryList key={val._id} orderList={val} />
+							return <OrdersDeliveryList key={val._id} orderList={val} userrole={user && user.role} />
 						})
 
 					}
