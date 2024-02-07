@@ -25,7 +25,7 @@ export class ordersRepository extends BaseRepository<OrderClass>{
 	 async setStatusPayment(orderid:string,status:string){
 		console.log('запись',orderid,status);
 		const result = await this.Model.findOneAndUpdate({
-			orderId:orderid
+			orderHash:orderid
 		},
 		{
 			$set: { "payment.paymentStatus": status }
