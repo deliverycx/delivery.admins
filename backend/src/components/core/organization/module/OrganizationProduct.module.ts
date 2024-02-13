@@ -12,13 +12,15 @@ import {OrganizationProductServices} from "../servises/organizationProduct.servi
 import {OrganizationProductRepository} from "../repository/organizationProduct.repository";
 import {OrganizationProductController} from "../controllers/organizationProduct.controller";
 import { IIkoAxios } from "src/repository/iiko/iiko.axios";
+import { RedisModules } from "src/module/redis.module";
 
 
 @Module({
     imports: [
         TypegooseModule.forFeature([OrganizationClass,CityClass, OrganizationHiddenProduct], DELIVERY_DB),
         TypegooseModule.forFeature([OrganizationStatusClass], DELIVERY_DB),
-        TypegooseModule.forFeature([SocialModel], ADMIN_DB)
+        TypegooseModule.forFeature([SocialModel], ADMIN_DB),
+				RedisModules
     ],
     controllers: [OrganizationProductController],
     providers:[

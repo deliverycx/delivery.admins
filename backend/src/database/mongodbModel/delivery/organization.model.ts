@@ -35,6 +35,9 @@ export class OrganizationClass {
 
     @prop()
     public workTime!: string[];
+
+		@prop()
+    public cityid!: string;
     
     @prop({ default: null })
     public delivMetod!: string | null;
@@ -44,6 +47,9 @@ export class OrganizationClass {
 
 		@prop()
     public redirect:string
+
+		@prop()
+    public terminal:string
 
 		@prop({ type: () => Boolean,default:false })
     public redirectON:string

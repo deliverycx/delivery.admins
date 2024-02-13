@@ -75,8 +75,8 @@ export class OrganizationServises{
 	async organizationTerminal(organizationsid:string){
 		try {
 			const termitalid = await this.iikoAxios.termiralGroops(organizationsid)
-			if(termitalid && organizationsid){
-				const terminalAlive = await this.iikoAxios.termiralGroopsAlive(organizationsid,termitalid)
+			if(termitalid.id && organizationsid){
+				const terminalAlive = await this.iikoAxios.termiralGroopsAlive(organizationsid,termitalid.id)
 				return terminalAlive
 			}
 			
