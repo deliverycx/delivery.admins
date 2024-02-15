@@ -8,6 +8,7 @@ import { RedisClient } from "redis";
 import { REDIS } from "src/module/redis.module";
 import { IikoOrganizationServises } from "../servises/iikkoOrganizations.servises";
 
+
 //@UseGuards(JwtAuthGuard)
 @Controller('unload')
 export class UnloadControllers{
@@ -15,6 +16,7 @@ export class UnloadControllers{
     private readonly IikoRequesterServises: IikoRequesterServises,
     private readonly UnloadServises: UnloadServises,
 		private readonly iikoOrganizationServises:IikoOrganizationServises,
+		
 		@Inject(REDIS) private readonly redis: RedisClient,
   ) { }
   
@@ -81,6 +83,31 @@ export class UnloadControllers{
 	}
 
 
+	@Get('poolingNomenclature')	
+	async poolingNomenclature(
+		@Res() response: Response,
+		@Query() query: {organization:string}
+	){
+		connection(process.env.CONNECTION_2)
+      .then(async () => {
+        console.log("success connect");
+				
+        const revision = await this.iikoOrganizationServises.poolingMenu(query.organization)
+        
+        response.status(200).json(revision)
+      }).catch((err) => {
+        console.log('ошибка в пулинге',err);
+        response.status(500).json({result:"bead"})
+      })
+	}
+
+	@Get('getNomenclature')	
+	async getFileNomenclature(
+		@Query() query: {organization:string}
+	){
+		await this.iikoOrganizationServises.getFileMenu(query.organization)
+	}
+
 	@Post('updateWebHooks')
 	async updateHooks(
 		@Body() body: {
@@ -90,4 +117,7 @@ export class UnloadControllers{
 	){
 		await this.iikoOrganizationServises.iikkoHooks(body.organization,body.localhoste)
 	}
+
+
+
 }

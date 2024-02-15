@@ -13,7 +13,7 @@ import { Types, Document } from "mongoose";
 import { ORG_STATUS, DELIVERY_METODS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
 import * as fs from "fs"
 import { join } from 'path';
-import { writeFile } from 'fs/promises';
+import { writeFile,readFile } from 'fs/promises';
 
 @Injectable()
 export class IikoOrganizationServises {
@@ -158,6 +158,35 @@ export class IikoOrganizationServises {
 
 			}
 		}
+	}
+
+
+	async poolingMenu(oraganization: string) {
+		const nomenclature = await this.iikoAxios.getNomenclature(oraganization)
+		
+		const nomenclatureFiles = JSON.stringify(nomenclature)
+
+		const folderStreet = fs.existsSync(join(process.cwd() + `/public/static/menu/`))
+		if (!folderStreet) {
+			fs.mkdir(join(process.cwd() + `/public/static/menu/`), async err => {
+				if (err) throw err; // не удалось создать папку
+				console.log('Папка успешно создана');
+				await writeFile(join(process.cwd() + `/public/static/menu/${oraganization}.json`), nomenclatureFiles)
+			});
+		} else {
+			await writeFile(join(process.cwd() + `/public/static/menu/${oraganization}.json`), nomenclatureFiles)
+		}
+
+		return {
+			revision:nomenclature.revision,
+			oraganization
+		}
+
+	}
+
+	async getFileMenu(oraganization: string){
+		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
+		console.log(file);
 	}
 
 }

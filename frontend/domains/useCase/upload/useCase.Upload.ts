@@ -7,6 +7,7 @@ export function useCaseUpload(this: any) {
 	const [organizationStatus,setOrganizationStatus] = useState<any>(null)
 	const [urlhooks,setUrlhooks] = useState<string>('https://хинкалыч.рф/api/webhook/test')
 	const [loading,setLoading] = useState<boolean>(false)
+	const [revision,setRevision] = useState<any>(false)
 
   const uploadRequest = async () => {
     try {
@@ -41,6 +42,19 @@ export function useCaseUpload(this: any) {
 		}
 	}
 
+	const poolingNomenclature = async (id:string) =>{
+		try {
+			const { data } = await RequestUpload.poolingMenu(id)
+			data && setRevision(data)
+		} catch (error) {
+			
+		}
+	}
+
+	const getMenu = async (id:string) =>{
+		const { data } = await RequestUpload.getMenu(id)
+	}
+
   useEffect(() => {
     uploadRequest()
   },[])
@@ -61,13 +75,16 @@ export function useCaseUpload(this: any) {
     organizations,
 		organizationInfo,
 		urlhooks,
-		loading
+		loading,
+		revision
   })
   this.handlers({
     getIIkkoInfoOrg,
 		poolingOrganization,
+		poolingNomenclature,
 		setUrlhooks,
-		updateIikkoHooks
+		updateIikkoHooks,
+		getMenu
   })
   this.status({
     

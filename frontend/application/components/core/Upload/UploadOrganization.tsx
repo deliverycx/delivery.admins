@@ -4,14 +4,18 @@ import cn from "classnames"
 
 const UploadOrganization = () => {
 	const useCaseUploads = adapterComponentUseCase(useCaseUpload)
-	const { organizations, organizationInfo, urlhooks, loading } = useCaseUploads.data
-	const { getIIkkoInfoOrg, poolingOrganization, setUrlhooks, updateIikkoHooks } = useCaseUploads.handlers
+	const { organizations, organizationInfo, urlhooks, loading,revision } = useCaseUploads.data
+	const { getIIkkoInfoOrg, poolingOrganization, setUrlhooks, updateIikkoHooks,poolingNomenclature,getMenu } = useCaseUploads.handlers
+
+
+	let sortedCities;
+	if (organizations) sortedCities = organizations.slice().sort((a: { name: string; }, b: { name: string; }) => a.name > b.name ? 1 : -1);
 
 	return (
 		<>
 			{
 				organizations &&
-				organizations
+				sortedCities
 					.sort((val: any) => val.new)
 					.map((org: any, index: number) => {
 
@@ -59,15 +63,30 @@ const UploadOrganization = () => {
 
 													</div>
 												</div>
+												<div className="card col-sm-6">
+													<div className="card-header">
+														<button onClick={() => poolingNomenclature(org.id)} className=" btn btn-success">выгрузка меню</button>
+													</div>
+												
+													<div className="card-body">
+														{
+															revision && org.id === revision.oraganization && <span>ревизия - {revision.revision}</span>
+														}
+														<button onClick={()=> getMenu(org.id)}>qqq</button>
+
+													</div>
+												</div>
 												
 
 											</div>
+
+
 											<div className="card-footer">
 												<div className="row">
 													<button onClick={() => poolingOrganization(org.id)} className="col-2 btn btn-success">выгрузка на сайт</button>
-													<section className="col-6">
+													<section className="col-4">
 														<div className="row">
-															<div className="col-3 input-group">
+															<div className="col-8 input-group">
 																<input type="text" className="form-control" value={urlhooks} onChange={e => setUrlhooks(e.target.value)} />
 															</div>
 															<span className="input-group-append">
@@ -76,6 +95,8 @@ const UploadOrganization = () => {
 															
 														</div>
 													</section>
+													
+													
 												</div>
 
 											</div>

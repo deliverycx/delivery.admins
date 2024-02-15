@@ -12,6 +12,9 @@ namespace Req {
 		organizationid: string,
 		adress: string
 	}
+	export type revisionMenu = {
+		revision:number
+	}
 }
 namespace Res {
 	export type Pooling = {
@@ -48,6 +51,17 @@ class RequestUpload extends ApiSuper {
 	poolingOrganization(org: string) {
 		return this.request<Req.terminalOrganization>(`/unload/poolingOrganization?organization=${org}`)
 	}
+
+	@methods('get')
+	poolingMenu(org: string) {
+		return this.request<Req.revisionMenu>(`/unload/poolingNomenclature?organization=${org}`)
+	}
+
+	@methods('get')
+	getMenu(org: string) {
+		return this.request<Req.revisionMenu>(`/unload/getNomenclature?organization=${org}`)
+	}
+
 
 	@methods('post')
 	ikkowebhooks(body: Res.webhooks) {

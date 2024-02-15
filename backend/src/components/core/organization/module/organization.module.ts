@@ -8,6 +8,7 @@ import { OrganizationCountModule } from "./organizationCounter.module";
 import { OrganizationFilterModule } from "./organizationFilter.module";
 import {OrganizationGoodPlaceModule} from "./OrganizationGoodPlace.module";
 import {OrganizationProductModule} from "./OrganizationProduct.module";
+import { UnloadModule } from "../../unload/module/unload.module";
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import {OrganizationProductModule} from "./OrganizationProduct.module";
 	  OrganizationCountModule,
 	  OrganizationFilterModule,
 	  OrganizationGoodPlaceModule,
-	  OrganizationProductModule
+	  OrganizationProductModule,
   ]
 })
 export class OrganizationModule{}

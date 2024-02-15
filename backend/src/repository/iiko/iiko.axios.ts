@@ -180,6 +180,24 @@ export class IIkoAxios extends AxiosCreate {
 		return data.streets
 	}
 
+	public async getNomenclature(organization: string): Promise<any> {
+		const token = await this.token();
+
+		const { data } = await this._axios.post(
+			`/nomenclature`,
+			{
+				"organizationId": organization
+			},
+			{
+				headers: { Authorization: `Bearer ${token}` }
+			}
+		);
+
+			
+
+		return data
+	}
+
 
 	public async updateIIkkoWebHooks(organizationIds: string, urls: string): Promise<any> {
 		const token = await this.token();
