@@ -186,7 +186,8 @@ export class IikoOrganizationServises {
 
 	async getFileMenu(oraganization: string){
 		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
-		console.log(file);
+		return file
+		
 	}
 
 }
