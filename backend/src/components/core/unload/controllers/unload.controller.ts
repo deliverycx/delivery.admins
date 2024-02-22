@@ -110,6 +110,15 @@ export class UnloadControllers{
 		return result
 	}
 
+	@Get('getStreet')	
+	async getFileStreet(
+		@Query() query: {organization:string}
+	){
+		console.log('getstreet',query);
+		const result = await this.iikoOrganizationServises.getFileStreet(query.organization)
+		return result
+	}
+
 	@Post('updateWebHooks')
 	async updateHooks(
 		@Body() body: {

@@ -130,6 +130,7 @@ export class IikoOrganizationServises {
 							$setOnInsert: {
 								_id: cityId,
 								name: city,
+								
 							},
 							$addToSet: {
 								organizations:objectIdPoint
@@ -147,10 +148,10 @@ export class IikoOrganizationServises {
 						fs.mkdir(join(process.cwd() + `/public/static/street/`), async err => {
 							if(err) throw err; // не удалось создать папку
 							console.log('Папка успешно создана');
-							await writeFile(join(process.cwd() + `/public/static/street/${organizationinfo.defaultDeliveryCityId}.json`),cityFiles)
+							await writeFile(join(process.cwd() + `/public/static/street/${termital.organizationid}.json`),cityFiles)
 					 });
 					}else{
-						await writeFile(join(process.cwd() + `/public/static/street/${organizationinfo.defaultDeliveryCityId}.json`),cityFiles)
+						await writeFile(join(process.cwd() + `/public/static/street/${termital.organizationid}.json`),cityFiles)
 					}
 						
 				 
@@ -187,7 +188,13 @@ export class IikoOrganizationServises {
 	async getFileMenu(oraganization: string){
 		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
 		return file
-		
+		 
+	}
+
+	async getFileStreet(oraganization: string){
+		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/street/${oraganization}.json`), 'utf8'));
+		return file
+		 
 	}
 
 }
