@@ -63,19 +63,7 @@ const UploadOrganization = () => {
 
 													</div>
 												</div>
-												<div className="card col-sm-6">
-													<div className="card-header">
-														<button onClick={() => poolingNomenclature(org.id)} className=" btn btn-success">выгрузка меню</button>
-													</div>
 												
-													<div className="card-body">
-														{
-															revision && org.id === revision.oraganization && <span>ревизия - {revision.revision}</span>
-														}
-														<button onClick={()=> getMenu(org.id)}>qqq</button>
-
-													</div>
-												</div>
 												
 
 											</div>

@@ -5,7 +5,7 @@ export function useCaseUpload(this: any) {
   const [organizations,setOrganizations] = useState<any>(null)
 	const [organizationInfo,setOrganizationInfo] = useState<any>(null)
 	const [organizationStatus,setOrganizationStatus] = useState<any>(null)
-	const [urlhooks,setUrlhooks] = useState<string>('https://хинкалыч.рф/api/webhook/test')
+	const [urlhooks,setUrlhooks] = useState<string>('https://хинкалыч.рф/api/webhook/webhooks')
 	const [loading,setLoading] = useState<boolean>(false)
 	const [revision,setRevision] = useState<any>(false)
 
