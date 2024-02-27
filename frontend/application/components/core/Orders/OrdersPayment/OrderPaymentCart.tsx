@@ -6,8 +6,8 @@ import { IorderItems, IOrderPayment } from "@type";
 import { FormikProvider, useFormik } from "formik";
 
 
-const OrderPaymentCart:FC<{orderid:string,payment:any}> = ({orderid,payment}) =>{
-	const useCase = adapterComponentUseCase(useOrderPaymentCart,{orderid,payment})
+const OrderPaymentCart:FC<{orderid:string,payment:any,org:string}> = ({orderid,payment,org}) =>{
+	const useCase = adapterComponentUseCase(useOrderPaymentCart,{orderid,payment,org})
 	const {statePaymentItem} = useCase.data
 	const {handlerReturns,canselPayment,successPayment,refresh} = useCase.handlers
 	const order =  statePaymentItem.order

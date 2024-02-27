@@ -173,7 +173,7 @@ const OrderDeliveryCart:FC<{id:string}> = ({id}) =>{
 			
 			{
 				order.payment &&
-				<OrderPaymentCart orderid={id} payment={order.payment} />
+				<OrderPaymentCart orderid={id} payment={order.payment} org={order.organization} />
 			}
       
 

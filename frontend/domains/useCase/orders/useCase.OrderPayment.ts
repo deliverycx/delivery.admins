@@ -44,7 +44,7 @@ export function useOrderPaymentItem(this: any,order:IOrderPayment) {
   })
 }
 
-export function useOrderPaymentCart(this: any,{orderid,payment}:{orderid:string,payment:any}) {
+export function useOrderPaymentCart(this: any,{orderid,payment,org}:{orderid:string,payment:any,org:string}) {
 	const router = useRouter()
 	const [barpay,setBarPay] = useState<any>(null)
 	const [statePaymentItem, dispatchPaymentItem] = useReducer(
@@ -57,7 +57,7 @@ export function useOrderPaymentCart(this: any,{orderid,payment}:{orderid:string,
 	useEffect(()=>{
 
 		if(orderid && payment){
-			init(payment.organization)
+			init(org)
 		}
 		
 	},[orderid,organization])
