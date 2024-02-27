@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Axios, AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { Axios, AxiosInstance, AxiosRequestConfig } from "axios";
 import { AxiosCreate } from "../AxiosCreate";
 import { IFoods } from "../../types/global";
 import { RedisClient } from "redis";
@@ -187,6 +187,28 @@ export class IIkoAxios extends AxiosCreate {
 			`/nomenclature`,
 			{
 				"organizationId": organization
+			},
+			{
+				headers: { Authorization: `Bearer ${token}` }
+			}
+		);
+
+			
+
+		return data
+	}
+
+	public async getMenuWeb(organization: string[]): Promise<any> {
+		const token = await this.token();
+
+		const { data } = await axios.post(
+			`https://api-ru.iiko.services/api/2/menu/by_id`,
+			{
+				"externalMenuId": "14710",
+				"organizationIds": organization,
+				"priceCategoryId": "00000000-0000-0000-0000-000000000000",
+				"version": 0,
+				"language": "string"
 			},
 			{
 				headers: { Authorization: `Bearer ${token}` }

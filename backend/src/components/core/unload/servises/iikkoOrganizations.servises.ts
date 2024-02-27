@@ -13,7 +13,7 @@ import { Types, Document } from "mongoose";
 import { ORG_STATUS, DELIVERY_METODS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
 import * as fs from "fs"
 import { join } from 'path';
-import { writeFile,readFile } from 'fs/promises';
+import { writeFile, readFile } from 'fs/promises';
 
 @Injectable()
 export class IikoOrganizationServises {
@@ -30,7 +30,7 @@ export class IikoOrganizationServises {
 	) {
 		this.geoCoder = new GeoCoder(process.env.YANDEX_APIKEY);
 		this.downloader = new DownloadImage();
-	 }
+	}
 
 
 	async iikkoOrgs() {
@@ -62,8 +62,8 @@ export class IikoOrganizationServises {
 	}
 
 
-	async iikkoHooks(organization: string,localhoste:string){
-		await this.iikoAxios.updateIIkkoWebHooks(organization,localhoste)
+	async iikkoHooks(organization: string, localhoste: string) {
+		await this.iikoAxios.updateIIkkoWebHooks(organization, localhoste)
 	}
 
 
@@ -82,11 +82,11 @@ export class IikoOrganizationServises {
 					cityRes
 				);
 
-			
-				const findcity = await this.cityModel.findOne({name:city})	
-				
+
+				const findcity = await this.cityModel.findOne({ name: city })
+
 				const cityId = findcity ? findcity._id : new Types.ObjectId();
-				
+
 
 
 				const objectIdPoint = await this.organizationModel.findOneAndUpdate(
@@ -95,16 +95,16 @@ export class IikoOrganizationServises {
 						$setOnInsert: {
 							id: termital.organizationid,
 							city: cityId,
-							cityid:organizationinfo.defaultDeliveryCityId,
+							cityid: organizationinfo.defaultDeliveryCityId,
 							isHidden: true,
-							terminal:termital.idtermital,
+							terminal: termital.idtermital,
 							address: {
 								street,
 								longitude: position[0],
-								latitude:position[1]
+								latitude: position[1]
 							},
-							workTime:['10:00-22:00'],
-							phone:"",
+							workTime: ['10:00-22:00'],
+							phone: "",
 						},
 
 					},
@@ -123,48 +123,49 @@ export class IikoOrganizationServises {
 					},
 					{ upsert: true, new: true })
 
-					
-					await this.cityModel.updateOne(
-						{ name: city },
-						{
-							$setOnInsert: {
-								_id: cityId,
-								name: city,
-								
-							},
-							$addToSet: {
-								organizations:objectIdPoint
-							}
+
+				await this.cityModel.updateOne(
+					{ name: city },
+					{
+						$setOnInsert: {
+							_id: cityId,
+							name: city,
+
 						},
-						{ upsert: true }
-					);
+						$addToSet: {
+							organizations: objectIdPoint
+						}
+					},
+					{ upsert: true }
+				);
 
 
-					const cityiikko = await this.iikoAxios.getStreetCity(organization,organizationinfo.defaultDeliveryCityId)
-					const cityFiles =  JSON.stringify(cityiikko)
+				const cityiikko = await this.iikoAxios.getStreetCity(organization, organizationinfo.defaultDeliveryCityId)
+				const cityFiles = JSON.stringify(cityiikko)
 
-					const folderStreet = fs.existsSync(join(process.cwd() + `/public/static/street/`))
-					if(!folderStreet){
-						fs.mkdir(join(process.cwd() + `/public/static/street/`), async err => {
-							if(err) throw err; // не удалось создать папку
-							console.log('Папка успешно создана');
-							await writeFile(join(process.cwd() + `/public/static/street/${termital.organizationid}.json`),cityFiles)
-					 });
-					}else{
-						await writeFile(join(process.cwd() + `/public/static/street/${termital.organizationid}.json`),cityFiles)
-					}
-						
-				 
-					
+				const folderStreet = fs.existsSync(join(process.cwd() + `/public/static/street/`))
+				if (!folderStreet) {
+					fs.mkdir(join(process.cwd() + `/public/static/street/`), async err => {
+						if (err) throw err; // не удалось создать папку
+						console.log('Папка успешно создана');
+						await writeFile(join(process.cwd() + `/public/static/street/${termital.organizationid}.json`), cityFiles)
+					});
+				} else {
+					await writeFile(join(process.cwd() + `/public/static/street/${termital.organizationid}.json`), cityFiles)
+				}
+
+
+
 
 			}
 		}
+		await this.iikkoHooks(organization,"https://хинкалыч.рф/api/webhook/webhooks")
 	}
 
 
 	async poolingMenu(oraganization: string) {
 		const nomenclature = await this.iikoAxios.getNomenclature(oraganization)
-		
+
 		const nomenclatureFiles = JSON.stringify(nomenclature)
 
 		const folderStreet = fs.existsSync(join(process.cwd() + `/public/static/menu/`))
@@ -179,22 +180,101 @@ export class IikoOrganizationServises {
 		}
 
 		return {
-			revision:nomenclature.revision,
+			revision: nomenclature.revision,
 			oraganization
 		}
 
 	}
 
-	async getFileMenu(oraganization: string){
-		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
-		return file
-		 
+	async poolingMenuWeb() {
+		const orgresult: [] = await this.iikoAxios.getOrganizationList()
+		const orglist = orgresult.map((value: any) => {
+			return value.id
+		})
+
+
+		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
+		const menu: [] = nomenclature.pureExternalMenuItemCategories
+
+		orglist.map(async (oraganization: string) => {
+
+
+			if (menu.length !== 0) {
+				const nomen = menu.reduce((acc: any, cate: any) => {
+					cate.items.forEach((item: any) => {
+						//console.log(item.name);
+						
+						const itemOrg = item.itemSizes[0].prices
+						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
+							//
+							const resultFind = orgs.organizations.includes(oraganization)
+							///console.log(resultFind);
+							if (resultFind && orgs.price) {
+								//console.log(oraganization,item.name);
+
+								acc.groups.push({
+									name: cate.name,
+									id: cate.id,
+									imageLinks:cate.buttonImageUrl
+								})
+								
+								acc.products.push({
+									name: item.name,
+									description: item.description,
+									id: item.iikoItemId,
+									code: item.itemSizes[0].sku,
+									parentGroup: cate.id,
+									imageLinks: item.itemSizes[0].buttonImageUrl,
+									measureUnit: item.measureUnit,
+									price: orgs.price,
+									tags: item.labelNames,
+									weight:item.itemSizes[0].portionWeightGrams
+								})
+								
+							}
+						})
+
+						
+					})
+					return acc
+				}, {
+					groups: [],
+					products: []
+				})
+
+				const table = {};
+				nomen.groups = nomen.groups.filter(({ name }) => (!table[name] && (table[name] = 1)));
+
+				//console.log(nomen);
+				const nomenclatureFiles = JSON.stringify(nomen)
+
+				const folderStreet = fs.existsSync(join(process.cwd() + `/public/static/menu/`))
+				if (!folderStreet) {
+					fs.mkdir(join(process.cwd() + `/public/static/menu/`), async err => {
+						if (err) throw err; // не удалось создать папку
+						console.log('Папка успешно создана');
+						await writeFile(join(process.cwd() + `/public/static/menu/${oraganization}.json`), nomenclatureFiles)
+					});
+				} else {
+					await writeFile(join(process.cwd() + `/public/static/menu/${oraganization}.json`), nomenclatureFiles)
+				}
+
+			}
+
+		})
+		console.log("finish");
 	}
 
-	async getFileStreet(oraganization: string){
+	async getFileMenu(oraganization: string) {
+		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
+		return file
+
+	}
+
+	async getFileStreet(oraganization: string) {
 		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/street/${oraganization}.json`), 'utf8'));
 		return file
-		 
+
 	}
 
 }
