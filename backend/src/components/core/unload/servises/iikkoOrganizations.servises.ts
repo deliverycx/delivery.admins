@@ -105,7 +105,7 @@ export class IikoOrganizationServises {
 							},
 							workTime: ['10:00-22:00'],
 							phone: "",
-							nomenuweb:true
+							nomenuweb:false
 						},
 
 					},
@@ -188,11 +188,24 @@ export class IikoOrganizationServises {
 	}
 
 	async poolingMenuWeb() {
-		const orgresult: [] = await this.iikoAxios.getOrganizationList()
-		const orglist = orgresult.map((value: any) => {
-			return value.id
-		})
+		const orgresult = await this.organizationModel.find(
+			{
+				//nomenuweb:false || undefined || null,
+				delivMetod:null
+			}
+		)
 
+		
+		//const orgresult: [] = await this.iikoAxios.getOrganizationList()
+		const orglist = orgresult 
+		.filter((val:any) =>{
+			return !val.nomenuweb && val
+		})
+		.map((value: any) => {
+			return value.id
+			
+		})
+		console.log(orglist);
 
 		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
 		const menu: [] = nomenclature.pureExternalMenuItemCategories
@@ -216,7 +229,7 @@ export class IikoOrganizationServises {
 								acc.groups.push({
 									name: cate.name,
 									id: cate.id,
-									imageLinks:cate.buttonImageUrl
+									imageLinks:[cate.buttonImageUrl]
 								})
 								
 								acc.products.push({
@@ -225,9 +238,15 @@ export class IikoOrganizationServises {
 									id: item.iikoItemId,
 									code: item.itemSizes[0].sku,
 									parentGroup: cate.id,
-									imageLinks: item.itemSizes[0].buttonImageUrl,
+									imageLinks: [item.itemSizes[0].buttonImageUrl],
 									measureUnit: item.measureUnit,
-									price: orgs.price,
+									sizePrices:[
+										{
+											price:{
+												currentPrice:orgs.price
+											}
+										}
+									],
 									tags: item.labelNames,
 									weight:item.itemSizes[0].portionWeightGrams
 								})

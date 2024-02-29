@@ -63,6 +63,19 @@ const UploadOrganization = () => {
 
 													</div>
 												</div>
+												<div className="card col-sm-6">
+													<div className="card-header">
+														<h4 className="card-title w-100">Меню из айко-офис <button onClick={() => poolingNomenclature(org.id)} className="btn btn-light">выгрузить меню</button></h4>
+													</div>
+													<div className="card-body">
+														
+														{
+															revision &&
+															<span>ревизия - {revision.revision}</span>
+														}
+
+													</div>
+												</div>
 												
 												
 
