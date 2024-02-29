@@ -93,11 +93,9 @@ export class IikoOrganizationServises {
 					{ id: termital.organizationid },
 					{
 						$setOnInsert: {
-							id: termital.organizationid,
-							city: cityId,
-							cityid: organizationinfo.defaultDeliveryCityId,
+							
 							isHidden: true,
-							terminal: termital.idtermital,
+							
 							address: {
 								street,
 								longitude: position[0],
@@ -107,6 +105,12 @@ export class IikoOrganizationServises {
 							phone: "",
 							nomenuweb:false
 						},
+						$set:{
+							id: termital.organizationid,
+							city: cityId,
+							cityid: organizationinfo.defaultDeliveryCityId,
+							terminal: termital.idtermital,
+						}
 
 					},
 					{ upsert: true, new: true }
