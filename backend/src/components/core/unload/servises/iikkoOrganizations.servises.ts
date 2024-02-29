@@ -105,6 +105,7 @@ export class IikoOrganizationServises {
 							},
 							workTime: ['10:00-22:00'],
 							phone: "",
+							nomenuweb:true
 						},
 
 					},

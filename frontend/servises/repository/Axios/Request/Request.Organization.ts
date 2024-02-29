@@ -159,6 +159,10 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/addfilter`)
   }
 
+	@methods('post')
+  iikkoweb(data:any) {
+    return this.request(`/organization/noiikkoweb`)
+  }
   
 }
 export default new RequestOrganization()

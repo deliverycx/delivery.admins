@@ -57,6 +57,9 @@ export class OrganizationClass {
 		@prop({ type: () => Boolean,default:false })
 		reservetable:boolean
 
+		@prop({ type: () => Boolean,default:false })
+		nomenuweb:boolean
+
 		@prop()
 		gallery:string[]
 

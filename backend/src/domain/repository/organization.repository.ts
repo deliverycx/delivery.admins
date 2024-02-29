@@ -343,4 +343,18 @@ export class OrganizationRepository {
 		return result
 	}
 
+	async noiikkoweb(idorganization:string,metod:boolean){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				$set:{
+					nomenuweb:metod
+				}
+			},
+			{ upsert: true, new: true }
+		)
+	}
+
 }

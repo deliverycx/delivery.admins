@@ -207,4 +207,11 @@ export class OrganizationControllers{
 		return result
 	}
 
+
+	@Post('noiikkoweb')
+	async noweb(@Body() body:{organization:string,metod:boolean},){
+		const result = await this.OrganizationServises.noiikkoweb(body)
+		return result
+	}
+
 }

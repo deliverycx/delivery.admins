@@ -107,4 +107,8 @@ export class OrganizationServises{
 	addFiltersServis({filterlist,idorganization}){
 		return this.OrganizationRepository.filtersMetod(idorganization,filterlist)
 	}
+
+	noiikkoweb({organization,metod}){
+		this.OrganizationRepository.noiikkoweb(organization,metod)
+	}
 }
