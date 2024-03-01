@@ -54,6 +54,7 @@ const OrdersDeliveryList:FC<IProps> = ({orderList,userrole}) => {
 					? <a href={`/managers/orderPayment/${orderList.orderHash}`} >{orderList.orderId || orderList.orderHash}</a>
 					: <a href={`/order/ordersDelivery/${orderList.orderHash}`} >{orderList.orderId || orderList.orderHash}</a>
 				}
+				<br />
 				<small>{orderList.orderHash}</small>
 				
 			</td>
