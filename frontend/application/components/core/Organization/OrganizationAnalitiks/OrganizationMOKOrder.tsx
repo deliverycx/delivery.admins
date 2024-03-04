@@ -8,7 +8,7 @@ type IProps = {
 }
 const OrganizationMOKOrder:FC<IProps> = ({organization}) =>{
 	const useCase = adapterComponentUseCase(useOrganizationMOKOrger,organization)
-	const {createdOrder,statusOrders} = useCase.data
+	const {createdOrder,statusOrders,terminalAlive} = useCase.data
 	const {handlerMOKorder,handlerStatusOrder,setStatusInput} = useCase.handlers
 
 	console.log(createdOrder);
@@ -17,6 +17,14 @@ const OrganizationMOKOrder:FC<IProps> = ({organization}) =>{
 		<div className="card-footer">
 			
 			<h4>Проверка точки</h4>
+			<div className="dispdel">
+						{
+							terminalAlive && terminalAlive.isAlive 
+							? <h5><div className="order_status order_status-sucses"></div>  терминал активен</h5>
+							: <h5><div className="order_status order_status-error"></div> терминал недоступен</h5>
+						}
+					</div>
+
 			<div className="col-2 btn btn-primary" onClick={handlerMOKorder}>сделать тестовый заказ</div>
 			{
 				createdOrder && 

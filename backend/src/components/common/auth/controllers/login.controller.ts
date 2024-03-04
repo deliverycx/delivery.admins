@@ -3,6 +3,7 @@ import { LoginServises } from "../servises/login.servises";
 import { AuthGuard } from "@nestjs/passport";
 import { Response } from 'express';
 import OrganizationDTO from "src/components/core/organization/dto/organization.dto";
+import { AuthJWTGuard } from "src/guard/auth.guard";
 
 
 @Controller("autorizate")
@@ -27,16 +28,16 @@ export class LoginController {
 
     res.cookie('auth-cookie', secretData, {
 			httpOnly: true,
-			secure: false,
+			secure: true,
 			sameSite: 'lax',
-			expires: new Date(Date.now() + 20 * 24 * 60 * 5000),
+			expires: new Date(Date.now() + 40 * 24 * 60 * 90000),
 	});
     return  byUser; 
   }
 
   
   @Get('checkauth')
-	@UseGuards(AuthGuard('jwt'))
+	@UseGuards(AuthJWTGuard)
   async checkAuth(){
     return true
   }

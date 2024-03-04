@@ -209,7 +209,7 @@ export class IikoOrganizationServises {
 			return value.id
 			
 		})
-		console.log(orglist);
+		//console.log(orglist);
 
 		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
 		const menu: [] = nomenclature.pureExternalMenuItemCategories
@@ -220,13 +220,19 @@ export class IikoOrganizationServises {
 			if (menu.length !== 0) {
 				const nomen = menu.reduce((acc: any, cate: any) => {
 					cate.items.forEach((item: any) => {
-						//console.log(item.name);
+						
 						
 						const itemOrg = item.itemSizes[0].prices
+
+						
+						if(item.name == 'Хачапури по-аджарски чкмерули'){
+							console.log(item.name,itemOrg);
+						}
 						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
 							//
 							const resultFind = orgs.organizations.includes(oraganization)
 							///console.log(resultFind);
+
 							if (resultFind && orgs.price) {
 								//console.log(oraganization,item.name);
 

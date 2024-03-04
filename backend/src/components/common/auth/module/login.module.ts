@@ -21,7 +21,7 @@ import { JwtStrategy } from "../strategy/jwt.stratagy";
     JwtModule.register({
       secret: 'kek',
 			signOptions: {
-        expiresIn: 30,
+        expiresIn: '30d',
       },
     }),
     PassportModule,

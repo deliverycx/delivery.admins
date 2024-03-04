@@ -23,6 +23,22 @@ export function useOrganizationMOKOrger(this: any,organization:IOrganization) {
 	const [statusInput,setStatusInput] = useState<string>('')
 	const [createdOrder,setCreatedOrder] = useState<any>(null)
 	const [statusOrders,setStatusOrders] = useState<any>(null)
+	const [terminalAlive, setTerminalAlive] = useState<any>()
+
+	const fetchOrgTerminal = async () => {
+    try {
+      const { data } = await RequestOrganization.getinfoTerminal({
+				idorganization:organization.id
+			})
+			if(data){
+				setTerminalAlive(data)
+			}
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
 	const createBody = {
 		organization: organization.id,
@@ -91,7 +107,12 @@ export function useOrganizationMOKOrger(this: any,organization:IOrganization) {
 
 
 	useEffect(()=>{
-		organization && getSiti()
+		if(organization){
+			getSiti()
+			fetchOrgTerminal()
+		}
+
+		
 	},[organization])
 
 	useEffect(()=>{
@@ -102,7 +123,8 @@ export function useOrganizationMOKOrger(this: any,organization:IOrganization) {
 	this.data({
 		createBody,
 		createdOrder,
-		statusOrders
+		statusOrders,
+		terminalAlive
   })
   this.handlers({
 		handlerMOKorder,
