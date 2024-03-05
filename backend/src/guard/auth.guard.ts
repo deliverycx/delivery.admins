@@ -29,7 +29,7 @@ export class AuthJWTGuard implements CanActivate {
 			}
 				
 
-			
+			/*
       try {
 				const payload = await this.jwtService.verifyAsync(token.token, {
 					secret: process.env.SESSION_SECRET,
@@ -43,7 +43,7 @@ export class AuthJWTGuard implements CanActivate {
 			} catch {
 				throw new UnauthorizedException();
 			}
-			/**/
+			*/
 			return true;
     }
 
