@@ -14,11 +14,11 @@ const Auth: NextPage = () => {
     
     <div className="card">
       <div className="card-body login-card-body">
-        <p className="login-box-msg">Sign in to start your session</p>
+        <p className="login-box-msg">Войдите, чтобы начать сеанс</p>
 
         <form method="post" onSubmit={onSubmitAuth}>
           <div className="input-group mb-3">
-            <input type="text" name="login" className="form-control" placeholder="Email" />
+            <input type="text" name="login" className="form-control" placeholder="Логин" />
             <div className="input-group-append">
               <div className="input-group-text">
                 <span className="fas fa-envelope"></span>
@@ -26,7 +26,7 @@ const Auth: NextPage = () => {
             </div>
           </div>
           <div className="input-group mb-3">
-            <input type="password" className="form-control" placeholder="Password" />
+            <input type="password" className="form-control" placeholder="Пароль" />
             <div className="input-group-append">
               <div className="input-group-text">
                 <span className="fas fa-lock"></span>
@@ -37,7 +37,7 @@ const Auth: NextPage = () => {
             
             
             <div className="col-4">
-              <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" className="btn btn-primary btn-block">Войти</button>
             </div>
             
           </div>
