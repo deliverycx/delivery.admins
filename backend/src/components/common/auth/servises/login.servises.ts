@@ -30,7 +30,7 @@ export class LoginServises extends BaseServises{
 		return user
   }
   async getJwtToken(name:string) {
-    console.log('namee',name);
+    console.log('namee',name,process.env.SESSION_SECRET);
 		
 		return await this.jwtService.signAsync(
 			{

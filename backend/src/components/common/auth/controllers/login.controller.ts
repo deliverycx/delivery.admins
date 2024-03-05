@@ -17,6 +17,7 @@ export class LoginController {
   @Post("login")
   async autoriz(@Req() req, @Res({ passthrough: true }) res: Response) {
     const token = await this.LoginServises.getJwtToken(req.body.name)
+		console.log('login token',token);
 		const refreshToken = await this.LoginServises.getRefreshToken(
       req.body.name,
     );
