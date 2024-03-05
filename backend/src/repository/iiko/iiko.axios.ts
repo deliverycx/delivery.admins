@@ -89,7 +89,7 @@ export class IIkoAxios extends AxiosCreate {
 	public async getFoods(id: { organizationId: string }) {
 		const token = await this.token();
 
-		console.log('ID ORG', id)
+		
 		const { data } = await this._axios.post<IFoods>(`/nomenclature`,
 			{
 				organizationId: id.organizationId
@@ -98,7 +98,7 @@ export class IIkoAxios extends AxiosCreate {
 				headers: { Authorization: `Bearer ${token}` }
 			}
 		);
-		console.log(data)
+		
 		return data
 	}
 

@@ -49,9 +49,9 @@ export class OrganizationControllers{
 	}
 	@Post('hidden')
 	async hidenOrg(@Body() body: OrganizationDTO) {
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.hiddenOranizationMetod(body)
-		console.log('res',result);
+		
 		return result
 	}
 	@Post('cityhidden')
@@ -113,7 +113,7 @@ export class OrganizationControllers{
 		@Body() body: OrganizationDTO,
 		@Query() query: OrganizationDTO
 	){
-		console.log('body time',body);
+		
 		const result = await this.OrganizationServises.organizationTime(body)
 
 		return result
@@ -124,7 +124,7 @@ export class OrganizationControllers{
 	async CityAdd(
 		@Body() body: CityDTO,
 	){
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.addCity(body)
 
 		return result
@@ -134,7 +134,7 @@ export class OrganizationControllers{
 	async organizationAdd(
 		@Body() body: OrganizationDTO,
 	){
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.organizationAdd(body)
 
 		return result
@@ -144,7 +144,7 @@ export class OrganizationControllers{
 	async organizationDel(
 		@Body() body: OrganizationDTO,
 	){
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.organizationDelite(body)
 
 		return result
@@ -154,7 +154,7 @@ export class OrganizationControllers{
 	async organizationRedirect(
 		@Body() body: OrganizationDTO,
 	){
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.organizationRedirect(body)
 
 		return result
@@ -164,7 +164,7 @@ export class OrganizationControllers{
 	async organizationRedirectON(
 		@Body() body: OrganizationDTO,
 	){
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.organizationRedirectON(body)
 
 		return result
@@ -174,7 +174,7 @@ export class OrganizationControllers{
 	async organizationTerminal(
 		@Body() body: OrganizationDTO,
 	){
-		console.log('body',body);
+		
 		const result = await this.OrganizationServises.organizationTerminal(body.idorganization)
 
 		return result

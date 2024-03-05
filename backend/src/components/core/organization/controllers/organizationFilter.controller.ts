@@ -27,7 +27,7 @@ export class OrganizationFilterControllers {
 		@Body() body: { name: string, images: string },
 		@Res() response,
 	) {
-		console.log(body,files);
+		
 		this.servises.create(body, files)
 		response.status(200).json({ error: false })
 	}

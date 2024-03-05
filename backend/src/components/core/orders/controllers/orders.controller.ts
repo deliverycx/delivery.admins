@@ -14,17 +14,17 @@ export class ordersControllers{
 	
 	@Get('buOrg')
 	getAll(@Query() query: {organization:string,limit:number}){
-		console.log(query);
+		
 		return this.Servises.getAllOrderMetod((query.organization !== 'undefined' && query) || {},query.limit)
 	}
 	@Get('buone')
 	geBu(@Query() query: orderPaymentDTO){
-		//console.log(query);
+		
 		return this.Servises.getOne(query)
 	}
 	@Get('buerrors')
 	geBubuerrors(@Query() query: orderPaymentDTO){
-		//console.log(query);
+		
 		return this.Servises.getAllOrderErrorsMetod()
 	}
 	@Post('mokorder')

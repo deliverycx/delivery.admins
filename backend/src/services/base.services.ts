@@ -16,7 +16,7 @@ export class BaseServises{
 		return this.repozitory.getOneBuId(id,populate)
 	}
 	async create<T>(body:T,files?:any[]){
-		console.log(this.repozitory);
+		
 		if(files){
 			const imagesMass = files.reduce((acc,images) => {
 			acc.push(images.originalname)

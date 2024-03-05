@@ -51,6 +51,6 @@ export class DashbordServises extends BaseServises{
 				headers: { Authorization: `Bearer ${token}` }
 			}
 		);
-		console.log(ikkoterminalstatus);	
+			
 	}
 }

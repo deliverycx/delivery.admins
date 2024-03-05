@@ -226,7 +226,7 @@ export class IikoOrganizationServises {
 
 						
 						if(item.name == 'Хачапури по-аджарски чкмерули'){
-							console.log(item.name,itemOrg);
+							
 						}
 						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
 							//

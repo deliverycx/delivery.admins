@@ -36,7 +36,7 @@ export class LoginController {
     return  byUser; 
   }
 
-  
+	
   @Get('checkauth')
 	@UseGuards(AuthJWTGuard)
   async checkAuth(){
