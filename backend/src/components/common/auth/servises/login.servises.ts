@@ -30,14 +30,23 @@ export class LoginServises extends BaseServises{
 		return user
   }
   async getJwtToken(name:string) {
-    const payload = { name };
-		return await this.jwtService.signAsync(payload)
+    console.log('namee',name,process.env.SESSION_SECRET);
+		
+		return await this.jwtService.signAsync(
+			{
+				name
+			},
+			{
+				secret: process.env.SESSION_SECRET,
+			}
+		)
+		
   }
 
 	async getRefreshToken(userName: string): Promise<string> {
     const userDataToUpdate = {
       refreshToken: randomToken.generate(16),
-      refreshTokenExp: moment().day(1).format('YYYY/MM/DD'),
+      refreshTokenExp: moment().day(1 + 10).format('YYYY/MM/DD'),
     };
 
     await this.UsersRepository.updateUser(userName, userDataToUpdate);

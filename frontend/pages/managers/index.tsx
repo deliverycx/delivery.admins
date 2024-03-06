@@ -7,14 +7,16 @@ import OrdersPayment from "application/components/core/Orders/OrdersPayment/Orde
 import { userRout } from "application/contstans/userRout.const"
 import { withCheckSession } from "application/helpers/session"
 import { NextPage } from "next"
+import OrdersDelivery from "application/components/core/Orders/OrdersDelivery/OrdersDelivery"
 
 const AdminPage: NextPage = ({user}:any) => {
+	console.log(user);
   return (
 		<div className="wrapper">
       <Header />
       <MenuAdmins />
 			<div className="content-wrapper ordertable">
-				<OrdersPayment organization={user.organization} />
+				<OrdersDelivery organization={user.organization} user={user}  />
 			</div>
       
     </div>

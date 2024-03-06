@@ -7,10 +7,12 @@ import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 import { OrganizationTablesControllers } from "../controllers/organizationTables.controller";
 import { OrganizationTablesRepository } from "../repository/organizationTables.repository";
 import { OrganizationTableServises } from "../servises/organizationTables.servises";
+import { RedisModules } from "src/module/redis.module";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,OrganizationTablesClass], DELIVERY_DB),
+		RedisModules
   ],
   controllers: [OrganizationTablesControllers], 
   providers:[OrganizationTableServises,OrganizationTablesRepository,IIkoAxios]

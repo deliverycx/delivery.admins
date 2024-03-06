@@ -5,6 +5,13 @@ type ImagePath = string;
 type Token = string;
 type ImagesObject = Array<{ imageUrl: string }>;
 
+export interface IFoods {
+    correlationId: string
+    groups: any[]
+    sizes: []
+    revision: number | string
+}
+
 interface ICategory {
     code: string;
     description: string;

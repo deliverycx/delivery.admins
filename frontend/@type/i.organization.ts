@@ -6,6 +6,22 @@ export type ISocial = {
 }
 
 
+
+export type IGoodPlace = {
+	_id: string
+	goodplaceid: string
+	organization: string
+}
+
+export type IFoodsArray = {
+	correlationId: string;
+	groups: []
+	productCategories: []
+	products: []
+	sizes: []
+	revision: number | string
+}
+
 export type IOrganization =  {
 	_id:string
 	id: string;

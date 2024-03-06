@@ -1,4 +1,21 @@
+import axios from "axios"
+import { useRouter } from 'next/router';
+
 const Menu = () =>{
+	const router = useRouter()
+
+	const deliteCookies = async () =>{
+		try {
+			const {data} = await axios.get('/api/auth/logout')
+			if(data && data.ok){
+				router.push('/auth')
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		
+	}
+
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
     
@@ -13,6 +30,7 @@ const Menu = () =>{
         </div>
         <div className="info">
           <a href="#" className="d-block">admin</a>
+					<a onClick={deliteCookies}>выйти</a>
         </div>
       </div>
 
@@ -33,7 +51,15 @@ const Menu = () =>{
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
           <li className="nav-item">
-            <a href="/upload" className="nav-link active">
+						<a href="/dashbord/" className="nav-link">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Дашборд
+                <i className="right fas fa-angle-left"></i>
+              </p>
+							
+            </a>
+            <a href="/upload" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Обновление Айко
@@ -94,10 +120,11 @@ const Menu = () =>{
               </p>
 							<ul className="nav nav-treeview">
 							<li className="nav-item">
-                <a href="/order/orderPayment" className="nav-link">
+								<a href="/order/ordersDelivery" className="nav-link">
                   <i className="far fa-circle nav-icon"></i>
-                  <p>Оплата картой</p>
+                  <p>Заказы доставка</p>
                 </a>
+                
               </li>
               
             </ul>

@@ -28,7 +28,8 @@ namespace Res{
   }
 	export type socialData = {
     idorganization: string
-		social:any
+		social?:any
+        like?: any
   }
 	export type reserve = {
     idorganization: string
@@ -57,7 +58,7 @@ class RequestOrganization extends ApiSuper {
 
 	@methods('get')
   getCityBu(query:string) {
-    return this.request(`/organization/getcity?cityid=${query}`)
+    return this.request<any>(`/organization/getcity?cityid=${query}`)
   }
 
 	@methods('post')
@@ -89,9 +90,14 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/social`)
   }
 
+  @methods('post')
+  like(data:Res.socialData) {
+      return this.request('/organization/like')
+  }
+
 	@methods('get')
   socialBu(query:string) {
-    return this.request<{social:any}>(`/organization/socialbu?idorganization=${query}`)
+    return this.request<{social:any, like: string}>(`/organization/socialbu?idorganization=${query}`)
   }
 
 	@methods('post')
@@ -134,6 +140,29 @@ class RequestOrganization extends ApiSuper {
     return this.request(`/organization/organizationRedirectON`)
   }
 
+	@methods('post')
+  getinfoTerminal(data:any) {
+    return this.request(`/organization/organizationTerminal`)
+  }
+
+  addCalleryOrg(data:any) {
+		console.log(data);
+		return this.api({
+			method: 'post',
+			url: `/organization/addPhoto`,
+			data: data
+		})
+  }
+	
+	@methods('post')
+  addfilter(data:any) {
+    return this.request(`/organization/addfilter`)
+  }
+
+	@methods('post')
+  iikkoweb(data:any) {
+    return this.request(`/organization/noiikkoweb`)
+  }
   
 }
 export default new RequestOrganization()

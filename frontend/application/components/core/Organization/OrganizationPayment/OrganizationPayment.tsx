@@ -1,8 +1,6 @@
 import { IOrganization } from '@type';
 import { adapterComponentUseCase } from 'adapters/adapterComponents';
-import Modal from 'application/components/common/Modal/Modal';
 import { useOrganizationPayment } from 'domains/useCase/organization/useCase.OrganizationPayment';
-import { useOrganizationSetting } from 'domains/useCase/organization/useCase.OrganizationSetting';
 import { FC } from 'react';
 import OrganizationPayMaster from './OrganizationPayMasterForm';
 import cn from 'classnames';
@@ -16,10 +14,6 @@ const OrganizationPayment:FC<IProps> = ({organization}) =>{
 	const useCase = adapterComponentUseCase(useOrganizationPayment,organization.id)
 	const {oragPayInfo,payInfoModal} = useCase.data
 	const {delitePay,setPayInfoModal} = useCase.handlers
-
-	const CNdelivMetod = oragPayInfo && cn('col-2 btn btn-block', {
-		'btn-success':oragPayInfo.isActive,
-	});
 
 	return(
 		<section className="content">

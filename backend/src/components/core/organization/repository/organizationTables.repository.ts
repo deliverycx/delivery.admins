@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { ReturnModelType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
 import { OrganizationTablesClass } from "src/database/mongodbModel/delivery/organizationTables.model";
-import { PaymentRecvisitesClass } from "src/database/mongodbModel/delivery/paymentRecvisites.model";
 import { BaseRepository } from "src/domain/repository/base.repository";
 
 @Injectable()

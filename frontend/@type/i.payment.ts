@@ -32,7 +32,7 @@ export type IOrderPayment = {
 	}
 	dyalPayment:{
 		BarPaymentAmount: number
-​​		BarPaymentid:string
+		BarPaymentid:string
 	}
 	paymentparams:{
 		organization:string

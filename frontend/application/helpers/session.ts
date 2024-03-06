@@ -1,6 +1,6 @@
 import { User } from '@type'
 import type { IronSessionOptions } from 'iron-session'
-import { withIronSessionSsr } from "iron-session/next";
+import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 
 export const sessionOptions: IronSessionOptions = {
   password: process.env.SECRET_COOKIE_PASSWORD as string,
@@ -16,6 +16,7 @@ declare module 'iron-session' {
     user?: User
   }
 }
+
 
 
 export const withCheckSession = (witchUser:{roles:string,rout:string}) => withIronSessionSsr(async function ({

@@ -15,7 +15,7 @@ export class OrganizationTableServises extends BaseServises{
   
 	async getIIkkoTable({idorganization}){
 		const termital = await this.iikoAxios.termiralGroops(idorganization)
-		const tables = await this.iikoAxios.organizationTables(termital)
+		const tables = await this.iikoAxios.organizationTables(termital.id)
 		return tables
 	}
 

@@ -19,7 +19,7 @@ const Pooling = () => {
               className="btn btn-block btn-dark btn-lg col-md-3"
               onClick={() => startPolling()}
             >
-              Обновить
+              Обновить Меню
             </button>
           </div>
 

@@ -10,12 +10,18 @@ import { ProductClass } from "src/database/mongodbModel/delivery/product.model";
 import { UnloadControllers } from "../controllers/unload.controller";
 import { IikoRequesterServises } from "../servises/iiko.servises";
 import { UnloadServises } from "../servises/unload.servises";
+import { RedisModules } from "src/module/redis.module";
+import { IIkoAxios } from "src/repository/iiko/iiko.axios";
+import { IikoOrganizationServises } from "../servises/iikkoOrganizations.servises";
+import { OrganizationServises } from "../../organization/servises/organization.servises";
+
 
 @Module({
   imports: [
-    TypegooseModule.forFeature([OrganizationClass,CityClass,CategoryClass,ProductClass,OrganizationStatusClass], DELIVERY_DB)
+    TypegooseModule.forFeature([OrganizationClass,CityClass,CategoryClass,ProductClass,OrganizationStatusClass], DELIVERY_DB),
+		RedisModules
   ],
   controllers: [UnloadControllers], 
-  providers:[IikoRequesterServises,UnloadServises]
+  providers:[IikoRequesterServises,IikoOrganizationServises,UnloadServises,IIkoAxios]
 })
 export class UnloadModule {}

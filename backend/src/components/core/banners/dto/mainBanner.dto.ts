@@ -1,5 +1,5 @@
 export class MainBannerDTO{
-	id:UniqueId
+	id:string
 	images:string[]
 	organization:string
 	url:string

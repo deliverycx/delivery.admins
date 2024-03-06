@@ -16,8 +16,9 @@ export class orderPaymentControllers{
 		return this.Servises.create(body)
 	}
 	@Get('all')
-	getAll(@Query() query: orderPaymentDTO){
-		return this.Servises.getAll(query)
+	getAll(@Query() query: {idorganization:string}){
+		console.log(query);
+		return this.Servises.getAll(query.idorganization ? query : {})
 	}
 	@Get('buone')
 	geBu(@Query() query: orderPaymentDTO){
@@ -45,6 +46,7 @@ export class orderPaymentControllers{
 
 	@Post('paymentConfirm')
 	payconf(@Body() body:orderPaymentDTO){
+		console.log('qqqq',body);
 		return this.Servises.payConfirm(body)
 	}
 

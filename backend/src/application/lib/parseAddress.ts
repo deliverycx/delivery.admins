@@ -3,7 +3,7 @@ import axios from "axios";
 
 function parseOrganization(organization:any,geo:any) {
 	
-	console.log(organization);
+	//console.log(organization);
 	
 
   const matchesAddress = organization.restaurantAddress.match(

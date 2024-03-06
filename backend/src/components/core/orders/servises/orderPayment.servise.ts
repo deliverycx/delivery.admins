@@ -4,12 +4,18 @@ import { orderPaymentRepository } from "../repository/orderPayment.repository";
 import axios, { AxiosInstance } from "axios";
 import { Axios } from "src/application/repository/axios";
 import { BotAxios } from "src/components/common/bot/bot.axios";
+import { ReturnModelType } from "@typegoose/typegoose";
+import { InjectModel } from "nestjs-typegoose";
+import { ordersRepository } from "../repository/orders.repository";
 
 @Injectable()
 export class orderPaymentServises extends BaseServises{
 	constructor(
 		@Inject(orderPaymentRepository)
 		private readonly Repository,
+
+		@Inject(ordersRepository)
+		private readonly OrderRepository,
 
 		@Inject(BotAxios)
 		private readonly botAxios
@@ -92,15 +98,16 @@ export class orderPaymentServises extends BaseServises{
 				}
 			)
 
-			await this.Repository.setStatusPayment(data.id,data.status)
+			//data && await this.OrderRepository.setStatusPayment(data.id,data.status)
 			return data
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	async payConfirm({token,id,price}){
+	async payConfirm({token,id,orderId,price}){
 		try {
+			await this.OrderRepository.setStatusPayment(orderId,'Settled')
 			const {data} = await axios.put(
 				`https://paymaster.ru/api/v2/payments/${id}/confirm`,
 					{
@@ -118,15 +125,17 @@ export class orderPaymentServises extends BaseServises{
 				
 			)
 			console.log('подтверждение платежа',data,token,id,price);
+		
 			return data
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	async canselPayment({token,id}){
+	async canselPayment({token,orderId,id}){
 		try {
 			console.log('отмена платежа',token,id);
+			await this.OrderRepository.setStatusPayment(orderId,'Cancelled')
 			const {data} = await axios.put(
 				`https://paymaster.ru/api/v2/payments/${id}/cancel`,
 					{},
@@ -138,7 +147,7 @@ export class orderPaymentServises extends BaseServises{
 				},
 				
 			)
-			await this.Repository.setStatusPayment(id,'Cancelled')
+			
 			return data
 		} catch (error) {
 			console.log(error);

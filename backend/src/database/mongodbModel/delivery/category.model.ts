@@ -5,6 +5,7 @@ import {
     Ref
 } from "@typegoose/typegoose";
 import { OrganizationClass } from "./organization.model";
+import { ImagePath } from "src/types/global";
 
 @ModelOptions({
     options: { customName: "Category" },
@@ -12,13 +13,13 @@ import { OrganizationClass } from "./organization.model";
 })
 export class CategoryClass {
     @prop({ required: false })
-    public id!: UniqueId;
+    public id!: string;
 
     @prop()
     public name!: string;
 
     @prop()
-    public image!: ImagePath;
+    public image!: string;
 
     @prop()
     public order!: number;

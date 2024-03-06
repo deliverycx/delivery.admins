@@ -1,12 +1,13 @@
 import { adapterComponentUseCase } from "adapters/adapterComponents"
 import Modal from "application/components/common/Modal/Modal"
-import { useOrganizationPayMaster, useOrganizationRecvisites } from "domains/useCase/organization/useCase.OrganizationPayment"
+import { useOrganizationRecvisites } from "domains/useCase/organization/useCase.OrganizationPayment"
 import { FC, memo } from "react"
 
 const OrganizationRecvisites:FC<{id:string}> = ({id}) => {
 	const useCase = adapterComponentUseCase(useOrganizationRecvisites,id)
 	const {info,modal} = useCase.data
 	const {setModal,handleSubmit,register,onSubmit} = useCase.handlers
+	console.log(info, 'data recewfewf')
 
 	return (
 		<>

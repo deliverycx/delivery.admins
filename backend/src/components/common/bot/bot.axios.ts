@@ -29,7 +29,7 @@ export class BotAxios {
 
 
 		async ReturntPayment(
-			organization: UniqueId,
+			organization: string,
 			data:any
 		): Promise<void> {
 				this.axios.post(`/return_payment/${organization}`, data);

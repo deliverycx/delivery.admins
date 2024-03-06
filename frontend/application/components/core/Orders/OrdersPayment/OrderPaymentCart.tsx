@@ -6,11 +6,11 @@ import { IorderItems, IOrderPayment } from "@type";
 import { FormikProvider, useFormik } from "formik";
 
 
-const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
-	const useCase = adapterComponentUseCase(useOrderPaymentCart,id)
+const OrderPaymentCart:FC<{orderid:string,payment:any,org:string}> = ({orderid,payment,org}) =>{
+	const useCase = adapterComponentUseCase(useOrderPaymentCart,{orderid,payment,org})
 	const {statePaymentItem} = useCase.data
 	const {handlerReturns,canselPayment,successPayment,refresh} = useCase.handlers
-	const order:IOrderPayment =  statePaymentItem.order
+	const order =  statePaymentItem.order
 
 	const initialValues = {
 		orderPrice:''
@@ -29,7 +29,7 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1>Детали заказа</h1>
+            <h1>Детали Платежа</h1>
           </div>
           
         </div>
@@ -43,96 +43,15 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 
       
       <div className="card">
-        <div className="card-header">
-					<div className="user-block">
-							{
-								statePaymentItem.errors &&
-								<span><strong>ошибка</strong> - {statePaymentItem.errors}</span>
-							}
-							<h5 className="text-warning">{order.dyalPayment.BarPaymentid && 'Двойная оплата'}</h5>
-							<br />
-						<h5 className="mt-5 text-muted">Информация о заказе - {order.orderNumber}</h5>
-              <ul className="list-unstyled">
-                <li>
-                  <small>адресс:</small> {`${order.paymentparams.address_city}, ${order.paymentparams.address_street}, ${order.paymentparams.address_home}`}
-                </li>
-                <li>
-								<	small>тип заказа:</small> {order.paymentparams.orderType}
-                </li>
-                <li>
-									<small>телефон:</small> {order.paymentparams.phone}
-                </li>
-                <li>
-									<small>дата:</small> {order.paymentparams.date}
-                </li>
-                
-              </ul>
-
-					</div>
-          
-          
-					<div className="clearfix"></div>
-					
-        </div>
+        
         <div className="card-body">
-          <div className="row">
-            <div className="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-              
-              <div className="row">
-                <div className="col-12">
-                  <h4>Товары</h4>
-										{
-											/**/
-											order.orderItems.map((item:IorderItems) =>{
-												return (
-													<>
-													<div key={item.product.id} className="post">
-													<ul className="list-unstyled">
-						                <li>
-						                  <small>Название:</small> {item.product.name}
-						                </li>
-						                <li>
-														<	small>цена:</small> {item.price}
-						                </li>
-						                <li>
-															<small>сумма:</small> {item.cost}p
-						                </li>
-						                <li>
-															<small>количество:</small> {item.amount}
-						                </li>
-						                
-						              </ul>
-                    			</div>
-													</>
-												)
-											})
-											
-										}
-                    
-
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <h3 className="text-primary"><i className="fas fa-paint-brush"></i> {statePaymentItem.organization && statePaymentItem.organization}</h3>
-              
-              <div className="text-muted">
-								<p className="text-sm">ИД заказа
-                  <b className="d-block">{order.orderId}</b>
-                </p>
-                
-                <p className="text-sm">ИД магазина(точки)
-                  <b className="d-block">{order.merchantId}</b>
-                </p>
-								<p className="text-sm">Номер карты плательщика
-                  <b className="d-block">{order.paymentData.paymentInstrumentTitle}</b>
-                </p>
-              </div>
-
-              
-              
-            </div>
-          </div>
+				<div className="">
+						<span><svg version="1.1" width="16" height="16" viewBox="0 0 16 16">
+<path fill="#444444" d="M9 10h-2c0-2 1.2-2.6 2-3 0.3-0.1 0.5-0.2 0.7-0.4 0.1-0.1 0.3-0.3 0.1-0.7-0.2-0.5-0.8-1-1.7-1-1.4 0-1.6 1.2-1.7 1.5l-2-0.3c0.1-1.1 1-3.2 3.6-3.2 1.6 0 3 0.9 3.6 2.2 0.4 1.1 0.2 2.2-0.6 3-0.4 0.4-0.8 0.6-1.2 0.7-0.6 0.4-0.8 0.2-0.8 1.2z"></path>
+<path fill="#444444" d="M8 1c3.9 0 7 3.1 7 7s-3.1 7-7 7-7-3.1-7-7 3.1-7 7-7zM8 0c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8v0z"></path>
+<path fill="#444444" d="M6.9 11h2v2h-2v-2z"></path>
+</svg></span> подробней о платежах в <a href="/managers/notification"><strong>в справочной</strong></a>
+					</div>
 					<hr />
 					
 
@@ -152,7 +71,9 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 									<a className="btn btn-danger " onClick={()=> canselPayment(order.paymentid)}>отменить</a>
 									
 	          </div>	
-						<section className="sm-4 float-right chastplatej">
+						{
+							/**
+							 * <section className="sm-4 float-right chastplatej">
 								<label className='form-label'>Частичное списание платежа</label>
 								<FormikProvider value={formik}>
 								<form onSubmit={formik.handleSubmit}>
@@ -165,6 +86,9 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 								</form>
 								</FormikProvider>
 								</section>
+							 */
+						}
+						
 					</div>
 					
 					<div className="row">
@@ -176,14 +100,7 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
                     </div>
                   </div>
                 </div>
-								<div className="col-12 col-sm-3">
-                  <div className="info-box bg-light">
-                    <div className="info-box-content">
-                      <span className="info-box-text text-center text-muted">Сумма заказа</span>
-                      <span className="info-box-number text-center text-muted mb-0">{order.orderAmount}p</span>
-                    </div>
-                  </div>
-                </div>
+								
                 <div className="col-12 col-sm-3">
                   <div className="info-box bg-light">
                     <div className="info-box-content">
@@ -207,20 +124,14 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
                     </div>
                   </div>
                 </div>
-                <div className="col-12 col-sm-3">
-                  <div className="info-box bg-light">
-                    <div className="info-box-content">
-                      <span className="info-box-text text-center text-muted">Статус заказа</span>
-                      <span className="info-box-number text-center text-muted mb-0">{OrderStatus[order.orderStatus]}</span>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
         </div>
         
       </div>
 
 			{
+				/*
 				order.dyalPayment.BarPaymentid && statePaymentItem.tokenBar &&
 				<div className="card">
 					<div className="card-header">
@@ -289,6 +200,7 @@ const OrderPaymentCart:FC<{id:string}> = ({id}) =>{
 						</div>
 					</div>
 				</div>
+				*/
 			}
 			
       

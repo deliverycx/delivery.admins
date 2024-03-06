@@ -12,13 +12,20 @@ import { OrganizationControllers } from "../controllers/organization.controller"
 import { OrganizationSettingControllers } from "../controllers/organizationSetting.controller";
 import { OrganizationServises } from "../servises/organization.servises";
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
+import { IIkoAxios } from "src/repository/iiko/iiko.axios";
+import { OrganizationfilterModel } from "src/database/mongodbModel/delivery/organizationFilter";
+import { RedisModules } from "src/module/redis.module";
 
 @Module({
   imports: [
     TypegooseModule.forFeature([OrganizationClass,CityClass], DELIVERY_DB),
-		TypegooseModule.forFeature([SocialModel], ADMIN_DB)
+		TypegooseModule.forFeature([OrganizationStatusClass], DELIVERY_DB),
+		TypegooseModule.forFeature([OrganizationfilterModel], DELIVERY_DB),
+		TypegooseModule.forFeature([SocialModel], ADMIN_DB),
+		RedisModules
   ],
   controllers: [OrganizationControllers,OrganizationSettingControllers], 
-  providers:[OrganizationServises,OrganizationRepository,OrganizationSettingServises]
+  providers:[OrganizationServises,OrganizationRepository,OrganizationSettingServises,IIkoAxios]
 })
 export class OrganizationSettingModule {}

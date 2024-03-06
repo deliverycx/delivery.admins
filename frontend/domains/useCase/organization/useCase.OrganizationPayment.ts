@@ -124,7 +124,6 @@ export function useOrganizationRecvisites(this: any,id:string) {
 	
 	useEffect(()=>{
 		getBu()
-
 	},[id])
 	
 	const { register, handleSubmit, watch,setValue } = useForm<typeof initState>();
@@ -145,6 +144,7 @@ export function useOrganizationRecvisites(this: any,id:string) {
 		try {
 			const {data} = await requestRecvisitesPayment.findBuOrg({organization:id})
 			data && setInfo(data)
+			console.log('USECASE PAYMENT getBu DATA', data)
 		} catch (error) {
 			console.log(error);
 		}
@@ -155,7 +155,7 @@ export function useOrganizationRecvisites(this: any,id:string) {
 
   this.data({
     modal,
-		info
+	info
   })
   this.handlers({
     setModal,

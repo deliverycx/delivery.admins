@@ -18,10 +18,10 @@ export class orderPaymentRepository extends BaseRepository<PaymentModel>{
 	 }
 
 
-	 async setStatusPayment(payid:string,status:string){
-		console.log('запись',payid,status);
+	 async setStatusPayment(orderId:string,status:string){
+		console.log('запись',orderId,status);
 		const result = await this.Model.findOneAndUpdate({
-			paymentid:payid
+			paymentid:orderId
 		},
 		{
 			$set:{

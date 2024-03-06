@@ -23,7 +23,7 @@ export class ProductClass {
     public organization!: Ref<OrganizationClass>;
 
     @prop()
-    public id!: UniqueId;
+    public id!: string;
 
     @prop()
     public name!: string;
@@ -50,7 +50,7 @@ export class ProductClass {
     public category!: Ref<CategoryClass>;
 
     @prop()
-    public image!: ImagePath;
+    public image!: string;
 
     @prop()
     public measureUnit!: string;

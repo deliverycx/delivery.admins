@@ -14,7 +14,7 @@ const News: NextPage = () => {
       <Header />
       <Menu />
       <Container>
-				<OrdersPayment organization="123" />
+				<OrdersPayment organization="" />
       </Container>
     </div>
 	)

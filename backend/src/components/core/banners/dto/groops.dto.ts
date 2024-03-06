@@ -7,7 +7,7 @@ export class GroopsDto{
 	name:string
 	category:string
 
-	id:UniqueId
+	id:string
 
 	banners:ObjectId
 

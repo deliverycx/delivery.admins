@@ -2,9 +2,12 @@ import { buildSchema, getModelForClass, modelOptions, prop } from "@typegoose/ty
 
 @modelOptions({ schemaOptions: { collection: 'social' } })
 export class SocialModel{
-  @prop({ type: () => String })
-  public idorganization: string
-  
-	@prop({ type: () => Object })
-  public social:any
+    @prop({ type: () => String })
+    public idorganization: string
+
+    @prop({ type: () => Object })
+    public social:any
+
+    @prop()
+    public like!: any;
 }

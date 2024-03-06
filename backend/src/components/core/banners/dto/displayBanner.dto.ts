@@ -5,7 +5,7 @@ export class DisplayBannerDto{
 
 	@IsString()
 	organization:ObjectId
-	id:UniqueId
+	id:string
 	field:string
 	banner:string
 

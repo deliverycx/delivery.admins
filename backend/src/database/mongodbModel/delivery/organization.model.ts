@@ -7,6 +7,7 @@ import {
     Severity
 } from "@typegoose/typegoose";
 import { CityClass } from "./city.model";
+import { OrganizationfilterModel } from "./organizationFilter";
 
 @ModelOptions({
     options: { customName: "Organization", allowMixed: Severity.ALLOW },
@@ -14,7 +15,7 @@ import { CityClass } from "./city.model";
 })
 export class OrganizationClass {
     @prop()
-    public id!: UniqueId;
+    public id!: string;
 
     @prop({ ref: "City" })
     public city!: Ref<CityClass>;
@@ -34,6 +35,9 @@ export class OrganizationClass {
 
     @prop()
     public workTime!: string[];
+
+		@prop()
+    public cityid!: string;
     
     @prop({ default: null })
     public delivMetod!: string | null;
@@ -44,11 +48,25 @@ export class OrganizationClass {
 		@prop()
     public redirect:string
 
+		@prop()
+    public terminal:string
+
 		@prop({ type: () => Boolean,default:false })
     public redirectON:string
 
 		@prop({ type: () => Boolean,default:false })
 		reservetable:boolean
+
+		@prop({ type: () => Boolean,default:false })
+		nomenuweb:boolean
+
+		@prop()
+		gallery:string[]
+
+		@prop({ ref: () => OrganizationfilterModel })
+    public filters!: Ref<OrganizationfilterModel>[];
+
+
     
 }
 

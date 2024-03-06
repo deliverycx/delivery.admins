@@ -5,13 +5,16 @@ import { SocialModel } from "src/database/mongodbModel/admin/social.model";
 import { CityClass } from "src/database/mongodbModel/delivery/city.model";
 import { OrganizationClass } from "src/database/mongodbModel/delivery/organization.model";
 import { organizationEntities } from "../entities/organization.entities";
+import { ORG_STATUS, DELIVERY_METODS, PAYMENT_METODS } from "src/application/constants/const.orgstatus";
+import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/organizationStatus.model";
 
 @Injectable()
 export class OrganizationRepository {
   constructor(
     @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>, 
-		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>
+    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
+		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>,
+		@InjectModel(OrganizationStatusClass) private readonly statusModel: ReturnModelType<typeof OrganizationStatusClass>
   ) { }
 
   async getAllOrganization() {
@@ -44,9 +47,10 @@ export class OrganizationRepository {
 	async getBuOrganization(idorg:string){
 		const result = await this.organizationModel
             .findOne({id:idorg})
+						.populate('filters')
             .lean();
 
-
+			console.log(result);
       return result
 	}
 
@@ -62,8 +66,8 @@ export class OrganizationRepository {
       },
       { new: true }
     )
-		
-    
+
+
     return organizationEntities.hiddenMetod(result.id,result.isHidden)
   }
 
@@ -92,9 +96,9 @@ export class OrganizationRepository {
 				},
 				{ new: true }
 			)
-			
+
 		}
-    
+
     return city
   }
 
@@ -113,7 +117,7 @@ export class OrganizationRepository {
       { new: true }
     )
 		console.log('res',result);
-    
+
     return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
 	async OpenOrgMetod(orgid: string, metod: boolean) {
@@ -130,13 +134,12 @@ export class OrganizationRepository {
       { new: true }
     )
 		console.log('res',result);
-    
+
     return organizationEntities.hiddenMetod(result._id,result.isHidden)
   }
 
 
 	async socialMetod(idorganization:string,social:[]){
-		
 		const result = await this.socialModel.findOneAndUpdate(
       {
         idorganization: idorganization
@@ -154,21 +157,43 @@ export class OrganizationRepository {
 				social
 			})
 		}
-		
+
 	}
+
+	async socialLikeMethod(idorganization:string,like: any){
+		const result = await this.socialModel.findOneAndUpdate(
+			{
+				idorganization: idorganization
+			},
+			{
+				$set: {
+					like: like
+				}
+			},
+			{ new: true }
+		)
+
+		if(!result){
+			await this.socialModel.create({
+				idorganization,
+				like
+			})
+		}
+	}
+
 	async socialMetodBu(idorganization:string){
-		
+
 		const result = await this.socialModel.findOne(
       {
         idorganization: idorganization
       }
     )
 		return result
-		
+
 	}
 
 	async reservetableMetod(idorganization:string,metod:boolean){
-		
+
 		const result = await this.organizationModel.findOneAndUpdate(
       {
         id: idorganization
@@ -226,7 +251,7 @@ export class OrganizationRepository {
 	async addCityMetod(city:any){
 		console.log(city);
 		const result = await this.cityModel.create(city)
-		
+
 		return result
 	}
 
@@ -243,14 +268,25 @@ export class OrganizationRepository {
 				}
 			}
 		)
-		console.log('ress',result);
-		
+		const status = await this.statusModel.findOneAndUpdate({
+				organization:String(org.id)
+			},
+			{
+				$setOnInsert:{
+					organizationStatus:ORG_STATUS.NOWORK,
+					deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP],
+					paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
+				}
+			},
+			{ upsert: true, new: true })
+		console.log('ress',status);
+
 		return result
 	}
 
 	async DeliteOrgMetod(id:any){
 		const result = await this.organizationModel.deleteOne({id:id})
-		
+
 		return result
 	}
 
@@ -263,7 +299,7 @@ export class OrganizationRepository {
 				redirect:url
 			}
 		)
-		
+
 		return result
 	}
 	async RedirectONOrgMetod(idorganization:string,metod:boolean){
@@ -275,36 +311,50 @@ export class OrganizationRepository {
 				redirectON:metod
 			}
 		)
-		
+
 		return result
 	}
-
-
-	async RedirectOrgMetod(idorganization,url:any){
+	async AddGalleryOrgMetod(idorganization,images:[]){
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
         id: idorganization
       },
 			{
-				redirect:url
+				gallery:images
 			}
 		)
 
 		return result
 	}
+	async filtersMetod(idorganization,filterlist:string){
 
-	async RedirectONOrgMetod(idorganization,url:any){
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
         id: idorganization
       },
 			{
-				redirectON:url
-			}
+				$set:{
+					filters:filterlist
+				}
+			},
+			{ upsert: true, new: true }
 		)
 
 		return result
 	}
-	
+
+	async noiikkoweb(idorganization:string,metod:boolean){
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+        id: idorganization
+      },
+			{
+				$set:{
+					nomenuweb:metod
+				}
+			},
+			{ upsert: true, new: true }
+		)
+	}
 
 }

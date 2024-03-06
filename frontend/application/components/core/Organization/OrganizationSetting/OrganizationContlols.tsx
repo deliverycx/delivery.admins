@@ -24,8 +24,23 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
 		}
 	}
 
+
+	const switchIIkkoWeb = async (idorganization: string,metod:boolean) =>{
+		try {
+			const {data} = await RequestOrganization.iikkoweb({
+				organization:idorganization,
+				metod:metod
+			})
+			setCheck(data)
+			getOrgBu(point.id)
+		} catch (error) {
+			
+		}
+	}
+
 	
-	const CNhiddenMetod = cn('col-2 btn btn-block', { 'btn-success': point.isHidden });									
+	const CNhiddenMetod = cn('col-2 btn btn-block', { 'btn-success': point.isHidden });				
+	const CNIIKKOWEB = cn('col-2 btn btn-block', { 'btn-success': point.nomenuweb });							
 	return (
 		<div className='card-body'>
                         <div className='card-footer'>
@@ -37,6 +52,7 @@ const OrganizationContlols:FC<IProps> = ({point,handels}) =>{
 														<section>
 															<div className={CNhiddenMetod} onClick={()=> handleHiddenOrg(point.id,!point.isHidden)}>Скрыть точку</div>
 															<div className="col-2 btn btn-primary" onClick={()=> checkOrganization(point.id)}>Проверить точку</div>
+															<div className={CNIIKKOWEB} onClick={()=> switchIIkkoWeb(point.id,!point.nomenuweb)}>выключить айко-веб</div>
 														</section>
 														
 														<div className="col-2 btn btn-danger" onClick={()=> deliteOrganization(point.id)}>Удалить точку</div>

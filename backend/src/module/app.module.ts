@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config'
+import { CacheModule, CacheStore, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from "@nestjs/mongoose";
 import * as path from "path";
 import * as fs from "fs";
@@ -14,6 +14,8 @@ import { StocksModule } from 'src/components/core/stocks/module/stocks.module';
 import { NestjsFormDataModule } from 'nestjs-form-data';
 import { OrganizationModule } from 'src/components/core/organization/module/organization.module';
 import { OrderModule } from 'src/components/core/orders/module/order.module';
+import { DashbordModule } from 'src/components/core/dashbord/module/dashbord.module';
+import { RedisModules } from './redis.module';
 
 
 
@@ -36,6 +38,7 @@ import { OrderModule } from 'src/components/core/orders/module/order.module';
 			MulterModule.register({
 				dest: './public/static/shop',
 			}),
+			RedisModules,	
 		NestjsFormDataModule,	
     AuthModule,
     UnloadModule,
@@ -43,7 +46,8 @@ import { OrderModule } from 'src/components/core/orders/module/order.module';
 		BannersModule,
 		NewsModule,
 		StocksModule,
-		OrderModule
+		OrderModule,
+		DashbordModule
   ],
   
 })
