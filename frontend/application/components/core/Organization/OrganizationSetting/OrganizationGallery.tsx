@@ -40,7 +40,7 @@ const OrganizationGallery:FC<{organization:any}> = ({organization}) => {
 								<div className='card-body'>
 									<div className='popBox_item'>
 										<label className='form-label'>фото в организации</label>
-										<DropzoneArea onChange={e => setFile(e)} filesLimit={10} 
+										<DropzoneArea acceptedFiles={['image/*']} maxFileSize={5000000} onChange={e => setFile(e)} filesLimit={10} 
 											initialFiles={organization.gallery && imagesArr(organization.gallery)}
 										/>
 									</div>
