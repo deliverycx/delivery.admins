@@ -1,8 +1,14 @@
 import axios from "axios"
+import { userModel } from "domains/models/Users.model";
+import { observer } from "mobx-react-lite";
 import { useRouter } from 'next/router';
+
 
 const Menu = () =>{
 	const router = useRouter()
+
+	const user = userModel.user
+	//console.log('user',user?.pagesUser);
 
 	const deliteCookies = async () =>{
 		try {
@@ -20,7 +26,7 @@ const Menu = () =>{
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
     
     
-
+		
     
     <div className="sidebar">
       
@@ -70,6 +76,14 @@ const Menu = () =>{
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Организации
+                <i className="right fas fa-angle-left"></i>
+              </p>
+							
+            </a>
+						<a href="/users/" className="nav-link">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Пользователи
                 <i className="right fas fa-angle-left"></i>
               </p>
 							
@@ -139,4 +153,4 @@ const Menu = () =>{
   </aside>
   )
 }
-export default Menu
+export default observer(Menu) 

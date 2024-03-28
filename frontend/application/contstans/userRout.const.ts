@@ -1,10 +1,6 @@
 export const userRout = {
-	superAdmin:{
+	pointAdmin:{
 		roles:'admin',
 		rout:'/managers'
-	},
-	admins:{
-		roles:'ofic',
-		rout:''
 	}
 }

@@ -63,12 +63,27 @@ export class LoginController {
 		return   {msg:'success'};
 	}
 
-	@Get('buallorg')
+	@Get('all')
 	async userBuOrg(
+    @Query() query: OrganizationDTO
+  ) {
+    return await this.LoginServises.getAll({})
+	}
+
+	@Get('buallorg')
+	async getAllUser(
     @Query() query: OrganizationDTO
   ) {
     return await this.LoginServises.getAll(query)
 	}
+
+	@Get("bu")
+	async findUser(
+    @Query() query: {id:string},
+  ) {
+		
+    return this.LoginServises.getUser(query.id)
+  }
 
   @Post('delet')
 	async delete(

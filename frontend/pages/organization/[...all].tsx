@@ -7,4 +7,4 @@ const org = () =>{
 	)
 }
 export default org
-export const getServerSideProps = withCheckSession({...userRout.superAdmin})
+export const getServerSideProps = withCheckSession({...userRout.pointAdmin})

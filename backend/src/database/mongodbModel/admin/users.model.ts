@@ -15,6 +15,9 @@ export class AdminUsersModel implements IUsersEntities{
 	@prop({ type: () => String })
   public organization:string
 
+	@prop({ type: () => Array })
+  public pagesUser:[]
+
 	@prop({ type: () => String })
 	public refreshToken:string
 

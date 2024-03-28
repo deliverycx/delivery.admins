@@ -30,4 +30,4 @@ const Organization: NextPage = () => {
 
 
 export default Organization
-export const getServerSideProps = withCheckSession({...userRout.superAdmin})
+export const getServerSideProps = withCheckSession({...userRout.pointAdmin})

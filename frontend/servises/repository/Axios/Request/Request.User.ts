@@ -53,6 +53,22 @@ class RequestUserRegister  extends ApiSuper {
   regUsers(data:any) {
     return this.request<Req.Login>(`/register/registration_admin`)
   }
+
+	@methods('post')
+  regSuperUsers(data:any) {
+    return this.request<Req.Login>(`/register/registration`)
+  }
+
+	@methods('post')
+  updateSuperUsers(data:any) {
+    return this.request<Req.Login>(`/register/update_user`)
+  }
+
+	@methods('post')
+  addPagesUser(data:any) {
+    return this.request<Req.Login>(`/register/pagesuser`)
+  }
+	
 }
 
 export const requestUserRegister = new RequestUserRegister()

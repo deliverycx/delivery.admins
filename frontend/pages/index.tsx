@@ -36,4 +36,4 @@ const Home: NextPage = () => {
 }
 
 export default Home
-export const getServerSideProps = withCheckSession({...userRout.superAdmin})
+export const getServerSideProps = withCheckSession({...userRout.pointAdmin})

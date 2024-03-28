@@ -20,10 +20,21 @@ export class UsersRepository extends BaseRepository<AdminUsersModel>{
   async getOneAdmin(name:string) {
     return await this.userModel.findOne({ name }).exec();
   }
+	async getOneAdminBuid(id:string) {
+    return await this.userModel.findById(id).exec();
+  }
 	async getOneToken(body:{name:string,refreshToken:string}) {
     return await this.userModel.findOne(body).exec();
   }
-	async updateUser(name:string,body:any){
-		return await this.userModel.findOneAndUpdate({name},body)
+	async updateUser(body:any){
+		return await this.userModel.findByIdAndUpdate(body._id,body)
+	}
+
+	async addPageUser (id:string,pages:[]){
+		return await this.userModel.findByIdAndUpdate(id,{
+			$set:{
+				pagesUser:pages
+			}
+		})
 	}
 }

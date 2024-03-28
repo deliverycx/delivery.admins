@@ -9,8 +9,10 @@ export class RegisterDTO{
 
 export class RegisterAdminDTO{
   @ApiProperty()
+	_id:string
   name: string
   password:string
 	role:string
 	organization:string
+	pages?:string
 }

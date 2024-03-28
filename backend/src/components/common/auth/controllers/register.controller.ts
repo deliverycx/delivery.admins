@@ -23,5 +23,20 @@ export class RegisterController {
     return this.registerServises.createOrganizationAdmin(body)
   }
 
-  
+	
+
+	@Post("update_user")
+  async updateuser(
+    @Body() body: RegisterAdminDTO,
+  ) {
+    return this.registerServises.updateUser(body)
+  }
+
+
+  @Post("pagesuser")
+  async pagesUser(
+    @Body() body: RegisterAdminDTO,
+  ) {
+    return this.registerServises.addPagesUserMetod(body)
+  }
 }

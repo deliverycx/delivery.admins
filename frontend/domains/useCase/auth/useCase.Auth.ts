@@ -6,6 +6,7 @@ import { IAdminUser } from "@type";
 import { requestUserRegister } from "servises/repository/Axios/Request/Request.User";
 import axios from "axios";
 import { useAuthCheck } from "application/hooks/useAuthCheck";
+import { userModel } from "domains/models/Users.model";
 
 export function useCaseAuth(this: any) {
   const [error, setError] = useState(false)
@@ -23,7 +24,10 @@ export function useCaseAuth(this: any) {
       if (data) {
         const response = await axios.post('/api/auth/login',data)
 				if(response.data){
-					userRout(response.data)
+					const {data} = await RequestUsers.CRUDFabric.getBu(user.name)
+					
+					userModel.actionSetUser(data)
+					userRout({...response.data,...data})
 				}
         
       }

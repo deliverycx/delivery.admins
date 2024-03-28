@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { genSalt, hash, compare } from 'bcryptjs';
+import { genSalt, hash, compare, compareSync } from 'bcryptjs';
 import {UsersRepository} from '../repository/users.repository'
 import { RegisterAdminDTO, RegisterDTO } from "../dto/register.dto";
 
@@ -22,4 +22,22 @@ export class RegisterServises{
     return this.UsersRepository.createAdmins({...body,password})
     
   }
+
+	async updateUser(body:RegisterAdminDTO){
+		const salt = await genSalt(10)
+		
+		if(body.password.length < 10){
+			const password = await hash(body.password, salt)
+			return this.UsersRepository.updateUser({...body,password})
+		
+		}else{
+			delete body.password
+			return this.UsersRepository.updateUser(body)
+		}
+    
+	}
+
+	async addPagesUserMetod(body:any){
+		return this.UsersRepository.addPageUser(body.id,body.pages)
+	}
 }

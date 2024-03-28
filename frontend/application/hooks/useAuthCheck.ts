@@ -10,6 +10,7 @@ export function useAuthCheck() {
 	const check = async () => {
     try {
       const user = await RequestUsers.check()
+			
       return user.data
     } catch (error) {
       router.push('/auth')
@@ -22,9 +23,11 @@ export function useAuthCheck() {
   }, [router.asPath])
 
 	const userRout = (user:User) =>{
+		
 		if(user.role){
 			switch(user.role){
 				case 'admin': router.push('/organization')
+				case 'superadmin' : router.push(`/${user.pagesUser[0].path}`) //`/${user.pagesUser[0].path}`
 			}
 		}else{
 			router.push('/')
