@@ -86,4 +86,4 @@ const AdminPage: NextPage = ({ user }: any) => {
 	)
 }
 export default AdminPage
-export const getServerSideProps = withCheckSession({ ...userRout.admins })
+export const getServerSideProps = withCheckSession({ ...userRout.pointAdmin })
