@@ -36,13 +36,20 @@ const MenuAdmins = () =>{
       </div>
      
       <nav className="mt-2">
-        <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul className="nav nav-pills " data-widget="treeview" role="menu" data-accordion="false">
           
           <li className="nav-item">
             <a href="/managers" className="nav-link">
               <i className="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Заказы
+                <i className="right fas fa-angle-left"></i>
+              </p>
+            </a>
+						<a href="/managers/counter" className="nav-link">
+              <i className="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+								Счетчик хинкали
                 <i className="right fas fa-angle-left"></i>
               </p>
             </a>
