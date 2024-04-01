@@ -73,7 +73,7 @@ export class IikoRequesterServises {
           guid: organization.id,
           longitude:position && position[0],
           latitude:position && position[1],
-          workTime: organization.workTime.split(";")[0],
+          workTime: organization.workTime && organization.workTime.split(";")[0],
           phone: organization.phone
         };
 
