@@ -71,8 +71,8 @@ export class IikoRequesterServises {
         const organizationInArray = {
           street,
           guid: organization.id,
-          longitude: position[0],
-          latitude: position[1],
+          longitude:position && position[0],
+          latitude:position && position[1],
           workTime: organization.workTime.split(";")[0],
           phone: organization.phone
         };
