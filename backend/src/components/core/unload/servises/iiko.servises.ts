@@ -67,7 +67,7 @@ export class IikoRequesterServises {
         );
 
 				
-
+				console.log(organization);	
         const organizationInArray = {
           street,
           guid: organization.id,
