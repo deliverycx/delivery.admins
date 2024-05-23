@@ -60,5 +60,11 @@ export class OrganizationFilterControllers {
 		return this.servises.getAll(query)
 	}
 
+	@Post('delet')
+	delite(@Query() query: {id:string}){
+	
+		return this.servises.delete(query.id)
+	}
+
 	
 }

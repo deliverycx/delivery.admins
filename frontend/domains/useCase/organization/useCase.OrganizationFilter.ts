@@ -11,6 +11,7 @@ export function useOrganizationFilter(this: any, organization: any) {
 	const [modal, setModal] = useState(false)
 	const [modalEdit, setModalEdit] = useState<any>(false)
 
+	
 	const onSubmit = async (data: any) => {
 		try {
 			const formData = new FormData()
@@ -92,6 +93,13 @@ export function useOrganizationFilter(this: any, organization: any) {
 	}
 
 
+	const handlerDelite = async (id:string) =>{
+		try {
+			await RequestOrganizationFilter.CRUDFabric.delet(id)
+		} catch (error) {
+			
+		}
+	}
 
 
 
@@ -109,7 +117,8 @@ export function useOrganizationFilter(this: any, organization: any) {
 		onSubmit,
 		handlerAddfilter,
 		setModalEdit,
-		onEditSubmit
+		onEditSubmit,
+		handlerDelite
 	})
 	this.status({
 

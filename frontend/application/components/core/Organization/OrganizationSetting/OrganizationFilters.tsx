@@ -9,7 +9,7 @@ const OrganizationFilters: FC<{ organization: any, refresh: any }> = ({ organiza
 
 	const useCase = adapterComponentUseCase(useOrganizationFilter, organization)
 	const { modalEdit, imagesArr, filters, modal } = useCase.data
-	const { setFile, onSubmit, setModal, handlerAddfilter, setModalEdit,onEditSubmit } = useCase.handlers
+	const { setFile, onSubmit, setModal, handlerAddfilter, setModalEdit,onEditSubmit,handlerDelite } = useCase.handlers
 
 
 	const { register, handleSubmit } = useForm<{ name: any }>();
@@ -107,6 +107,7 @@ const OrganizationFilters: FC<{ organization: any, refresh: any }> = ({ organiza
 
 															/>
 														</div>
+														<button className='btn float-right' onClick={() =>handlerDelite(modalEdit._id)}>удалить</button>
 														<input type='submit' value='Сохранить' className='btn btn-success float-right' />
 													</div>
 
