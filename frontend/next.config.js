@@ -8,6 +8,7 @@ const nextConfig = {
 	sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+	swcMinify: false
 }
 
 module.exports = nextConfig
