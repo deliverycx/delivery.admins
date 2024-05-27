@@ -23,7 +23,7 @@ services:
         ports:
           - "6500:6500"
         env_file:
-            - ./backend/.development.env
+            - ./backend/.development.local.env
         volumes:
           - ./backend:/usr/src/app
           - /usr/src/app/node_modules
