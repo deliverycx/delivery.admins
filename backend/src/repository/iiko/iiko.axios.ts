@@ -65,7 +65,7 @@ export class IIkoAxios extends AxiosCreate {
 		return data.organizations
 	}
 
-	public async getOrganization(organization:string) {
+	public async getOrganization(organization: string) {
 		const token = await this.token();
 		const { data } = await this._axios.post(`/organizations`,
 			{
@@ -89,7 +89,7 @@ export class IIkoAxios extends AxiosCreate {
 	public async getFoods(id: { organizationId: string }) {
 		const token = await this.token();
 
-		
+
 		const { data } = await this._axios.post<IFoods>(`/nomenclature`,
 			{
 				organizationId: id.organizationId
@@ -98,7 +98,7 @@ export class IIkoAxios extends AxiosCreate {
 				headers: { Authorization: `Bearer ${token}` }
 			}
 		);
-		
+
 		return data
 	}
 
@@ -193,7 +193,7 @@ export class IIkoAxios extends AxiosCreate {
 			}
 		);
 
-			
+
 
 		return data
 	}
@@ -215,7 +215,7 @@ export class IIkoAxios extends AxiosCreate {
 			}
 		);
 
-			
+
 
 		return data
 	}
@@ -229,8 +229,8 @@ export class IIkoAxios extends AxiosCreate {
 			{
 				"organizationId": organizationIds,
 				"webHooksUri": urls,
-				"authToken":"539ecfae"
-				
+				"authToken": "8302094a-a920-4072-b076-a3dd50d35fa7"
+
 			},
 			{
 				headers: { Authorization: `Bearer ${token}` }

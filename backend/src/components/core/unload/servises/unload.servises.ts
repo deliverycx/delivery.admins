@@ -6,53 +6,53 @@ import { Types, Document } from "mongoose";
 import { Organization, parseOrganization } from "src/application/lib/parseAddress";
 
 export class UnloadServises {
-  private static token: string = '';
-  private organizations:any = [];
-	private organizationsIds:any = [];
-  private geoCoder
-  private downloader
+	private static token: string = '';
+	private organizations: any = [];
+	private organizationsIds: any = [];
+	private geoCoder
+	private downloader
 
-  constructor() {
-    this.geoCoder = new GeoCoder(process.env.YANDEX_APIKEY);
-    this.downloader = new DownloadImage();
-  }
+	constructor() {
+		this.geoCoder = new GeoCoder(process.env.YANDEX_APIKEY);
+		this.downloader = new DownloadImage();
+	}
 
-  async getToken() {
-    try {
+	async getToken() {
+		try {
 			const { data } = await axios.post(
-	        'https://api-ru.iiko.services/api/1/access_token',
-					{
-						apiLogin: "539ecfae"
-					}
-	    );
-					
-	    return data.token
-    } catch (e) {
-        console.log(`Error with get token\n${e}`);
-    }
-  }
-  async getOrganizations() {
-    try {
-      const token = await this.getToken()
-      console.log("starting get organizations");
-      const organizationsResponse =  await axios.get(
+				'https://api-ru.iiko.services/api/1/access_token',
+				{
+					apiLogin: "8302094a-a920-4072-b076-a3dd50d35fa7"
+				}
+			);
+
+			return data.token
+		} catch (e) {
+			console.log(`Error with get token\n${e}`);
+		}
+	}
+	async getOrganizations() {
+		try {
+			const token = await this.getToken()
+			console.log("starting get organizations");
+			const organizationsResponse = await axios.get(
 				'https://api-ru.iiko.services/api/1/organizations',
 				{
 					headers: { Authorization: `Bearer ${token}` }
 				}
 			);
 
-			
-      const result = Promise.all( organizationsResponse.data.organizations.map(async (organization:any) => {
+
+			const result = Promise.all(organizationsResponse.data.organizations.map(async (organization: any) => {
 				const org = await this.getMapOrganization(organization.id)
-				
-				return parseOrganization(org,this.geoCoder)
-				
-      }))
+
+				return parseOrganization(org, this.geoCoder)
+
+			}))
 
 
 			this.organizations = await result
-			
+
 
 			/*
 			for (let i = 0; i < organizationsResponse.data.organizations.length; i++){
@@ -63,16 +63,16 @@ export class UnloadServises {
 				console.log(res);
 			}
 			*/
-			
-      
-    } catch (e) {
-        console.log(`Error with get organizations\n${e}`);
-    }
-  }
-	async getMapOrganization(organization:any){
+
+
+		} catch (e) {
+			console.log(`Error with get organizations\n${e}`);
+		}
+	}
+	async getMapOrganization(organization: any) {
 		const token = await this.getToken()
 
-		const {data:resorg} = await axios.post(
+		const { data: resorg } = await axios.post(
 			'https://api-ru.iiko.services/api/1/organizations',
 			{
 				organizationIds: [
@@ -88,7 +88,7 @@ export class UnloadServises {
 		return resorg.organizations[0]
 	}
 
-	async getTeminalOrg(organizations){
+	async getTeminalOrg(organizations) {
 		const token = await this.getToken()
 		const { data: terminal } = await axios.post(
 			'https://api-ru.iiko.services/api/1/terminal_groups',
@@ -104,10 +104,10 @@ export class UnloadServises {
 		);
 	}
 
-  async getOrganizationsResult() {
-    await this.getOrganizations()
+	async getOrganizationsResult() {
+		await this.getOrganizations()
 		console.log(this.organizations);
-    return this.organizations
-  }
+		return this.organizations
+	}
 
 }

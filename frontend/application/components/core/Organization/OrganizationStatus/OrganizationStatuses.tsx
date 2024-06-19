@@ -25,6 +25,7 @@ const OrganizationStatuses:FC<IPoprs> = ({organizationStatus,swtchStatus}) =>{
 				<div className={CN(ORG_STATUS.NOWORK)} onClick={()=> handler(ORG_STATUS.NOWORK)}>Не работает</div>
 				<div className={CN(ORG_STATUS.NODELIVERY)} onClick={()=> handler(ORG_STATUS.NODELIVERY)}>Нет онлайн заказа</div>
 				<div className={CN(ORG_STATUS.OPEN)} onClick={()=> handler(ORG_STATUS.OPEN)}>Открытие</div>
+				<div className={CN(ORG_STATUS.SEZONNOTWORK)} onClick={()=> handler(ORG_STATUS.SEZONNOTWORK)}>Временно не работает</div>
 			</div>
 			</div>
 		</div>

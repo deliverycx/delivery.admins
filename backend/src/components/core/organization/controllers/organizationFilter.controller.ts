@@ -32,11 +32,38 @@ export class OrganizationFilterControllers {
 		response.status(200).json({ error: false })
 	}
 
+	@Post('edit')
+	@UseInterceptors(
+		FilesInterceptor('files', 20, {
+			storage: diskStorage({
+				destination: './public/static/shop',
+				filename: editFileName,
+			}),
+			fileFilter: imageFileFilter
+		}),
+	)
+	edit(
+		@UploadedFiles() files: Array<Express.Multer.File>,
+		@Body() body: { name: string, images: string },
+		@Query() query: {id:string},
+		@Res() response,
+	) {
+		
+		this.servises.edit(body,query.id, files)
+		response.status(200).json({ error: false })
+	}
+
 
 	@Get('all')
 	getAll(@Query() query: any){
 		console.log(query);
 		return this.servises.getAll(query)
+	}
+
+	@Post('delet')
+	delite(@Query() query: {id:string}){
+	
+		return this.servises.delete(query.id)
 	}
 
 	

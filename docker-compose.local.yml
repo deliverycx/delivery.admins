@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+    
+    admin_frontend:
+        image: docker/admin_frontend
+        container_name: admin_frontend
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile.local
+        depends_on:
+          - admin_backend
+        ports:
+          - "4100:4100"
+        volumes:
+          - ./frontend:/app  
+    admin_backend:
+        image: docker/admin_backend
+        container_name: admin_backend
+        build:
+            context: ./backend
+            dockerfile: Dockerfile.local
+        ports:
+          - "6500:6500"
+        env_file:
+            - ./backend/.development.local.env
+        volumes:
+          - ./backend:/usr/src/app
+          - /usr/src/app/node_modules
+        environment:
+          - REDIS_HOST=redis
+          - REDIS_PORT=6379  
+          - MONGODB_HOST=mongodb
+          - MONGODB_PORT=27012
+          - RABBITMQ_HOST=rabbitmq
+          - RABBITMQ_PORT=5672  
+        networks:
+          - mynetwork
+
+networks:
+  mynetwork:
+    external:
+      name: my_global_network    
+            

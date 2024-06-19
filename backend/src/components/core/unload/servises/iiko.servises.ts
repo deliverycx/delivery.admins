@@ -43,7 +43,7 @@ export class IikoRequesterServises {
 		const { data } = await axios.post(
 			'https://api-ru.iiko.services/api/1/access_token',
 			{
-				apiLogin: "539ecfae"
+				apiLogin: "8302094a-a920-4072-b076-a3dd50d35fa7"
 			}
 		);
 
@@ -82,7 +82,7 @@ export class IikoRequesterServises {
 
 
 
-			
+
 			console.log(organizations.id);
 
 			const { data: terminal } = await axios.post(

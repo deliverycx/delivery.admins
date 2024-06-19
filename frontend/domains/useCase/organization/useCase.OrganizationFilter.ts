@@ -3,13 +3,15 @@ import { useCallback, useState, useEffect } from 'react';
 import { RequestOrganization, RequestOrganizationFilter } from 'servises/repository/Axios/Request';
 
 
-export type IFilters = { name: string, images: [] }
+export type IFilters = {_id:string, name: string, images: [] }
 
 export function useOrganizationFilter(this: any, organization: any) {
 	const [file, setFile] = useState<any>()
 	const [filters, setFilters] = useState<IFilters | null>()
 	const [modal, setModal] = useState(false)
+	const [modalEdit, setModalEdit] = useState<any>(false)
 
+	
 	const onSubmit = async (data: any) => {
 		try {
 			const formData = new FormData()
@@ -20,6 +22,21 @@ export function useOrganizationFilter(this: any, organization: any) {
 			await RequestOrganizationFilter.CRUDFabric.create(formData)
 			getAllFilters()
 			setModal(false)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const onEditSubmit = async (data: any) => {
+		try {
+			const formData = new FormData()
+			for (let i = 0; i < file.length; i++) {
+				formData.append('files', file[i])
+			}
+			formData.append('name', data.name)
+			await RequestOrganizationFilter.CRUDFabric.edit(formData,modalEdit._id)
+			getAllFilters()
+			setModalEdit(false)
 		} catch (error) {
 			console.log(error);
 		}
@@ -76,19 +93,32 @@ export function useOrganizationFilter(this: any, organization: any) {
 	}
 
 
+	const handlerDelite = async (id:string) =>{
+		try {
+			await RequestOrganizationFilter.CRUDFabric.delet(id)
+		} catch (error) {
+			
+		}
+	}
+
+
 
 
 	this.data({
 		file,
 		imagesArr,
 		filters,
-		modal
+		modal,
+		modalEdit
 	})
 	this.handlers({
 		setModal,
 		setFile,
 		onSubmit,
-		handlerAddfilter
+		handlerAddfilter,
+		setModalEdit,
+		onEditSubmit,
+		handlerDelite
 	})
 	this.status({
 
