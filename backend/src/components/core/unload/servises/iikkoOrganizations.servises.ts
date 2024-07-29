@@ -15,6 +15,8 @@ import * as fs from "fs"
 import { join } from 'path';
 import { writeFile, readFile } from 'fs/promises';
 import { Cron, CronExpression } from "@nestjs/schedule";
+import * as moment from 'moment-timezone';
+import { compareAsc, format } from "date-fns";
 
 @Injectable()
 export class IikoOrganizationServises {
@@ -169,10 +171,6 @@ export class IikoOrganizationServises {
 	}
 
 
-	@Cron(CronExpression.EVERY_HOUR, {
-		name: "MenuNomenclature",
-		timeZone: "Europe/Moscow"
-	})
 	async poolingMenu(oraganization: string) {
 		console.log('start MenuNomenclature');
 		const nomenclature = await this.iikoAxios.getNomenclature(oraganization)
@@ -199,12 +197,31 @@ export class IikoOrganizationServises {
 
 	}
 
+	/*
+	@Cron(CronExpression.EVERY_30_SECONDS, {
+		name: "qqq",
+		timeZone: "Europe/Moscow"
+	})
+	*/
+	async time() {
+
+		const b = moment as any
+		const q = b().tz("Europe/Moscow").format()
+		const formate = format(q, 'yyyy-MM-dd hh:mm aa');
+		console.log(formate);
+	}
+
+	/*
 	@Cron(CronExpression.EVERY_30_MINUTES, {
 		name: "MenuWeb",
 		timeZone: "Europe/Moscow"
 	})
+	*/
 	async poolingMenuWeb() {
 		console.log('start poolingMenuWeb');
+
+
+
 		const orgresult = await this.organizationModel.find(
 			{
 				//nomenuweb:false || undefined || null,
