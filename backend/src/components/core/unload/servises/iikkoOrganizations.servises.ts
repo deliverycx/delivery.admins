@@ -14,6 +14,7 @@ import { ORG_STATUS, DELIVERY_METODS, PAYMENT_METODS } from "src/application/con
 import * as fs from "fs"
 import { join } from 'path';
 import { writeFile, readFile } from 'fs/promises';
+import { Cron, CronExpression } from "@nestjs/schedule";
 
 @Injectable()
 export class IikoOrganizationServises {
@@ -93,9 +94,9 @@ export class IikoOrganizationServises {
 					{ id: termital.organizationid },
 					{
 						$setOnInsert: {
-							
+
 							isHidden: true,
-							
+
 							address: {
 								street,
 								longitude: position[0],
@@ -103,9 +104,9 @@ export class IikoOrganizationServises {
 							},
 							workTime: ['10:00-22:00'],
 							phone: "",
-							nomenuweb:false
+							nomenuweb: false
 						},
-						$set:{
+						$set: {
 							id: termital.organizationid,
 							city: cityId,
 							cityid: organizationinfo.defaultDeliveryCityId,
@@ -164,11 +165,16 @@ export class IikoOrganizationServises {
 
 			}
 		}
-		await this.iikkoHooks(organization,"https://хинкалыч.рф/api/webhook/webhooks")
+		await this.iikkoHooks(organization, "https://хинкалыч.рф/api/webhook/webhooks")
 	}
 
 
+	@Cron(CronExpression.EVERY_HOUR, {
+		name: "MenuNomenclature",
+		timeZone: "Europe/Moscow"
+	})
 	async poolingMenu(oraganization: string) {
+		console.log('start MenuNomenclature');
 		const nomenclature = await this.iikoAxios.getNomenclature(oraganization)
 
 		const nomenclatureFiles = JSON.stringify(nomenclature)
@@ -184,6 +190,8 @@ export class IikoOrganizationServises {
 			await writeFile(join(process.cwd() + `/public/static/menu/${oraganization}.json`), nomenclatureFiles)
 		}
 
+		console.log('finish MenuNomenclature');
+
 		return {
 			revision: nomenclature.revision,
 			oraganization
@@ -191,24 +199,29 @@ export class IikoOrganizationServises {
 
 	}
 
+	@Cron(CronExpression.EVERY_30_MINUTES, {
+		name: "MenuWeb",
+		timeZone: "Europe/Moscow"
+	})
 	async poolingMenuWeb() {
+		console.log('start poolingMenuWeb');
 		const orgresult = await this.organizationModel.find(
 			{
 				//nomenuweb:false || undefined || null,
-				delivMetod:null
+				delivMetod: null
 			}
 		)
 
-		
+
 		//const orgresult: [] = await this.iikoAxios.getOrganizationList()
-		const orglist = orgresult 
-		.filter((val:any) =>{
-			return !val.nomenuweb && val
-		})
-		.map((value: any) => {
-			return value.id
-			
-		})
+		const orglist = orgresult
+			.filter((val: any) => {
+				return !val.nomenuweb && val
+			})
+			.map((value: any) => {
+				return value.id
+
+			})
 		//console.log(orglist);
 
 		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
@@ -220,13 +233,13 @@ export class IikoOrganizationServises {
 			if (menu.length !== 0) {
 				const nomen = menu.reduce((acc: any, cate: any) => {
 					cate.items.forEach((item: any) => {
-						
-						
+
+
 						const itemOrg = item.itemSizes[0].prices
 
-						
-						if(item.name == 'Хачапури по-аджарски чкмерули'){
-							
+
+						if (item.name == 'Хачапури по-аджарски чкмерули') {
+
 						}
 						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
 							//
@@ -239,9 +252,9 @@ export class IikoOrganizationServises {
 								acc.groups.push({
 									name: cate.name,
 									id: cate.id,
-									imageLinks:[cate.buttonImageUrl]
+									imageLinks: [cate.buttonImageUrl]
 								})
-								
+
 								acc.products.push({
 									name: item.name,
 									description: item.description,
@@ -250,21 +263,21 @@ export class IikoOrganizationServises {
 									parentGroup: cate.id,
 									imageLinks: [item.itemSizes[0].buttonImageUrl],
 									measureUnit: item.measureUnit,
-									sizePrices:[
+									sizePrices: [
 										{
-											price:{
-												currentPrice:orgs.price
+											price: {
+												currentPrice: orgs.price
 											}
 										}
 									],
 									tags: item.labelNames,
-									weight:item.itemSizes[0].portionWeightGrams
+									weight: item.itemSizes[0].portionWeightGrams
 								})
-								
+
 							}
 						})
 
-						
+
 					})
 					return acc
 				}, {
@@ -292,7 +305,7 @@ export class IikoOrganizationServises {
 			}
 
 		})
-		console.log("finish");
+		console.log("finish poolingMenuWeb");
 	}
 
 	async getFileMenu(oraganization: string) {

@@ -11,111 +11,111 @@ import { IikoOrganizationServises } from "../servises/iikkoOrganizations.servise
 
 //@UseGuards(JwtAuthGuard)
 @Controller('unload')
-export class UnloadControllers{
-  constructor(
-    private readonly IikoRequesterServises: IikoRequesterServises,
-    private readonly UnloadServises: UnloadServises,
-		private readonly iikoOrganizationServises:IikoOrganizationServises,
-		
-		@Inject(REDIS) private readonly redis: RedisClient,
-  ) { }
-  
-  @Post('pooling')
-  async polling(@Res() response: Response) {
-    
-    connection(process.env.CONNECTION_2)
-      .then(async () => {
-        console.log("success connect");
-				
-				
-        //await this.IikoRequesterServises.polling();
-				await this.iikoOrganizationServises.poolingMenuWeb()
-        response.status(200).json({result:"ok"})
-      }).catch((err) => {
-        console.log('ошибка в пулинге',err);
-        response.status(500).json({result:"bead"})
-      })
-    
-  }
-  @Get('organizations')
-  getOrganization(@Res() response: Response) {
-    connection(process.env.CONNECTION_2)
-      .then(async () => {
-        console.log("success connect");
-				
-        const result = await this.UnloadServises.getOrganizationsResult()
-        
-        response.status(200).json({result})
-      }).catch((err) => {
-        console.log('ошибка в пулинге',err);
-        response.status(500).json({result:"bead"})
-      })
-  }
-  
+export class UnloadControllers {
+	constructor(
+		private readonly IikoRequesterServises: IikoRequesterServises,
+		private readonly UnloadServises: UnloadServises,
+		private readonly iikoOrganizationServises: IikoOrganizationServises,
 
-	@Get('iikkoOrganizations')	
-	async getiikkoOrganizations(){
+		@Inject(REDIS) private readonly redis: RedisClient,
+	) { }
+
+	@Post('pooling')
+	async polling(@Res() response: Response) {
+
+		connection(process.env.CONNECTION_2)
+			.then(async () => {
+				console.log("success connect");
+
+
+				//await this.IikoRequesterServises.polling();
+				await this.iikoOrganizationServises.poolingMenuWeb()
+				response.status(200).json({ result: "ok" })
+			}).catch((err) => {
+				console.log('ошибка в пулинге', err);
+				response.status(500).json({ result: "bead" })
+			})
+
+	}
+	@Get('organizations')
+	getOrganization(@Res() response: Response) {
+		connection(process.env.CONNECTION_2)
+			.then(async () => {
+				console.log("success connect");
+
+				const result = await this.UnloadServises.getOrganizationsResult()
+
+				response.status(200).json({ result })
+			}).catch((err) => {
+				console.log('ошибка в пулинге', err);
+				response.status(500).json({ result: "bead" })
+			})
+	}
+
+
+	@Get('iikkoOrganizations')
+	async getiikkoOrganizations() {
 		return await this.iikoOrganizationServises.iikkoOrgs()
 	}
 
-	@Get('iikkoOrganizationInfo')	
+	@Get('iikkoOrganizationInfo')
 	async getiikkoOrganizationInfo(
-		@Query() query: {organization:string}
-	){
+		@Query() query: { organization: string }
+	) {
 		return await this.iikoOrganizationServises.ikkoOrgInfo(query.organization)
 	}
 
-	@Get('poolingOrganization')	
+	@Get('poolingOrganization')
 	poolingOrganization(
 		@Res() response: Response,
-		@Query() query: {organization:string}
-	){
+		@Query() query: { organization: string }
+	) {
 		connection(process.env.CONNECTION_2)
-      .then(async () => {
-        console.log("success connect");
-				
-        await this.iikoOrganizationServises.poolingOrg(query.organization)
-        
-        response.status(200).json({})
-      }).catch((err) => {
-        console.log('ошибка в пулинге',err);
-        response.status(500).json({result:"bead"})
-      })
+			.then(async () => {
+				console.log("success connect");
+
+				await this.iikoOrganizationServises.poolingOrg(query.organization)
+
+				response.status(200).json({})
+			}).catch((err) => {
+				console.log('ошибка в пулинге', err);
+				response.status(500).json({ result: "bead" })
+			})
 	}
 
 
-	@Get('poolingNomenclature')	
+	@Get('poolingNomenclature')
 	async poolingNomenclature(
 		@Res() response: Response,
-		@Query() query: {organization:string}
-	){
+		@Query() query: { organization: string }
+	) {
 		connection(process.env.CONNECTION_2)
-      .then(async () => {
-        console.log("success connect");
-				
-        const revision = await this.iikoOrganizationServises.poolingMenu(query.organization)
-        
-        response.status(200).json(revision)
-      }).catch((err) => {
-        console.log('ошибка в пулинге',err);
-        response.status(500).json({result:"bead"})
-      })
+			.then(async () => {
+				console.log("success connect");
+
+				const revision = await this.iikoOrganizationServises.poolingMenu(query.organization)
+
+				response.status(200).json(revision)
+			}).catch((err) => {
+				console.log('ошибка в пулинге', err);
+				response.status(500).json({ result: "bead" })
+			})
 	}
 
-	@Get('getNomenclature')	
+	@Get('getNomenclature')
 	async getFileNomenclature(
-		@Query() query: {organization:string}
-	){
-		console.log('getNomenclature',query);
+		@Query() query: { organization: string }
+	) {
+		console.log('getNomenclature', query);
 		const result = await this.iikoOrganizationServises.getFileMenu(query.organization)
 		return result
 	}
 
-	@Get('getStreet')	
+	@Get('getStreet')
 	async getFileStreet(
-		@Query() query: {organization:string}
-	){
-		console.log('getstreet',query);
+		@Query() query: { organization: string }
+	) {
+
 		const result = await this.iikoOrganizationServises.getFileStreet(query.organization)
 		return result
 	}
@@ -123,11 +123,11 @@ export class UnloadControllers{
 	@Post('updateWebHooks')
 	async updateHooks(
 		@Body() body: {
-			organization:string
-			localhoste:string
+			organization: string
+			localhoste: string
 		}
-	){
-		await this.iikoOrganizationServises.iikkoHooks(body.organization,body.localhoste)
+	) {
+		await this.iikoOrganizationServises.iikkoHooks(body.organization, body.localhoste)
 	}
 
 

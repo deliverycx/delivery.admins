@@ -16,39 +16,40 @@ import { OrganizationModule } from 'src/components/core/organization/module/orga
 import { OrderModule } from 'src/components/core/orders/module/order.module';
 import { DashbordModule } from 'src/components/core/dashbord/module/dashbord.module';
 import { RedisModules } from './redis.module';
-
+import { ScheduleModule } from '@nestjs/schedule';
 
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      envFilePath: path.resolve(
-          __dirname,
-          `../../.${process.env.NODE_ENV}.env`
-      )
-    }),
-    MongooseModule.forRoot(process.env.CONNECTION_1,
-      {
-        connectionName: ADMIN_DB
-      }),
-    MongooseModule.forRoot(process.env.CONNECTION_2,
-      {
-        connectionName: DELIVERY_DB
-      }),
-			MulterModule.register({
-				dest: './public/static/shop',
+	imports: [
+		ConfigModule.forRoot({
+			envFilePath: path.resolve(
+				__dirname,
+				`../../.${process.env.NODE_ENV}.env`
+			)
+		}),
+		ScheduleModule.forRoot(),
+		MongooseModule.forRoot(process.env.CONNECTION_1,
+			{
+				connectionName: ADMIN_DB
 			}),
-			RedisModules,	
-		NestjsFormDataModule,	
-    AuthModule,
-    UnloadModule,
-    OrganizationModule,
+		MongooseModule.forRoot(process.env.CONNECTION_2,
+			{
+				connectionName: DELIVERY_DB
+			}),
+		MulterModule.register({
+			dest: './public/static/shop',
+		}),
+		RedisModules,
+		NestjsFormDataModule,
+		AuthModule,
+		UnloadModule,
+		OrganizationModule,
 		BannersModule,
 		NewsModule,
 		StocksModule,
 		OrderModule,
 		DashbordModule
-  ],
-  
+	],
+
 })
-export class AppModule {}
+export class AppModule { }
