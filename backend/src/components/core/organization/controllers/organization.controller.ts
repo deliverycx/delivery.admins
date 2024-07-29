@@ -9,11 +9,11 @@ import { AnyFilesInterceptor, FilesInterceptor } from "@nestjs/platform-express"
 import { diskStorage } from "multer";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
 import { MainBannerDTO } from "../../banners/dto/mainBanner.dto";
-import {Public} from "../../../../guard/public-auth.guard";
+import { Public } from "../../../../guard/public-auth.guard";
 
 @UseGuards(JwtAuthGuard)
 @Controller('organization')
-export class OrganizationControllers{
+export class OrganizationControllers {
 	constructor(
 		private readonly OrganizationServises: OrganizationServises
 	) { }
@@ -25,6 +25,12 @@ export class OrganizationControllers{
 		return result
 	}
 
+	@Get('getpoints')
+	getOrganizations() {
+		const result = this.OrganizationServises.getOrganizations()
+		return result
+	}
+
 
 	@Get('getcity')
 	getCity(@Query() query: OrganizationDTO) {
@@ -33,7 +39,7 @@ export class OrganizationControllers{
 	}
 
 	@Post('getorgbu')
-	getOrganizationBu(@Body() body:OrganizationDTO) {
+	getOrganizationBu(@Body() body: OrganizationDTO) {
 		const result = this.OrganizationServises.getBuOrganization(body)
 		return result
 	}
@@ -43,15 +49,15 @@ export class OrganizationControllers{
 		return result
 	}
 	@Post('puckup')
-	swichPuckup(@Body() body:OrganizationDTO) {
+	swichPuckup(@Body() body: OrganizationDTO) {
 		const result = this.OrganizationServises.switchDelivMetod(body)
 		return result
 	}
 	@Post('hidden')
 	async hidenOrg(@Body() body: OrganizationDTO) {
-		
+
 		const result = await this.OrganizationServises.hiddenOranizationMetod(body)
-		
+
 		return result
 	}
 	@Post('cityhidden')
@@ -112,8 +118,8 @@ export class OrganizationControllers{
 	async OrganizationTime(
 		@Body() body: OrganizationDTO,
 		@Query() query: OrganizationDTO
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.organizationTime(body)
 
 		return result
@@ -123,8 +129,8 @@ export class OrganizationControllers{
 	@Post('cityadd')
 	async CityAdd(
 		@Body() body: CityDTO,
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.addCity(body)
 
 		return result
@@ -133,8 +139,8 @@ export class OrganizationControllers{
 	@Post('organizationAdd')
 	async organizationAdd(
 		@Body() body: OrganizationDTO,
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.organizationAdd(body)
 
 		return result
@@ -143,8 +149,8 @@ export class OrganizationControllers{
 	@Post('organizationDelite')
 	async organizationDel(
 		@Body() body: OrganizationDTO,
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.organizationDelite(body)
 
 		return result
@@ -153,8 +159,8 @@ export class OrganizationControllers{
 	@Post('organizationRedirect')
 	async organizationRedirect(
 		@Body() body: OrganizationDTO,
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.organizationRedirect(body)
 
 		return result
@@ -163,8 +169,8 @@ export class OrganizationControllers{
 	@Post('organizationRedirectON')
 	async organizationRedirectON(
 		@Body() body: OrganizationDTO,
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.organizationRedirectON(body)
 
 		return result
@@ -173,8 +179,8 @@ export class OrganizationControllers{
 	@Post('organizationTerminal')
 	async organizationTerminal(
 		@Body() body: OrganizationDTO,
-	){
-		
+	) {
+
 		const result = await this.OrganizationServises.organizationTerminal(body.idorganization)
 
 		return result
@@ -193,23 +199,23 @@ export class OrganizationControllers{
 	)
 	async addPhoto(
 		@UploadedFiles() files: Array<Express.Multer.File>,
-		@Body() body:{idorganization:string},
+		@Body() body: { idorganization: string },
 		@Res() response,
-	){
-		console.log('добавить',body,files);
-		const result = await this.OrganizationServises.addOrgPhoto(body.idorganization,files)
+	) {
+		console.log('добавить', body, files);
+		const result = await this.OrganizationServises.addOrgPhoto(body.idorganization, files)
 		response.status(200).json(result)
 	}
 
 	@Post('addfilter')
-	async addFilters(@Body() body:{filterlist:string[],idorganization:string},){
+	async addFilters(@Body() body: { filterlist: string[], idorganization: string },) {
 		const result = await this.OrganizationServises.addFiltersServis(body)
 		return result
 	}
 
 
 	@Post('noiikkoweb')
-	async noweb(@Body() body:{organization:string,metod:boolean},){
+	async noweb(@Body() body: { organization: string, metod: boolean },) {
 		const result = await this.OrganizationServises.noiikkoweb(body)
 		return result
 	}

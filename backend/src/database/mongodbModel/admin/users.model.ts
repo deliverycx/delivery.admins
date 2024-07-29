@@ -2,27 +2,30 @@ import { buildSchema, getModelForClass, modelOptions, prop } from "@typegoose/ty
 import { IUsersEntities } from "src/domain/entities/users.entities";
 
 @modelOptions({ schemaOptions: { collection: 'users' } })
-export class AdminUsersModel implements IUsersEntities{
-  @prop({ type: () => String })
-  public name: string
-  
-  @prop({ type: () => String })
-  public password:string
+export class AdminUsersModel implements IUsersEntities {
+	@prop({ type: () => String })
+	public name: string
 
 	@prop({ type: () => String })
-  public role:string
+	public password: string
 
 	@prop({ type: () => String })
-  public organization:string
+	public role: string
+
+	@prop({ type: () => String })
+	public organization: string
 
 	@prop({ type: () => Array })
-  public pagesUser:[]
+	public pagesUser: []
+
+	@prop({ type: () => Array })
+	public organizationsUser: []
 
 	@prop({ type: () => String })
-	public refreshToken:string
+	public refreshToken: string
 
 	@prop({ type: () => String })
-	public refreshTokenExp:string
+	public refreshTokenExp: string
 
 }
 

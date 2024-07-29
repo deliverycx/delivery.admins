@@ -1,5 +1,6 @@
 import { IAdminUser, ISuperAdminUser } from "@type";
 import Modal from "application/components/common/Modal/Modal"
+import { useRole } from "application/contstans/user.const";
 import { id } from 'date-fns/locale';
 
 import { useEffect, useState } from 'react';
@@ -12,17 +13,18 @@ const initState = {
 	password: '',
 	token: '',
 	merchantId: '',
-	role: "superadmin"
+	role: ""
 }
 const UsersMain = () => {
 	const [modal, setModal] = useState<boolean>()
 	const [users, setUsers] = useState<any>(null)
+	const [roles, setRoles] = useState<string>(useRole.superadmin.role)
 	const { register, handleSubmit, watch, setValue } = useForm<typeof initState>();
 
+
 	const onSubmit = async (data: any) => {
-		console.log(data);
 		try {
-			await requestUserRegister.regSuperUsers({ ...data, role: "superadmin" })
+			await requestUserRegister.regSuperUsers({ ...data, role: roles })
 			setModal(false)
 			getUsers()
 		} catch (error) {
@@ -33,14 +35,15 @@ const UsersMain = () => {
 	const getUsers = async () => {
 		try {
 			const { data } = await RequestUsers.CRUDFabric.getAll()
+
 			if (data && Array.isArray(data)) {
 				const res = data.filter((value) => {
-					return value.role == 'superadmin'
+					return value.role !== useRole.admin.role
 				})
-				console.log(res)
+				//console.log(res)
 				setUsers(res)
 			}
-			
+
 		} catch (error) {
 
 		}
@@ -65,7 +68,7 @@ const UsersMain = () => {
 								<div className="col-md-12">
 									<div className="card card-primary">
 										<div className="card-header">
-											<h3 className="card-title">Добавить Реквизиты</h3>
+											<h3 className="card-title">Добавить пользователя</h3>
 
 											<div className="card-tools">
 												<button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -87,7 +90,12 @@ const UsersMain = () => {
 
 
 											<div className="popBox_item form-group">
+												<select onChange={e => setRoles(e.target.value)}>
+													<option value={useRole.superadmin.role}>{useRole.superadmin.name}</option>
+													<option value={useRole.guestadmin.role}>{useRole.guestadmin.name}</option>
+													<option value={useRole.franchazi.role}>{useRole.franchazi.name}</option>
 
+												</select>
 
 											</div>
 										</div>
@@ -138,23 +146,23 @@ const UsersMain = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{	
-									users && users.map((val:any) =>(
+								{
+									users && users.map((val: { name: string, role: keyof typeof useRole }) => (
 										<tr>
-										<td>
-											<a href={`/users/${val.name}`}>
-												{val.name}
-											</a>
-											
-										</td>
-										<td>
-											{val.role}
-										</td>
-									</tr>
+											<td>
+												<a href={`/users/${val.name}`}>
+													{val.name}
+												</a>
+
+											</td>
+											<td>
+												{useRole.hasOwnProperty(val.role) && useRole[val.role].name}
+											</td>
+										</tr>
 									))
-									
+
 								}
-								
+
 							</tbody>
 						</table>
 					</div>

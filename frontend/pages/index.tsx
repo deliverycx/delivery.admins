@@ -11,29 +11,29 @@ import { useRouter } from 'next/router'
 import { User } from '@type'
 import { sessionOptions, withCheckSession } from 'application/helpers/session'
 import { withIronSessionSsr } from 'iron-session/next'
-import { userRout } from 'application/contstans/userRout.const'
+import { userRout } from 'application/contstans/user.const'
 
 const Home: NextPage = () => {
 
-  return (
+	return (
 		<>
-    <div className="wrapper">
+			<div className="wrapper">
 
-    <Header />
-    <Menu />
-  
-  
-  
+				<Header />
+				<Menu />
 
-  
 
-  
-  	<Footer />
-		  
-		</div>
+
+
+
+
+
+				<Footer />
+
+			</div>
 		</>
-  )
+	)
 }
 
 export default Home
-export const getServerSideProps = withCheckSession({...userRout.pointAdmin})
+export const getServerSideProps = withCheckSession({ ...userRout.pointAdmin })
