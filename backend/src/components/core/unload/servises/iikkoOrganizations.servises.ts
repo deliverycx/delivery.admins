@@ -197,26 +197,14 @@ export class IikoOrganizationServises {
 
 	}
 
-	/*
-	@Cron(CronExpression.EVERY_30_SECONDS, {
-		name: "qqq",
-		timeZone: "Europe/Moscow"
-	})
-	*/
-	async time() {
 
-		const b = moment as any
-		const q = b().tz("Europe/Moscow").format()
-		const formate = format(q, 'yyyy-MM-dd hh:mm aa');
-		console.log(formate);
-	}
 
-	/*
-	@Cron(CronExpression.EVERY_30_MINUTES, {
+	/**/
+	@Cron(CronExpression.EVERY_HOUR, {
 		name: "MenuWeb",
 		timeZone: "Europe/Moscow"
 	})
-	*/
+
 	async poolingMenuWeb() {
 		console.log('start poolingMenuWeb');
 
@@ -322,7 +310,13 @@ export class IikoOrganizationServises {
 			}
 
 		})
-		console.log("finish poolingMenuWeb");
+		const b = moment as any
+		const q = b().tz("Europe/Moscow").format()
+		const formate = format(q, 'yyyy-MM-dd hh:mm aa');
+		console.log("finish poolingMenuWeb", formate);
+
+
+
 	}
 
 	async getFileMenu(oraganization: string) {
