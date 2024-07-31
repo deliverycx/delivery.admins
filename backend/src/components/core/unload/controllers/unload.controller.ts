@@ -106,7 +106,6 @@ export class UnloadControllers {
 	async getFileNomenclature(
 		@Query() query: { organization: string }
 	) {
-		console.log('getNomenclature', query);
 		const result = await this.iikoOrganizationServises.getFileMenu(query.organization)
 		return result
 	}
