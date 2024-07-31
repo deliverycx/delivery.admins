@@ -235,7 +235,7 @@ export class IikoOrganizationServises {
 		orglist.map(async (oraganization: string) => {
 
 
-			if (menu.length !== 0) {
+			if (menu.length !== 0 && oraganization) {
 				const nomen = menu.reduce((acc: any, cate: any) => {
 					cate.items.forEach((item: any) => {
 
