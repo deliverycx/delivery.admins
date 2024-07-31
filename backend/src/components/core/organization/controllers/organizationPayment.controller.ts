@@ -5,58 +5,57 @@ import { OrganizationPaymentServises } from "../servises/organizationPayment.ser
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises"
 
 @Controller('organization_payment')
-export class OrganizationPaymentControllers{
-  constructor(
-    private readonly servises: OrganizationPaymentServises
-  ) { }
-  
-  
-  @Get('all')
-	getAll(@Query() query: OrganizationPaymentDTO){
+export class OrganizationPaymentControllers {
+	constructor(
+		private readonly servises: OrganizationPaymentServises
+	) { }
+
+
+	@Get('all')
+	getAll(@Query() query: OrganizationPaymentDTO) {
 		return this.servises.getAll(query)
 	}
 	@Get('bu')
-	geBu(@Query() query: OrganizationPaymentDTO){
+	geBu(@Query() query: OrganizationPaymentDTO) {
 		return this.servises.getOneBuId(query.id)
 	}
 	@Get('buorg')
-	geBuOrg(@Query() query: OrganizationPaymentDTO){
-		console.log(query);
+	geBuOrg(@Query() query: OrganizationPaymentDTO) {
 		return this.servises.getOne(query)
 	}
 
 	@Post('add')
-	add(@Body() body:OrganizationPaymentDTO){	
-		
+	add(@Body() body: OrganizationPaymentDTO) {
+
 		return this.servises.create(body)
 	}
 	@Post('edit')
 	edit(
-		@Body() body:OrganizationPaymentDTO,
+		@Body() body: OrganizationPaymentDTO,
 		@Query() query: OrganizationPaymentDTO
-		){	
-		return this.servises.edit(body,query.id)
+	) {
+		return this.servises.edit(body, query.id)
 	}
 
 	@Post('delet')
 	async delete(
 		@Query() query: OrganizationPaymentDTO,
-	){
+	) {
 		return this.servises.delete(query.id)
 	}
 
 	@Post('find')
 	async findBuOrg(
-		@Body() body:OrganizationPaymentDTO
-	){
+		@Body() body: OrganizationPaymentDTO
+	) {
 		return this.servises.metodFindBuOrg(body)
 	}
 
 	@Post('switchpay')
 	async switchPay(
-		@Body() body:OrganizationPaymentDTO,
+		@Body() body: OrganizationPaymentDTO,
 		@Query() query: OrganizationPaymentDTO
-	){
-		return this.servises.metodSwitchPayMent(query.id,body)
+	) {
+		return this.servises.metodSwitchPayMent(query.id, body)
 	}
 }

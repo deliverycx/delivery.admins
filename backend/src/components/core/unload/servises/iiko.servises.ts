@@ -83,7 +83,7 @@ export class IikoRequesterServises {
 
 
 
-			console.log(organizations.id);
+
 
 			const { data: terminal } = await axios.post(
 				'https://api-ru.iiko.services/api/1/terminal_groups',

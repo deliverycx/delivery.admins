@@ -7,49 +7,49 @@ import { GroopsDto } from "../dto/groops.dto";
 import { GroopsServises } from "../servises/groops.servises";
 
 @Controller('groops')
-export class GroopsControllers{
-  constructor(
-    private readonly groopsServises: GroopsServises
-  ) { }
+export class GroopsControllers {
+	constructor(
+		private readonly groopsServises: GroopsServises
+	) { }
 
 
 
 	@Get('all')
-	getAll(@Query() query: GroopsDto){
-		return this.groopsServises.getAll(query,'banners')
+	getAll(@Query() query: GroopsDto) {
+		return this.groopsServises.getAll(query, 'banners')
 	}
 	@Get('bu')
-	geBu(@Query() query: GroopsDto){
-		return this.groopsServises.getOneBuId(query.id,'banners')
+	geBu(@Query() query: GroopsDto) {
+		return this.groopsServises.getOneBuId(query.id, 'banners')
 	}
 
 	@Post('add')
-	addGroop(@Body() body:GroopsDto){	
-		console.log(body);
+	addGroop(@Body() body: GroopsDto) {
+
 		return this.groopsServises.create(body)
 	}
 	@Post('edit')
 	editGroop(
-		@Body() body:GroopsDto,
+		@Body() body: GroopsDto,
 		@Query() query: GroopsDto
-		){	
-		return this.groopsServises.edit(body,query.id)
+	) {
+		return this.groopsServises.edit(body, query.id)
 	}
 
 	@Post('delet')
 	async deleteGroop(
 		@Query() query: GroopsDto,
-	){
+	) {
 		return this.groopsServises.delete(query.id)
 	}
 
 	@Post('addbanner')
-	addBanner(@Body() body:GroopsDto){	
+	addBanner(@Body() body: GroopsDto) {
 		return this.groopsServises.addGroopsBanner(body)
 	}
 
 	@Post('deletebanner')
-	deleteBanner(@Body() body:GroopsDto){	
+	deleteBanner(@Body() body: GroopsDto) {
 		return this.groopsServises.deleteGroopsBanner(body)
 	}
 

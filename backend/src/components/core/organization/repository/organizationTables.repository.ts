@@ -5,16 +5,15 @@ import { OrganizationTablesClass } from "src/database/mongodbModel/delivery/orga
 import { BaseRepository } from "src/domain/repository/base.repository";
 
 @Injectable()
-export class OrganizationTablesRepository extends BaseRepository<OrganizationTablesClass>{
-  constructor(
-    @InjectModel(OrganizationTablesClass) private readonly Model: ReturnModelType<typeof OrganizationTablesClass>,
-  ) { 
+export class OrganizationTablesRepository extends BaseRepository<OrganizationTablesClass> {
+	constructor(
+		@InjectModel(OrganizationTablesClass) private readonly Model: ReturnModelType<typeof OrganizationTablesClass>,
+	) {
 		super(Model)
 	}
 
-	async addTableMetod(body:any){
+	async addTableMetod(body: any) {
 		const result = await this.Model.create(body)
-		console.log(result);
 		return result
 	}
 

@@ -27,7 +27,7 @@ export class OrganizationFilterControllers {
 		@Body() body: { name: string, images: string },
 		@Res() response,
 	) {
-		
+
 		this.servises.create(body, files)
 		response.status(200).json({ error: false })
 	}
@@ -45,26 +45,25 @@ export class OrganizationFilterControllers {
 	edit(
 		@UploadedFiles() files: Array<Express.Multer.File>,
 		@Body() body: { name: string, images: string },
-		@Query() query: {id:string},
+		@Query() query: { id: string },
 		@Res() response,
 	) {
-		
-		this.servises.edit(body,query.id, files)
+
+		this.servises.edit(body, query.id, files)
 		response.status(200).json({ error: false })
 	}
 
 
 	@Get('all')
-	getAll(@Query() query: any){
-		console.log(query);
+	getAll(@Query() query: any) {
 		return this.servises.getAll(query)
 	}
 
 	@Post('delet')
-	delite(@Query() query: {id:string}){
-	
+	delite(@Query() query: { id: string }) {
+
 		return this.servises.delete(query.id)
 	}
 
-	
+
 }

@@ -106,7 +106,6 @@ export class UnloadServises {
 
 	async getOrganizationsResult() {
 		await this.getOrganizations()
-		console.log(this.organizations);
 		return this.organizations
 	}
 

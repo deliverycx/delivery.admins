@@ -123,7 +123,6 @@ export class ordersServises extends BaseServises {
 				}
 			);
 			const token = ikkotoken.token
-			console.log(body);
 			const { data: order } = await axios.post('https://api-ru.iiko.services/api/1/deliveries/by_id',
 				{
 					"organizationId": body.organization,
@@ -153,20 +152,20 @@ export class ordersServises extends BaseServises {
 		const HI = /(Hi)+/i;
 		const HIGAmer = /(gamers)+/i;
 
-		
+
 		//console.log(re.test(b),re2.test(b));
 
 		const q = data.map((values: any, index: number) => {
-			
+
 			const tik = {
-				count:0
+				count: 0
 			}
 
 			if (values.orderStatus === "Success") {
 				values.orderItems.map((item: any, i: number) => {
 
 					//console.log(item.productTags);
-					const tagIndex = item.productTags.includes('gamers')				
+					const tagIndex = item.productTags.includes('gamers')
 
 					if (tagIndex) {
 						//console.log(item.productTags);
@@ -176,7 +175,7 @@ export class ordersServises extends BaseServises {
 
 					const tage = item.productTags[0]
 
-					if(HI.test(tage) && HIGAmer.test(tage)){
+					if (HI.test(tage) && HIGAmer.test(tage)) {
 						tik.count = tik.count + item.amount
 						//console.log(values.orderParams.name,item.amount);
 						//console.log(values.orderParams.name,tik);

@@ -4,32 +4,32 @@ import { orderPaymentServises } from "../servises/orderPayment.servise";
 import { response, Response } from "express";
 
 @Controller('orderPayment')
-export class orderPaymentControllers{
-  constructor(
-    private readonly Servises: orderPaymentServises
-  ) { }
+export class orderPaymentControllers {
+	constructor(
+		private readonly Servises: orderPaymentServises
+	) { }
 
 	@Post('createOrderPayment')
 	createOrderPayment(
-		@Body() body:orderPaymentDTO
-	){
+		@Body() body: orderPaymentDTO
+	) {
 		return this.Servises.create(body)
 	}
 	@Get('all')
-	getAll(@Query() query: {idorganization:string}){
-		console.log(query);
+	getAll(@Query() query: { idorganization: string }) {
+
 		return this.Servises.getAll(query.idorganization ? query : {})
 	}
 	@Get('buone')
-	geBu(@Query() query: orderPaymentDTO){
+	geBu(@Query() query: orderPaymentDTO) {
 		return this.Servises.getOne(query)
 	}
 
 	@Post('returnPamyMent')
 	async returnPamyMent(
-			@Body() body:orderPaymentDTO,
-			@Res() response: Response
-		){
+		@Body() body: orderPaymentDTO,
+		@Res() response: Response
+	) {
 		try {
 			const result = await this.Servises.returnPamyMent(body)
 			response.status(200).json(result);
@@ -40,34 +40,34 @@ export class orderPaymentControllers{
 	}
 
 	@Post('statusPayment')
-	statusPay(@Body() body:orderPaymentDTO){
+	statusPay(@Body() body: orderPaymentDTO) {
 		return this.Servises.statusPayment(body)
 	}
 
 	@Post('paymentConfirm')
-	payconf(@Body() body:orderPaymentDTO){
-		console.log('qqqq',body);
+	payconf(@Body() body: orderPaymentDTO) {
+		console.log('qqqq', body);
 		return this.Servises.payConfirm(body)
 	}
 
 	@Post('canselpayment')
-	canselpay(@Body() body:orderPaymentDTO){
+	canselpay(@Body() body: orderPaymentDTO) {
 		return this.Servises.canselPayment(body)
 	}
 
 	@Post('statusReturn')
 	statusreturnPamyMent(
 		@Query() query: orderPaymentDTO,
-		@Body() body:orderPaymentDTO,
-		){
-			return this.Servises.statusReturnPamyMent(body.token,body.order,query.id)
+		@Body() body: orderPaymentDTO,
+	) {
+		return this.Servises.statusReturnPamyMent(body.token, body.order, query.id)
 	}
 
 	@Post('delet')
 	async delete(
 		@Query() query: orderPaymentDTO,
-	){
+	) {
 		return this.Servises.delete(query.id)
 	}
-	
+
 }

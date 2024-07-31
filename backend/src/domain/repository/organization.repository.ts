@@ -10,81 +10,81 @@ import { OrganizationStatusClass } from "src/database/mongodbModel/delivery/orga
 
 @Injectable()
 export class OrganizationRepository {
-  constructor(
-    @InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
-    @InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
+	constructor(
+		@InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
+		@InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
 		@InjectModel(SocialModel) private readonly socialModel: ReturnModelType<typeof SocialModel>,
 		@InjectModel(OrganizationStatusClass) private readonly statusModel: ReturnModelType<typeof OrganizationStatusClass>
-  ) { }
+	) { }
 
-  async getAllOrganization() {
-    const result = await this.cityModel
-            .find({})
-            .populate("organizations")
-            .lean();
+	async getAllOrganization() {
+		const result = await this.cityModel
+			.find({})
+			.populate("organizations")
+			.lean();
 
-        return result
-  }
+		return result
+	}
 
-	async findCity(id:string){
+	async findCity(id: string) {
 		return await this.cityModel.findById(id).lean()
 	}
 
-  async swtchDelivMetod(orgid:string,metod:string) {
-    const result = await this.organizationModel.findOneAndUpdate(
-      {
-        id: orgid
-      },
-      {
-        $set: {
-          delivMetod: metod
-        }
-      },
-      { new: true }
-    )
-    return organizationEntities.delivMetod(result.id,result.delivMetod)
-  }
-	async getBuOrganization(idorg:string){
+	async swtchDelivMetod(orgid: string, metod: string) {
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+				id: orgid
+			},
+			{
+				$set: {
+					delivMetod: metod
+				}
+			},
+			{ new: true }
+		)
+		return organizationEntities.delivMetod(result.id, result.delivMetod)
+	}
+	async getBuOrganization(idorg: string) {
 		const result = await this.organizationModel
-            .findOne({id:idorg})
-						.populate('filters')
-            .lean();
+			.findOne({ id: idorg })
+			.populate('filters')
+			.lean();
 
-			console.log(result);
-      return result
+		console.log(result);
+		return result
 	}
 
-  async hiddenOranizationMetod(orgid: string, metod: boolean) {
-    const result = await this.organizationModel.findOneAndUpdate(
-      {
-        id: orgid
-      },
-      {
-        $set: {
-          isHidden: metod
-        }
-      },
-      { new: true }
-    )
+	async hiddenOranizationMetod(orgid: string, metod: boolean) {
+		const result = await this.organizationModel.findOneAndUpdate(
+			{
+				id: orgid
+			},
+			{
+				$set: {
+					isHidden: metod
+				}
+			},
+			{ new: true }
+		)
 
 
-    return organizationEntities.hiddenMetod(result.id,result.isHidden)
-  }
+		return organizationEntities.hiddenMetod(result.id, result.isHidden)
+	}
 
 	async checkOranizationMetod(orgid: string) {
-    const result = await this.organizationModel.findOne(
-      {
-        id: orgid
-      }
-    )
-		const city = await  this.cityModel.find({
-			organizations:{
-				$all:[result._id]
+		const result = await this.organizationModel.findOne(
+			{
+				id: orgid
+			}
+		)
+		const city = await this.cityModel.find({
+			organizations: {
+				$all: [result._id]
 			}
 		})
-		console.log('город',city);
+		console.log('город', city);
 
-		if(JSON.stringify(result.city)  !== JSON.stringify(city[0]._id)){
+		if (JSON.stringify(result.city) !== JSON.stringify(city[0]._id)) {
 			await this.organizationModel.findOneAndUpdate(
 				{
 					id: orgid
@@ -99,59 +99,59 @@ export class OrganizationRepository {
 
 		}
 
-    return city
-  }
+		return city
+	}
 
 
 	async hiddenCityMetod(orgid: string, metod: boolean) {
-		console.log(orgid,metod);
-    const result = await this.cityModel.findOneAndUpdate(
-      {
-        _id: orgid
-      },
-      {
-        $set: {
-          isHidden: metod
-        }
-      },
-      { new: true }
-    )
-		console.log('res',result);
+		console.log(orgid, metod);
+		const result = await this.cityModel.findOneAndUpdate(
+			{
+				_id: orgid
+			},
+			{
+				$set: {
+					isHidden: metod
+				}
+			},
+			{ new: true }
+		)
+		console.log('res', result);
 
-    return organizationEntities.hiddenMetod(result._id,result.isHidden)
-  }
+		return organizationEntities.hiddenMetod(result._id, result.isHidden)
+	}
 	async OpenOrgMetod(orgid: string, metod: boolean) {
-		console.log(orgid,metod);
-    const result = await this.cityModel.findOneAndUpdate(
-      {
-        _id: orgid
-      },
-      {
-        $set: {
-          isHidden: metod
-        }
-      },
-      { new: true }
-    )
-		console.log('res',result);
+		console.log(orgid, metod);
+		const result = await this.cityModel.findOneAndUpdate(
+			{
+				_id: orgid
+			},
+			{
+				$set: {
+					isHidden: metod
+				}
+			},
+			{ new: true }
+		)
+		console.log('res', result);
 
-    return organizationEntities.hiddenMetod(result._id,result.isHidden)
-  }
+		return organizationEntities.hiddenMetod(result._id, result.isHidden)
+	}
 
 
-	async socialMetod(idorganization:string,social:[]){
+	async socialMetod(idorganization: string, social: []) {
 		const result = await this.socialModel.findOneAndUpdate(
-      {
-        idorganization: idorganization
-      },
-      {
-        $set: {
-          social: social
-        }
-      },
-      { new: true }
-    )
-		if(!result){
+			{
+				idorganization: idorganization
+			},
+			{
+				$set: {
+					social: social
+				}
+			},
+			{ new: true }
+		)
+		if (!result) {
 			await this.socialModel.create({
 				idorganization,
 				social
@@ -160,7 +160,7 @@ export class OrganizationRepository {
 
 	}
 
-	async socialLikeMethod(idorganization:string,like: any){
+	async socialLikeMethod(idorganization: string, like: any) {
 		const result = await this.socialModel.findOneAndUpdate(
 			{
 				idorganization: idorganization
@@ -173,7 +173,7 @@ export class OrganizationRepository {
 			{ new: true }
 		)
 
-		if(!result){
+		if (!result) {
 			await this.socialModel.create({
 				idorganization,
 				like
@@ -181,160 +181,157 @@ export class OrganizationRepository {
 		}
 	}
 
-	async socialMetodBu(idorganization:string){
+	async socialMetodBu(idorganization: string) {
 
 		const result = await this.socialModel.findOne(
-      {
-        idorganization: idorganization
-      }
-    )
+			{
+				idorganization: idorganization
+			}
+		)
 		return result
 
 	}
 
-	async reservetableMetod(idorganization:string,metod:boolean){
+	async reservetableMetod(idorganization: string, metod: boolean) {
 
 		const result = await this.organizationModel.findOneAndUpdate(
-      {
-        id: idorganization
-      },
-      {
-        $set: {
-          reservetable: metod
-        }
-      },
-      { new: true }
-    )
-		console.log('заказ стоилка',result);
+			{
+				id: idorganization
+			},
+			{
+				$set: {
+					reservetable: metod
+				}
+			},
+			{ new: true }
+		)
+		console.log('заказ стоилка', result);
 
 		return result
 	}
 
-	async OrganizationTimeMetod(idorganization:string,time:string[]){
+	async OrganizationTimeMetod(idorganization: string, time: string[]) {
 		const result = await this.organizationModel.findOneAndUpdate(
-      {
-        id: idorganization
-      },
-      {
-        $set: {
-          workTime: time
-        }
-      },
-      { new: true }
-    )
-		console.log('время точки',result);
+			{
+				id: idorganization
+			},
+			{
+				$set: {
+					workTime: time
+				}
+			},
+			{ new: true }
+		)
+		console.log('время точки', result);
 		return result
 	}
 
-	async settingOrgMetod(idorganization:string,setting){
-		console.log(setting);
+	async settingOrgMetod(idorganization: string, setting) {
 		const result = await this.organizationModel.findOneAndUpdate(
-      {
-        id: idorganization
-      },
-      {
-        $set: {
-          phone: setting.phone,
-					address:{
-						street:setting.adress,
-						longitude:setting.longitude,
-						latitude:setting.latitude
+			{
+				id: idorganization
+			},
+			{
+				$set: {
+					phone: setting.phone,
+					address: {
+						street: setting.adress,
+						longitude: setting.longitude,
+						latitude: setting.latitude
 					}
 
-        }
-      },
-      { new: true }
-    )
+				}
+			},
+			{ new: true }
+		)
 		return result
 	}
 
-	async addCityMetod(city:any){
-		console.log(city);
+	async addCityMetod(city: any) {
 		const result = await this.cityModel.create(city)
 
 		return result
 	}
 
-	async addOrganizationMetod(org:any){
-		console.log(org);
+	async addOrganizationMetod(org: any) {
 		const neworg = await this.organizationModel.create(org)
 		const result = await this.cityModel.findOneAndUpdate(
 			{
-				_id:org.city
+				_id: org.city
 			},
 			{
-				$push:{
-					organizations:neworg._id
+				$push: {
+					organizations: neworg._id
 				}
 			}
 		)
 		const status = await this.statusModel.findOneAndUpdate({
-				organization:String(org.id)
-			},
+			organization: String(org.id)
+		},
 			{
-				$setOnInsert:{
-					organizationStatus:ORG_STATUS.NOWORK,
-					deliveryMetod:[DELIVERY_METODS.COURIER,DELIVERY_METODS.PICKUP],
-					paymentMetod:[PAYMENT_METODS.CASH,PAYMENT_METODS.BYCARD]
+				$setOnInsert: {
+					organizationStatus: ORG_STATUS.NOWORK,
+					deliveryMetod: [DELIVERY_METODS.COURIER, DELIVERY_METODS.PICKUP],
+					paymentMetod: [PAYMENT_METODS.CASH, PAYMENT_METODS.BYCARD]
 				}
 			},
 			{ upsert: true, new: true })
-		console.log('ress',status);
+		console.log('ress', status);
 
 		return result
 	}
 
-	async DeliteOrgMetod(id:any){
-		const result = await this.organizationModel.deleteOne({id:id})
+	async DeliteOrgMetod(id: any) {
+		const result = await this.organizationModel.deleteOne({ id: id })
 
 		return result
 	}
 
-	async RedirectOrgMetod(idorganization,url:any){
+	async RedirectOrgMetod(idorganization, url: any) {
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
-        id: idorganization
-      },
+				id: idorganization
+			},
 			{
-				redirect:url
+				redirect: url
 			}
 		)
 
 		return result
 	}
-	async RedirectONOrgMetod(idorganization:string,metod:boolean){
+	async RedirectONOrgMetod(idorganization: string, metod: boolean) {
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
-        id: idorganization
-      },
+				id: idorganization
+			},
 			{
-				redirectON:metod
+				redirectON: metod
 			}
 		)
 
 		return result
 	}
-	async AddGalleryOrgMetod(idorganization,images:[]){
+	async AddGalleryOrgMetod(idorganization, images: []) {
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
-        id: idorganization
-      },
+				id: idorganization
+			},
 			{
-				gallery:images
+				gallery: images
 			}
 		)
 
 		return result
 	}
-	async filtersMetod(idorganization,filterlist:string){
+	async filtersMetod(idorganization, filterlist: string) {
 
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
-        id: idorganization
-      },
+				id: idorganization
+			},
 			{
-				$set:{
-					filters:filterlist
+				$set: {
+					filters: filterlist
 				}
 			},
 			{ upsert: true, new: true }
@@ -343,14 +340,14 @@ export class OrganizationRepository {
 		return result
 	}
 
-	async noiikkoweb(idorganization:string,metod:boolean){
+	async noiikkoweb(idorganization: string, metod: boolean) {
 		const result = await this.organizationModel.findOneAndUpdate(
 			{
-        id: idorganization
-      },
+				id: idorganization
+			},
 			{
-				$set:{
-					nomenuweb:metod
+				$set: {
+					nomenuweb: metod
 				}
 			},
 			{ upsert: true, new: true }
