@@ -50,7 +50,7 @@ export class OrganizationRepository {
 			.populate('filters')
 			.lean();
 
-		console.log(result);
+
 		return result
 	}
 
@@ -104,7 +104,7 @@ export class OrganizationRepository {
 
 
 	async hiddenCityMetod(orgid: string, metod: boolean) {
-		console.log(orgid, metod);
+
 		const result = await this.cityModel.findOneAndUpdate(
 			{
 				_id: orgid
@@ -116,12 +116,12 @@ export class OrganizationRepository {
 			},
 			{ new: true }
 		)
-		console.log('res', result);
+
 
 		return organizationEntities.hiddenMetod(result._id, result.isHidden)
 	}
 	async OpenOrgMetod(orgid: string, metod: boolean) {
-		console.log(orgid, metod);
+
 		const result = await this.cityModel.findOneAndUpdate(
 			{
 				_id: orgid
@@ -133,7 +133,7 @@ export class OrganizationRepository {
 			},
 			{ new: true }
 		)
-		console.log('res', result);
+
 
 		return organizationEntities.hiddenMetod(result._id, result.isHidden)
 	}
@@ -276,7 +276,7 @@ export class OrganizationRepository {
 				}
 			},
 			{ upsert: true, new: true })
-		console.log('ress', status);
+
 
 		return result
 	}

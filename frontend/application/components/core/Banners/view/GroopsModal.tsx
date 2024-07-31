@@ -9,198 +9,198 @@ import RequestGroops from "servises/repository/Axios/Request/Request.Groops";
 import BannerList from "./BannerList";
 
 type IProps = {
-	addGroop:(id:string,field:string) => void
-	idgroop:string
+	addGroop: (id: string, field: string) => void
+	idgroop: string
 }
 
-const GroopsModal:FC<IProps> = ({addGroop,idgroop}) => {
-	const [groops,setGroops] = useState<IGroopsBanner[]>()
-	const [modal,setModal] = useState(false)
-	const [modalBanner,setModalBanner] = useState(false)
-	const [banner,setBanner] = useState<any>()
+const GroopsModal: FC<IProps> = ({ addGroop, idgroop }) => {
+	const [groops, setGroops] = useState<IGroopsBanner[]>()
+	const [modal, setModal] = useState(false)
+	const [modalBanner, setModalBanner] = useState(false)
+	const [banner, setBanner] = useState<any>()
 
-	console.log('clickban',banner);
+	console.log('clickban', banner);
 
 	const fetchGroopsBanner = async () => {
-    try {
-      const { data } = await RequestGroops.CRUDFabric.getAll()
-			console.log(data);
-			setGroops(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+		try {
+			const { data } = await RequestGroops.CRUDFabric.getAll()
 
-	useEffect(()=>{
+			setGroops(data)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	useEffect(() => {
 		fetchGroopsBanner()
-	},[])
+	}, [])
 
 	return (
 		<>
-			<button type="button" className="btn btn-block btn-default col-md-2" onClick={()=> setModal(true)}>Добавить группу</button>
+			<button type="button" className="btn btn-block btn-default col-md-2" onClick={() => setModal(true)}>Добавить группу</button>
 			{
-				(modal && groops)  &&
+				(modal && groops) &&
 				<div className="modal_box">
-					<div className="modal_overfloy"  onClick={()=> setModal(false)}></div>
-						<div className="col-md-8 modales">
+					<div className="modal_overfloy" onClick={() => setModal(false)}></div>
+					<div className="col-md-8 modales">
 						<div className="card card-warning">
 							<div className="card-header">
-								
+
 
 								<div className="card-tools">
-									<button type="button" className="btn btn-tool" data-card-widget="remove" onClick={()=> setModal(false)}>
+									<button type="button" className="btn btn-tool" data-card-widget="remove" onClick={() => setModal(false)}>
 										<img src="/img/close.png" />
-									
+
 									</button>
 								</div>
-								
+
 							</div>
 							{
 								<div className="card card-primary">
-		              <div className="card-header">
-		                <h4 className="card-title">Категория общая</h4>
-		              </div>
-		              <div className="card-body">
+									<div className="card-header">
+										<h4 className="card-title">Категория общая</h4>
+									</div>
+									<div className="card-body">
 										<div className="form-group">
 
 											{
-												groops && groops.map((val:IGroopsBanner)=>{
+												groops && groops.map((val: IGroopsBanner) => {
 													return (
 														val.category === bannerCategory.default &&
 														<div key={val._id}>
 															<hr />
 															<div className="card-footer">
-														 		<a className="card-title" onClick={()=> {
-																	addGroop(val._id,idgroop)
+																<a className="card-title" onClick={() => {
+																	addGroop(val._id, idgroop)
 																	setModal(false)
 																}}>{val.name}	</a>
 																<a onClick={() => setModalBanner(true)}>Посмотреть банеры</a>
-														 	</div>
-															 
-																{
-																	modalBanner &&
-																	<Modal setter={setModalBanner}>
-																		<BannerList banners={val.banners} handler={(id) => {
-																			
-																			setModalBanner(false)
-																		}} />
-																 	</Modal>
-																}
+															</div>
+
+															{
+																modalBanner &&
+																<Modal setter={setModalBanner}>
+																	<BannerList banners={val.banners} handler={(id) => {
+
+																		setModalBanner(false)
+																	}} />
+																</Modal>
+															}
 
 														</div>
 													)
-												})	
+												})
 											}
 
-			               </div>
-		              </div>
-		            </div>
+										</div>
+									</div>
+								</div>
 
-						
-					}
+
+							}
 							{
 								<div className="card card-primary">
-		              <div className="card-header">
-		                <h4 className="card-title">Категория Меню</h4>
-		              </div>
-		              <div className="card-body">
+									<div className="card-header">
+										<h4 className="card-title">Категория Меню</h4>
+									</div>
+									<div className="card-body">
 										<div className="form-group">
 
 											{
-												groops && groops.map((val:IGroopsBanner)=>{
+												groops && groops.map((val: IGroopsBanner) => {
 													return (
 														val.category === bannerCategory.menu &&
 														<div key={val._id}>
 															<hr />
 															<div className="card-footer">
-														 		<a className="card-title" onClick={()=> {
-																	addGroop(val._id,idgroop)
+																<a className="card-title" onClick={() => {
+																	addGroop(val._id, idgroop)
 																	setModal(false)
 																}}>{val.name}	</a>
 																<a className="display_banner" onClick={() => {
 																	setModalBanner(true)
 																	setBanner(val.banners)
 																}}>Посмотреть банеры</a>
-														 	</div>
-															 
-															 
-																{
-																	modalBanner &&
-																	<Modal setter={setModalBanner}>
-																		<BannerList banners={banner} handler={(id) => {
-																			
-																			setModalBanner(false)
-																		}} />
-																 	</Modal>
-																}
+															</div>
+
+
+															{
+																modalBanner &&
+																<Modal setter={setModalBanner}>
+																	<BannerList banners={banner} handler={(id) => {
+
+																		setModalBanner(false)
+																	}} />
+																</Modal>
+															}
 
 														</div>
 													)
-												})	
+												})
 											}
 
-			               </div>
-		              </div>
-		            </div>
+										</div>
+									</div>
+								</div>
 
-						
-					}
-					{
+
+							}
+							{
 								<div className="card card-primary">
-		              <div className="card-header">
-		                <h4 className="card-title">Категория доставка</h4>
-		              </div>
-		              <div className="card-body">
+									<div className="card-header">
+										<h4 className="card-title">Категория доставка</h4>
+									</div>
+									<div className="card-body">
 										<div className="form-group">
 
 											{
-												groops && groops.map((val:IGroopsBanner)=>{
+												groops && groops.map((val: IGroopsBanner) => {
 													return (
 														val.category === bannerCategory.delivery &&
 														<div key={val._id}>
 															<hr />
 															<div className="card-footer">
-														 		<a className="card-title" onClick={()=> {
-																	addGroop(val._id,idgroop)
+																<a className="card-title" onClick={() => {
+																	addGroop(val._id, idgroop)
 																	setModal(false)
-																} }>{val.name}	</a>
+																}}>{val.name}	</a>
 																<a className="display_banner" onClick={() => {
 																	setModalBanner(true)
 																	setBanner(val.banners)
 																}}>Посмотреть банеры</a>
-														 	</div>
-															 
-																{
-																	modalBanner &&
-																	<Modal setter={setModalBanner}>
-																		<BannerList banners={banner} handler={(id) => {
-																			
-																			setModalBanner(false)
-																		}} />
-																 	</Modal>
-																}
+															</div>
+
+															{
+																modalBanner &&
+																<Modal setter={setModalBanner}>
+																	<BannerList banners={banner} handler={(id) => {
+
+																		setModalBanner(false)
+																	}} />
+																</Modal>
+															}
 
 														</div>
 													)
-												})	
+												})
 											}
 
-			               </div>
-		              </div>
-		            </div>
+										</div>
+									</div>
+								</div>
 
-						
-					}
-							
-							
-							
+
+							}
+
+
+
 						</div>
-						
+
 					</div>
 				</div>
-				
+
 			}
-			
+
 		</>
 	)
 }
