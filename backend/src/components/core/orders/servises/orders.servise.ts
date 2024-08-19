@@ -64,7 +64,7 @@ export class ordersServises extends BaseServises {
 					"mode": "Async"
 				},
 				"order": {
-					"phone": "79787554654",
+					"phone": "+79787554654",
 					"customer": {
 						"name": "test",
 						"comment": "test"
