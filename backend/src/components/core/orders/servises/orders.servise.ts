@@ -64,10 +64,10 @@ export class ordersServises extends BaseServises {
 					"mode": "Async"
 				},
 				"order": {
-					"phone": "+7 978 755 46 54",
+					"phone": "+79787554654",
 					"customer": {
 						"name": "test",
-						"comment": "+7 978 755 46 54"
+						"comment": "test"
 					},
 					"deliveryPoint": {
 						"address": {
