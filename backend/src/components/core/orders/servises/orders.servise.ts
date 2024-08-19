@@ -64,7 +64,7 @@ export class ordersServises extends BaseServises {
 					"mode": "Async"
 				},
 				"order": {
-					"phone": String("+79787554654").trim().replace(/\s+/g, ''),
+					"phone": String("+7999888999").trim().replace(/\s+/g, ''),
 					"customer": {
 						"name": "test",
 						"comment": "test"
