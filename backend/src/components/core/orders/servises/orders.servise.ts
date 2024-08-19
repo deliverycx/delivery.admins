@@ -25,7 +25,7 @@ export class ordersServises extends BaseServises {
 	}
 
 	async mokOrderServises(body: any) {
-		console.log('созал мок', body);
+
 
 		try {
 
@@ -64,7 +64,7 @@ export class ordersServises extends BaseServises {
 					"mode": "Async"
 				},
 				"order": {
-					"phone": "+79787554654",
+					"phone": String("+79787554654").trim().replace(/\s+/g, ''),
 					"customer": {
 						"name": "test",
 						"comment": "test"
@@ -99,7 +99,7 @@ export class ordersServises extends BaseServises {
 					"orderTypeId": "9ee06fcc-8233-46fa-b74d-ff6f50128afb"
 				}
 			}
-
+			console.log('созал мок', bodyOrder);
 			const { data: order } = await axios.post('https://api-ru.iiko.services/api/1/deliveries/create', bodyOrder,
 				{
 					headers: { Authorization: `Bearer ${token}` }
