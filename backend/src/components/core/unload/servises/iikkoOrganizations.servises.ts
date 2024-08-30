@@ -243,17 +243,19 @@ export class IikoOrganizationServises {
 						const itemOrg = item.itemSizes[0].prices
 
 
-						if (item.name == 'Пирог с тыквой, орехами и изюмом') {
-							qq.push(oraganization)
-							//console.log(oraganization, item.name);
-						}
+
 						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
 							//
 							const resultFind = orgs.organizations.includes(oraganization)
 							///console.log(resultFind);
 
+							if (item.name == 'Пирог с тыквой, орехами и изюмом') {
+								qq.push({ oraganization, price: orgs.price })
+								//console.log(oraganization, item.name);
+							}
+
 							if (resultFind && orgs.price) {
-								console.log(oraganization, item.name);
+								//console.log(oraganization, item.name);
 
 
 
