@@ -248,10 +248,9 @@ export class IikoOrganizationServises {
 							//
 							const resultFind = orgs.organizations.includes(oraganization)
 							///console.log(resultFind);
-
-							if (item.name == 'Пирог с тыквой, орехами и изюмом') {
-								qq.push({ oraganization, price: orgs.price })
-								//console.log(oraganization, item.name);
+							if (resultFind && item.name == 'Пирог с тыквой, орехами и изюмом') {
+								qq.push({ oraganization, name: item.name, price: orgs.price })
+								//console.log(oraganization, item.name, orgs.price);
 							}
 
 							if (resultFind && orgs.price) {
