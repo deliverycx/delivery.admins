@@ -208,7 +208,7 @@ export class IikoOrganizationServises {
 	async poolingMenuWeb() {
 		console.log('start poolingMenuWeb');
 
-
+		const qq = []
 
 		const orgresult = await this.organizationModel.find(
 			{
@@ -243,8 +243,9 @@ export class IikoOrganizationServises {
 						const itemOrg = item.itemSizes[0].prices
 
 
-						if (item.name == 'Хачапури по-аджарски чкмерули') {
-
+						if (item.name == 'Пирог с тыквой, орехами и изюмом') {
+							qq.push(oraganization)
+							//console.log(oraganization, item.name);
 						}
 						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
 							//
@@ -252,7 +253,9 @@ export class IikoOrganizationServises {
 							///console.log(resultFind);
 
 							if (resultFind && orgs.price) {
-								//console.log(oraganization,item.name);
+								console.log(oraganization, item.name);
+
+
 
 								acc.groups.push({
 									name: cate.name,
@@ -310,6 +313,8 @@ export class IikoOrganizationServises {
 			}
 
 		})
+
+		console.log(qq);
 		const b = moment as any
 		const q = b().tz("Europe/Moscow").format()
 		const formate = format(q, 'yyyy-MM-dd hh:mm aa');
