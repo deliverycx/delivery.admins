@@ -1,28 +1,28 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { RequestOrganization } from "servises/repository/Axios/Request"
-import {IFoodsArray, IOrganization, ISocial, ListOrganization} from "@type";
+import { IFoodsArray, IOrganization, ISocial, ListOrganization } from "@type";
 import { useFormik, FormikProvider } from "formik";
-import {requestOrganizationFoods} from "../../../servises/repository/Axios/Request/Request.OrganizationFoods";
+import { requestOrganizationFoods } from "../../../servises/repository/Axios/Request/Request.OrganizationFoods";
 
-export function  useOrganizationSetting(this: any){
+export function useOrganizationSetting(this: any) {
 	const router = useRouter()
 	const slideId = router.query.id as string
 
-	const [input,setInput] = useState<string>()
-	const [social,setSocial] = useState<any>()
-	const [organization,setOrganization] = useState<any>(null)
+	const [input, setInput] = useState<string>()
+	const [social, setSocial] = useState<any>()
+	const [organization, setOrganization] = useState<any>(null)
 	const [foods, setFoods] = useState<IFoodsArray>()
 	const [hiddenProducts, setHiddenProducts] = useState<any>()
 
-	useEffect(()=>{
-		if(slideId){
+	useEffect(() => {
+		if (slideId) {
 			getOrgBu()
 			getOrganizationFoods()
 			getHiddenProductsByOrg(slideId)
 		}
 
-	},[slideId])
+	}, [slideId])
 
 	const hideProduct = async (organization: any, productId: any) => {
 		try {
@@ -41,16 +41,16 @@ export function  useOrganizationSetting(this: any){
 				organization
 			})
 			setHiddenProducts(res.data)
-			console.log(res)
+
 			return res
 		} catch (e) {
 			console.log('error get', e)
 		}
 	}
 
-	const getOrgBu = async () =>{
+	const getOrgBu = async () => {
 		try {
-			const {data} = await RequestOrganization.getBu({idorganization: slideId})
+			const { data } = await RequestOrganization.getBu({ idorganization: slideId })
 			setOrganization(data)
 		} catch (error) {
 			console.log(error);
@@ -59,30 +59,30 @@ export function  useOrganizationSetting(this: any){
 
 	const getOrganizationFoods = async () => {
 		try {
-			const { data } = await requestOrganizationFoods.getAllFoods({organizationId: slideId})
+			const { data } = await requestOrganizationFoods.getAllFoods({ organizationId: slideId })
 			setFoods(data)
 		} catch (e) {
 			console.log(e)
 		}
 	}
 
-	const deliteOrganization = async (id:string) =>{
+	const deliteOrganization = async (id: string) => {
 		try {
-			const {data} = await RequestOrganization.organizationDelite({id})
+			const { data } = await RequestOrganization.organizationDelite({ id })
 			router.push('/organization/')
 		} catch (error) {
 
 		}
 	}
 
-	const handleHiddenOrg = async (idorganization: string,isHidden:boolean) => {
+	const handleHiddenOrg = async (idorganization: string, isHidden: boolean) => {
 		await RequestOrganization.hiddenOrganization({ idorganization, isHidden })
 		await getOrgBu()
 	}
 
-	const checkOrganization = async (idorganization: string) =>{
+	const checkOrganization = async (idorganization: string) => {
 		try {
-			await RequestOrganization.checkOrganization({idorganization})
+			await RequestOrganization.checkOrganization({ idorganization })
 		} catch (error) {
 
 		}
@@ -109,18 +109,18 @@ export function  useOrganizationSetting(this: any){
 }
 
 
-export function  useOrganizationSettingFrom(this: any,organization:IOrganization){
+export function useOrganizationSettingFrom(this: any, organization: IOrganization) {
 
 	const initialValues = {
-		phone:organization.phone,
-		adress:organization.address.street,
-		longitude:organization.address.longitude,
-		latitude:organization.address.latitude
+		phone: organization.phone,
+		adress: organization.address.street,
+		longitude: organization.address.longitude,
+		latitude: organization.address.latitude
 	}
 
-	const handlerOrgSetting = async (values:typeof initialValues) =>{
+	const handlerOrgSetting = async (values: typeof initialValues) => {
 		await RequestOrganization.setSetting({
-			idorganization:organization.id,
+			idorganization: organization.id,
 			...values
 		})
 	}

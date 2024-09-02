@@ -1,25 +1,20 @@
-import {useContext, useEffect} from "react"
+import { useContext, useEffect } from "react"
 import { OrganizationContext } from "../OrganizationSetting"
 import Menu from "../../../common/Menu/MenuFoods";
+import OrganizationMenu from "../OrganizationMenu/OrganizationMenu";
 
-const TabsMenu = () =>{
-    const useCaseContext = useContext(OrganizationContext)
-    const {foods, slideId, hiddenProducts} = useCaseContext.data
-    const { hideProduct, getHiddenProductsByOrg } = useCaseContext.handlers
+const TabsMenu = () => {
+	const useCaseContext = useContext(OrganizationContext)
+	const { foods, slideId, hiddenProducts } = useCaseContext.data
+	const { hideProduct, getHiddenProductsByOrg } = useCaseContext.handlers
 
-    return(
+	return (
 
-        <>
-            {
-                !foods ? <div>Загрузка меню</div> : <Menu
-                    // groups={foods.groups}
-                    // products={foods.products}
-                    organization={slideId}
-                    data={{groups: foods.groups, products: foods.products, hiddenProducts}}
-                    handlers={{hideProduct}}
-                />
-            }
-        </>
-    )
+		<>
+			{
+				<OrganizationMenu slideId={slideId} />
+			}
+		</>
+	)
 }
 export default TabsMenu
