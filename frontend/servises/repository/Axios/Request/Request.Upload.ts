@@ -2,7 +2,7 @@ import { ApiSuper, methods, token } from "../AxiosApi";
 
 namespace Req {
 	export type Pooling = {
-		result: string
+		result: []
 	}
 	export type PoolingOrganization = {
 		result: any
@@ -13,7 +13,7 @@ namespace Req {
 		adress: string
 	}
 	export type revisionMenu = {
-		revision:number
+		revision: number
 	}
 }
 namespace Res {
@@ -22,7 +22,7 @@ namespace Res {
 	}
 	export type webhooks = {
 		organization: string
-		localhoste:string
+		localhoste: string
 	}
 }
 
@@ -31,7 +31,7 @@ namespace Res {
 class RequestUpload extends ApiSuper {
 
 	@methods('post')
-	Pooling() {
+	Pooling(sku: { sku: string }) {
 		return this.request<Req.Pooling>(`/unload/pooling`)
 	}
 	@methods('get')

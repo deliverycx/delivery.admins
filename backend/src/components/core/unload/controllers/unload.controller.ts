@@ -21,16 +21,16 @@ export class UnloadControllers {
 	) { }
 
 	@Post('pooling')
-	async polling(@Res() response: Response) {
+	async polling(@Res() response: Response, @Body() body: { sku: string }) {
 
 		connection(process.env.CONNECTION_2)
 			.then(async () => {
 				console.log("success connect");
 
-
+				console.log(body);
 				//await this.IikoRequesterServises.polling();
-				await this.iikoOrganizationServises.poolingMenuWeb()
-				response.status(200).json({ result: "ok" })
+				const result = await this.iikoOrganizationServises.poolingMenuWeb(body.sku)
+				response.status(200).json({ result: result })
 			}).catch((err) => {
 				console.log('ошибка в пулинге', err);
 				response.status(500).json({ result: "bead" })
