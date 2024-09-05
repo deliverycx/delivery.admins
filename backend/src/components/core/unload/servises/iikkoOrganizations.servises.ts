@@ -215,7 +215,7 @@ export class IikoOrganizationServises {
 				//nomenuweb:false || undefined || null,
 				delivMetod: null
 			}
-		)
+		).populate("city").lean()
 
 
 		//const orgresult: [] = await this.iikoAxios.getOrganizationList()
@@ -227,7 +227,9 @@ export class IikoOrganizationServises {
 				return value.id
 
 			})
-		//console.log(orglist);
+
+
+
 
 		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
 		const menu: [] = nomenclature.pureExternalMenuItemCategories
@@ -249,8 +251,9 @@ export class IikoOrganizationServises {
 							const resultFind = orgs.organizations.includes(oraganization)
 
 							if (sku && resultFind && item.sku == sku) {
+								const point: any = orgresult.find((val: any) => val.id === oraganization)
 
-								modalprice.push({ oraganization, name: item.name, price: orgs.price, sku: item.sku })
+								modalprice.push({ oraganization, point: `${point.city.name},${point.address.street}`, name: item.name, price: orgs.price, sku: item.sku })
 								//console.log(oraganization, item.name, orgs.price);
 							}
 

@@ -52,7 +52,11 @@ const Pooling = () => {
 									modalSku.map((value: any) => {
 										return (
 											<tr>
-												<td>{value.oraganization}</td>
+												<td>
+													{value.point}<br />
+													<small>{value.oraganization}</small>
+
+												</td>
 												<td>{value.name}</td>
 												<td>{value.price}</td>
 												<td>{value.sku}</td>
