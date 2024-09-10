@@ -199,12 +199,12 @@ export class IikoOrganizationServises {
 
 
 
-	/*
+	/**/
 	@Cron(CronExpression.EVERY_HOUR, {
 		name: "MenuWeb",
 		timeZone: "Europe/Moscow"
 	})
-*/
+
 	async poolingMenuWeb(sku: string) {
 		console.log('start poolingMenuWeb');
 
