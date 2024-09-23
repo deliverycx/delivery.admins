@@ -14,14 +14,15 @@ import { RedisModules } from "src/module/redis.module";
 import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 import { IikoOrganizationServises } from "../servises/iikkoOrganizations.servises";
 import { OrganizationServises } from "../../organization/servises/organization.servises";
+import { BotAxios } from "src/components/common/bot/bot.axios";
 
 
 @Module({
-  imports: [
-    TypegooseModule.forFeature([OrganizationClass,CityClass,CategoryClass,ProductClass,OrganizationStatusClass], DELIVERY_DB),
+	imports: [
+		TypegooseModule.forFeature([OrganizationClass, CityClass, CategoryClass, ProductClass, OrganizationStatusClass], DELIVERY_DB),
 		RedisModules
-  ],
-  controllers: [UnloadControllers], 
-  providers:[IikoRequesterServises,IikoOrganizationServises,UnloadServises,IIkoAxios]
+	],
+	controllers: [UnloadControllers],
+	providers: [IikoRequesterServises, IikoOrganizationServises, UnloadServises, IIkoAxios, BotAxios]
 })
-export class UnloadModule {}
+export class UnloadModule { }

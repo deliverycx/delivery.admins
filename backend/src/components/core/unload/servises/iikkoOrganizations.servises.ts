@@ -17,6 +17,7 @@ import { writeFile, readFile } from 'fs/promises';
 import { Cron, CronExpression } from "@nestjs/schedule";
 import * as moment from 'moment-timezone';
 import { compareAsc, format } from "date-fns";
+import { BotAxios } from "src/components/common/bot/bot.axios";
 
 @Injectable()
 export class IikoOrganizationServises {
@@ -25,6 +26,7 @@ export class IikoOrganizationServises {
 
 	constructor(
 		private readonly iikoAxios: IIkoAxios,
+		private readonly botAxios: BotAxios,
 		@InjectModel(OrganizationClass) private readonly organizationModel: ReturnModelType<typeof OrganizationClass>,
 		@InjectModel(CityClass) private readonly cityModel: ReturnModelType<typeof CityClass>,
 		@InjectModel(CategoryClass) private readonly categoryModel: ReturnModelType<typeof CategoryClass>,
@@ -324,7 +326,7 @@ export class IikoOrganizationServises {
 		const q = b().tz("Europe/Moscow").format()
 		const formate = format(q, 'yyyy-MM-dd hh:mm aa');
 		console.log("finish poolingMenuWeb", formate);
-
+		await this.botAxios.unloadWebMenu()
 
 
 		return modalprice
