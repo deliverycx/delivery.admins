@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypegooseModule } from "nestjs-typegoose";
-import { BotAxios } from "src/components/common/bot/bot.axios";
+import { BotAxios } from "src/components/common/bot/servises/bot.axios";
 import { PaymentModel } from "src/database/mongodbModel/admin/payment.model";
 import { ADMIN_DB } from "src/database/mongodbModel/config.mongodb";
 import { orderPaymentControllers } from "../controllers/orderPayment.controller";
@@ -10,11 +10,11 @@ import { ordersRepository } from "../repository/orders.repository";
 import { OrderClass } from "src/database/mongodbModel/admin/order.model";
 
 @Module({
-  imports: [
-    TypegooseModule.forFeature([PaymentModel], ADMIN_DB),
+	imports: [
+		TypegooseModule.forFeature([PaymentModel], ADMIN_DB),
 		TypegooseModule.forFeature([OrderClass], ADMIN_DB)
-  ],
-  controllers: [orderPaymentControllers], 
-  providers:[orderPaymentServises,orderPaymentRepository,BotAxios,ordersRepository]
+	],
+	controllers: [orderPaymentControllers],
+	providers: [orderPaymentServises, orderPaymentRepository, BotAxios, ordersRepository]
 })
-export class orderPaymentModule{}
+export class orderPaymentModule { }

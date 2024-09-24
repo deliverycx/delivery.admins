@@ -17,7 +17,7 @@ import { writeFile, readFile } from 'fs/promises';
 import { Cron, CronExpression } from "@nestjs/schedule";
 import * as moment from 'moment-timezone';
 import { compareAsc, format } from "date-fns";
-import { BotAxios } from "src/components/common/bot/bot.axios";
+import { BotAxios } from "src/components/common/bot/servises/bot.axios";
 
 @Injectable()
 export class IikoOrganizationServises {
@@ -331,6 +331,35 @@ export class IikoOrganizationServises {
 
 		return modalprice
 
+	}
+
+	async webMenuIIkko() {
+		const modalprice = []
+
+		const orgresult = await this.organizationModel.find(
+			{
+				//nomenuweb:false || undefined || null,
+				delivMetod: null
+			}
+		).populate("city").lean()
+
+
+		//const orgresult: [] = await this.iikoAxios.getOrganizationList()
+		const orglist = orgresult
+			.filter((val: any) => {
+				return !val.nomenuweb && val
+			})
+			.map((value: any) => {
+				return value.id
+
+			})
+
+
+
+
+		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
+		const menu: [] = nomenclature.pureExternalMenuItemCategories
+		return menu
 	}
 
 	async getFileMenu(oraganization: string) {

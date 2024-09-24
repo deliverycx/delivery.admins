@@ -3,7 +3,7 @@ import { BaseServises } from "src/services/base.services";
 import { orderPaymentRepository } from "../repository/orderPayment.repository";
 import axios, { AxiosInstance } from "axios";
 import { Axios } from "src/application/repository/axios";
-import { BotAxios } from "src/components/common/bot/bot.axios";
+import { BotAxios } from "src/components/common/bot/servises/bot.axios";
 import { ReturnModelType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
 import { ordersRepository } from "../repository/orders.repository";

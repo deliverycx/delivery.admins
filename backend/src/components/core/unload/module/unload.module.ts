@@ -14,7 +14,7 @@ import { RedisModules } from "src/module/redis.module";
 import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 import { IikoOrganizationServises } from "../servises/iikkoOrganizations.servises";
 import { OrganizationServises } from "../../organization/servises/organization.servises";
-import { BotAxios } from "src/components/common/bot/bot.axios";
+import { BotAxios } from "src/components/common/bot/servises/bot.axios";
 
 
 @Module({

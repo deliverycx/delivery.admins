@@ -110,6 +110,13 @@ export class UnloadControllers {
 		return result
 	}
 
+	@Get('getIIKKoWebNomenclature')
+	async getiikkoNomenclature() {
+		const result = await this.iikoOrganizationServises.webMenuIIkko()
+		return result
+	}
+
+
 	@Get('getStreet')
 	async getFileStreet(
 		@Query() query: { organization: string }
