@@ -108,18 +108,21 @@ export class IikoOrganizationServises {
 							},
 							workTime: ['10:00-22:00'],
 							phone: "",
-							nomenuweb: false
+							nomenuweb: false,
+
 						},
 						$set: {
 							id: termital.organizationid,
 							city: cityId,
 							cityid: organizationinfo.defaultDeliveryCityId,
 							terminal: termital.idtermital,
+							pointname: organizationinfo.name
 						}
 
 					},
 					{ upsert: true, new: true }
 				);
+				console.log(objectIdPoint);
 
 
 				await this.orgstatusModel.findOneAndUpdate(
