@@ -5,87 +5,90 @@ import { IIkoAxios } from "src/repository/iiko/iiko.axios";
 
 
 @Injectable()
-export class OrganizationServises{
-  constructor(
+export class OrganizationServises {
+	constructor(
 		private readonly OrganizationRepository: OrganizationRepository,
-		private readonly iikoAxios:IIkoAxios
-		) { }
-  
-  getAllOrganization() {
-    return this.OrganizationRepository.getAllOrganization()
-  }
-	getSityBu({cityid}){
+		private readonly iikoAxios: IIkoAxios
+	) { }
+
+	getAllOrganization() {
+		return this.OrganizationRepository.getAllOrganization()
+	}
+	getSityBu({ cityid }) {
 		return this.OrganizationRepository.findCity(cityid)
 	}
-	getBuOrganization({idorganization}) {
-    return this.OrganizationRepository.getBuOrganization(idorganization)
-  }
-  switchDelivMetod({idorganization,delivmetod}) {
-    return this.OrganizationRepository.swtchDelivMetod(idorganization,delivmetod)
-  }
-  hiddenOranizationMetod({idorganization,isHidden}) {
-    return this.OrganizationRepository.hiddenOranizationMetod(idorganization,isHidden)
-  }
-	checkOranizationMetod({idorganization}) {
-    return this.OrganizationRepository.checkOranizationMetod(idorganization)
-  }
-
-	hiddenCityMetod({idorganization,isHidden}) {
-    return this.OrganizationRepository.hiddenCityMetod(idorganization,isHidden)
-  }
-
-	socialMetod({idorganization,social}){
-		return this.OrganizationRepository.socialMetod(idorganization,social)
+	getBuOrganization({ idorganization }) {
+		return this.OrganizationRepository.getBuOrganization(idorganization)
+	}
+	switchDelivMetod({ idorganization, delivmetod }) {
+		return this.OrganizationRepository.swtchDelivMetod(idorganization, delivmetod)
+	}
+	hiddenOranizationMetod({ idorganization, isHidden }) {
+		return this.OrganizationRepository.hiddenOranizationMetod(idorganization, isHidden)
+	}
+	checkOranizationMetod({ idorganization }) {
+		return this.OrganizationRepository.checkOranizationMetod(idorganization)
 	}
 
-	socialLikeMethod({idorganization, like}) {
-	  return this.OrganizationRepository.socialLikeMethod(idorganization, like)
+	hiddenCityMetod({ idorganization, isHidden }) {
+		return this.OrganizationRepository.hiddenCityMetod(idorganization, isHidden)
+	}
+	hiddenMobileCityMetod({ idorganization, isHiddenOnMobile }) {
+		return this.OrganizationRepository.hiddenMobileCityMetod(idorganization, isHiddenOnMobile)
 	}
 
-	socialMetodBu({idorganization}){
+	socialMetod({ idorganization, social }) {
+		return this.OrganizationRepository.socialMetod(idorganization, social)
+	}
+
+	socialLikeMethod({ idorganization, like }) {
+		return this.OrganizationRepository.socialLikeMethod(idorganization, like)
+	}
+
+	socialMetodBu({ idorganization }) {
 		return this.OrganizationRepository.socialMetodBu(idorganization)
 	}
 
-	reservetable({idorganization,reservetable}){
-		return this.OrganizationRepository.reservetableMetod(idorganization,reservetable)
-	}
-	
-	organizationTime({idorganization,worktime}){
-		return this.OrganizationRepository.OrganizationTimeMetod(idorganization,worktime)
+	reservetable({ idorganization, reservetable }) {
+		return this.OrganizationRepository.reservetableMetod(idorganization, reservetable)
 	}
 
-	addCity(city: any){
+	organizationTime({ idorganization, worktime }) {
+		return this.OrganizationRepository.OrganizationTimeMetod(idorganization, worktime)
+	}
+
+	addCity(city: any) {
 		return this.OrganizationRepository.addCityMetod(city)
 	}
 
-	organizationAdd(org: any){
+	organizationAdd(org: any) {
 		return this.OrganizationRepository.addOrganizationMetod(org)
 	}
 
-	organizationDelite({id}){
+	organizationDelite({ id }) {
 		return this.OrganizationRepository.DeliteOrgMetod(id)
 	}
 
-	organizationRedirect({idorganization,redirect}){
-		return this.OrganizationRepository.RedirectOrgMetod(idorganization,redirect)
+	organizationRedirect({ idorganization, redirect }) {
+		return this.OrganizationRepository.RedirectOrgMetod(idorganization, redirect)
 	}
-	organizationRedirectON({idorganization,redirectON}){
-		return this.OrganizationRepository.RedirectONOrgMetod(idorganization,redirectON)
+	organizationRedirectON({ idorganization, redirectON }) {
+		return this.OrganizationRepository.RedirectONOrgMetod(idorganization, redirectON)
 	}
-	async organizationTerminal(organizationsid:string){
+	async organizationTerminal(organizationsid: string) {
 		try {
 			const termitalid = await this.iikoAxios.termiralGroops(organizationsid)
-			if(termitalid.id && organizationsid){
-				const terminalAlive = await this.iikoAxios.termiralGroopsAlive(organizationsid,termitalid.id)
+			if (termitalid.id && organizationsid) {
+				const terminalAlive = await this.iikoAxios.termiralGroopsAlive(organizationsid, termitalid.id)
 				return terminalAlive
 			}
-			
+
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	async getOrganizationFoods(id: {organizationId: string}) {
+	async getOrganizationFoods(id: { organizationId: string }) {
 		try {
 			const data = await this.iikoAxios.getFoods(id)
 			return data
@@ -94,21 +97,21 @@ export class OrganizationServises{
 		}
 	}
 
-	addOrgPhoto(id:any,files:any){
-		if(files){
-			const imagesMass = files.reduce((acc,images) => {
-			acc.push(images.originalname)
+	addOrgPhoto(id: any, files: any) {
+		if (files) {
+			const imagesMass = files.reduce((acc, images) => {
+				acc.push(images.originalname)
 				return acc
-			},[]);
-			this.OrganizationRepository.AddGalleryOrgMetod(id,imagesMass)
+			}, []);
+			this.OrganizationRepository.AddGalleryOrgMetod(id, imagesMass)
 		}
 	}
 
-	addFiltersServis({filterlist,idorganization}){
-		return this.OrganizationRepository.filtersMetod(idorganization,filterlist)
+	addFiltersServis({ filterlist, idorganization }) {
+		return this.OrganizationRepository.filtersMetod(idorganization, filterlist)
 	}
 
-	noiikkoweb({organization,metod}){
-		this.OrganizationRepository.noiikkoweb(organization,metod)
+	noiikkoweb({ organization, metod }) {
+		this.OrganizationRepository.noiikkoweb(organization, metod)
 	}
 }

@@ -120,6 +120,28 @@ export class OrganizationRepository {
 
 		return organizationEntities.hiddenMetod(result._id, result.isHidden)
 	}
+
+	async hiddenMobileCityMetod(orgid: string, metod: boolean) {
+
+		const result = await this.cityModel.findOneAndUpdate(
+			{
+				_id: orgid
+			},
+			{
+				$set: {
+					isHiddenOnMobile: metod
+				}
+			},
+			{ new: true }
+		)
+
+		console.log(metod, result);
+
+	}
+
+
+
+
 	async OpenOrgMetod(orgid: string, metod: boolean) {
 
 		const result = await this.cityModel.findOneAndUpdate(

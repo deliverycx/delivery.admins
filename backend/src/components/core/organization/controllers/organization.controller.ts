@@ -61,6 +61,13 @@ export class OrganizationControllers {
 		return result
 	}
 
+	@Post('citymobilehidden')
+	async CitymobileHidden(@Body() body: OrganizationDTO) {
+		const result = await this.OrganizationServises.hiddenMobileCityMetod(body)
+
+		return result
+	}
+
 	@Post('checkorg')
 	async checkOrg(@Body() body: OrganizationDTO) {
 		const result = await this.OrganizationServises.checkOranizationMetod(body)
