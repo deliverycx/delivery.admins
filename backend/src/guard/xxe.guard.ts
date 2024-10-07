@@ -8,7 +8,7 @@ export class XmlGuard implements CanActivate {
 
 		// Проверка на наличие DTD и внешних сущностей
 
-		if (xml.includes('<!DOCTYPE') || xml.includes('&')) {
+		if (xml.includes('<!DOCTYPE') || xml.includes('select extractvalue')) {
 			return false; // блокируем запрос
 		}
 
