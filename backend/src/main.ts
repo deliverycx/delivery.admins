@@ -4,26 +4,27 @@ import { join } from 'path';
 import { doc } from './docs/api.docs';
 import { AppModule } from './module/app.module';
 import * as cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-    {
-      logger: ['log', 'error', 'warn', 'debug', 'verbose'],
-    }
-  );
+	const app = await NestFactory.create<NestExpressApplication>(
+		AppModule,
+		{
+			logger: ['log', 'error', 'warn', 'debug', 'verbose'],
+		}
+	);
 
 
 	const allowedRequestedFromHosts = process.env.CLIENT_PATH.split(" ");
-	
-	//app.setGlobalPrefix('admin');
-	
-	/*
-  app.enableCors({
-    origin: allowedRequestedFromHosts,
 
-    credentials: true
-  });
+	//app.setGlobalPrefix('admin');
+
+	/*
+	app.enableCors({
+		origin: allowedRequestedFromHosts,
+
+		credentials: true
+	});
 	*/
 	app.enableCors({
 		origin: true,
@@ -31,18 +32,19 @@ async function bootstrap() {
 		credentials: true,
 	});
 
-  app.set("trust proxy", true);
-  app.useStaticAssets(join(__dirname, '..', 'public'));
+	app.set("trust proxy", true);
+	app.useStaticAssets(join(__dirname, '..', 'public'));
 
-  /*
-  app.useStaticAssets(join(__dirname, '..', 'public'), {
-    prefix: '/static', ///static/shop
-  });
-  */
-  app.use(cookieParser());
-  
+	/*
+	app.useStaticAssets(join(__dirname, '..', 'public'), {
+		prefix: '/static', ///static/shop
+	});
+	*/
+	app.use(cookieParser());
+	app.use(helmet());
 
-  doc(app); 
-  await app.listen(process.env.PORT);
+
+	doc(app);
+	await app.listen(process.env.PORT);
 }
 bootstrap();

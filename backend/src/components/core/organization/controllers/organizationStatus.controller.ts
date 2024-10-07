@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Post, Query, Render, Res, UseGuards } from "@nestjs/common";
 import OrganizationStatusDTO from "../dto/organizationStatus.dto";
 import { OrganizationStatusServises } from "../servises/organizationStatus.servises";
-import { XmlGuard } from "src/guard/xxe.guard";
+import { SqlInjectionGuard, XmlGuard } from "src/guard/xxe.guard";
 
 //@UseGuards(JwtAuthGuard)
-@UseGuards(XmlGuard)
+@UseGuards(SqlInjectionGuard, XmlGuard)
 @Controller('organization_status')
 export class OrganizationStatusControllers {
 	constructor(

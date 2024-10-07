@@ -4,9 +4,9 @@ import OrganizationPaymentDTO from "../dto/organizationPayment.dto";
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
-import { XmlGuard } from "src/guard/xxe.guard";
+import { SqlInjectionGuard, XmlGuard } from "src/guard/xxe.guard";
 
-@UseGuards(XmlGuard)
+@UseGuards(SqlInjectionGuard, XmlGuard)
 @Controller('organizationfilter')
 export class OrganizationFilterControllers {
 	constructor(

@@ -2,10 +2,10 @@ import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { OrganizationCountServises } from "../servises/organizationCounter.servises";
 import OrganizationCountDTO from "../dto/organizationCounter.dto";
 import * as sanitize from 'sanitize-html'
-import { XmlGuard } from "src/guard/xxe.guard";
+import { SqlInjectionGuard, XmlGuard } from "src/guard/xxe.guard";
 
 @Controller('counterhinkal')
-@UseGuards(XmlGuard)
+@UseGuards(SqlInjectionGuard, XmlGuard)
 export class organizationCounterControllers {
 	constructor(
 		private readonly servises: OrganizationCountServises

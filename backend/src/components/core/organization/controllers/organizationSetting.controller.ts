@@ -5,10 +5,10 @@ import { OrganizationSettingServises } from '../servises/organizationSetting.ser
 import { Response } from "express";
 import OrganizationDTO from "../dto/organization.dto";
 import OrganizationSettingDTO from "../dto/organizationSetting.dto";
-import { XmlGuard } from "src/guard/xxe.guard";
+import { SqlInjectionGuard, XmlGuard } from "src/guard/xxe.guard";
 
 //@UseGuards(JwtAuthGuard)
-@UseGuards(XmlGuard)
+@UseGuards(SqlInjectionGuard, XmlGuard)
 @Controller('organization_setting')
 export class OrganizationSettingControllers {
 	constructor(

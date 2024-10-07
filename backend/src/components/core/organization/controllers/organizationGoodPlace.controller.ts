@@ -1,9 +1,9 @@
 import { Controller, Post, Body, Get, Query, Header, UseGuards } from "@nestjs/common"
 import OrganizationGoodPlaceDTO from "../dto/organizationGoodPlace.dto";
 import { OrganizationGoodPlaceServises } from "../servises/organizationGoodPlace.services";
-import { XmlGuard } from "src/guard/xxe.guard";
+import { SqlInjectionGuard, XmlGuard } from "src/guard/xxe.guard";
 
-@UseGuards(XmlGuard)
+@UseGuards(SqlInjectionGuard, XmlGuard)
 @Controller('organization_goodplace')
 export class OrganizationGoodPlaceControllers {
 	constructor(
