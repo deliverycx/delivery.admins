@@ -122,7 +122,7 @@ export class IikoOrganizationServises {
 					},
 					{ upsert: true, new: true }
 				);
-				console.log(objectIdPoint);
+
 
 
 				await this.orgstatusModel.findOneAndUpdate(
@@ -366,8 +366,11 @@ export class IikoOrganizationServises {
 	}
 
 	async getFileMenu(oraganization: string) {
-		const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
-		return file
+		if (oraganization) {
+			const file = JSON.parse(fs.readFileSync(join(process.cwd() + `/public/static/menu/${oraganization}.json`), 'utf8'));
+			return file ? file : null
+		}
+
 
 	}
 

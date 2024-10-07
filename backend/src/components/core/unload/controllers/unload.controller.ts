@@ -27,7 +27,6 @@ export class UnloadControllers {
 			.then(async () => {
 				console.log("success connect");
 
-				console.log(body);
 				//await this.IikoRequesterServises.polling();
 				const result = await this.iikoOrganizationServises.poolingMenuWeb(body.sku)
 				response.status(200).json({ result: result })

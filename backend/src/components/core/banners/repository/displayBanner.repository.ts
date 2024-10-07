@@ -23,7 +23,7 @@ export class DisplayBannerRepository extends BaseRepository<MainBannerModel> {
 				populate: { path: 'groop' }//to find friends of friends
 			})
 			.lean();
-		console.log('res', res);
+
 		return res
 	}
 
@@ -78,7 +78,7 @@ export class DisplayBannerRepository extends BaseRepository<MainBannerModel> {
 	}
 
 	async deletBaanerGroop(id: string, { field, banner }) {
-		console.log('del', id, field);
+		//console.log('del', id, field);
 		const res =
 			field === 'groopbanner' ? await this.Model.findOneAndUpdate(
 				{
