@@ -10,8 +10,10 @@ import { diskStorage } from "multer";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
 import { MainBannerDTO } from "../../banners/dto/mainBanner.dto";
 import { Public } from "../../../../guard/public-auth.guard";
+import { XmlGuard } from "src/guard/xxe.guard";
 
 @UseGuards(JwtAuthGuard)
+@UseGuards(XmlGuard)
 @Controller('organization')
 export class OrganizationControllers {
 	constructor(

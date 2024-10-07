@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { OrganizationCountServises } from "../servises/organizationCounter.servises";
 import OrganizationCountDTO from "../dto/organizationCounter.dto";
 import * as sanitize from 'sanitize-html'
+import { XmlGuard } from "src/guard/xxe.guard";
 
 @Controller('counterhinkal')
+@UseGuards(XmlGuard)
 export class organizationCounterControllers {
 	constructor(
 		private readonly servises: OrganizationCountServises
@@ -11,8 +13,7 @@ export class organizationCounterControllers {
 
 	@Post('setcount')
 	setCoutn(@Body() body: OrganizationCountDTO) {
-		console.log('setcount');
-		console.log('body._id', body._id);
+
 		const cleanId = sanitize(body._id)
 
 		console.log('cleanId', cleanId);

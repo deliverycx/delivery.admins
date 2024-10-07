@@ -1,7 +1,9 @@
-import { Controller, Post, Body } from "@nestjs/common"
+import { Controller, Post, Body, UseGuards } from "@nestjs/common"
 import { OrganizationProductServices } from "../servises/organizationProduct.services";
 import OrganizationHiddenProductDto from "../dto/organizationHiddenProduct.dto";
+import { XmlGuard } from "src/guard/xxe.guard";
 
+@UseGuards(XmlGuard)
 @Controller('organizationProduct')
 export class OrganizationProductController {
 	constructor(

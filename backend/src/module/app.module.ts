@@ -17,6 +17,8 @@ import { OrderModule } from 'src/components/core/orders/module/order.module';
 import { DashbordModule } from 'src/components/core/dashbord/module/dashbord.module';
 import { RedisModules } from './redis.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from 'src/guard/errorsFilter.filter';
 
 
 @Module({
@@ -48,8 +50,14 @@ import { ScheduleModule } from '@nestjs/schedule';
 		NewsModule,
 		StocksModule,
 		OrderModule,
-		DashbordModule
-	],
+		DashbordModule,
 
+	],
+	providers: [
+		{
+			provide: APP_FILTER,
+			useClass: AllExceptionsFilter,
+		},
+	],
 })
 export class AppModule { }

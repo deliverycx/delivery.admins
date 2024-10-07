@@ -5,20 +5,22 @@ import { OrganizationSettingServises } from '../servises/organizationSetting.ser
 import { Response } from "express";
 import OrganizationDTO from "../dto/organization.dto";
 import OrganizationSettingDTO from "../dto/organizationSetting.dto";
+import { XmlGuard } from "src/guard/xxe.guard";
 
 //@UseGuards(JwtAuthGuard)
+@UseGuards(XmlGuard)
 @Controller('organization_setting')
-export class OrganizationSettingControllers{
-  constructor(
-    private readonly organizationSettingServises: OrganizationSettingServises
-  ) { }
-  
-  
-  @Post('setting')
-  async Reservetable(@Body() body: OrganizationSettingDTO) {
-    const result = await this.organizationSettingServises.settingOrganization(body)
-    return result
-  }
+export class OrganizationSettingControllers {
+	constructor(
+		private readonly organizationSettingServises: OrganizationSettingServises
+	) { }
+
+
+	@Post('setting')
+	async Reservetable(@Body() body: OrganizationSettingDTO) {
+		const result = await this.organizationSettingServises.settingOrganization(body)
+		return result
+	}
 
 
 }

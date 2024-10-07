@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Post, Query, Res, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Res, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
 import { OrganizationFilterServises } from "../servises/organizationFilter.servises";
 import OrganizationPaymentDTO from "../dto/organizationPayment.dto";
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { editFileName, imageFileFilter } from "src/application/lib/file-upload.utils";
+import { XmlGuard } from "src/guard/xxe.guard";
 
+@UseGuards(XmlGuard)
 @Controller('organizationfilter')
 export class OrganizationFilterControllers {
 	constructor(

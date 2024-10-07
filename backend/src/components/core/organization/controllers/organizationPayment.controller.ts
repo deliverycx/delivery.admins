@@ -1,9 +1,11 @@
-import { Controller, Post, Body, Get, Query } from "@nestjs/common"
+import { Controller, Post, Body, Get, Query, UseGuards } from "@nestjs/common"
 import OrganizationPaymentDTO from "../dto/organizationPayment.dto"
 import OrganizationSettingDTO from "../dto/organizationSetting.dto"
 import { OrganizationPaymentServises } from "../servises/organizationPayment.servises"
 import { OrganizationSettingServises } from "../servises/organizationSetting.servises"
+import { XmlGuard } from "src/guard/xxe.guard"
 
+@UseGuards(XmlGuard)
 @Controller('organization_payment')
 export class OrganizationPaymentControllers {
 	constructor(

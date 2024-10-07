@@ -7,35 +7,37 @@ import OrganizationDTO from "../dto/organization.dto";
 import OrganizationSettingDTO from "../dto/organizationSetting.dto";
 import { OrganizationTableServises } from "../servises/organizationTables.servises";
 import { organizationTablesDTO } from "../dto/organizationTables.dto";
+import { XmlGuard } from "src/guard/xxe.guard";
 
 //@UseGuards(JwtAuthGuard)
+@UseGuards(XmlGuard)
 @Controller('organizationTables')
-export class OrganizationTablesControllers{
-  constructor(
-    private readonly organizationTableServises: OrganizationTableServises
-  ) { }
-  
-  @Get('IIkkoTable')
-  async IikkoTable(
+export class OrganizationTablesControllers {
+	constructor(
+		private readonly organizationTableServises: OrganizationTableServises
+	) { }
+
+	@Get('IIkkoTable')
+	async IikkoTable(
 		@Query() query: organizationTablesDTO
 	) {
 		const result = await this.organizationTableServises.getIIkkoTable(query)
-    return result
-  }
+		return result
+	}
 
 	@Post('addtable')
-	async addTable(@Body() body: organizationTablesDTO){
+	async addTable(@Body() body: organizationTablesDTO) {
 		const result = await this.organizationTableServises.addTables(body)
-    return result
+		return result
 	}
 
 	@Get('buallorg')
-	getAll(@Query() query: organizationTablesDTO){
+	getAll(@Query() query: organizationTablesDTO) {
 		return this.organizationTableServises.getBuAll(query)
 	}
 
 	@Post('delet')
-	delet(@Query() query: organizationTablesDTO){
+	delet(@Query() query: organizationTablesDTO) {
 		return this.organizationTableServises.delete(query.id)
 	}
 
