@@ -244,7 +244,7 @@ export class OrganizationRepository {
 			},
 			{ new: true }
 		)
-		console.log('время точки', result);
+
 		return result
 	}
 
