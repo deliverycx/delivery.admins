@@ -11,7 +11,11 @@ export class organizationCounterControllers {
 
 	@Post('setcount')
 	setCoutn(@Body() body: OrganizationCountDTO) {
+		console.log('setcount');
+		console.log('body._id', body._id);
 		const cleanId = sanitize(body._id)
+
+		console.log('cleanId', cleanId);
 		return !cleanId ? this.servises.create(body) : this.servises.edit(body, body._id)
 	}
 
