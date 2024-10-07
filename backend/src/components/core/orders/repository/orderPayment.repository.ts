@@ -6,35 +6,35 @@ import { BaseRepository } from "src/domain/repository/base.repository";
 
 
 @Injectable()
-export class orderPaymentRepository extends BaseRepository<PaymentModel>{
+export class orderPaymentRepository extends BaseRepository<PaymentModel> {
 	constructor(
-    @InjectModel(PaymentModel) private readonly Model: ReturnModelType<typeof PaymentModel>,
-  ) {
+		@InjectModel(PaymentModel) private readonly Model: ReturnModelType<typeof PaymentModel>,
+	) {
 		super(Model)
-	 }
+	}
 
-	 async getAll(bu: Record<string, any>, populate?: string): Promise<any[]> {
-		return await this.Model.find(bu).select('-__v').sort({paymentTime:'desc'})
-	 }
+	async getAll(bu: Record<string, any>, populate?: string): Promise<any[]> {
+		return await this.Model.find(bu).select('-__v').sort({ paymentTime: 'desc' })
+	}
 
 
-	 async setStatusPayment(orderId:string,status:string){
-		console.log('запись',orderId,status);
+	async setStatusPayment(orderId: string, status: string) {
+		console.log('запись', orderId, status);
 		const result = await this.Model.findOneAndUpdate({
-			paymentid:orderId
+			paymentid: orderId
 		},
-		{
-			$set:{
-				paymentStatus:status 
-			}
-		},{
-			new:true
+			{
+				$set: {
+					paymentStatus: status
+				}
+			}, {
+			new: true
 		}
-		
+
 		)
-		console.log('запись статуса',result);
+		//console.log('запись статуса',result);
 		return result
-	 }
+	}
 
 
 }
