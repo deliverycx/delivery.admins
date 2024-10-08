@@ -41,7 +41,7 @@ export class BaseRepository<ModelClass> {
 
 	async edit<T>(id: string, body: T) {
 		console.log('edit', id, body);
-		//await this.model.findByIdAndUpdate(id, body)
+		await this.model.findByIdAndUpdate(id, body)
 	}
 	async delete(id: string) {
 		await this.model.findOneAndDelete({
