@@ -247,9 +247,11 @@ export class IikoOrganizationServises {
 					cate.items.forEach((item: any) => {
 
 
-						const itemOrg = item.itemSizes[0].prices
+						const itemOrg = Array.isArray(item.itemSizes) ? item.itemSizes[0] && item.itemSizes[0].prices : null
 
-
+						if (!itemOrg) {
+							return
+						}
 
 						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
 							//
