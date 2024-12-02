@@ -237,6 +237,7 @@ export class IikoOrganizationServises {
 
 
 		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
+
 		const menu: [] = nomenclature.pureExternalMenuItemCategories
 
 		orglist.map(async (oraganization: string) => {
@@ -308,7 +309,6 @@ export class IikoOrganizationServises {
 				const table = {};
 				nomen.groups = nomen.groups.filter(({ name }) => (!table[name] && (table[name] = 1)));
 
-				//console.log(nomen);
 				const nomenclatureFiles = JSON.stringify(nomen)
 
 				const folderStreet = fs.existsSync(join(process.cwd() + `/public/static/menu/`))
@@ -331,7 +331,7 @@ export class IikoOrganizationServises {
 		const q = b().tz("Europe/Moscow").format()
 		const formate = format(q, 'yyyy-MM-dd hh:mm aa');
 		console.log("finish poolingMenuWeb", formate);
-		await this.botAxios.unloadWebMenu()
+		//await this.botAxios.unloadWebMenu()
 
 
 		return modalprice
