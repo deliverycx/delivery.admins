@@ -206,7 +206,7 @@ export class IIkoAxios extends AxiosCreate {
 			{
 				"externalMenuId": "14710",
 				"organizationIds": organization,
-				"priceCategoryId": "39bbe93d-6a35-4b7d-aca3-22f87d235750",
+				"priceCategoryId": "00000000-0000-0000-0000-000000000000",
 				"version": 0,
 				"language": "string"
 			},
