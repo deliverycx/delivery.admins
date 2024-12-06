@@ -41,7 +41,7 @@ const GuestVip = () => {
 		<>
 			<button onClick={swtichDashbordVip}>
 				{
-					vip && vip.guestvip ? 'выключить сайт' : 'включить сайт'
+					vip && vip.guestvip ? 'включить сайт' : 'выключить сайт'
 				}
 			</button>
 			<br />
