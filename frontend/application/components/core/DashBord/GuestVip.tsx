@@ -1,13 +1,13 @@
 import { RequestDashBord } from "servises/repository/Axios/Request"
 import { useEffect, useState } from 'react';
 
-const GuestVip = () =>{
-	const [vip,setVip] = useState<any>(null)
+const GuestVip = () => {
+	const [vip, setVip] = useState<any>(null)
 
-	const getDashbordVip = async () =>{
+	const getDashbordVip = async () => {
 		try {
-			const {data} = await RequestDashBord.CRUDFabric.getBu('')
-			if(!data){
+			const { data } = await RequestDashBord.CRUDFabric.getBu('')
+			if (!data) {
 				await RequestDashBord.switchGuestVip({})
 			}
 			setVip(data)
@@ -16,14 +16,14 @@ const GuestVip = () =>{
 		}
 	}
 
-	const swtichDashbordVip = async () =>{
+	const swtichDashbordVip = async () => {
 		try {
-			if(vip){
-				const {data} = await RequestDashBord.switchGuestVip({
-					_id:vip._id,
-					guestvip:!vip.guestvip
+			if (vip) {
+				const { data } = await RequestDashBord.switchGuestVip({
+					_id: vip._id,
+					guestvip: !vip.guestvip
 				})
-				
+
 			}
 			getDashbordVip()
 		} catch (error) {
@@ -31,9 +31,9 @@ const GuestVip = () =>{
 		}
 	}
 
-	useEffect(()=>{
+	useEffect(() => {
 		getDashbordVip()
-	},[])
+	}, [])
 
 
 
@@ -41,9 +41,14 @@ const GuestVip = () =>{
 		<>
 			<button onClick={swtichDashbordVip}>
 				{
-					vip && vip.guestvip ? 'выключить вип' : 'включить вип'
+					vip && vip.guestvip ? 'выключить сайт' : 'включить сайт'
 				}
 			</button>
+			<br />
+			{
+				vip && vip.guestvip &&
+				<img src="/img/rik.gif" />
+			}
 		</>
 	)
 
