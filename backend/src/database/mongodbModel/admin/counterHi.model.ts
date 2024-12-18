@@ -13,4 +13,6 @@ export class CounterHinkalModel {
 	@prop({ type: () => String })
 	public date: string
 
+	@prop({ type: () => String })
+	public url: string
 }

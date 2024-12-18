@@ -3,22 +3,31 @@ import { CRUDFabric } from "../Fabric/CRUD.fabric"
 import { RequestFabric } from "../Fabric/FabricApi"
 
 @RequestFabric({
-	request:'counterhinkal',
-	factory:[{
-		name:'CRUDFabric',
-		fabric:CRUDFabric
+	request: 'counterhinkal',
+	factory: [{
+		name: 'CRUDFabric',
+		fabric: CRUDFabric
 	}]
 })
-class RequestOrganizationCount  extends ApiSuper {
-	CRUDFabric!:CRUDFabric
+class RequestOrganizationCount extends ApiSuper {
+	CRUDFabric!: CRUDFabric
 
-	findBuOrg(data:{organization:string}){
+	findBuOrg(data: { organization: string }) {
 		return this.api({
 			method: 'post',
 			url: `/counterhinkal/setcount`,
 			data
 		})
-		
+
+	}
+
+	checkCount(data: any) {
+		return this.api({
+			method: 'post',
+			url: `/counterhinkal/checkcount`,
+			data
+		})
+
 	}
 
 
