@@ -12,12 +12,14 @@ function dtime_nums(e: any) {
 const OrganizationCounter: FC<{ organization: any }> = ({ organization }) => {
 	const [counterHI, setCounterHi] = useState<any>(null)
 	const [value, setValue] = useState<any>()
+	const [valueHI, setValueHi] = useState<any>(null)
 
 	const getCoutn = async () => {
 		try {
 			const { data } = await RequestOrganizationCount.CRUDFabric.getBuOrg(organization.id)
 			if (data) {
 				setValue(data.url)
+				setCounterHi(data)
 			}
 		} catch (error) {
 			console.log(error);
@@ -31,7 +33,7 @@ const OrganizationCounter: FC<{ organization: any }> = ({ organization }) => {
 	const handlerCouter = async () => {
 		try {
 			const dates = format(new Date(), 'yyyy-MM-dd')
-			await RequestOrganizationCount.findBuOrg(counterHI ? { ...counterHI } :
+			await RequestOrganizationCount.findBuOrg(counterHI ? { ...counterHI, url: value } :
 				{
 					organization: organization.id,
 					url: value
@@ -51,7 +53,7 @@ const OrganizationCounter: FC<{ organization: any }> = ({ organization }) => {
 				dateTo: dtime_nums(1)
 			}
 			const { data } = await RequestOrganizationCount.checkCount({ url: value, date })
-			data && setCounterHi(data)
+			data && setValueHi(data)
 		} catch (error) {
 
 		}
@@ -73,7 +75,7 @@ const OrganizationCounter: FC<{ organization: any }> = ({ organization }) => {
 				<button type="submit" className="btn btn-success" onClick={handlerCouter}>Сохранить</button>
 				<a className="btn" onClick={handlerCheckCounter}>проверить счетчик</a>
 				{
-					counterHI && <span>кол-во хинкали: {counterHI}</span>
+					valueHI && <span>кол-во хинкали: {valueHI}</span>
 				}
 			</div>
 			<div className="card-body">
