@@ -240,10 +240,11 @@ export class IikoOrganizationServises {
 
 		const menu: [] = nomenclature.pureExternalMenuItemCategories
 
+		console.log(menu);
 		orglist.map(async (oraganization: string) => {
 
 
-			if (menu.length !== 0 && oraganization) {
+			if (menu && menu.length !== 0 && oraganization) {
 				const nomen = menu.reduce((acc: any, cate: any) => {
 					cate.items.forEach((item: any) => {
 
