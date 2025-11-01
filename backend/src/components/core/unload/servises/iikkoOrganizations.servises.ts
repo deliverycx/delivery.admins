@@ -238,9 +238,9 @@ export class IikoOrganizationServises {
 
 		const nomenclature = await this.iikoAxios.getMenuWeb(orglist)
 
-		const menu: [] = nomenclature.pureExternalMenuItemCategories
+		const menu: [] = nomenclature.itemCategories
 
-		console.log(menu);
+
 		orglist.map(async (oraganization: string) => {
 
 
@@ -255,9 +255,10 @@ export class IikoOrganizationServises {
 							return
 						}
 
-						itemOrg.forEach((orgs: { organizations: string[], price: number | null }) => {
+						itemOrg.forEach((orgs: { organizationId: string, price: number | null }) => {
 							//
-							const resultFind = orgs.organizations.includes(oraganization)
+							const resultFind = orgs.organizationId === oraganization //orgs.organizationId.includes(oraganization)
+
 
 							if (sku && resultFind && item.sku == sku) {
 								const point: any = orgresult.find((val: any) => val.id === oraganization)
@@ -280,11 +281,12 @@ export class IikoOrganizationServises {
 								acc.products.push({
 									name: item.name,
 									description: item.description,
-									id: item.iikoItemId,
+									id: item.itemId,
 									code: item.itemSizes[0].sku,
 									parentGroup: cate.id,
 									imageLinks: [item.itemSizes[0].buttonImageUrl],
 									measureUnit: item.measureUnit,
+									modifiers: this.extractModifiers(item.itemSizes[0].itemModifierGroups, oraganization),
 									sizePrices: [
 										{
 											price: {
@@ -337,6 +339,38 @@ export class IikoOrganizationServises {
 
 		return modalprice
 
+	}
+
+	private extractModifiers(modifierGroups: any[], oraganization: string): any[] {
+
+		if (!Array.isArray(modifierGroups) || modifierGroups.length === 0) {
+			return [];
+		}
+
+		const modifiers: any[] = [];
+
+		for (const group of modifierGroups) {
+			if (Array.isArray(group.items) && group.items.length > 0) {
+				for (const modifier of group.items) {
+
+					if (modifier.prices.length !== 0) {
+
+					}
+
+					modifiers.push({
+						name: modifier.name,
+						description: modifier.description,
+						prices: modifier.prices,
+						tags: modifier.tags || [],
+						groupName: group.name,
+						modifierId: modifier.id || modifier.itemId,
+						buttonImageUrl: modifier.buttonImageUrl,
+					});
+				}
+			}
+		}
+
+		return modifiers;
 	}
 
 	async webMenuIIkko() {
