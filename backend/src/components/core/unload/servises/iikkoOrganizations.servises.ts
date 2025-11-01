@@ -294,7 +294,7 @@ export class IikoOrganizationServises {
 											}
 										}
 									],
-									tags: item.labelNames,
+									tags: item.labelNames || [],
 									weight: item.itemSizes[0].portionWeightGrams
 								})
 
